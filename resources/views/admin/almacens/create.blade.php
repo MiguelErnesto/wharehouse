@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Create new Category</h1>
+    <h1>Nuevo Almacén</h1>
 @stop
 
 @section('content')
@@ -15,12 +15,13 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.categories.store']) !!}
+            {!! Form::open(['route' => 'almacens.store']) !!}
+            @include('admin.almacens.partials.form')
 
-            @include('admin.categories.partials.form')
-
-            {!! Form::submit('Create category', ['class' => 'btn btn-primary']) !!}
-
+            <div class='text-right'>
+                <a class="btn btn-danger" href="{{ url()->previous() }}"><i class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
+                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Crear almacén', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+            </div>
             {!! Form::close() !!}
         </div>
     </div>

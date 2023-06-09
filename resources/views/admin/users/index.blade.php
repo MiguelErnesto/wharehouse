@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Users List</h1>
+    <span class="text-uppercase page-subtitle">Listado de <h1 class='pl-3'>Usuarios</h1></span>
 @stop
 
 @section('content')
@@ -15,5 +15,7 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        console.log('Hi!');
+    </script>
 @stop

@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Edit Category: {{ $category->name }}</h1>
+    <span class="text-uppercase page-subtitle">Editar almacén <h1 class='pl-3'>{{ $almacen->nombre }}</h1></span>
 @stop
 
 @section('content')
@@ -16,14 +16,19 @@
 
     <div class="card">
         <div class="card-body">
-            {!! Form::model($category, ['route' => ['admin.categories.update', $category], 'method' => 'put']) !!}
+            {!! Form::model($almacen, ['route' => ['almacens.update', $almacen->id], 'method' => 'put']) !!}
 
-            @include('admin.categories.partials.form')
+            @include('admin.almacens.partials.form')
 
-            {!! Form::submit('Edit category', ['class' => 'btn btn-primary']) !!}
-
+            <div class='text-right'>
+                <a class="btn btn-danger" href="{{ url()->previous() }}"><i class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
+                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar cambios', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+            </div>
             {!! Form::close() !!}
         </div>
+
+        {!! Form::close() !!}
+    </div>
     </div>
 @stop
 

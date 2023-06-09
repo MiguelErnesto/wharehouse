@@ -39,7 +39,7 @@ Route::get('category/{category}', [PostController::class, 'category'])->name(
 Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
 
 Route::resource('productos', ProductoController::class);
-Route::resource('almacenes', AlmacenController::class);
+Route::resource('almacens', AlmacenController::class);
 Route::resource('productos_almacenes', AlmacenProductoController::class);
 Route::resource('recepcion_productos', RecepcionProductoController::class);
 Route::resource('salida_productos', SalidaProductoController::class);

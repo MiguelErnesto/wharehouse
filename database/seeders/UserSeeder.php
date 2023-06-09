@@ -22,8 +22,8 @@ class UserSeeder extends Seeder
         DB::table('users')->truncate();
 
         User::create([
-            'name' => 'Javier Hernandez',
-            'email' => 'admin@example.com',
+            'name' => 'Administrador del Sistema',
+            'email' => 'superadmin@example.com',
             'password' => bcrypt('12345678'),
         ])->assignRole('admin');
 

@@ -10,13 +10,10 @@ class AlmacenController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.almacenes.index')->only('index');
-        $this->middleware('can:admin.almacenes.create')->only(
-            'create',
-            'store'
-        );
-        $this->middleware('can:admin.almacenes.edit')->only('edit', 'update');
-        $this->middleware('can:admin.almacenes.destroy')->only('destroy');
+        $this->middleware('can:admin.almacens.index')->only('index');
+        $this->middleware('can:admin.almacens.create')->only('create', 'store');
+        $this->middleware('can:admin.almacens.edit')->only('edit', 'update');
+        $this->middleware('can:admin.almacens.destroy')->only('destroy');
     }
 
     /**
@@ -27,7 +24,7 @@ class AlmacenController extends Controller
     public function index()
     {
         $almacenes = Almacen::all();
-        return view('admin.almacenes.index', compact('almacenes'));
+        return view('admin.almacens.index', compact('almacenes'));
     }
 
     /**
@@ -37,7 +34,7 @@ class AlmacenController extends Controller
      */
     public function create()
     {
-        return 'CONTROLLER CODE TO CREATE';
+        return view('admin.almacens.create');
     }
 
     /**
@@ -48,7 +45,15 @@ class AlmacenController extends Controller
      */
     public function store(Request $request)
     {
-        return 'CONTROLLER CODE TO STORE Request: ' . $request;
+        $request->validate([
+            'nombre' => 'required',
+            'direccion' => 'required',
+        ]);
+
+        $almacen = Almacen::create($request->all());
+        return redirect()
+            ->route('almacens.index')
+            ->with('info', 'Almacén ' . $almacen->nombre . ' creado con éxito');
     }
 
     /**
@@ -59,7 +64,7 @@ class AlmacenController extends Controller
      */
     public function show($id)
     {
-        return 'CONTROLLER CODE TO SHOW ' . $id;
+        //
     }
 
     /**
@@ -68,9 +73,9 @@ class AlmacenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Almacen $almacen)
     {
-        return 'CONTROLLER CODE TO EDIT ' . $id;
+        return view('admin.almacens.edit', compact('almacen'));
     }
 
     /**
@@ -80,9 +85,21 @@ class AlmacenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Almacen $almacen)
     {
-        return 'CONTROLLER CODE TO UPDATE ' . $id . ' Request: ' . $request;
+        $request->validate([
+            'nombre' => 'required',
+            'direccion' => 'required',
+        ]);
+
+        $almacen->update($request->all());
+
+        return redirect()
+            ->route('almacens.index')
+            ->with(
+                'info',
+                'Almacén ' . $almacen->nombre . ' actualizado con éxito'
+            );
     }
 
     /**
@@ -91,8 +108,17 @@ class AlmacenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Almacen $almacen)
     {
-        return 'CONTROLLER CODE TO DESTROY ' . $id;
+        $almacen->delete();
+
+        return redirect()
+            ->route('almacens.index')
+            ->with(
+                'info',
+                'El almacén ' .
+                    $almacen->nombre .
+                    ' ha sido eliminado con éxito'
+            );
     }
 }

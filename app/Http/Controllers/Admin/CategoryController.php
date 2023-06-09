@@ -11,7 +11,10 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('can:admin.categories.index')->only('index');
-        $this->middleware('can:admin.categories.create')->only('create', 'store');
+        $this->middleware('can:admin.categories.create')->only(
+            'create',
+            'store'
+        );
         $this->middleware('can:admin.categories.edit')->only('edit', 'update');
         $this->middleware('can:admin.categories.destroy')->only('destroy');
     }
@@ -50,7 +53,9 @@ class CategoryController extends Controller
         ]);
 
         $category = Category::create($request->all());
-        return redirect()->route('admin.categories.edit', $category)->with('info', 'Category created successfully');;
+        return redirect()
+            ->route('admin.categories.edit', $category)
+            ->with('info', 'Category created successfully');
     }
 
     /**
@@ -80,7 +85,9 @@ class CategoryController extends Controller
 
         $category->update($request->all());
 
-        return redirect()->route('admin.categories.edit', $category)->with('info', 'Category updated successfully');
+        return redirect()
+            ->route('admin.categories.edit', $category)
+            ->with('info', 'Category updated successfully');
     }
 
     /**
@@ -93,6 +100,8 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('info', 'The category has been successfully removed');
+        return redirect()
+            ->route('admin.categories.index')
+            ->with('info', 'The category has been successfully removed');
     }
 }

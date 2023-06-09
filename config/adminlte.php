@@ -44,9 +44,10 @@ return [
     |
     */
 
-    'logo' => '<b>Laravel</b>Blog',
-    'logo_img' => 'vendor/adminlte/dist/img/JH-logo.jpg',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b>Wharehouse</b>System',
+    'logo_img' => 'vendor/adminlte/dist/img/whs02.png',
+    //'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AdminLTE',
@@ -245,8 +246,8 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        ['header' => ''],
-        ['header' => 'Opciones generales'],
+        //['header' => ''],
+        //['header' => 'Opciones generales'],
         /* [
             'text' => 'Dashboard',
             'route' => 'admin.home',
@@ -256,43 +257,52 @@ return [
             // 'label_color' => 'success',
         ], */
         [
+            'header' => 'Secciones',
+            'classes' => 'text-uppercase',
+        ],
+        [
             'text' => 'Almacenes',
-            'route' => 'almacenes.index',
+            'route' => 'almacens.index',
             'icon' => 'fas fa-warehouse fa-fw pr-4',
-            'active' => ['admin/almacenes*'],
-            'can' => 'admin.almacenes.index',
+            'active' => ['admin/almacens*'],
+            'can' => 'admin.almacens.index',
         ],
         ['header' => ''],
-        ['header' => 'Users options'],
+        ['header' => ''],
         [
-            'text' => 'Users',
+            'header' => 'Opciones de Usuarios',
+            'classes' => 'text-uppercase',
+            //'classes' => 'text-center bg-gray',
+        ],
+        [
+            'text' => 'Usuarios',
             'route' => 'admin.users.index',
             'icon' => 'fas fa-users fa-fw pr-4',
             'active' => ['admin/users*'],
             'can' => 'admin.users.index',
         ],
         [
-            'text' => 'Roles List',
+            'text' => 'Listado de Roles',
             'route' => 'admin.roles.index',
             'icon' => 'fas fa-users-cog fa-fw pr-4',
             'active' => ['admin/roles*'],
             // 'can' => 'admin.roles.index',
         ],
-        [
+        /* [
             'text' => 'Categories',
             'route' => 'admin.categories.index',
             'icon' => 'fab fa-buffer fa-fw pr-4',
             'active' => ['admin/categories*'],
             'can' => 'admin.categories.index',
-        ],
-        [
+        ], */
+        /* [
             'text' => 'Tags',
             'route' => 'admin.tags.index',
             'icon' => 'fas fa-tags fa-fw pr-4',
             'active' => ['admin/tags*'],
             'can' => 'admin.tags.index',
-        ],
-        ['header' => ''],
+        ], */
+        /*  ['header' => ''],
         ['header' => 'Blog options'],
         [
             'text' => 'Posts list',
@@ -307,7 +317,7 @@ return [
             'icon' => 'fas fa-fw fa-file pr-4',
             'active' => ['admin/posts/create'],
             'can' => 'admin.posts.create',
-        ],
+        ], */
     ],
 
     /*

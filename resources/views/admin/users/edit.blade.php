@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Edit User</h1>
+    <h1>Editar Usuario</h1>
 @stop
 
 @section('content')
