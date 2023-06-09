@@ -44,10 +44,9 @@ return [
     |
     */
 
-    'logo' => '<b>Wharehouse</b>System',
-    'logo_img' => 'vendor/adminlte/dist/img/whs02.png',
-    //'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_class' => 'brand-image elevation-3',
+    'logo' => '<b>Admin</b>LTE',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AdminLTE',
@@ -85,7 +84,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => true,
+    'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -188,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
+    'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -242,21 +241,6 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        //['header' => ''],
-        //['header' => 'Opciones generales'],
-        /* [
-            'text' => 'Dashboard',
-            'route' => 'admin.home',
-            'icon' => 'fas fa-tachometer-alt fa-fw pr-4',
-            'can' => 'admin.home',
-            // 'label'       => 4,
-            // 'label_color' => 'success',
-        ], */
-        [
             'header' => 'Secciones',
             'classes' => 'text-uppercase',
         ],
@@ -288,36 +272,83 @@ return [
             'active' => ['admin/roles*'],
             // 'can' => 'admin.roles.index',
         ],
-        /* [
-            'text' => 'Categories',
-            'route' => 'admin.categories.index',
-            'icon' => 'fab fa-buffer fa-fw pr-4',
-            'active' => ['admin/categories*'],
-            'can' => 'admin.categories.index',
-        ], */
-        /* [
-            'text' => 'Tags',
-            'route' => 'admin.tags.index',
-            'icon' => 'fas fa-tags fa-fw pr-4',
-            'active' => ['admin/tags*'],
-            'can' => 'admin.tags.index',
-        ], */
-        /*  ['header' => ''],
-        ['header' => 'Blog options'],
         [
-            'text' => 'Posts list',
-            'route' => 'admin.posts.index',
-            'icon' => 'fas fa-fw fa-clipboard pr-4',
-            'active' => ['admin/posts'],
-            'can' => 'admin.posts.index',
+            'text' => 'blog',
+            'url' => 'admin/blog',
+            'can' => 'manage-blog',
         ],
         [
-            'text' => 'Create new post',
-            'route' => 'admin.posts.create',
-            'icon' => 'fas fa-fw fa-file pr-4',
-            'active' => ['admin/posts/create'],
-            'can' => 'admin.posts.create',
-        ], */
+            'text' => 'pages',
+            'url' => 'admin/pages',
+            'icon' => 'far fa-fw fa-file',
+            'label' => 4,
+            'label_color' => 'success',
+        ],
+        ['header' => 'account_settings'],
+        [
+            'text' => 'profile',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'change_password',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'multilevel',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'level_two',
+                            'url' => '#',
+                        ],
+                        [
+                            'text' => 'level_two',
+                            'url' => '#',
+                            'submenu' => [
+                                [
+                                    'text' => 'level_three',
+                                    'url' => '#',
+                                ],
+                                [
+                                    'text' => 'level_three',
+                                    'url' => '#',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'level_one',
+                    'url' => '#',
+                ],
+            ],
+        ],
+        ['header' => 'labels'],
+        [
+            'text' => 'important',
+            'icon_color' => 'red',
+            'url' => '#',
+        ],
+        [
+            'text' => 'warning',
+            'icon_color' => 'yellow',
+            'url' => '#',
+        ],
+        [
+            'text' => 'information',
+            'icon_color' => 'cyan',
+            'url' => '#',
+        ],
     ],
 
     /*
@@ -480,5 +511,5 @@ return [
     |
     */
 
-    'livewire' => true,
+    'livewire' => false,
 ];
