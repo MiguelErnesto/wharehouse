@@ -53,7 +53,10 @@ class AlmacenController extends Controller
         $almacen = Almacen::create($request->all());
         return redirect()
             ->route('almacens.index')
-            ->with('info', 'Almacén ' . $almacen->nombre . ' creado con éxito');
+            ->with(
+                'info',
+                'Almacén ' . $almacen->nombre . ' creado correctamente'
+            );
     }
 
     /**
@@ -98,7 +101,7 @@ class AlmacenController extends Controller
             ->route('almacens.index')
             ->with(
                 'info',
-                'Almacén ' . $almacen->nombre . ' actualizado con éxito'
+                'Almacén ' . $almacen->nombre . ' actualizado correctamente'
             );
     }
 
@@ -116,9 +119,7 @@ class AlmacenController extends Controller
             ->route('almacens.index')
             ->with(
                 'info',
-                'El almacén ' .
-                    $almacen->nombre .
-                    ' ha sido eliminado con éxito'
+                'Almacén ' . $almacen->nombre . ' eliminado correctamente'
             );
     }
 }

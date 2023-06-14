@@ -11,4 +11,9 @@ class Almacen extends Model
 
     protected $table = 'almacenes';
     protected $fillable = ['nombre', 'direccion'];
+
+    const MODEL_PLURAL = 'almacenes';
+    const MODEL_SINGULAR_DISPLAY = 'almacen';
+    protected $viewsDir = self::MODEL_PLURAL;
+    protected $routePrefix = self::MODEL_PLURAL;
 }

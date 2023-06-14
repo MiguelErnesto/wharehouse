@@ -4,16 +4,18 @@
 
 @section('content_header')
     <span class="text-uppercase page-subtitle">Listado de <h1 class='pl-3'>Almacenes</h1></span>
+    <br />
 @stop
 
 @section('content')
     @if (session('info'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" style='width:95%;'>
             <strong>{{ session('info') }}</strong>
         </div>
+        <br />
     @endif
 
-    <div class="card">
+    <div class="card" style='width:95%;'>
         @can('admin.almacens.create')
             <div class="card-header">
                 <a href="{{ route('almacens.create') }}" class="btn btn-info" title="Crear Nuevo"><i
@@ -30,32 +32,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($almacenes as $almacen)
+                    @if (count($almacenes) == 0)
                         <tr>
-                            <td>{{ $almacen->nombre }}</td>
-                            <td>{{ $almacen->direccion }}</td>
-                            <td width='10px' class="text-right">
-                                @can('admin.almacens.edit')
-                                    <a class="btn btn-primary btn-sm" href="{{ route('almacens.edit', $almacen) }}"
-                                        title="Editar">
-                                        <i class="fas fa-solid fa-pen"></i></a>
-                                @endcan
-                            </td>
-                            <td width='10px' class="text-right">
-                                @can('admin.almacens.destroy')
-                                    <form action="{{ route('almacens.destroy', $almacen) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
-                                            <i class="fas fa-solid fa-trash fa-lg"></i></button>
-                                    </form>
-                                @endcan
-                            </td>
+                            <td></td>
+                            <td class='text-center font-weight-italic'>No hay elementos que mostrar...</td>
+                            <td></td>
                         </tr>
-                    @endforeach
+                    @else
+                        @foreach ($almacenes as $almacen)
+                            <tr>
+                                <td>{{ $almacen->nombre }}</td>
+                                <td>{{ $almacen->direccion }}</td>
+                                <td width='10px' class="text-right">
+                                    @can('admin.almacens.edit')
+                                        <a class="btn btn-primary btn-sm" href="{{ route('almacens.edit', $almacen) }}"
+                                            title="Editar">
+                                            <i class="fas fa-solid fa-pen"></i></a>
+                                    @endcan
+                                </td>
+                                <td width='10px' class="text-right">
+                                    @can('admin.almacens.destroy')
+                                        <form id='formIndex_{{ $almacen->id }}'
+                                            action="{{ route('almacens.destroy', $almacen) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" data-id={{ $almacen->id }}
+                                                class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
+                                                <i class="fas fa-solid fa-trash fa-lg"></i></button>
+                                        </form>
+                                    @endcan
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+
+
                 </tbody>
             </table>
         </div>
     </div>
 
+@stop
+
+@section('js')
+    <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script>
 @stop
