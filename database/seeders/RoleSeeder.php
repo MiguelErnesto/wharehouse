@@ -94,21 +94,21 @@ class RoleSeeder extends Seeder
 
         // Almacenes Roles
         Permission::create([
-            'name' => 'admin.almacens.index',
+            'name' => 'admin.almacenes.index',
             'description' => 'Listar almacenes',
         ])->syncRoles([$role1, $role2]);
         Permission::create([
-            'name' => 'admin.almacens.create',
+            'name' => 'admin.almacenes.create',
             'description' => 'Crear nuevo almacén',
         ])->syncRoles([$role1, $role2]);
 
         Permission::create([
-            'name' => 'admin.almacens.edit',
+            'name' => 'admin.almacenes.edit',
             'description' => 'Editar almacén',
         ])->syncRoles([$role1, $role2]);
 
         Permission::create([
-            'name' => 'admin.almacens.destroy',
+            'name' => 'admin.almacenes.destroy',
             'description' => 'Eliminar almacén',
         ])->syncRoles([$role1, $role2]);
 

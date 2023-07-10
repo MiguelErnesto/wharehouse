@@ -16,12 +16,12 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::model($almacen, ['id' => 'form', 'route' => ['almacens.update', $almacen->id], 'method' => 'put']) !!}
+            {!! Form::model($almacen, ['id' => 'form', 'route' => ['almacenes.update', $almacen->id], 'method' => 'put']) !!}
 
-            @include('admin.almacens.partials.form')
+            @include('admin.almacenes.partials.form')
 
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('almacens.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('almacenes.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
                 {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar cambios', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
@@ -45,6 +45,7 @@
         });
     </script>
 
-    <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/almacenes.js') }}"></script>
+
 
 @stop

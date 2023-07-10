@@ -16,9 +16,9 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.almacens.create')
+        @can('admin.almacenes.create')
             <div class="card-header">
-                <a href="{{ route('almacens.create') }}" class="btn btn-info" title="Crear Nuevo"><i
+                <a href="{{ route('almacenes.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
             </div>
         @endcan
@@ -35,7 +35,7 @@
                     @if (count($almacenes) == 0)
                         <tr>
                             <td></td>
-                            <td class='text-center font-weight-italic'>No hay elementos que mostrar...</td>
+                            <td class='text-center'><i>No hay elementos para mostrar...</i></td>
                             <td></td>
                         </tr>
                     @else
@@ -44,16 +44,16 @@
                                 <td>{{ $almacen->nombre }}</td>
                                 <td>{{ $almacen->direccion }}</td>
                                 <td width='10px' class="text-right">
-                                    @can('admin.almacens.edit')
-                                        <a class="btn btn-primary btn-sm" href="{{ route('almacens.edit', $almacen) }}"
+                                    @can('admin.almacenes.edit')
+                                        <a class="btn btn-success btn-sm" href="{{ route('almacenes.edit', $almacen) }}"
                                             title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
                                     @endcan
                                 </td>
                                 <td width='10px' class="text-right">
-                                    @can('admin.almacens.destroy')
+                                    @can('admin.almacenes.destroy')
                                         <form id='formIndex_{{ $almacen->id }}'
-                                            action="{{ route('almacens.destroy', $almacen) }}" method="POST">
+                                            action="{{ route('almacenes.destroy', $almacen) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" data-id={{ $almacen->id }}
@@ -75,5 +75,7 @@
 @stop
 
 @section('js')
-    <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script>
+    {{-- <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
+    <script async type="module" src="{{ mix('/js/compiled/almacenes.js') }}"></script>
+
 @stop

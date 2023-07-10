@@ -7,6 +7,42 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Overview
+
+>git clone ... proyecto
+
+>composer install
+
+>\>database/my_db.sqlite
+
+>cp .env.example .env
+
+>code .
+
+DB_CONNECTION=sqlite
+
+DB_HOST=127.0.0.1
+
+DB_PORT=3306
+
+DB_DATABASE=/home/miguel/Descargas/lrv9basic0?/database/my_db.sqlite
+
+DB_USERNAME=root
+
+DB_PASSWORD=
+
+>php artisan key:generate
+
+>php artisan migrate --seed
+
+>php artisan serve
+
+
+admin@example.com
+12345678
+
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

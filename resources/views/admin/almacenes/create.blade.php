@@ -15,11 +15,11 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::open(['id' => 'form', 'route' => 'almacens.store']) !!}
-            @include('admin.almacens.partials.form')
+            {!! Form::open(['id' => 'form', 'route' => 'almacenes.store']) !!}
+            @include('admin.almacenes.partials.form')
 
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('almacens.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('almacenes.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
                 {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Crear almacén', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
@@ -39,7 +39,5 @@
             });
         });
     </script>
-
-    <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script>
-
+    <script async type="module" src="{{ mix('/js/compiled/almacenes.js') }}"></script>
 @stop

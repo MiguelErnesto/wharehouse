@@ -10,10 +10,13 @@ class AlmacenController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.almacens.index')->only('index');
-        $this->middleware('can:admin.almacens.create')->only('create', 'store');
-        $this->middleware('can:admin.almacens.edit')->only('edit', 'update');
-        $this->middleware('can:admin.almacens.destroy')->only('destroy');
+        $this->middleware('can:admin.almacenes.index')->only('index');
+        $this->middleware('can:admin.almacenes.create')->only(
+            'create',
+            'store'
+        );
+        $this->middleware('can:admin.almacenes.edit')->only('edit', 'update');
+        $this->middleware('can:admin.almacenes.destroy')->only('destroy');
     }
 
     /**
@@ -24,7 +27,7 @@ class AlmacenController extends Controller
     public function index()
     {
         $almacenes = Almacen::all();
-        return view('admin.almacens.index', compact('almacenes'));
+        return view('admin.almacenes.index', compact('almacenes'));
     }
 
     /**
@@ -34,7 +37,7 @@ class AlmacenController extends Controller
      */
     public function create()
     {
-        return view('admin.almacens.create');
+        return view('admin.almacenes.create');
     }
 
     /**
@@ -52,7 +55,7 @@ class AlmacenController extends Controller
 
         $almacen = Almacen::create($request->all());
         return redirect()
-            ->route('almacens.index')
+            ->route('almacenes.index')
             ->with(
                 'info',
                 'Almacén ' . $almacen->nombre . ' creado correctamente'
@@ -78,7 +81,7 @@ class AlmacenController extends Controller
      */
     public function edit(Almacen $almacen)
     {
-        return view('admin.almacens.edit', compact('almacen'));
+        return view('admin.almacenes.edit', compact('almacen'));
     }
 
     /**
@@ -98,7 +101,7 @@ class AlmacenController extends Controller
         $almacen->update($request->all());
 
         return redirect()
-            ->route('almacens.index')
+            ->route('almacenes.index')
             ->with(
                 'info',
                 'Almacén ' . $almacen->nombre . ' actualizado correctamente'
@@ -116,7 +119,7 @@ class AlmacenController extends Controller
         $almacen->delete();
 
         return redirect()
-            ->route('almacens.index')
+            ->route('almacenes.index')
             ->with(
                 'info',
                 'Almacén ' . $almacen->nombre . ' eliminado correctamente'

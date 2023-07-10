@@ -44,12 +44,12 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Whare</b>House',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'WareHouse',
 
     /*
     |--------------------------------------------------------------------------
@@ -240,37 +240,58 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
-        [
-            'header' => 'Secciones',
-            'classes' => 'text-uppercase',
-        ],
-        [
-            'text' => 'Almacenes',
-            'route' => 'almacens.index',
-            'icon' => 'fas fa-warehouse fa-fw pr-4',
-            'active' => ['admin/almacens*'],
-            'can' => 'admin.almacens.index',
-        ],
         ['header' => ''],
         ['header' => ''],
         [
-            'header' => 'Opciones de Usuarios',
+            'text' => 'Módulos del Sistema',
             'classes' => 'text-uppercase',
-            //'classes' => 'text-center bg-gray',
+            'icon' => 'fas fa-fw fa-caret-down',
+            'submenu' => [
+                [
+                    'text' => 'Almacenes',
+                    'classes' => 'ml-3',
+                    'route' => 'almacenes.index',
+                    'icon' => 'fas fa-warehouse fa-fw pr-4',
+                    'active' => ['admin/almacenes*'],
+                    'can' => 'admin.almacenes.index',
+                ],
+            ],
         ],
+
         [
             'text' => 'Usuarios',
-            'route' => 'admin.users.index',
-            'icon' => 'fas fa-users fa-fw pr-4',
-            'active' => ['admin/users*'],
-            'can' => 'admin.users.index',
-        ],
-        [
-            'text' => 'Listado de Roles',
-            'route' => 'admin.roles.index',
-            'icon' => 'fas fa-users-cog fa-fw pr-4',
-            'active' => ['admin/roles*'],
-            // 'can' => 'admin.roles.index',
+            'classes' => 'text-uppercase',
+            'icon' => 'fas fa-fw fa-caret-down',
+            'submenu' => [
+                [
+                    'text' => 'Usuarios',
+                    'classes' => 'ml-3',
+                    'route' => 'admin.users.index',
+                    'icon' => 'fas fa-users fa-fw pr-4',
+                    'active' => ['admin/users*'],
+                    'can' => 'admin.users.index',
+                ],
+                [
+                    'text' => 'Roles',
+                    'classes' => 'ml-3',
+                    'route' => 'admin.roles.index',
+                    'icon' => 'fas fa-users-cog fa-fw pr-4',
+                    'active' => ['admin/roles*'],
+                    // 'can' => 'admin.roles.index',
+                ],
+                [
+                    'text' => 'Perfil de Usuario',
+                    'classes' => 'ml-3',
+                    'url' => 'admin/settings',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Cambiar contraseña',
+                    'classes' => 'ml-3',
+                    'url' => 'admin/settings',
+                    'icon' => 'fas fa-fw fa-lock',
+                ],
+            ],
         ],
         [
             'text' => 'blog',
@@ -284,55 +305,7 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
+
         ['header' => 'labels'],
         [
             'text' => 'important',

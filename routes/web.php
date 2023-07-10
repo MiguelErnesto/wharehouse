@@ -39,7 +39,23 @@ Route::get('category/{category}', [PostController::class, 'category'])->name(
 Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
 
 Route::resource('productos', ProductoController::class);
-Route::resource('almacens', AlmacenController::class);
-Route::resource('productos_almacenes', AlmacenProductoController::class);
-Route::resource('recepcion_productos', RecepcionProductoController::class);
-Route::resource('salida_productos', SalidaProductoController::class);
+Route::resource('almacenes', AlmacenController::class, [
+    'parameters' => [
+        'almacenes' => 'almacen',
+    ],
+]);
+Route::resource('productos_almacenes', AlmacenProductoController::class, [
+    'parameters' => [
+        'productos_almacenes' => 'producto_almacen',
+    ],
+]);
+Route::resource('recepcion_productos', RecepcionProductoController::class, [
+    'parameters' => [
+        'recepcion_productos' => 'recepcion_producto',
+    ],
+]);
+Route::resource('salida_productos', SalidaProductoController::class, [
+    'parameters' => [
+        'salida_productos' => 'salida_producto',
+    ],
+]);
