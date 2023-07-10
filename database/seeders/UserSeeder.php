@@ -25,9 +25,9 @@ class UserSeeder extends Seeder
             'name' => 'Administrador del Sistema',
             'email' => 'superadmin@example.com',
             'password' => bcrypt('12345678'),
-        ])->assignRole('admin');
+        ])->assignRole('SuperAdmin');
 
-        User::factory(9)->create();
+        //User::factory(9)->create();
 
         //Enable foreign key checks for current db driver
         //SET foreign_key_checks = 1 //MYSQL

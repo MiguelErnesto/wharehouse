@@ -20,8 +20,6 @@ use App\Http\Controllers\SalidaProductoController;
 |
 */
 
-Route::get('/', [PostController::class, 'index'])->name('posts.index');
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -32,13 +30,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('posts', PostController::class);
-Route::get('category/{category}', [PostController::class, 'category'])->name(
-    'posts.category'
-);
-Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
-
-Route::resource('productos', ProductoController::class);
+Route::resource('productos', ProductoController::class, [
+    'parameters' => [
+        'productos' => 'producto',
+    ],
+]);
 Route::resource('almacenes', AlmacenController::class, [
     'parameters' => [
         'almacenes' => 'almacen',
@@ -59,3 +55,10 @@ Route::resource('salida_productos', SalidaProductoController::class, [
         'salida_productos' => 'salida_producto',
     ],
 ]);
+
+//Route::get('/', [PostController::class, 'index'])->name('posts.index');
+//Route::resource('posts', PostController::class);
+/* Route::get('category/{category}', [PostController::class, 'category'])->name(
+    'posts.category'
+); */
+//Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');

@@ -245,7 +245,7 @@ return [
         [
             'text' => 'Módulos del Sistema',
             'classes' => 'text-uppercase',
-            'icon' => 'fas fa-fw fa-caret-down',
+            'icon' => 'fas fa-fw fa-clone',
             'submenu' => [
                 [
                     'text' => 'Almacenes',
@@ -255,13 +255,21 @@ return [
                     'active' => ['admin/almacenes*'],
                     'can' => 'admin.almacenes.index',
                 ],
+                [
+                    'text' => 'Productos',
+                    'classes' => 'ml-3',
+                    'route' => 'productos.index',
+                    'icon' => 'fas fa-boxes fa-fw pr-4',
+                    'active' => ['admin/productos*'],
+                    'can' => 'admin.productos.index',
+                ],
             ],
         ],
 
         [
             'text' => 'Usuarios',
             'classes' => 'text-uppercase',
-            'icon' => 'fas fa-fw fa-caret-down',
+            'icon' => 'fas fa-fw fa-users mr-1',
             'submenu' => [
                 [
                     'text' => 'Usuarios',
@@ -283,44 +291,20 @@ return [
                     'text' => 'Perfil de Usuario',
                     'classes' => 'ml-3',
                     'url' => 'admin/settings',
-                    'icon' => 'fas fa-fw fa-user',
+                    'icon' => 'fas fa-fw fa-user mr-1',
                 ],
                 [
                     'text' => 'Cambiar contraseña',
                     'classes' => 'ml-3',
                     'url' => 'admin/settings',
-                    'icon' => 'fas fa-fw fa-lock',
+                    'icon' => 'fas fa-fw fa-lock mr-1',
                 ],
             ],
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
+            'text' => 'Ajustes',
             'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
+            'icon' => 'fas fa-cogs mr-1',
         ],
     ],
 

@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class ProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin.productos.index')->only('index');
+        $this->middleware('can:admin.productos.create')->only(
+            'create',
+            'store'
+        );
+        $this->middleware('can:admin.productos.edit')->only('edit', 'update');
+        $this->middleware('can:admin.productos.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +25,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::all();
+        return view('admin.productos.index', compact('productos'));
     }
 
     /**
@@ -23,7 +36,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.productos.create');
     }
 
     /**
