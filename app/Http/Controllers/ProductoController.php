@@ -47,7 +47,19 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'codigo' => 'required',
+            'nombre' => 'required',
+            'descripcion' => 'required',
+        ]);
+
+        $producto = Producto::create($request->all());
+        return redirect()
+            ->route('productos.index')
+            ->with(
+                'info',
+                'Producto ' . $producto->nombre . ' creado correctamente'
+            );
     }
 
     /**
@@ -67,9 +79,9 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Producto $producto)
     {
-        //
+        return view('admin.productos.edit', compact('producto'));
     }
 
     /**
@@ -79,9 +91,22 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Producto $producto)
     {
-        //
+        $request->validate([
+            'codigo' => 'required',
+            'nombre' => 'required',
+            'descripcion' => 'required',
+        ]);
+
+        $producto->update($request->all());
+
+        return redirect()
+            ->route('productos.index')
+            ->with(
+                'info',
+                'Producto ' . $producto->nombre . ' actualizado correctamente'
+            );
     }
 
     /**
@@ -90,8 +115,15 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Producto $producto)
     {
-        //
+        $producto->delete();
+
+        return redirect()
+            ->route('productos.index')
+            ->with(
+                'info',
+                'Producto ' . $producto->nombre . ' eliminado correctamente'
+            );
     }
 }

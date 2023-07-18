@@ -31,6 +31,13 @@ export default class productosClass {
   onValidate(evt) {
     evt.preventDefault()
 
+    if (document.getElementById('codigo').value.length == 0) {
+      document.getElementById('codigo').className =
+        'form-control border border-danger'
+      document.getElementById('codigo').placeholder = '--- Valor requerido ---'
+      document.getElementById('codigo').focus()
+      return false
+    }
     if (document.getElementById('nombre').value.length == 0) {
       document.getElementById('nombre').className =
         'form-control border border-danger'
@@ -38,12 +45,12 @@ export default class productosClass {
       document.getElementById('nombre').focus()
       return false
     }
-    if (document.getElementById('direccion').value.length == 0) {
-      document.getElementById('direccion').className =
+    if (document.getElementById('descripcion').value.length == 0) {
+      document.getElementById('descripcion').className =
         'form-control border border-danger'
-      document.getElementById('direccion').placeholder =
+      document.getElementById('descripcion').placeholder =
         '--- Valor requerido ---'
-      document.getElementById('direccion').focus()
+      document.getElementById('descripcion').focus()
       return false
     }
 

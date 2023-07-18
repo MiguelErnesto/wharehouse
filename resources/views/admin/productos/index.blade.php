@@ -16,7 +16,7 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.almacenes.create')
+        @can('admin.productos.create')
             <div class="card-header">
                 <a href="{{ route('productos.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
@@ -26,8 +26,9 @@
             <table class="table table-striped">
                 <thead class="thead-inverse">
                     <tr>
+                        <th>Código</th>
                         <th>Nombre</th>
-                        <th>Dirección</th>
+                        <th>Descripción</th>
                         <th colspan="2" class='text-center'>Acciones</th>
                     </tr>
                 </thead>
@@ -41,8 +42,9 @@
                     @else
                         @foreach ($productos as $producto)
                             <tr>
+                                <td>{{ $producto->codigo }}</td>
                                 <td>{{ $producto->nombre }}</td>
-                                <td>{{ $producto->direccion }}</td>
+                                <td>{{ $producto->descripcion }}</td>
                                 <td width='10px' class="text-right">
                                     @can('admin.productos.edit')
                                         <a class="btn btn-success btn-sm" href="{{ route('productos.edit', $producto) }}"
@@ -53,7 +55,7 @@
                                 <td width='10px' class="text-right">
                                     @can('admin.productos.destroy')
                                         <form id='formIndex_{{ $producto->id }}'
-                                            action="{{ route('almacenes.destroy', $producto) }}" method="POST">
+                                            action="{{ route('productos.destroy', $producto) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" data-id={{ $producto->id }}

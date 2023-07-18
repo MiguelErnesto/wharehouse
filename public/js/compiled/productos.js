@@ -915,6 +915,13 @@ var productosClass = /*#__PURE__*/function () {
     value: function onValidate(evt) {
       evt.preventDefault();
 
+      if (document.getElementById('codigo').value.length == 0) {
+        document.getElementById('codigo').className = 'form-control border border-danger';
+        document.getElementById('codigo').placeholder = '--- Valor requerido ---';
+        document.getElementById('codigo').focus();
+        return false;
+      }
+
       if (document.getElementById('nombre').value.length == 0) {
         document.getElementById('nombre').className = 'form-control border border-danger';
         document.getElementById('nombre').placeholder = '--- Valor requerido ---';
@@ -922,10 +929,10 @@ var productosClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('direccion').value.length == 0) {
-        document.getElementById('direccion').className = 'form-control border border-danger';
-        document.getElementById('direccion').placeholder = '--- Valor requerido ---';
-        document.getElementById('direccion').focus();
+      if (document.getElementById('descripcion').value.length == 0) {
+        document.getElementById('descripcion').className = 'form-control border border-danger';
+        document.getElementById('descripcion').placeholder = '--- Valor requerido ---';
+        document.getElementById('descripcion').focus();
         return false;
       }
 

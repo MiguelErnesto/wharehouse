@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <span class="text-uppercase page-subtitle">Editar almacén <h1 class='pl-3'>{{ $almacen->nombre }}</h1></span>
+    <span class="text-uppercase page-subtitle">Editar producto <h1 class='pl-3'>{{ $producto->nombre }}</h1></span>
 @stop
 
 @section('content')
@@ -16,12 +16,12 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::model($almacen, ['id' => 'form', 'route' => ['almacenes.update', $almacen->id], 'method' => 'put']) !!}
+            {!! Form::model($producto, ['id' => 'form', 'route' => ['productos.update', $producto->id], 'method' => 'put']) !!}
 
-            @include('admin.almacenes.partials.form')
+            @include('admin.productos.partials.form')
 
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('almacenes.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('productos.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
                 {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar cambios', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
@@ -45,7 +45,7 @@
         });
     </script>
 
-    <script async type="module" src="{{ mix('/js/compiled/almacenes.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/productos.js') }}"></script>
 
 
 @stop
