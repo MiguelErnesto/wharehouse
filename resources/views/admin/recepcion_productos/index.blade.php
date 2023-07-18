@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <span class="text-uppercase page-subtitle">Listado de <h1 class='pl-3'>Productos</h1></span>
+    <span class="text-uppercase page-subtitle">Listado de <h1 class='pl-3'>Informes de Recepción</h1></span>
     <br />
 @stop
 
@@ -16,9 +16,9 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.productos.create')
+        @can('admin.recepcion_productos.create')
             <div class="card-header">
-                <a href="{{ route('productos.create') }}" class="btn btn-info" title="Crear Nuevo"><i
+                <a href="{{ route('recepcion_productos.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
             </div>
         @endcan
@@ -33,11 +33,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (count($productos) == 0)
+                    @if (count($recepcion_productos) == 0)
                         <tr>
                             <td></td>
                             <td class='text-center'><i>No hay elementos para mostrar...</i></td>
-                            <td></td>
                             <td></td>
                         </tr>
                     @else
@@ -47,16 +46,17 @@
                                 <td>{{ $producto->nombre }}</td>
                                 <td>{{ $producto->descripcion }}</td>
                                 <td width='10px' class="text-right">
-                                    @can('admin.productos.edit')
-                                        <a class="btn btn-success btn-sm" href="{{ route('productos.edit', $producto) }}"
-                                            title="Editar">
+                                    @can('admin.recepcion_productos.edit')
+                                        <a class="btn btn-success btn-sm"
+                                            href="{{ route('recepcion_productos.edit', $recepcion_producto) }}" title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
                                     @endcan
                                 </td>
                                 <td width='10px' class="text-right">
-                                    @can('admin.productos.destroy')
+                                    @can('admin.recepcion_productos.destroy')
                                         <form id='formIndex_{{ $producto->id }}'
-                                            action="{{ route('productos.destroy', $producto) }}" method="POST">
+                                            action="{{ route('recepcion_productos.destroy', $recepcion_producto) }}"
+                                            method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" data-id={{ $producto->id }}
@@ -79,6 +79,6 @@
 
 @section('js')
     {{-- <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
-    <script async type="module" src="{{ mix('/js/compiled/productos.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/recepcion_productos.js') }}"></script>
 
 @stop

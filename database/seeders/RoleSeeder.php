@@ -93,7 +93,7 @@ class RoleSeeder extends Seeder
             'description' => 'Delete posts',
         ])->syncRoles([$role1, $role2, $role3]);
 
-        // Almacenes Roles
+        // Almacenes - Roles
         Permission::create([
             'name' => 'admin.almacenes.index',
             'description' => 'Listar almacenes',
@@ -111,7 +111,7 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar almacén',
         ])->syncRoles([$role1, $role2, $role3]);
 
-        // Productos Roles
+        // Productos - Roles
         Permission::create([
             'name' => 'admin.productos.index',
             'description' => 'Listar productos',
@@ -127,6 +127,42 @@ class RoleSeeder extends Seeder
         Permission::create([
             'name' => 'admin.productos.destroy',
             'description' => 'Eliminar productos',
+        ])->syncRoles([$role1, $role2, $role3]);
+
+        // Recepción de Productos - Roles
+        Permission::create([
+            'name' => 'admin.recepcion_productos.index',
+            'description' => 'Listar Informes de Recepción',
+        ])->syncRoles([$role1, $role2, $role3]);
+        Permission::create([
+            'name' => 'admin.recepcion_productos.create',
+            'description' => 'Crear nuevo Informe de Recepción',
+        ])->syncRoles([$role1, $role2, $role3]);
+        Permission::create([
+            'name' => 'admin.recepcion_productos.edit',
+            'description' => 'Editar Informe de Recepción',
+        ])->syncRoles([$role1, $role2, $role3]);
+        Permission::create([
+            'name' => 'admin.recepcion_productos.destroy',
+            'description' => 'Eliminar Informe de Recepción',
+        ])->syncRoles([$role1, $role2, $role3]);
+
+        // Almacenes Productos - Roles
+        Permission::create([
+            'name' => 'admin.almacenes_productos.index',
+            'description' => 'Listar Productos de un Almacén',
+        ])->syncRoles([$role1, $role2, $role3]);
+        Permission::create([
+            'name' => 'admin.almacenes_productos.create',
+            'description' => 'Ingresar nuevo producto a un Almacén',
+        ])->syncRoles([$role1, $role2, $role3]);
+        Permission::create([
+            'name' => 'admin.almacenes_productos.edit',
+            'description' => 'Editar Productos de un Almacén',
+        ])->syncRoles([$role1, $role2, $role3]);
+        Permission::create([
+            'name' => 'admin.almacenes_productos.destroy',
+            'description' => 'Eliminar Productos de un Almacén',
         ])->syncRoles([$role1, $role2, $role3]);
 
         //Enable foreign key checks for current db driver

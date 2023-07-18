@@ -28,14 +28,16 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Dirección</th>
-                        <th colspan="2" class='text-center'>Acciones</th>
+                        <th colspan="3" class='text-center'>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (count($almacenes) == 0)
                         <tr>
                             <td></td>
+                            <td></td>
                             <td class='text-center'><i>No hay elementos para mostrar...</i></td>
+                            <td></td>
                             <td></td>
                         </tr>
                     @else
@@ -43,22 +45,32 @@
                             <tr>
                                 <td>{{ $almacen->nombre }}</td>
                                 <td>{{ $almacen->direccion }}</td>
-                                <td width='10px' class="text-right">
+                                <td style="padding-right: 0.125rem;padding-left: 0.125rem;" width='8px'
+                                    class="text-right">
+                                    @can('admin.almacenes_productos.index')
+                                        <a class="btn btn-primary btn-sm"
+                                            href="{{ route('getProductosAlmacen', $almacen->id) }}"
+                                            title="Ver Productos del Almacén">
+                                            <i class="fas fa-boxes fa-fw"></i></a>
+                                    @endcan
+                                </td>
+                                <td style="padding-right: 0rem;padding-left: 0rem;" width='8px' class="text-right">
                                     @can('admin.almacenes.edit')
                                         <a class="btn btn-success btn-sm" href="{{ route('almacenes.edit', $almacen) }}"
-                                            title="Editar">
+                                            title="Editar almacén">
                                             <i class="fas fa-solid fa-pen"></i></a>
                                     @endcan
                                 </td>
-                                <td width='10px' class="text-right">
+                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                    class="text-right">
                                     @can('admin.almacenes.destroy')
                                         <form id='formIndex_{{ $almacen->id }}'
                                             action="{{ route('almacenes.destroy', $almacen) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" data-id={{ $almacen->id }}
-                                                class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
-                                                <i class="fas fa-solid fa-trash fa-lg"></i></button>
+                                                class="btn btn-danger btn-sm btnDelete" title='Eliminar almacén'>
+                                                <i class="fas fa-solid fa-trash"></i></button>
                                         </form>
                                     @endcan
                                 </td>

@@ -3,9 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\RecepcionProducto;
 
 class RecepcionProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin.recepcion_productos.index')->only('index');
+        $this->middleware('can:admin.recepcion_productos.create')->only(
+            'create',
+            'store'
+        );
+        $this->middleware('can:admin.recepcion_productos.edit')->only(
+            'edit',
+            'update'
+        );
+        $this->middleware('can:admin.recepcion_productos.destroy')->only(
+            'destroy'
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +30,11 @@ class RecepcionProductoController extends Controller
      */
     public function index()
     {
-        //
+        $recepcion_productos = RecepcionProducto::all();
+        return view(
+            'admin.recepcion_productos.index',
+            compact('recepcion_productos')
+        );
     }
 
     /**

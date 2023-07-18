@@ -40,11 +40,19 @@ Route::resource('almacenes', AlmacenController::class, [
         'almacenes' => 'almacen',
     ],
 ]);
-Route::resource('productos_almacenes', AlmacenProductoController::class, [
+
+//Productos del Almacen
+Route::resource('almacenes_productos', AlmacenProductoController::class, [
     'parameters' => [
-        'productos_almacenes' => 'producto_almacen',
+        'almacenes_productos' => 'almacen_productos',
     ],
 ]);
+Route::get('almacenes_productos/getProductosAlmacen/{id}', [
+    AlmacenProductoController::class,
+    'getProductosAlmacen',
+])->name('getProductosAlmacen');
+
+//Recepcion de Productos
 Route::resource('recepcion_productos', RecepcionProductoController::class, [
     'parameters' => [
         'recepcion_productos' => 'recepcion_producto',

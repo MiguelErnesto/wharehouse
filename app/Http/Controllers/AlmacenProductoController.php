@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AlmacenProducto;
+use App\Models\Almacen;
 
 class AlmacenProductoController extends Controller
 {
@@ -11,7 +13,7 @@ class AlmacenProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
     }
@@ -80,5 +82,36 @@ class AlmacenProductoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getProductosAlmacen($id)
+    {
+        $almacen_productos = AlmacenProducto::where('almacen_id', '=', $id)
+            ->select(
+                'p.id as pId',
+                'p.codigo as pCodigo',
+                'p.nombre as pNombre',
+                'p.descripcion as pDescripcion',
+                'almacenes_productos.id as apId',
+                'almacenes_productos.almacen_id as apAlmId',
+                'almacenes_productos.producto_id as apProdId',
+                'almacenes_productos.cantidad as apCantidad'
+            )
+            ->join(
+                'productos as p',
+                'p.id',
+                '=',
+                'almacenes_productos.producto_id'
+            )
+            ->get();
+
+        $almacen = Almacen::where('id', '=', $id)
+            ->select('id', 'nombre', 'direccion')
+            ->first();
+
+        return view(
+            'admin.almacenes_productos.index',
+            compact('almacen_productos', 'almacen')
+        );
     }
 }

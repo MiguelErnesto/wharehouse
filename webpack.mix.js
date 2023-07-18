@@ -19,6 +19,7 @@ mix
   ])
   .js('resources/js/almacenes.js', 'public/js/compiled/')
   .js('resources/js/productos.js', 'public/js/compiled/')
+  .js('resources/js/recepcion_productos.js', 'public/js/compiled/')
 
 if (mix.inProduction()) {
   mix.version()
