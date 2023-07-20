@@ -891,14 +891,30 @@ var almacenesClass = /*#__PURE__*/function () {
           });
         }
       }
+
+      if (_this.btnVerProdAlm) {
+        for (var i = 0; i < _this.btnVerProdAlm.length; i += 1) {
+          _this.btnVerProdAlm[i].addEventListener('click', function (evt) {
+            return _this.onVerProductosAlmacen(evt);
+          });
+        }
+      }
     });
 
     this.form = (_document$getElementB = document.getElementById('form')) !== null && _document$getElementB !== void 0 ? _document$getElementB : null;
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
+    this.btnVerProdAlm = document.querySelectorAll('.btnVerProdAlm');
     this.addListeners();
   }
 
   _createClass(almacenesClass, [{
+    key: "onVerProductosAlmacen",
+    value: function onVerProductosAlmacen(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      document.getElementById('titleMdVerProdAlm').innerText = 'Almacén ' + evt.currentTarget.dataset.nombre;
+    }
+  }, {
     key: "onDelete",
     value: function onDelete(evt) {
       evt.preventDefault();

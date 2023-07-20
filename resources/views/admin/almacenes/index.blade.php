@@ -47,12 +47,20 @@
                                 <td>{{ $almacen->direccion }}</td>
                                 <td style="padding-right: 0.125rem;padding-left: 0.125rem;" width='8px'
                                     class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                    {{-- @can('admin.almacenes_productos.index')
                                         <a class="btn btn-primary btn-sm"
                                             href="{{ route('getProductosAlmacen', $almacen->id) }}"
-                                            title="Ver Productos del Almacén">
+                                            title="Ver Productos del Almacén obsoleto">
                                             <i class="fas fa-boxes fa-fw"></i></a>
+                                    @endcan --}}
+                                    @can('admin.almacenes_productos.index')
+                                        <a class="btn btn-primary btn-sm btnVerProdAlm" data-bs-toggle="modal"
+                                            data-bs-target="#myModal" data-id={{ $almacen->id }}
+                                            data-nombre="{{ $almacen->nombre }}" title="Ver Productos del Almacén">
+                                            <i class="fas fa-boxes fa-fw"></i>
+                                        </a>
                                     @endcan
+
                                 </td>
                                 <td style="padding-right: 0rem;padding-left: 0rem;" width='8px' class="text-right">
                                     @can('admin.almacenes.edit')
@@ -77,17 +85,16 @@
                             </tr>
                         @endforeach
                     @endif
-
-
                 </tbody>
             </table>
         </div>
     </div>
 
+    {{-- Modal para ver Productos del Almacen  --}}
+    @include('admin.almacenes.modals.verProductosAlmacen')
+
 @stop
 
 @section('js')
-    {{-- <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
     <script async type="module" src="{{ mix('/js/compiled/almacenes.js') }}"></script>
-
 @stop

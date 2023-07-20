@@ -2,6 +2,7 @@ export default class almacenesClass {
   constructor() {
     this.form = document.getElementById('form') ?? null
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
+    this.btnVerProdAlm = document.querySelectorAll('.btnVerProdAlm')
     this.addListeners()
   }
 
@@ -15,6 +16,20 @@ export default class almacenesClass {
         this.btnDelete[i].addEventListener('click', (evt) => this.onDelete(evt))
       }
     }
+    if (this.btnVerProdAlm) {
+      for (var i = 0; i < this.btnVerProdAlm.length; i += 1) {
+        this.btnVerProdAlm[i].addEventListener('click', (evt) =>
+          this.onVerProductosAlmacen(evt),
+        )
+      }
+    }
+  }
+
+  onVerProductosAlmacen(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    document.getElementById('titleMdVerProdAlm').innerText =
+      'Almacén ' + evt.currentTarget.dataset.nombre
   }
 
   onDelete(evt) {
