@@ -1,3 +1,5 @@
+//import Request from './modules/services/request.js'
+
 export default class almacenesClass {
   constructor() {
     this.form = document.getElementById('form') ?? null
@@ -23,13 +25,40 @@ export default class almacenesClass {
         )
       }
     }
+    $(document).ready(function () {
+      console.log('ready!')
+    })
   }
 
   onVerProductosAlmacen(evt) {
     evt.preventDefault()
     evt.stopPropagation()
+
+    let almId = evt.currentTarget.dataset.id
+    let almNombre = evt.currentTarget.dataset.nombre
+    let almDireccion = evt.currentTarget.dataset.direccion
+
     document.getElementById('titleMdVerProdAlm').innerText =
-      'Almacén ' + evt.currentTarget.dataset.nombre
+      'Almacén ' + almNombre
+
+    // AJAX GET request
+    $.ajax({
+      url: `almacenes_productos/getProductosAlmacen/${almId}`,
+      type: 'get',
+      dataType: 'json',
+      success: function (response) {
+        console.log('Fetching data: SUCCESS')
+        alert(JSON.stringify(response))
+        //Llenar body modal con los datos aqui
+      },
+      error: function (error) {
+        console.log('Fetching data: ERROR')
+        console.log(JSON.stringify(error))
+      },
+    })
+
+    //`almacenes_productos/getProductosAlmacen/${evt.currentTarget.dataset.id}`,
+    //href="{{ route('getProductosAlmacen', $almacen->id) }}"
   }
 
   onDelete(evt) {

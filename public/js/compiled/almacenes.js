@@ -871,6 +871,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//import Request from './modules/services/request.js'
 var almacenesClass = /*#__PURE__*/function () {
   function almacenesClass() {
     var _this = this,
@@ -899,6 +900,10 @@ var almacenesClass = /*#__PURE__*/function () {
           });
         }
       }
+
+      $(document).ready(function () {
+        console.log('ready!');
+      });
     });
 
     this.form = (_document$getElementB = document.getElementById('form')) !== null && _document$getElementB !== void 0 ? _document$getElementB : null;
@@ -912,7 +917,25 @@ var almacenesClass = /*#__PURE__*/function () {
     value: function onVerProductosAlmacen(evt) {
       evt.preventDefault();
       evt.stopPropagation();
-      document.getElementById('titleMdVerProdAlm').innerText = 'Almacén ' + evt.currentTarget.dataset.nombre;
+      var almId = evt.currentTarget.dataset.id;
+      var almNombre = evt.currentTarget.dataset.nombre;
+      var almDireccion = evt.currentTarget.dataset.direccion;
+      document.getElementById('titleMdVerProdAlm').innerText = 'Almacén ' + almNombre; // AJAX GET request
+
+      $.ajax({
+        url: "almacenes_productos/getProductosAlmacen/".concat(almId),
+        type: 'get',
+        dataType: 'json',
+        success: function success(response) {
+          console.log('Fetching data: SUCCESS');
+          alert(JSON.stringify(response)); //Llenar body modal con los datos aqui
+        },
+        error: function error(_error) {
+          console.log('Fetching data: ERROR');
+          console.log(JSON.stringify(_error));
+        }
+      }); //`almacenes_productos/getProductosAlmacen/${evt.currentTarget.dataset.id}`,
+      //href="{{ route('getProductosAlmacen', $almacen->id) }}"
     }
   }, {
     key: "onDelete",

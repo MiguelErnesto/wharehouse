@@ -56,7 +56,8 @@
                                     @can('admin.almacenes_productos.index')
                                         <a class="btn btn-primary btn-sm btnVerProdAlm" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id={{ $almacen->id }}
-                                            data-nombre="{{ $almacen->nombre }}" title="Ver Productos del Almacén">
+                                            data-nombre="{{ $almacen->nombre }}" data-direccion="{{ $almacen->direccion }}"
+                                            title="Ver Productos del Almacén">
                                             <i class="fas fa-boxes fa-fw"></i>
                                         </a>
                                     @endcan

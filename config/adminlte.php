@@ -244,7 +244,7 @@ return [
         ['header' => ''],
         [
             'text' => 'Módulos del Sistema',
-            'classes' => 'text-uppercase',
+            'classes' => '',
             'icon' => 'fas fa-fw fa-clone',
             'submenu' => [
                 [
