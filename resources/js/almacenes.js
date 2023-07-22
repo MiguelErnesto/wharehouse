@@ -81,7 +81,7 @@ export default class almacenesClass {
     <td style="width: 20%">${producto.pNombre}</td>
     <td>${producto.pDescripcion}</td>
     <td class='text-right pr-2' style="width: 25%">${
-      producto.pCantidad ?? ''
+      producto.apCantidad ?? '0'
     }</td>
     </tr>`
     })
