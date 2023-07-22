@@ -34,21 +34,23 @@ export default class almacenesClass {
     evt.preventDefault()
     evt.stopPropagation()
 
-    let almId = evt.currentTarget.dataset.id
-    let almNombre = evt.currentTarget.dataset.nombre
-    let almDireccion = evt.currentTarget.dataset.direccion
+    let id = evt.currentTarget.dataset.id
+    let nombre = evt.currentTarget.dataset.nombre
+    let direccion = evt.currentTarget.dataset.direccion
 
-    document.getElementById('titleMdVerProdAlm').innerText =
-      'Almacén ' + almNombre
+    /* document.getElementById('titleMdVerProdAlm').innerText =
+      'Productos del Almacén' + almNombre */
 
     // AJAX GET request
     $.ajax({
-      url: `almacenes_productos/getProductosAlmacen/${almId}`,
+      url: `almacenes_productos/getProductosAlmacen/${id}`,
       type: 'get',
       dataType: 'json',
+      context: this,
       success: function (response) {
         console.log('Fetching data: SUCCESS')
-        alert(JSON.stringify(response))
+        this.showDataAlmacen(nombre, direccion)
+        this.showProductosAlmacen(response)
         //Llenar body modal con los datos aqui
       },
       error: function (error) {
@@ -56,9 +58,57 @@ export default class almacenesClass {
         console.log(JSON.stringify(error))
       },
     })
+  }
 
-    //`almacenes_productos/getProductosAlmacen/${evt.currentTarget.dataset.id}`,
-    //href="{{ route('getProductosAlmacen', $almacen->id) }}"
+  showProductosAlmacen(response) {
+    const listaProductos = document.querySelector(
+      '#listaProductosAlmacen tbody',
+    )
+    listaProductos.innerHTML = ''
+
+    if (!response.length > 0) {
+      listaProductos.innerHTML = `
+      <tr>
+        <td class='text-center' colspan='4'><i>No hay elementos para mostrar...</i></td>        
+      </tr>`
+      return false
+    }
+
+    response.forEach((producto) => {
+      listaProductos.innerHTML += `
+      <tr>
+    <td style="width: 15%">${producto.pCodigo}</td>
+    <td style="width: 20%">${producto.pNombre}</td>
+    <td>${producto.pDescripcion}</td>
+    <td class='text-right pr-2' style="width: 25%">${
+      producto.pCantidad ?? ''
+    }</td>
+    </tr>`
+    })
+  }
+
+  showDataAlmacen(nombre, direccion) {
+    document.getElementById('Head').innerHTML = `<tr>
+    <td class="font-weight-bold pr-3">
+        Almacén:
+    </td>
+    <td>
+        ${nombre}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Dirección:
+    </td>
+    <td>
+        ${direccion}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <br/>`
   }
 
   onDelete(evt) {

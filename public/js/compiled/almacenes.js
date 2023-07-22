@@ -917,25 +917,50 @@ var almacenesClass = /*#__PURE__*/function () {
     value: function onVerProductosAlmacen(evt) {
       evt.preventDefault();
       evt.stopPropagation();
-      var almId = evt.currentTarget.dataset.id;
-      var almNombre = evt.currentTarget.dataset.nombre;
-      var almDireccion = evt.currentTarget.dataset.direccion;
-      document.getElementById('titleMdVerProdAlm').innerText = 'Almacén ' + almNombre; // AJAX GET request
+      var id = evt.currentTarget.dataset.id;
+      var nombre = evt.currentTarget.dataset.nombre;
+      var direccion = evt.currentTarget.dataset.direccion;
+      /* document.getElementById('titleMdVerProdAlm').innerText =
+        'Productos del Almacén' + almNombre */
+      // AJAX GET request
 
       $.ajax({
-        url: "almacenes_productos/getProductosAlmacen/".concat(almId),
+        url: "almacenes_productos/getProductosAlmacen/".concat(id),
         type: 'get',
         dataType: 'json',
+        context: this,
         success: function success(response) {
           console.log('Fetching data: SUCCESS');
-          alert(JSON.stringify(response)); //Llenar body modal con los datos aqui
+          this.showDataAlmacen(nombre, direccion);
+          this.showProductosAlmacen(response); //Llenar body modal con los datos aqui
         },
         error: function error(_error) {
           console.log('Fetching data: ERROR');
           console.log(JSON.stringify(_error));
         }
-      }); //`almacenes_productos/getProductosAlmacen/${evt.currentTarget.dataset.id}`,
-      //href="{{ route('getProductosAlmacen', $almacen->id) }}"
+      });
+    }
+  }, {
+    key: "showProductosAlmacen",
+    value: function showProductosAlmacen(response) {
+      var listaProductos = document.querySelector('#listaProductosAlmacen tbody');
+      listaProductos.innerHTML = '';
+
+      if (!response.length > 0) {
+        listaProductos.innerHTML = "\n      <tr>\n        <td class='text-center' colspan='4'><i>No hay elementos para mostrar...</i></td>        \n      </tr>";
+        return false;
+      }
+
+      response.forEach(function (producto) {
+        var _producto$pCantidad;
+
+        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.pCodigo, "</td>\n    <td style=\"width: 20%\">").concat(producto.pNombre, "</td>\n    <td>").concat(producto.pDescripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 25%\">").concat((_producto$pCantidad = producto.pCantidad) !== null && _producto$pCantidad !== void 0 ? _producto$pCantidad : '', "</td>\n    </tr>");
+      });
+    }
+  }, {
+    key: "showDataAlmacen",
+    value: function showDataAlmacen(nombre, direccion) {
+      document.getElementById('Head').innerHTML = "<tr>\n    <td class=\"font-weight-bold pr-3\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ".concat(nombre, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Direcci\xF3n:\n    </td>\n    <td>\n        ").concat(direccion, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
     }
   }, {
     key: "onDelete",

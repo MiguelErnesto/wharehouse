@@ -249,9 +249,9 @@ return [
             'submenu' => [
                 [
                     'text' => 'Almacenes',
-                    'classes' => 'ml-3',
+                    'classes' => 'ml-1',
                     'route' => 'almacenes.index',
-                    'icon' => 'fas fa-warehouse fa-fw pr-4',
+                    'icon' => 'fas fa-warehouse fa-fw pr-2',
                     'active' => [
                         'admin/almacenes*',
                         'almacenes_productos/getProductosAlmacen*',
@@ -260,17 +260,17 @@ return [
                 ],
                 /* [
                     'text' => 'Productos',
-                    'classes' => 'ml-3',
+                    'classes' => 'ml-1',
                     'route' => 'productos.index',
-                    'icon' => 'fas fa-boxes fa-fw pr-4',
+                    'icon' => 'fas fa-boxes fa-fw pr-2',
                     'active' => ['admin/productos*'],
                     'can' => 'admin.productos.index',
                 ], */
                 [
                     'text' => 'Recepción de Productos',
-                    'classes' => 'ml-3',
+                    'classes' => 'ml-1',
                     'route' => 'recepcion_productos.index',
-                    'icon' => 'fas fa-list fa-fw pr-4',
+                    'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['admin/recepcion_productos*'],
                     'can' => 'admin.recepcion_productos.index',
                 ],

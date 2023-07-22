@@ -4,13 +4,25 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 id='titleMdVerProdAlm' class="modal-title"></h5>
+                <h5 id='titleMdVerProdAlm' class="modal-title">Productos del Almacén</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                Modal body..
+                <table id="Head">
+                </table>
+
+                <table class="table" id="listaProductosAlmacen">
+                    <thead>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th class='text-right pr-2'>Cantidad</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
 
             <!-- Modal footer -->
