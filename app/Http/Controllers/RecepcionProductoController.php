@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RecepcionProducto;
+use App\Models\Almacen;
+use App\Models\Producto;
 
 class RecepcionProductoController extends Controller
 {
@@ -44,7 +46,17 @@ class RecepcionProductoController extends Controller
      */
     public function create()
     {
-        //
+        $almacenes = Almacen::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $productos = Producto::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+        return view(
+            'admin.recepcion_productos.create',
+            compact('almacenes', 'productos')
+        );
     }
 
     /**

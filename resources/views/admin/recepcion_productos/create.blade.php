@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Nuevo Producto</h1>
+    <h1>Nueva recepción de Productos</h1>
 @stop
 
 @section('content')
@@ -15,13 +15,13 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::open(['id' => 'form', 'route' => 'productos.store']) !!}
-            @include('admin.productos.partials.form')
-
+            {!! Form::open(['id' => 'form', 'route' => 'recepcion_productos.store']) !!}
+            @include('admin.recepcion_productos.partials.form')
+            <br />
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('productos.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('recepcion_productos.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
-                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Crear producto', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
             {!! Form::close() !!}
         </div>
@@ -39,5 +39,5 @@
             });
         });
     </script>
-    <script async type="module" src="{{ mix('/js/compiled/productos.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/recepcion_productos.js') }}"></script>
 @stop

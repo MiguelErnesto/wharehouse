@@ -26,7 +26,7 @@ export default class almacenesClass {
       }
     }
     $(document).ready(function () {
-      console.log('ready!')
+      console.log('Ready!')
     })
   }
 

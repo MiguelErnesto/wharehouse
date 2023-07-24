@@ -35,10 +35,7 @@
                 <tbody>
                     @if (count($productos) == 0)
                         <tr>
-                            <td></td>
-                            <td class='text-center'><i>No hay elementos para mostrar...</i></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan='4' class='text-center'><i>No hay elementos para mostrar...</i></td>
                         </tr>
                     @else
                         @foreach ($productos as $producto)
@@ -46,14 +43,15 @@
                                 <td>{{ $producto->codigo }}</td>
                                 <td>{{ $producto->nombre }}</td>
                                 <td>{{ $producto->descripcion }}</td>
-                                <td width='10px' class="text-right">
+                                <td style="padding-left: 0rem;padding-right: 0rem;" width='8px' class="text-right">
                                     @can('admin.productos.edit')
                                         <a class="btn btn-success btn-sm" href="{{ route('productos.edit', $producto) }}"
                                             title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
                                     @endcan
                                 </td>
-                                <td width='10px' class="text-right">
+                                <td style="padding-left: 0.125rem;padding-right: 0.75rem;" width='8px'
+                                    class="text-right">
                                     @can('admin.productos.destroy')
                                         <form id='formIndex_{{ $producto->id }}'
                                             action="{{ route('productos.destroy', $producto) }}" method="POST">

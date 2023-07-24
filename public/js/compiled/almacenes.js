@@ -902,7 +902,7 @@ var almacenesClass = /*#__PURE__*/function () {
       }
 
       $(document).ready(function () {
-        console.log('ready!');
+        console.log('Ready!');
       });
     });
 

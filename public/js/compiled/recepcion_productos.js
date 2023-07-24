@@ -891,14 +891,28 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
           });
         }
       }
+
+      _this.add.addEventListener('click', function (evt) {
+        return _this.onAddProducts(evt);
+      });
+
+      $(document).ready(function () {
+        console.log('Ready!');
+      });
     });
 
     this.form = (_document$getElementB = document.getElementById('form')) !== null && _document$getElementB !== void 0 ? _document$getElementB : null;
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
+    this.add = document.getElementById('add');
     this.addListeners();
   }
 
   _createClass(RecepcionProductosClass, [{
+    key: "onAddProducts",
+    value: function onAddProducts(evt) {
+      alert('agregar producto aqui');
+    }
+  }, {
     key: "onDelete",
     value: function onDelete(evt) {
       evt.preventDefault();
@@ -915,24 +929,38 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
     value: function onValidate(evt) {
       evt.preventDefault();
 
-      if (document.getElementById('codigo').value.length == 0) {
-        document.getElementById('codigo').className = 'form-control border border-danger';
-        document.getElementById('codigo').placeholder = '--- Valor requerido ---';
-        document.getElementById('codigo').focus();
+      if (document.getElementById('fecha').value.length == 0) {
+        document.getElementById('fecha').className = 'form-control border border-danger';
+        document.getElementById('fecha').placeholder = '--- Valor requerido ---';
+        document.getElementById('fecha').focus();
         return false;
       }
 
-      if (document.getElementById('nombre').value.length == 0) {
-        document.getElementById('nombre').className = 'form-control border border-danger';
-        document.getElementById('nombre').placeholder = '--- Valor requerido ---';
-        document.getElementById('nombre').focus();
+      if (document.getElementById('nro_informe').value.length == 0) {
+        document.getElementById('nro_informe').className = 'form-control border border-danger';
+        document.getElementById('nro_informe').placeholder = '--- Valor requerido ---';
+        document.getElementById('nro_informe').focus();
         return false;
       }
 
-      if (document.getElementById('descripcion').value.length == 0) {
-        document.getElementById('descripcion').className = 'form-control border border-danger';
-        document.getElementById('descripcion').placeholder = '--- Valor requerido ---';
-        document.getElementById('descripcion').focus();
+      if (document.getElementById('almacen').value.length == 0) {
+        document.getElementById('almacen').className = 'form-control border border-danger';
+        document.getElementById('almacen').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen').focus();
+        return false;
+      }
+
+      if (document.getElementById('producto').value.length == 0) {
+        document.getElementById('producto').className = 'form-control border border-danger';
+        document.getElementById('producto').placeholder = '--- Valor requerido ---';
+        document.getElementById('producto').focus();
+        return false;
+      }
+
+      if (document.getElementById('cantidad').value.length == 0) {
+        document.getElementById('cantidad').className = 'form-control border border-danger';
+        document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad').focus();
         return false;
       }
 

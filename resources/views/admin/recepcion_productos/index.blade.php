@@ -35,9 +35,7 @@
                 <tbody>
                     @if (count($recepcion_productos) == 0)
                         <tr>
-                            <td></td>
-                            <td class='text-center'><i>No hay elementos para mostrar...</i></td>
-                            <td></td>
+                            <td colspan='4' class='text-center'><i>No hay elementos para mostrar...</i></td>
                         </tr>
                     @else
                         @foreach ($productos as $producto)

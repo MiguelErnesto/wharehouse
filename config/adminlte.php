@@ -258,16 +258,16 @@ return [
                     ],
                     'can' => 'admin.almacenes.index',
                 ],
-                /* [
+                [
                     'text' => 'Productos',
                     'classes' => 'ml-1',
                     'route' => 'productos.index',
                     'icon' => 'fas fa-boxes fa-fw pr-2',
                     'active' => ['admin/productos*'],
                     'can' => 'admin.productos.index',
-                ], */
+                ],
                 [
-                    'text' => 'Recepción de Productos',
+                    'text' => 'Informes de Recepción',
                     'classes' => 'ml-1',
                     'route' => 'recepcion_productos.index',
                     'icon' => 'fas fa-list fa-fw pr-2',

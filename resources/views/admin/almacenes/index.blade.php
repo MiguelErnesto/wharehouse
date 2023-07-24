@@ -34,11 +34,7 @@
                 <tbody>
                     @if (count($almacenes) == 0)
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td class='text-center'><i>No hay elementos para mostrar...</i></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan='5' class='text-center'><i>No hay elementos para mostrar...</i></td>
                         </tr>
                     @else
                         @foreach ($almacenes as $almacen)
@@ -47,12 +43,7 @@
                                 <td>{{ $almacen->direccion }}</td>
                                 <td style="padding-right: 0.125rem;padding-left: 0.125rem;" width='8px'
                                     class="text-right">
-                                    {{-- @can('admin.almacenes_productos.index')
-                                        <a class="btn btn-primary btn-sm"
-                                            href="{{ route('getProductosAlmacen', $almacen->id) }}"
-                                            title="Ver Productos del Almacén obsoleto">
-                                            <i class="fas fa-boxes fa-fw"></i></a>
-                                    @endcan --}}
+
                                     @can('admin.almacenes_productos.index')
                                         <a class="btn btn-primary btn-sm btnVerProdAlm" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id={{ $almacen->id }}
