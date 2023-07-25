@@ -5,6 +5,15 @@ export default class RecepcionProductosClass {
     this.add = document.getElementById('add')
 
     this.addListeners()
+    this.clean()
+  }
+
+  clean() {
+    if (document.querySelector('table#listaProductos tbody').innerHTML == '') {
+      document.querySelector('table#listaProductos thead').innerHTML = ''
+    }
+    document.querySelector('input[name="cantidad"]').value = 1
+    document.getElementById('producto').value = ''
   }
 
   addListeners = () => {
@@ -18,15 +27,84 @@ export default class RecepcionProductosClass {
       }
     }
 
-    this.add.addEventListener('click', (evt) => this.onAddProducts(evt))
+    if (this.add) {
+      this.add.addEventListener('click', () => this.onAddProducts())
+    }
 
     $(document).ready(function () {
       console.log('Ready!')
     })
   }
 
-  onAddProducts(evt) {
-    alert('agregar producto aqui')
+  onAddProducts() {
+    if (document.getElementById('producto').value.length == 0) {
+      alert('Debe seleccionar un producto')
+      document.getElementById('producto').className =
+        'form-control border border-danger'
+      document.getElementById('producto').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('producto').focus()
+      return false
+    }
+
+    const cantidad = parseInt(
+      document.querySelector('input[name="cantidad"]').value,
+    )
+
+    this.producto = document.getElementById('producto')
+    let idSelected = this.producto.value
+
+    if (!this.productExists(idSelected)) {
+      let valueSelected = document.getElementById('producto').options[
+        document.getElementById('producto').selectedIndex
+      ].text
+      document.querySelector('table#listaProductos thead').innerHTML = `<tr>
+        <th style="width: 70%">Producto</th>
+        <th class='text-center' style="width: 10%">Cantidad</th>
+        <th></th>
+     </tr>`
+      document
+        .querySelector('table#listaProductos tbody')
+        .append(this.addProductoList(idSelected, valueSelected, cantidad))
+    }
+    this.clean()
+  }
+
+  addProductoList(id, product, qty) {
+    const tr = document.createElement('tr')
+    tr.id = id
+    tr.dataset.id = id
+    tr.dataset.cantidad = qty
+    tr.innerHTML = `
+                    <td>${product}</td>
+                    <td class="text-right">${qty}</td>
+                    <td class="text-center"><a href="#" class="btn btn-sm btn-danger deleteProductoFromList"> <i class="fas fa-solid fa-trash fa-lg"></i></a></td>
+                `
+    tr.querySelector('.deleteProductoFromList').addEventListener(
+      'click',
+      (evt) => {
+        if (confirm('¿Desea eliminar el producto de la lista?')) {
+          document
+            .querySelector(
+              `table#listaProductos tbody tr[id="${evt.currentTarget.dataset.id}"]`,
+            )
+            .remove()
+        }
+      },
+    )
+
+    return tr
+  }
+
+  productExists(id) {
+    const productsWithId = document.querySelectorAll(
+      `table#listaProductos tbody tr[id="${id}"]`,
+    )
+    if (productsWithId.length > 0) {
+      alert('El producto ya fué agregado al listado')
+      return true
+    }
+    return false
   }
 
   onDelete(evt) {
@@ -42,8 +120,10 @@ export default class RecepcionProductosClass {
 
   onValidate(evt) {
     evt.preventDefault()
+    evt.stopPropagation()
 
     if (document.getElementById('fecha').value.length == 0) {
+      alert('Debe completar todos los datos del Informe')
       document.getElementById('fecha').className =
         'form-control border border-danger'
       document.getElementById('fecha').placeholder = '--- Valor requerido ---'
@@ -51,6 +131,7 @@ export default class RecepcionProductosClass {
       return false
     }
     if (document.getElementById('nro_informe').value.length == 0) {
+      alert('Debe completar todos los datos del Informe')
       document.getElementById('nro_informe').className =
         'form-control border border-danger'
       document.getElementById('nro_informe').placeholder =
@@ -59,6 +140,7 @@ export default class RecepcionProductosClass {
       return false
     }
     if (document.getElementById('almacen').value.length == 0) {
+      alert('Debe completar todos los datos del Informe')
       document.getElementById('almacen').className =
         'form-control border border-danger'
       document.getElementById('almacen').placeholder = '--- Valor requerido ---'
@@ -66,7 +148,10 @@ export default class RecepcionProductosClass {
       return false
     }
 
-    if (document.getElementById('producto').value.length == 0) {
+    if (
+      document.querySelectorAll('table#listaProductos tbody tr').length == 0
+    ) {
+      alert('Debe agregar al menos un producto')
       document.getElementById('producto').className =
         'form-control border border-danger'
       document.getElementById('producto').placeholder =
@@ -76,6 +161,7 @@ export default class RecepcionProductosClass {
     }
 
     if (document.getElementById('cantidad').value.length == 0) {
+      alert('Debe completar todos los datos del Informe')
       document.getElementById('cantidad').className =
         'form-control border border-danger'
       document.getElementById('cantidad').placeholder =
@@ -84,7 +170,43 @@ export default class RecepcionProductosClass {
       return false
     }
 
-    this.form.submit()
+    const data = {
+      _token: document.querySelector('input[name="_token"]').value,
+      user_id: document.getElementById('user_id').value,
+      fecha: document.getElementById('fecha').value,
+      nro_informe: document.getElementById('nro_informe').value,
+      almacen_id: document.getElementById('almacen').value,
+      productos: this.getProductos(),
+    }
+
+    $.ajax({
+      url: `/recepcion_productos`,
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+      context: this,
+      success: function (response) {
+        window.open(`/recepcion_productos`, '_self')
+      },
+      error: function (error) {
+        console.log('Fetching data: ERROR')
+        console.log(JSON.stringify(error))
+      },
+    })
+  }
+
+  getProductos() {
+    let NodelistaProductos = document.querySelectorAll(
+      'table#listaProductos tbody tr',
+    )
+    const listaProductos = []
+    for (const producto of NodelistaProductos) {
+      listaProductos.unshift({
+        id: producto.dataset.id,
+        cantidad: producto.dataset.cantidad,
+      })
+    }
+    return listaProductos
   }
 }
 

@@ -29,14 +29,22 @@ class AlmacenProductoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a `new`ly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'recepcion_producto_id' => 'required',
+            'almacen_id' => 'required',
+            'producto_id' => 'required',
+            'cantidad' => 'required',
+        ]);
+        $almacen_producto = AlmacenProducto::create($request->all());
+
+        return $almacen_producto->id;
     }
 
     /**

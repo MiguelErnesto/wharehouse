@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\RecepcionProducto;
 use App\Models\Almacen;
 use App\Models\Producto;
+use App\Models\AlmacenProducto;
+use App\Http\Controllers\AlmacenProductoController;
 
 class RecepcionProductoController extends Controller
 {
@@ -32,7 +34,18 @@ class RecepcionProductoController extends Controller
      */
     public function index()
     {
-        $recepcion_productos = RecepcionProducto::all();
+        $query = RecepcionProducto::orderBy('created_at', 'desc')
+            ->join('users as u', 'u.id', '=', 'recepcion_productos.user_id')
+            ->join(
+                'almacenes as alm',
+                'alm.id',
+                '=',
+                'recepcion_productos.almacen_id'
+            )
+            ->select('*', 'u.name as userName', 'alm.nombre as almNombre');
+
+        $recepcion_productos = $query->get();
+
         return view(
             'admin.recepcion_productos.index',
             compact('recepcion_productos')
@@ -67,7 +80,45 @@ class RecepcionProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Crear nueva Recepcion Producto
+        $request->validate([
+            'user_id' => 'required',
+            'fecha' => 'required',
+            'nro_informe' => 'required',
+            'almacen_id' => 'required',
+        ]);
+
+        $recepcion_producto = RecepcionProducto::create($request->all());
+
+        //Guardar productos en el almacen seleccionado
+        $recepcion_producto_id = RecepcionProducto::latest()->first()->id;
+        $almacen_id = $request->almacen_id;
+        $cantidad = $request->cantidad;
+        $productos = $request->productos;
+
+        foreach ($productos as $producto) {
+            $found = AlmacenProducto::where('producto_id', '=', $producto['id'])
+                ->where('almacen_id', '=', $request->almacen_id)
+                ->first();
+
+            if ($found) {
+                $almProdId = $found->update([
+                    'cantidad' =>
+                        intval($found->cantidad) +
+                        intval($producto['cantidad']),
+                ]);
+            } else {
+                $requestProductoAlmacen = new Request([
+                    'recepcion_producto_id' => $recepcion_producto_id,
+                    'almacen_id' => $almacen_id,
+                    'producto_id' => $producto['id'],
+                    'cantidad' => $producto['cantidad'],
+                ]);
+                $almProd = new AlmacenProductoController();
+                $almProdId = $almProd->store($requestProductoAlmacen);
+            }
+        }
+        return response()->json($almProdId);
     }
 
     /**

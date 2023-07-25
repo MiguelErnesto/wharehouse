@@ -78,9 +78,9 @@ export default class almacenesClass {
       listaProductos.innerHTML += `
       <tr>
     <td style="width: 15%">${producto.pCodigo}</td>
-    <td style="width: 20%">${producto.pNombre}</td>
-    <td>${producto.pDescripcion}</td>
-    <td class='text-right pr-2' style="width: 25%">${
+    <td style="width: 30%">${producto.pNombre}</td>
+    <td style="width: 40%">${producto.pDescripcion}</td>
+    <td class='text-right pr-2' style="width: 15%">${
       producto.apCantidad ?? '0'
     }</td>
     </tr>`

@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Nueva recepción de Productos</h1>
+    <br />
 @stop
 
 @section('content')
@@ -14,10 +14,14 @@
     @endif
 
     <div class="card" style='width:95%;'>
+        <div class="card-header bg-light text-dark pt-2">
+            <h5 class='text-uppercase text-left pt-2'>Nuevo Infome - Recepción de Productos</h5>
+        </div>
+
         <div class="card-body">
             {!! Form::open(['id' => 'form', 'route' => 'recepcion_productos.store']) !!}
             @include('admin.recepcion_productos.partials.form')
-            <br />
+            <hr />
             <div class='text-right'>
                 <a class="btn btn-danger" href="{{ route('recepcion_productos.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
@@ -25,6 +29,10 @@
             </div>
             {!! Form::close() !!}
         </div>
+
+        {{-- <div class="card-footer">
+        </div> --}}
+
     </div>
 @stop
 

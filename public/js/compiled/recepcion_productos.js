@@ -863,6 +863,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -892,9 +898,11 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
         }
       }
 
-      _this.add.addEventListener('click', function (evt) {
-        return _this.onAddProducts(evt);
-      });
+      if (_this.add) {
+        _this.add.addEventListener('click', function () {
+          return _this.onAddProducts();
+        });
+      }
 
       $(document).ready(function () {
         console.log('Ready!');
@@ -905,12 +913,68 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
     this.add = document.getElementById('add');
     this.addListeners();
+    this.clean();
   }
 
   _createClass(RecepcionProductosClass, [{
+    key: "clean",
+    value: function clean() {
+      if (document.querySelector('table#listaProductos tbody').innerHTML == '') {
+        document.querySelector('table#listaProductos thead').innerHTML = '';
+      }
+
+      document.querySelector('input[name="cantidad"]').value = 1;
+      document.getElementById('producto').value = '';
+    }
+  }, {
     key: "onAddProducts",
-    value: function onAddProducts(evt) {
-      alert('agregar producto aqui');
+    value: function onAddProducts() {
+      if (document.getElementById('producto').value.length == 0) {
+        alert('Debe seleccionar un producto');
+        document.getElementById('producto').className = 'form-control border border-danger';
+        document.getElementById('producto').placeholder = '--- Valor requerido ---';
+        document.getElementById('producto').focus();
+        return false;
+      }
+
+      var cantidad = parseInt(document.querySelector('input[name="cantidad"]').value);
+      this.producto = document.getElementById('producto');
+      var idSelected = this.producto.value;
+
+      if (!this.productExists(idSelected)) {
+        var valueSelected = document.getElementById('producto').options[document.getElementById('producto').selectedIndex].text;
+        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 70%\">Producto</th>\n        <th class='text-center' style=\"width: 10%\">Cantidad</th>\n        <th></th>\n     </tr>";
+        document.querySelector('table#listaProductos tbody').append(this.addProductoList(idSelected, valueSelected, cantidad));
+      }
+
+      this.clean();
+    }
+  }, {
+    key: "addProductoList",
+    value: function addProductoList(id, product, qty) {
+      var tr = document.createElement('tr');
+      tr.id = id;
+      tr.dataset.id = id;
+      tr.dataset.cantidad = qty;
+      tr.innerHTML = "\n                    <td>".concat(product, "</td>\n                    <td class=\"text-right\">").concat(qty, "</td>\n                    <td class=\"text-center\"><a href=\"#\" class=\"btn btn-sm btn-danger deleteProductoFromList\"> <i class=\"fas fa-solid fa-trash fa-lg\"></i></a></td>\n                ");
+      tr.querySelector('.deleteProductoFromList').addEventListener('click', function (evt) {
+        if (confirm('¿Desea eliminar el producto de la lista?')) {
+          document.querySelector("table#listaProductos tbody tr[id=\"".concat(evt.currentTarget.dataset.id, "\"]")).remove();
+        }
+      });
+      return tr;
+    }
+  }, {
+    key: "productExists",
+    value: function productExists(id) {
+      var productsWithId = document.querySelectorAll("table#listaProductos tbody tr[id=\"".concat(id, "\"]"));
+
+      if (productsWithId.length > 0) {
+        alert('El producto ya fué agregado al listado');
+        return true;
+      }
+
+      return false;
     }
   }, {
     key: "onDelete",
@@ -928,8 +992,10 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
     key: "onValidate",
     value: function onValidate(evt) {
       evt.preventDefault();
+      evt.stopPropagation();
 
       if (document.getElementById('fecha').value.length == 0) {
+        alert('Debe completar todos los datos del Informe');
         document.getElementById('fecha').className = 'form-control border border-danger';
         document.getElementById('fecha').placeholder = '--- Valor requerido ---';
         document.getElementById('fecha').focus();
@@ -937,6 +1003,7 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
       }
 
       if (document.getElementById('nro_informe').value.length == 0) {
+        alert('Debe completar todos los datos del Informe');
         document.getElementById('nro_informe').className = 'form-control border border-danger';
         document.getElementById('nro_informe').placeholder = '--- Valor requerido ---';
         document.getElementById('nro_informe').focus();
@@ -944,13 +1011,15 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
       }
 
       if (document.getElementById('almacen').value.length == 0) {
+        alert('Debe completar todos los datos del Informe');
         document.getElementById('almacen').className = 'form-control border border-danger';
         document.getElementById('almacen').placeholder = '--- Valor requerido ---';
         document.getElementById('almacen').focus();
         return false;
       }
 
-      if (document.getElementById('producto').value.length == 0) {
+      if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
+        alert('Debe agregar al menos un producto');
         document.getElementById('producto').className = 'form-control border border-danger';
         document.getElementById('producto').placeholder = '--- Valor requerido ---';
         document.getElementById('producto').focus();
@@ -958,13 +1027,60 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
       }
 
       if (document.getElementById('cantidad').value.length == 0) {
+        alert('Debe completar todos los datos del Informe');
         document.getElementById('cantidad').className = 'form-control border border-danger';
         document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
         document.getElementById('cantidad').focus();
         return false;
       }
 
-      this.form.submit();
+      var data = {
+        _token: document.querySelector('input[name="_token"]').value,
+        user_id: document.getElementById('user_id').value,
+        fecha: document.getElementById('fecha').value,
+        nro_informe: document.getElementById('nro_informe').value,
+        almacen_id: document.getElementById('almacen').value,
+        productos: this.getProductos()
+      };
+      $.ajax({
+        url: "/recepcion_productos",
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+        context: this,
+        success: function success(response) {
+          window.open("/recepcion_productos", '_self');
+        },
+        error: function error(_error) {
+          console.log('Fetching data: ERROR');
+          console.log(JSON.stringify(_error));
+        }
+      });
+    }
+  }, {
+    key: "getProductos",
+    value: function getProductos() {
+      var NodelistaProductos = document.querySelectorAll('table#listaProductos tbody tr');
+      var listaProductos = [];
+
+      var _iterator = _createForOfIteratorHelper(NodelistaProductos),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var producto = _step.value;
+          listaProductos.unshift({
+            id: producto.dataset.id,
+            cantidad: producto.dataset.cantidad
+          });
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return listaProductos;
     }
   }]);
 

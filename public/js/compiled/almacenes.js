@@ -954,7 +954,7 @@ var almacenesClass = /*#__PURE__*/function () {
       response.forEach(function (producto) {
         var _producto$apCantidad;
 
-        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.pCodigo, "</td>\n    <td style=\"width: 20%\">").concat(producto.pNombre, "</td>\n    <td>").concat(producto.pDescripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 25%\">").concat((_producto$apCantidad = producto.apCantidad) !== null && _producto$apCantidad !== void 0 ? _producto$apCantidad : '0', "</td>\n    </tr>");
+        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.pCodigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.pNombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.pDescripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$apCantidad = producto.apCantidad) !== null && _producto$apCantidad !== void 0 ? _producto$apCantidad : '0', "</td>\n    </tr>");
       });
     }
   }, {

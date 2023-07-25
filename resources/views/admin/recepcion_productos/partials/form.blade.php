@@ -1,3 +1,5 @@
+<input id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
+
 <div class="row">
     <div class="col-3">
         <div class="form-group">
@@ -55,8 +57,8 @@
                 'class' => 'pl-1',
             ]) !!}
             {!! Form::select('producto', $productos, null, [
-                'class' => 'form-control text-uppercase',
-                'placeholder' => 'Seleccione productos...',
+                'class' => 'form-control',
+                'placeholder' => 'Seleccione producto...',
             ]) !!}
             @error('producto')
                 <span class="text-danger">{{ $message }}</span>
@@ -82,4 +84,24 @@
             {{ Form::button('+', ['class' => 'btn btn-info', 'id' => 'add']) }}
         </div>
     </div>
+</div>
+
+<br />
+
+<div class="table-responsive pl-4">
+    <table id="listaProductos" class="table table-striped w-75">
+        <thead>
+            <tr class="paginationLinks">
+            <tr>
+        </thead>
+        <thead>
+
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            <tr class="paginationLinks">
+            </tr>
+        </tfoot>
+    </table>
 </div>
