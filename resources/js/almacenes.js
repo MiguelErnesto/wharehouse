@@ -4,6 +4,7 @@ export default class almacenesClass {
   constructor() {
     this.form = document.getElementById('form') ?? null
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
+    this.btnPrint = document.querySelector('.btnPrint') ?? null
     this.btnVerProdAlm = document.querySelectorAll('.btnVerProdAlm')
     this.addListeners()
   }
@@ -25,8 +26,32 @@ export default class almacenesClass {
         )
       }
     }
+    this.btnPrint.addEventListener('click', (evt) => this.onPrint(evt))
+
     $(document).ready(function () {
       console.log('Ready!')
+    })
+  }
+
+  onPrint(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    let id = document.getElementById('almacen_id').value
+    window.open(`almacenes_productos/imprimir/${id}`, '_blank')
+
+    // AJAX GET request
+    $.ajax({
+      url: `almacenes_productos/imprimir/${id}`,
+      type: 'get',
+      dataType: 'json',
+      context: this,
+      success: function (response) {
+        alert(JSON.stringify(response))
+      },
+      error: function (error) {
+        console.log('Fetching data: ERROR')
+        console.log(JSON.stringify(error))
+      },
     })
   }
 
@@ -38,8 +63,7 @@ export default class almacenesClass {
     let nombre = evt.currentTarget.dataset.nombre
     let direccion = evt.currentTarget.dataset.direccion
 
-    /* document.getElementById('titleMdVerProdAlm').innerText =
-      'Productos del Almacén' + almNombre */
+    document.getElementById('almacen_id').value = id
 
     // AJAX GET request
     $.ajax({
@@ -51,7 +75,6 @@ export default class almacenesClass {
         console.log('Fetching data: SUCCESS')
         this.showDataAlmacen(nombre, direccion)
         this.showProductosAlmacen(response)
-        //Llenar body modal con los datos aqui
       },
       error: function (error) {
         console.log('Fetching data: ERROR')

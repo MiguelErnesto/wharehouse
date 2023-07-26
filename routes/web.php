@@ -51,6 +51,10 @@ Route::get('almacenes_productos/getProductosAlmacen/{id}', [
     AlmacenProductoController::class,
     'getProductosAlmacen',
 ])->name('getProductosAlmacen');
+Route::get('almacenes_productos/imprimir/{id}', [
+    AlmacenProductoController::class,
+    'imprimir',
+]);
 
 //Recepcion de Productos
 Route::resource('recepcion_productos', RecepcionProductoController::class, [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AlmacenProducto;
+use App\Models\Producto;
 use App\Models\Almacen;
 
 class AlmacenProductoController extends Controller
@@ -92,7 +93,7 @@ class AlmacenProductoController extends Controller
         //
     }
 
-    public function getProductosAlmacen(Request $request, $id)
+    public function getProductosAlmacen($id)
     {
         try {
             $almacen_productos = AlmacenProducto::where('almacen_id', '=', $id)
@@ -118,5 +119,34 @@ class AlmacenProductoController extends Controller
         } catch (Exception $e) {
             return response($e->getMessage(), $e->getCode());
         }
+    }
+
+    public function imprimir($id)
+    {
+        //$productos = $this->getProductosAlmacen($id);
+        $productos = AlmacenProducto::where('almacen_id', '=', $id)
+            ->select(
+                'p.codigo as pCodigo',
+                'p.nombre as pNombre',
+                'p.descripcion as pDescripcion',
+                'almacenes_productos.cantidad as apCantidad'
+            )
+            ->join(
+                'productos as p',
+                'p.id',
+                '=',
+                'almacenes_productos.producto_id'
+            )
+            ->get();
+
+        $almacen = Almacen::find($id);
+
+        return view('admin.almacenes.print', compact('productos', 'almacen'));
+
+        return view('admin.almacenes.print', [
+            'productos' => $productos,
+            'almacen' => $almacen,
+        ]);
+        //return response()->json($productos);
     }
 }

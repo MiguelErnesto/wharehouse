@@ -1,0 +1,136 @@
+.invoice-box {
+    margin: auto;
+    padding: 10px;
+    font-size: 10pt;
+    line-height: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000;
+}
+
+.invoice-box span.chico {
+    font-size: 10pt;
+}
+
+.invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+}
+
+.invoice-box table td {
+    padding: 2px 0px;
+    vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+    text-align: right;
+}
+
+.invoice-box table tr.top > td {
+    border-bottom: 1px solid black;
+}
+
+.invoice-box table tr.top table td {
+    padding-bottom: 10px;
+}
+
+.invoice-box table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #000000;
+}
+
+.invoice-box table tr.information table td {
+    padding-bottom: 5px;
+}
+
+.invoice-box table tr.heading td {
+    border-top: 1px solid #000000;
+
+    border-bottom: 1px solid #000000;
+    font-weight: bold;
+}
+
+.invoice-box table tr.heading td:last-child {
+}
+
+.invoice-box table tr.details td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.item,
+.invoice-box table tr.descuentos,
+.invoice-box table tr.total {
+    line-height: 14px;
+}
+
+.invoice-box table tr.item:first-child {
+    border-top: 1px solid #000000;
+}
+
+.invoice-box table tr.item td:last-child {
+}
+
+.invoice-box table tr.item td {
+}
+
+.invoice-box table tr.item.last td {
+    border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .invoice-box table tr.top table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .invoice-box table tr.information table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+}
+
+/** RTL **/
+.rtl {
+    direction: rtl;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.rtl table {
+    text-align: right;
+}
+
+.rtl table tr td:nth-child(2) {
+    text-align: left;
+}
+
+.invoice-box table tr.descuentos td.bt {
+    border-top: 1px solid #000000;
+}
+
+.invoice-box table tr.descuentos.grande,
+.invoice-box table tr.total.grande {
+    font-weight: bold;
+    font-size: 0.8rem;
+    line-height: 1rem;
+}
+
+.invoice-box table tr.descuentos.grande td {
+    padding-top: 1rem;
+}
+
+.datos-empresa div {
+    line-height: 15px;
+}
+
+.datos-empresa .company-name {
+    font-size: 11px;
+    font-weight: bold;
+}

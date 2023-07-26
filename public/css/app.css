@@ -1040,8 +1040,8 @@ select {
 .m-auto {
   margin: auto;
 }
-.m-3 {
-  margin: 0.75rem;
+.m-5 {
+  margin: 1.25rem;
 }
 .mx-auto {
   margin-left: auto;
@@ -1147,9 +1147,6 @@ select {
 }
 .mb-0 {
   margin-bottom: 0px;
-}
-.mr-5 {
-  margin-right: 1.25rem;
 }
 .block {
   display: block;
@@ -1663,6 +1660,9 @@ select {
 .pl-1 {
   padding-left: 0.25rem;
 }
+.pl-4 {
+  padding-left: 1rem;
+}
 .pr-2 {
   padding-right: 0.5rem;
 }
@@ -1686,9 +1686,6 @@ select {
 }
 .pt-3 {
   padding-top: 0.75rem;
-}
-.pl-4 {
-  padding-left: 1rem;
 }
 .text-left {
   text-align: left;

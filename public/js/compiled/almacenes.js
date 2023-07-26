@@ -876,7 +876,8 @@ var almacenesClass = /*#__PURE__*/function () {
   function almacenesClass() {
     var _this = this,
         _document$getElementB,
-        _document$querySelect;
+        _document$querySelect,
+        _document$querySelect2;
 
     _classCallCheck(this, almacenesClass);
 
@@ -901,6 +902,10 @@ var almacenesClass = /*#__PURE__*/function () {
         }
       }
 
+      _this.btnPrint.addEventListener('click', function (evt) {
+        return _this.onPrint(evt);
+      });
+
       $(document).ready(function () {
         console.log('Ready!');
       });
@@ -908,11 +913,34 @@ var almacenesClass = /*#__PURE__*/function () {
 
     this.form = (_document$getElementB = document.getElementById('form')) !== null && _document$getElementB !== void 0 ? _document$getElementB : null;
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
+    this.btnPrint = (_document$querySelect2 = document.querySelector('.btnPrint')) !== null && _document$querySelect2 !== void 0 ? _document$querySelect2 : null;
     this.btnVerProdAlm = document.querySelectorAll('.btnVerProdAlm');
     this.addListeners();
   }
 
   _createClass(almacenesClass, [{
+    key: "onPrint",
+    value: function onPrint(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      var id = document.getElementById('almacen_id').value;
+      window.open("almacenes_productos/imprimir/".concat(id), '_blank'); // AJAX GET request
+
+      $.ajax({
+        url: "almacenes_productos/imprimir/".concat(id),
+        type: 'get',
+        dataType: 'json',
+        context: this,
+        success: function success(response) {
+          alert(JSON.stringify(response));
+        },
+        error: function error(_error) {
+          console.log('Fetching data: ERROR');
+          console.log(JSON.stringify(_error));
+        }
+      });
+    }
+  }, {
     key: "onVerProductosAlmacen",
     value: function onVerProductosAlmacen(evt) {
       evt.preventDefault();
@@ -920,9 +948,7 @@ var almacenesClass = /*#__PURE__*/function () {
       var id = evt.currentTarget.dataset.id;
       var nombre = evt.currentTarget.dataset.nombre;
       var direccion = evt.currentTarget.dataset.direccion;
-      /* document.getElementById('titleMdVerProdAlm').innerText =
-        'Productos del Almacén' + almNombre */
-      // AJAX GET request
+      document.getElementById('almacen_id').value = id; // AJAX GET request
 
       $.ajax({
         url: "almacenes_productos/getProductosAlmacen/".concat(id),
@@ -932,11 +958,11 @@ var almacenesClass = /*#__PURE__*/function () {
         success: function success(response) {
           console.log('Fetching data: SUCCESS');
           this.showDataAlmacen(nombre, direccion);
-          this.showProductosAlmacen(response); //Llenar body modal con los datos aqui
+          this.showProductosAlmacen(response);
         },
-        error: function error(_error) {
+        error: function error(_error2) {
           console.log('Fetching data: ERROR');
-          console.log(JSON.stringify(_error));
+          console.log(JSON.stringify(_error2));
         }
       });
     }
