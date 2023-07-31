@@ -4,6 +4,10 @@ export default class RecepcionProductosClass {
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
     this.add = document.getElementById('add')
 
+    this.btnVerInformeRecepcion = document.querySelectorAll(
+      '.btnVerInformeRecepcion',
+    )
+
     this.addListeners()
     this.clean()
   }
@@ -31,9 +35,114 @@ export default class RecepcionProductosClass {
       this.add.addEventListener('click', () => this.onAddProducts())
     }
 
+    if (this.btnVerInformeRecepcion) {
+      for (var i = 0; i < this.btnVerInformeRecepcion.length; i += 1) {
+        this.btnVerInformeRecepcion[i].addEventListener('click', (evt) =>
+          this.onVerInformeRecepcion(evt),
+        )
+      }
+    }
+
     $(document).ready(function () {
       console.log('Ready!')
     })
+  }
+
+  onVerInformeRecepcion(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+
+    let id = evt.currentTarget.dataset.id
+
+    document.getElementById('informe_id').value = id
+
+    // AJAX GET request
+    $.ajax({
+      url: `recepcion_productos/getDetallesRecepcion/${id}`,
+      type: 'get',
+      dataType: 'json',
+      context: this,
+      success: function (response) {
+        console.log('Fetching data: SUCCESS')
+        this.showDetallesInforme(response.informeDetalles[0])
+        this.showProductosInforme(response.informeProductos)
+      },
+      error: function (error) {
+        console.log('Fetching data: ERROR')
+        console.log(JSON.stringify(error))
+      },
+    })
+  }
+
+  showProductosInforme(productos) {
+    const listaProductos = document.querySelector(
+      '#listaProductosInforme tbody',
+    )
+    listaProductos.innerHTML = ''
+
+    if (!productos.length > 0) {
+      listaProductos.innerHTML = `
+      <tr>
+        <td class='text-center' colspan='4'><i>No hay elementos para mostrar...</i></td>        
+      </tr>`
+      return false
+    }
+
+    productos.forEach((producto) => {
+      listaProductos.innerHTML += `
+      <tr>
+    <td style="width: 15%">${producto.codigo}</td>
+    <td style="width: 30%">${producto.nombre}</td>
+    <td style="width: 40%">${producto.descripcion}</td>
+    <td class='text-right pr-2' style="width: 15%">${
+      producto.cantidad ?? '0'
+    }</td>
+    </tr>`
+    })
+  }
+
+  showDetallesInforme(informe) {
+    document.getElementById('Head').innerHTML = `<tr>
+    <td class="font-weight-bold pr-3">
+        No. Informe:
+    </td>
+    <td>
+        ${informe.nro_informe}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Almacén:
+    </td>
+    <td>
+        ${informe.almacen}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Fecha:
+    </td>
+    <td>
+        ${informe.fecha}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Creado por:
+    </td>
+    <td>
+        ${informe.usuario}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <br/>`
   }
 
   onAddProducts() {
@@ -59,7 +168,7 @@ export default class RecepcionProductosClass {
         document.getElementById('producto').selectedIndex
       ].text
       document.querySelector('table#listaProductos thead').innerHTML = `<tr>
-        <th style="width: 70%">Producto</th>
+        <th style="width: 70%">Productos agregados</th>
         <th class='text-center' style="width: 10%">Cantidad</th>
         <th></th>
      </tr>`

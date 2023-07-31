@@ -62,6 +62,11 @@ Route::resource('recepcion_productos', RecepcionProductoController::class, [
         'recepcion_productos' => 'recepcion_producto',
     ],
 ]);
+Route::get('recepcion_productos/getDetallesRecepcion/{id}', [
+    RecepcionProductoController::class,
+    'getDetallesRecepcion',
+])->name('getDetallesRecepcion');
+
 Route::resource('salida_productos', SalidaProductoController::class, [
     'parameters' => [
         'salida_productos' => 'salida_producto',

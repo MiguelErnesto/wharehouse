@@ -904,6 +904,14 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
         });
       }
 
+      if (_this.btnVerInformeRecepcion) {
+        for (var i = 0; i < _this.btnVerInformeRecepcion.length; i += 1) {
+          _this.btnVerInformeRecepcion[i].addEventListener('click', function (evt) {
+            return _this.onVerInformeRecepcion(evt);
+          });
+        }
+      }
+
       $(document).ready(function () {
         console.log('Ready!');
       });
@@ -912,6 +920,7 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
     this.form = (_document$getElementB = document.getElementById('form')) !== null && _document$getElementB !== void 0 ? _document$getElementB : null;
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
     this.add = document.getElementById('add');
+    this.btnVerInformeRecepcion = document.querySelectorAll('.btnVerInformeRecepcion');
     this.addListeners();
     this.clean();
   }
@@ -925,6 +934,52 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
 
       document.querySelector('input[name="cantidad"]').value = 1;
       document.getElementById('producto').value = '';
+    }
+  }, {
+    key: "onVerInformeRecepcion",
+    value: function onVerInformeRecepcion(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      var id = evt.currentTarget.dataset.id;
+      document.getElementById('informe_id').value = id; // AJAX GET request
+
+      $.ajax({
+        url: "recepcion_productos/getDetallesRecepcion/".concat(id),
+        type: 'get',
+        dataType: 'json',
+        context: this,
+        success: function success(response) {
+          console.log('Fetching data: SUCCESS');
+          this.showDetallesInforme(response.informeDetalles[0]);
+          this.showProductosInforme(response.informeProductos);
+        },
+        error: function error(_error) {
+          console.log('Fetching data: ERROR');
+          console.log(JSON.stringify(_error));
+        }
+      });
+    }
+  }, {
+    key: "showProductosInforme",
+    value: function showProductosInforme(productos) {
+      var listaProductos = document.querySelector('#listaProductosInforme tbody');
+      listaProductos.innerHTML = '';
+
+      if (!productos.length > 0) {
+        listaProductos.innerHTML = "\n      <tr>\n        <td class='text-center' colspan='4'><i>No hay elementos para mostrar...</i></td>        \n      </tr>";
+        return false;
+      }
+
+      productos.forEach(function (producto) {
+        var _producto$cantidad;
+
+        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.codigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.nombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.descripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad = producto.cantidad) !== null && _producto$cantidad !== void 0 ? _producto$cantidad : '0', "</td>\n    </tr>");
+      });
+    }
+  }, {
+    key: "showDetallesInforme",
+    value: function showDetallesInforme(informe) {
+      document.getElementById('Head').innerHTML = "<tr>\n    <td class=\"font-weight-bold pr-3\">\n        No. Informe:\n    </td>\n    <td>\n        ".concat(informe.nro_informe, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ").concat(informe.almacen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha:\n    </td>\n    <td>\n        ").concat(informe.fecha, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Creado por:\n    </td>\n    <td>\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
     }
   }, {
     key: "onAddProducts",
@@ -943,7 +998,7 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
 
       if (!this.productExists(idSelected)) {
         var valueSelected = document.getElementById('producto').options[document.getElementById('producto').selectedIndex].text;
-        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 70%\">Producto</th>\n        <th class='text-center' style=\"width: 10%\">Cantidad</th>\n        <th></th>\n     </tr>";
+        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 70%\">Productos agregados</th>\n        <th class='text-center' style=\"width: 10%\">Cantidad</th>\n        <th></th>\n     </tr>";
         document.querySelector('table#listaProductos tbody').append(this.addProductoList(idSelected, valueSelected, cantidad));
       }
 
@@ -1051,9 +1106,9 @@ var RecepcionProductosClass = /*#__PURE__*/function () {
         success: function success(response) {
           window.open("/recepcion_productos", '_self');
         },
-        error: function error(_error) {
+        error: function error(_error2) {
           console.log('Fetching data: ERROR');
-          console.log(JSON.stringify(_error));
+          console.log(JSON.stringify(_error2));
         }
       });
     }

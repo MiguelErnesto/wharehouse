@@ -42,7 +42,12 @@ class RecepcionProductoController extends Controller
                 '=',
                 'recepcion_productos.almacen_id'
             )
-            ->select('*', 'u.name as userName', 'alm.nombre as almNombre');
+            ->select(
+                '*',
+                'recepcion_productos.id as rpId',
+                'u.name as userName',
+                'alm.nombre as almNombre'
+            );
 
         $recepcion_productos = $query->get();
 
@@ -164,5 +169,50 @@ class RecepcionProductoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getDetallesRecepcion($id)
+    {
+        $InformeRecepcion = RecepcionProducto::where(
+            'recepcion_productos.id',
+            '=',
+            $id
+        )
+            ->join(
+                'almacenes as alm',
+                'alm.id',
+                '=',
+                'recepcion_productos.almacen_id'
+            )
+            ->join('users as u', 'u.id', '=', 'recepcion_productos.user_id')
+            ->select(
+                'recepcion_productos.id as id',
+                'recepcion_productos.fecha as fecha',
+                'recepcion_productos.nro_informe as nro_informe',
+                'alm.nombre as almacen',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = RecepcionProducto::select(
+            'p.nombre as nombre',
+            'p.codigo as codigo',
+            'p.descripcion as descripcion',
+            'ap.cantidad as cantidad'
+        )
+            ->join(
+                'almacenes_productos as ap',
+                'ap.recepcion_producto_id',
+                '=',
+                'recepcion_productos.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'ap.producto_id')
+            ->where('recepcion_productos.id', '=', $id)
+            ->get();
+
+        return response()->json([
+            'informeDetalles' => $InformeRecepcion,
+            'informeProductos' => $productos,
+        ]);
     }
 }
