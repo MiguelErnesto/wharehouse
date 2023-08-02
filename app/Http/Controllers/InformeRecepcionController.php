@@ -223,4 +223,45 @@ class InformeRecepcionController extends Controller
             'informeProductos' => $productos,
         ]);
     }
+
+    public function imprimir($id)
+    {
+        $informe = InformeRecepcion::where('informes_recepcion.id', '=', $id)
+            ->join(
+                'almacenes as alm',
+                'alm.id',
+                '=',
+                'informes_recepcion.almacen_id'
+            )
+            ->join('users as u', 'u.id', '=', 'informes_recepcion.user_id')
+            ->select(
+                'informes_recepcion.id as id',
+                'informes_recepcion.fecha as fecha',
+                'informes_recepcion.nro_informe as nro_informe',
+                'alm.nombre as almacen',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = InformeRecepcion::select(
+            'p.nombre as nombre',
+            'p.codigo as codigo',
+            'p.descripcion as descripcion',
+            'rp.cantidad as cantidad'
+        )
+            ->join(
+                'recepcion_productos as rp',
+                'rp.informe_recepcion_id',
+                '=',
+                'informes_recepcion.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'rp.producto_id')
+            ->where('informes_recepcion.id', '=', $id)
+            ->get();
+
+        return view(
+            'admin.informes_recepcion.print',
+            compact('productos', 'informe')
+        );
+    }
 }

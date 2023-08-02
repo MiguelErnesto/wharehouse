@@ -8,6 +8,8 @@ export default class InformesRecepcionClass {
       '.btnVerInformeRecepcion',
     )
 
+    this.btnPrint = document.querySelectorAll('.btnPrint')
+
     this.addListeners()
     this.clean()
   }
@@ -51,9 +53,22 @@ export default class InformesRecepcionClass {
       }
     }
 
+    if (this.btnPrint) {
+      for (var i = 0; i < this.btnPrint.length; i += 1) {
+        this.btnPrint[i].addEventListener('click', (evt) => this.onPrint(evt))
+      }
+    }
+
     $(document).ready(function () {
       console.log('Ready!')
     })
+  }
+
+  onPrint(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    let id = evt.currentTarget.dataset.id
+    window.open(`informes_recepcion/imprimir/${id}`, '_blank')
   }
 
   onVerInformeRecepcion(evt) {

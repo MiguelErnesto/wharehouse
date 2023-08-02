@@ -141,11 +141,5 @@ class AlmacenProductoController extends Controller
         $almacen = Almacen::find($id);
 
         return view('admin.almacenes.print', compact('productos', 'almacen'));
-
-        return view('admin.almacenes.print', [
-            'productos' => $productos,
-            'almacen' => $almacen,
-        ]);
-        //return response()->json($productos);
     }
 }

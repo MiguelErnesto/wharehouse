@@ -926,19 +926,19 @@ var almacenesClass = /*#__PURE__*/function () {
       var id = document.getElementById('almacen_id').value;
       window.open("almacenes_productos/imprimir/".concat(id), '_blank'); // AJAX GET request
 
-      $.ajax({
-        url: "almacenes_productos/imprimir/".concat(id),
+      /* $.ajax({
+        url: `almacenes_productos/imprimir/${id}`,
         type: 'get',
         dataType: 'json',
         context: this,
-        success: function success(response) {
-          alert(JSON.stringify(response));
+        success: function (response) {
+          alert(JSON.stringify(response))
         },
-        error: function error(_error) {
-          console.log('Fetching data: ERROR');
-          console.log(JSON.stringify(_error));
-        }
-      });
+        error: function (error) {
+          console.log('Fetching data: ERROR')
+          console.log(JSON.stringify(error))
+        },
+      }) */
     }
   }, {
     key: "onVerProductosAlmacen",
@@ -960,9 +960,9 @@ var almacenesClass = /*#__PURE__*/function () {
           this.showDataAlmacen(nombre, direccion);
           this.showProductosAlmacen(response);
         },
-        error: function error(_error2) {
+        error: function error(_error) {
           console.log('Fetching data: ERROR');
-          console.log(JSON.stringify(_error2));
+          console.log(JSON.stringify(_error));
         }
       });
     }

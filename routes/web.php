@@ -57,7 +57,7 @@ Route::get('almacenes_productos/imprimir/{id}', [
     'imprimir',
 ]);
 
-//Recepcion de Productos
+//Informes de Recepcion
 Route::resource('informes_recepcion', InformeRecepcionController::class, [
     'parameters' => [
         'informes_recepcion' => 'informe_recepcion',
@@ -67,6 +67,10 @@ Route::get('informes_recepcion/getDetallesRecepcion/{id}', [
     InformeRecepcionController::class,
     'getDetallesRecepcion',
 ])->name('getDetallesRecepcion');
+Route::get('informes_recepcion/imprimir/{id}', [
+    InformeRecepcionController::class,
+    'imprimir',
+]);
 
 //Recepcion de Productos
 Route::resource('recepcion_productos', RecepcionProductoController::class, [

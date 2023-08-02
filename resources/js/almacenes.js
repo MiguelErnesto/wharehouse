@@ -40,7 +40,7 @@ export default class almacenesClass {
     window.open(`almacenes_productos/imprimir/${id}`, '_blank')
 
     // AJAX GET request
-    $.ajax({
+    /* $.ajax({
       url: `almacenes_productos/imprimir/${id}`,
       type: 'get',
       dataType: 'json',
@@ -52,7 +52,7 @@ export default class almacenesClass {
         console.log('Fetching data: ERROR')
         console.log(JSON.stringify(error))
       },
-    })
+    }) */
   }
 
   onVerProductosAlmacen(evt) {

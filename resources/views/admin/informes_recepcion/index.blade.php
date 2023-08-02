@@ -49,7 +49,7 @@
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
                                         <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"
-                                            data-bs-target="#myModal" data-id={{ $informe_recepcion->rpId }}
+                                            data-bs-target="#myModal" data-id="{{ $informe_recepcion->rpId }}"
                                             title="Ver Informe de Recepción">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
@@ -58,9 +58,8 @@
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
-                                        <a class="btn btn-primary btn-sm btnVerProdAlm" data-bs-toggle="modal"
-                                            data-bs-target="#myModal" data-id={{ $informe_recepcion->id }}
-                                            data-nro_informe="{{ $informe_recepcion->nro_informe }}" title="Imprimir">
+                                        <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $informe_recepcion->rpId }}"
+                                            title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
                                     @endcan

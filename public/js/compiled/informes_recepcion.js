@@ -912,6 +912,14 @@ var InformesRecepcionClass = /*#__PURE__*/function () {
         }
       }
 
+      if (_this.btnPrint) {
+        for (var i = 0; i < _this.btnPrint.length; i += 1) {
+          _this.btnPrint[i].addEventListener('click', function (evt) {
+            return _this.onPrint(evt);
+          });
+        }
+      }
+
       $(document).ready(function () {
         console.log('Ready!');
       });
@@ -921,6 +929,7 @@ var InformesRecepcionClass = /*#__PURE__*/function () {
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
     this.add = document.getElementById('add');
     this.btnVerInformeRecepcion = document.querySelectorAll('.btnVerInformeRecepcion');
+    this.btnPrint = document.querySelectorAll('.btnPrint');
     this.addListeners();
     this.clean();
   }
@@ -941,6 +950,14 @@ var InformesRecepcionClass = /*#__PURE__*/function () {
       if (document.querySelector('producto')) {
         document.getElementById('producto').value = '';
       }
+    }
+  }, {
+    key: "onPrint",
+    value: function onPrint(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      var id = evt.currentTarget.dataset.id;
+      window.open("informes_recepcion/imprimir/".concat(id), '_blank');
     }
   }, {
     key: "onVerInformeRecepcion",
