@@ -123,7 +123,6 @@ class AlmacenProductoController extends Controller
 
     public function imprimir($id)
     {
-        //$productos = $this->getProductosAlmacen($id);
         $productos = AlmacenProducto::where('almacen_id', '=', $id)
             ->select(
                 'p.codigo as pCodigo',

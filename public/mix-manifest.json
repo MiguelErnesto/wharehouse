@@ -2,6 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/js/compiled/almacenes.js": "/js/compiled/almacenes.js",
     "/js/compiled/productos.js": "/js/compiled/productos.js",
-    "/js/compiled/recepcion_productos.js": "/js/compiled/recepcion_productos.js",
+    "/js/compiled/informes_recepcion.js": "/js/compiled/informes_recepcion.js",
     "/css/app.css": "/css/app.css"
 }

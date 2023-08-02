@@ -131,19 +131,19 @@ class RoleSeeder extends Seeder
 
         // Recepción de Productos - Roles
         Permission::create([
-            'name' => 'admin.recepcion_productos.index',
+            'name' => 'admin.informes_recepcion.index',
             'description' => 'Listar Informes de Recepción',
         ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
-            'name' => 'admin.recepcion_productos.create',
+            'name' => 'admin.informes_recepcion.create',
             'description' => 'Crear nuevo Informe de Recepción',
         ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
-            'name' => 'admin.recepcion_productos.edit',
+            'name' => 'admin.informes_recepcion.edit',
             'description' => 'Editar Informe de Recepción',
         ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
-            'name' => 'admin.recepcion_productos.destroy',
+            'name' => 'admin.informes_recepcion.destroy',
             'description' => 'Eliminar Informe de Recepción',
         ])->syncRoles([$role1, $role2, $role3]);
 

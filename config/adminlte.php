@@ -269,10 +269,10 @@ return [
                 [
                     'text' => 'Informes de Recepción',
                     'classes' => 'ml-1',
-                    'route' => 'recepcion_productos.index',
+                    'route' => 'informes_recepcion.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
-                    'active' => ['admin/recepcion_productos*'],
-                    'can' => 'admin.recepcion_productos.index',
+                    'active' => ['admin/informes_recepcion*'],
+                    'can' => 'admin.informes_recepcion.index',
                 ],
             ],
         ],

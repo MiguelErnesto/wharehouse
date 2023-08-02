@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\AlmacenProductoController;
-use App\Http\Controllers\RecepcionProductoController;
+use App\Http\Controllers\InformeRecepcionController;
 use App\Http\Controllers\SalidaProductoController;
+use App\Http\Controllers\RecepcionProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,16 +58,24 @@ Route::get('almacenes_productos/imprimir/{id}', [
 ]);
 
 //Recepcion de Productos
+Route::resource('informes_recepcion', InformeRecepcionController::class, [
+    'parameters' => [
+        'informes_recepcion' => 'informe_recepcion',
+    ],
+]);
+Route::get('informes_recepcion/getDetallesRecepcion/{id}', [
+    InformeRecepcionController::class,
+    'getDetallesRecepcion',
+])->name('getDetallesRecepcion');
+
+//Recepcion de Productos
 Route::resource('recepcion_productos', RecepcionProductoController::class, [
     'parameters' => [
         'recepcion_productos' => 'recepcion_producto',
     ],
 ]);
-Route::get('recepcion_productos/getDetallesRecepcion/{id}', [
-    RecepcionProductoController::class,
-    'getDetallesRecepcion',
-])->name('getDetallesRecepcion');
 
+//Salida de productos
 Route::resource('salida_productos', SalidaProductoController::class, [
     'parameters' => [
         'salida_productos' => 'salida_producto',

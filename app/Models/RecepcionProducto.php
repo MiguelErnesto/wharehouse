@@ -10,5 +10,5 @@ class RecepcionProducto extends Model
     use HasFactory;
 
     protected $table = 'recepcion_productos';
-    protected $fillable = ['nro_informe', 'user_id', 'fecha', 'almacen_id'];
+    protected $fillable = ['informe_recepcion_id', 'producto_id', 'cantidad'];
 }

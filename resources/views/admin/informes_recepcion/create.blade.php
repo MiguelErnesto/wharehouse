@@ -19,11 +19,11 @@
         </div>
 
         <div class="card-body">
-            {!! Form::open(['id' => 'form', 'route' => 'recepcion_productos.store']) !!}
-            @include('admin.recepcion_productos.partials.form')
+            {!! Form::open(['id' => 'form', 'route' => 'informes_recepcion.store']) !!}
+            @include('admin.informes_recepcion.partials.form')
             <hr />
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('recepcion_productos.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('informes_recepcion.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
                 {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
@@ -47,5 +47,5 @@
             });
         });
     </script>
-    <script async type="module" src="{{ mix('/js/compiled/recepcion_productos.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/informes_recepcion.js') }}"></script>
 @stop

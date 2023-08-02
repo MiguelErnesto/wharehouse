@@ -1,4 +1,4 @@
-export default class RecepcionProductosClass {
+export default class InformesRecepcionClass {
   constructor() {
     this.form = document.getElementById('form') ?? null
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
@@ -13,11 +13,19 @@ export default class RecepcionProductosClass {
   }
 
   clean() {
-    if (document.querySelector('table#listaProductos tbody').innerHTML == '') {
-      document.querySelector('table#listaProductos thead').innerHTML = ''
+    if (document.querySelector('table#listaProductos tbody')) {
+      if (
+        document.querySelector('table#listaProductos tbody').innerHTML == ''
+      ) {
+        document.querySelector('table#listaProductos thead').innerHTML = ''
+      }
     }
-    document.querySelector('input[name="cantidad"]').value = 1
-    document.getElementById('producto').value = ''
+    if (document.querySelector('input[name="cantidad"]')) {
+      document.querySelector('input[name="cantidad"]').value = 1
+    }
+    if (document.querySelector('producto')) {
+      document.getElementById('producto').value = ''
+    }
   }
 
   addListeners = () => {
@@ -58,7 +66,7 @@ export default class RecepcionProductosClass {
 
     // AJAX GET request
     $.ajax({
-      url: `recepcion_productos/getDetallesRecepcion/${id}`,
+      url: `informes_recepcion/getDetallesRecepcion/${id}`,
       type: 'get',
       dataType: 'json',
       context: this,
@@ -289,13 +297,14 @@ export default class RecepcionProductosClass {
     }
 
     $.ajax({
-      url: `/recepcion_productos`,
+      url: `/informes_recepcion`,
       type: 'POST',
       dataType: 'json',
       data: data,
       context: this,
       success: function (response) {
-        window.open(`/recepcion_productos`, '_self')
+        alert('Recepción de productos exitosa')
+        window.open(`/informes_recepcion`, '_self')
       },
       error: function (error) {
         console.log('Fetching data: ERROR')
@@ -319,8 +328,8 @@ export default class RecepcionProductosClass {
   }
 }
 
-const RecepcionProductos = async () => {
-  var Handler = new RecepcionProductosClass()
+const InformesRecepcion = async () => {
+  var Handler = new InformesRecepcionClass()
 }
 
-window.addEventListener('load', RecepcionProductos)
+window.addEventListener('load', InformesRecepcion)

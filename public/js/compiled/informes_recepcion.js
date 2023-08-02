@@ -848,9 +848,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!*********************************************!*\
-  !*** ./resources/js/recepcion_productos.js ***!
-  \*********************************************/
+/*!********************************************!*\
+  !*** ./resources/js/informes_recepcion.js ***!
+  \********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ InformesRecepcionClass)
@@ -928,12 +928,19 @@ var InformesRecepcionClass = /*#__PURE__*/function () {
   _createClass(InformesRecepcionClass, [{
     key: "clean",
     value: function clean() {
-      if (document.querySelector('table#listaProductos tbody').innerHTML == '') {
-        document.querySelector('table#listaProductos thead').innerHTML = '';
+      if (document.querySelector('table#listaProductos tbody')) {
+        if (document.querySelector('table#listaProductos tbody').innerHTML == '') {
+          document.querySelector('table#listaProductos thead').innerHTML = '';
+        }
       }
 
-      document.querySelector('input[name="cantidad"]').value = 1;
-      document.getElementById('producto').value = '';
+      if (document.querySelector('input[name="cantidad"]')) {
+        document.querySelector('input[name="cantidad"]').value = 1;
+      }
+
+      if (document.querySelector('producto')) {
+        document.getElementById('producto').value = '';
+      }
     }
   }, {
     key: "onVerInformeRecepcion",
@@ -1105,7 +1112,6 @@ var InformesRecepcionClass = /*#__PURE__*/function () {
         context: this,
         success: function success(response) {
           alert('Recepción de productos exitosa');
-          alert(response);
           window.open("/informes_recepcion", '_self');
         },
         error: function error(_error2) {

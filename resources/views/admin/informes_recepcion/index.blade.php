@@ -16,9 +16,9 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.recepcion_productos.create')
+        @can('admin.informes_recepcion.create')
             <div class="card-header">
-                <a href="{{ route('recepcion_productos.create') }}" class="btn btn-info" title="Crear Nuevo"><i
+                <a href="{{ route('informes_recepcion.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
             </div>
         @endcan
@@ -34,22 +34,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (count($recepcion_productos) == 0)
+                    @if (count($informes_recepcion) == 0)
                         <tr>
                             <td colspan='5' class='text-center'><i>No hay elementos para mostrar...</i></td>
                         </tr>
                     @else
-                        @foreach ($recepcion_productos as $recepcion_producto)
+                        @foreach ($informes_recepcion as $informe_recepcion)
                             <tr>
-                                <td>{{ $recepcion_producto->fecha }}</td>
-                                <td>{{ $recepcion_producto->nro_informe }}</td>
-                                <td>{{ $recepcion_producto->almNombre }}</td>
-                                <td>{{ $recepcion_producto->userName }}</td>
+                                <td>{{ $informe_recepcion->fecha }}</td>
+                                <td>{{ $informe_recepcion->nro_informe }}</td>
+                                <td>{{ $informe_recepcion->almNombre }}</td>
+                                <td>{{ $informe_recepcion->userName }}</td>
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
                                         <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"
-                                            data-bs-target="#myModal" data-id={{ $recepcion_producto->rpId }}
+                                            data-bs-target="#myModal" data-id={{ $informe_recepcion->rpId }}
                                             title="Ver Informe de Recepción">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
@@ -59,17 +59,17 @@
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
                                         <a class="btn btn-primary btn-sm btnVerProdAlm" data-bs-toggle="modal"
-                                            data-bs-target="#myModal" data-id={{ $recepcion_producto->id }}
-                                            data-nro_informe="{{ $recepcion_producto->nro_informe }}" title="Imprimir">
+                                            data-bs-target="#myModal" data-id={{ $informe_recepcion->id }}
+                                            data-nro_informe="{{ $informe_recepcion->nro_informe }}" title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
                                     @endcan
                                 </td>
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.recepcion_productos.edit')
+                                    @can('admin.informes_recepcion.edit')
                                         <a class="btn btn-success btn-sm"
-                                            href="{{ route('recepcion_productos.edit', $recepcion_producto) }}" title="Editar">
+                                            href="{{ route('informes_recepcion.edit', $informe_recepcion) }}" title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
                                     @endcan
                                 </td>
@@ -77,13 +77,13 @@
 
                                 <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
                                     class="text-right">
-                                    @can('admin.recepcion_productos.destroy')
-                                        <form id='formIndex_{{ $recepcion_producto->id }}'
-                                            action="{{ route('recepcion_productos.destroy', $recepcion_producto) }}"
+                                    @can('admin.informes_recepcion.destroy')
+                                        <form id='formIndex_{{ $informe_recepcion->id }}'
+                                            action="{{ route('informes_recepcion.destroy', $informe_recepcion) }}"
                                             method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" data-id={{ $recepcion_producto->id }}
+                                            <button type="submit" data-id={{ $informe_recepcion->id }}
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
@@ -100,12 +100,12 @@
     </div>
 
     {{-- Modal para ver Informe de Recepción  --}}
-    @include('admin.recepcion_productos.modals.verInformeRecepcion')
+    @include('admin.informes_recepcion.modals.verInformeRecepcion')
 
 @stop
 
 @section('js')
     {{-- <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
-    <script async type="module" src="{{ mix('/js/compiled/recepcion_productos.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/informes_recepcion.js') }}"></script>
 
 @stop

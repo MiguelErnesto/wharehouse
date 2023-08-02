@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         //Disable foreign key checks for current db driver
         //SET foreign_key_checks = 0   //MYSQL
-        DB::statement('PRAGMA foreign_keys = ON;');
+        DB::statement('PRAGMA foreign_keys = OFF;');
         DB::table('users')->truncate();
 
         User::create([
@@ -31,6 +31,6 @@ class UserSeeder extends Seeder
 
         //Enable foreign key checks for current db driver
         //SET foreign_key_checks = 1 //MYSQL
-        DB::statement('PRAGMA foreign_keys = OFF;');
+        DB::statement('PRAGMA foreign_keys = ON;');
     }
 }
