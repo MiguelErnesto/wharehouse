@@ -14,7 +14,7 @@
                             <strong>No. de Informe:</strong> {{ $informe[0]->nro_informe }}<br />
                             <strong>Almacén:</strong> {{ $informe[0]->almacen }}<br />
                             <strong>Fecha:</strong> {{ $informe[0]->fecha }}<br />
-                            <strong>Creado por:</strong> {{ $informe[0]->usuario }}<br />
+                            <strong>Creado/Actualizado:</strong> {{ $informe[0]->usuario }}<br />
                         </td>
                     </tr>
                     <tr>

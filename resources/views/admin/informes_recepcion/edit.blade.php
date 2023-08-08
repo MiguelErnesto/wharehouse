@@ -3,7 +3,9 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <span class="text-uppercase page-subtitle">Editar producto <h1 class='pl-3'>{{ $producto->nombre }}</h1></span>
+    <span class="text-uppercase page-subtitle">Editar informe de recepción <h1 class='pl-3'>
+            {{ $informe_recepcion->nro_informe }}</h1>
+    </span>
 @stop
 
 @section('content')
@@ -16,12 +18,16 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::model($producto, ['id' => 'form', 'route' => ['productos.update', $producto->id], 'method' => 'put']) !!}
+            {!! Form::model($informe_recepcion, [
+                'id' => 'form',
+                'route' => ['informes_recepcion.update', $informe_recepcion->id],
+                'method' => 'put',
+            ]) !!}
 
-            @include('admin.productos.partials.form')
+            @include('admin.informes_recepcion.partials.form')
 
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('productos.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('informes_recepcion.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
                 {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar cambios', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>

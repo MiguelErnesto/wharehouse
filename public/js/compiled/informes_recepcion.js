@@ -1003,7 +1003,7 @@ var InformesRecepcionClass = /*#__PURE__*/function () {
   }, {
     key: "showDetallesInforme",
     value: function showDetallesInforme(informe) {
-      document.getElementById('Head').innerHTML = "<tr>\n    <td class=\"font-weight-bold pr-3\">\n        No. Informe:\n    </td>\n    <td>\n        ".concat(informe.nro_informe, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ").concat(informe.almacen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha:\n    </td>\n    <td>\n        ").concat(informe.fecha, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Creado por:\n    </td>\n    <td>\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
+      document.getElementById('Head').innerHTML = "<tr>\n    <td class=\"font-weight-bold pr-3\">\n        No. Informe:\n    </td>\n    <td>\n        ".concat(informe.nro_informe, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ").concat(informe.almacen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha:\n    </td>\n    <td>\n        ").concat(informe.fecha, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Creado/Actualizado:\n    </td>\n    <td>\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
     }
   }, {
     key: "onAddProducts",
@@ -1059,8 +1059,9 @@ var InformesRecepcionClass = /*#__PURE__*/function () {
     key: "onDelete",
     value: function onDelete(evt) {
       evt.preventDefault();
+      evt.stopPropagation();
 
-      if (confirm('¿Confirma que desea eliminar este Producto?')) {
+      if (confirm("\xBFConfirma que desea eliminar este Informe?")) {
         this.formIndex = document.getElementById('formIndex_' + evt.currentTarget.dataset.id);
         this.formIndex.submit();
       }

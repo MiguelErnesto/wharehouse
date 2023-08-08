@@ -274,6 +274,14 @@ return [
                     'active' => ['admin/informes_recepcion*'],
                     'can' => 'admin.informes_recepcion.index',
                 ],
+                [
+                    'text' => 'Órdenes de Despacho',
+                    'classes' => 'ml-1',
+                    'route' => 'ordenes_despacho.index',
+                    'icon' => 'fas fa-list fa-fw pr-2',
+                    'active' => ['admin/ordenes_despacho*'],
+                    'can' => 'admin.ordenes_despacho.index',
+                ],
             ],
         ],
 

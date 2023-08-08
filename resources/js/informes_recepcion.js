@@ -157,7 +157,7 @@ export default class InformesRecepcionClass {
   </tr>
   <tr>
     <td class="font-weight-bold">
-        Creado por:
+        Creado/Actualizado:
     </td>
     <td>
         ${informe.usuario}
@@ -241,7 +241,8 @@ export default class InformesRecepcionClass {
 
   onDelete(evt) {
     evt.preventDefault()
-    if (confirm('¿Confirma que desea eliminar este Producto?')) {
+    evt.stopPropagation()
+    if (confirm(`¿Confirma que desea eliminar este Informe?`)) {
       this.formIndex = document.getElementById(
         'formIndex_' + evt.currentTarget.dataset.id,
       )

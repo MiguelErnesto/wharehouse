@@ -9,7 +9,7 @@ use App\Http\Controllers\AlmacenProductoController;
 use App\Http\Controllers\InformeRecepcionController;
 use App\Http\Controllers\SalidaProductoController;
 use App\Http\Controllers\RecepcionProductoController;
-
+use App\Http\Controllers\OrdenDespachoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,6 +72,22 @@ Route::get('informes_recepcion/imprimir/{id}', [
     'imprimir',
 ]);
 
+//Órdenes de Despacho
+Route::resource('ordenes_despacho', OrdenDespachoController::class, [
+    'parameters' => [
+        'ordenes_despacho' => 'orden_despacho',
+    ],
+]);
+Route::get('ordenes_despacho/getDetallesDespacho/{id}', [
+    OrdenDespachoController::class,
+    'getDetallesDespacho',
+])->name('getDetallesRecepcion');
+Route::get('ordenes_despacho/imprimir/{id}', [
+    OrdenDespachoController::class,
+    'imprimir',
+]);
+
+//esto puede ser despacho_productos o eliminarlo por completo
 //Recepcion de Productos
 Route::resource('recepcion_productos', RecepcionProductoController::class, [
     'parameters' => [

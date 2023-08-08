@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\InformeRecepcion;
 use App\Models\RecepcionProducto;
 use App\Models\Almacen;
+use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
@@ -35,26 +36,18 @@ class InformeRecepcionController extends Controller
      */
     public function index()
     {
-        $query = InformeRecepcion::orderBy('created_at', 'desc')
-            ->join('users as u', 'u.id', '=', 'informes_recepcion.user_id')
-            ->join(
-                'almacenes as alm',
-                'alm.id',
-                '=',
-                'informes_recepcion.almacen_id'
-            )
-            ->select(
-                '*',
-                'informes_recepcion.id as rpId',
-                'u.name as userName',
-                'alm.nombre as almNombre'
-            );
+        $informes_recepcion = InformeRecepcion::orderBy(
+            'updated_at',
+            'desc'
+        )->get();
+        $usuarios = User::all();
+        $almacenes = Almacen::orderBy('nombre', 'desc')->get();
 
-        $informes_recepcion = $query->get();
+        //$datosInformes = $query->get();
 
         return view(
             'admin.informes_recepcion.index',
-            compact('informes_recepcion')
+            compact('informes_recepcion', 'usuarios', 'almacenes')
         );
     }
 
@@ -121,14 +114,12 @@ class InformeRecepcionController extends Controller
                         intval($producto['cantidad']),
                 ]);
             } else {
-                $requestProductoAlmacen = new Request([
+                $almProdId = AlmacenProducto::create([
                     'recepcion_producto_id' => $informe_recepcion_id,
                     'almacen_id' => $almacen_id,
                     'producto_id' => $producto['id'],
                     'cantidad' => $producto['cantidad'],
                 ]);
-                $almProd = new AlmacenProducto();
-                $almProdId = $almProd->store($requestProductoAlmacen);
             }
         }
         return response()->json($almProdId);
@@ -151,9 +142,22 @@ class InformeRecepcionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(InformeRecepcion $informe_recepcion)
     {
-        //
+        $almacenes = Almacen::select('id', 'nombre')
+            ->orderBy('nombre', 'asc')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $productos = Producto::select('id', 'nombre')
+            ->orderBy('nombre', 'asc')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        return view(
+            'admin.informes_recepcion.edit',
+            compact('informe_recepcion', 'almacenes', 'productos')
+        );
     }
 
     /**
@@ -174,9 +178,24 @@ class InformeRecepcionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(InformeRecepcion $informe_recepcion)
     {
-        //
+        $InformesRecepcion = RecepcionProducto::where(
+            'informe_recepcion_id',
+            '=',
+            $informe_recepcion->id
+        )->delete();
+
+        $informe_recepcion->delete();
+
+        return redirect()
+            ->route('informes_recepcion.index')
+            ->with(
+                'info',
+                'Informe ' .
+                    $informe_recepcion->nro_informe .
+                    ' eliminado correctamente'
+            );
     }
 
     public function getDetallesRecepcion($id)

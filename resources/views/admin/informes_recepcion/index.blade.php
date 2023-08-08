@@ -29,7 +29,7 @@
                         <th>Fecha</th>
                         <th>No. Informe</th>
                         <th>Almacén</th>
-                        <th>Realizado por</th>
+                        <th>Creado/Actualizado por</th>
                         <th colspan="3" class='text-center'>Acciones</th>
                     </tr>
                 </thead>
@@ -42,15 +42,24 @@
                         @foreach ($informes_recepcion as $informe_recepcion)
                             <tr>
                                 <td>{{ $informe_recepcion->fecha }}</td>
+
                                 <td>{{ $informe_recepcion->nro_informe }}</td>
-                                <td>{{ $informe_recepcion->almNombre }}</td>
-                                <td>{{ $informe_recepcion->userName }}</td>
+                                @foreach ($almacenes as $almacen)
+                                    @if ($almacen->id == $informe_recepcion->almacen_id)
+                                        <td>{{ $almacen->nombre }}</td>
+                                    @endif
+                                @endforeach
+                                @foreach ($usuarios as $usuario)
+                                    @if ($usuario->id == $informe_recepcion->user_id)
+                                        <td>{{ $usuario->name }}</td>
+                                    @endif
+                                @endforeach
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
                                         <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"
-                                            data-bs-target="#myModal" data-id="{{ $informe_recepcion->rpId }}"
-                                            title="Ver Informe de Recepción">
+                                            data-bs-target="#myModal" data-id="{{ $informe_recepcion->id }}"
+                                            title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
                                     @endcan
@@ -58,7 +67,7 @@
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
-                                        <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $informe_recepcion->rpId }}"
+                                        <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $informe_recepcion->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>

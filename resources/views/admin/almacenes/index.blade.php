@@ -69,7 +69,7 @@
                                             @csrf
                                             @method('delete')
                                             <button type="submit" data-id={{ $almacen->id }}
-                                                class="btn btn-danger btn-sm btnDelete" title='Eliminar almacén'>
+                                                class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash"></i></button>
                                         </form>
                                     @endcan
