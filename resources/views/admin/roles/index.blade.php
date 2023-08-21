@@ -24,7 +24,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Role</th>
-                        <th colspan="2" class="text-center">Acciones</th>
+                        <th colspan="2" class="text-center"></th>
                     </tr>
                 </thead>
                 <tbody>

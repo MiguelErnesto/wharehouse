@@ -27,37 +27,39 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>Fecha</th>
-                        <th>No. Informe</th>
+                        <th>No.</th>
+                        <th>Tipo</th>
+                        <th>Entidad</th>
                         <th>Almacén</th>
-                        <th>Creado/Actualizado por</th>
-                        <th colspan="3" class='text-center'>Acciones</th>
+                        <th colspan="3" class='text-center'></th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (count($vales) == 0)
                         <tr>
-                            <td colspan='5' class='text-center'><i>No hay elementos para mostrar...</i></td>
+                            <td colspan='7' class='text-center'><i>No hay elementos para mostrar...</i></td>
                         </tr>
                     @else
                         @foreach ($vales as $vale)
                             <tr>
-                                <td>{{ $vale->fecha }}</td>
+                                <td>{{ $vale->updated_at > $vale->created_at ? $vale->updated_at : $vale->created_at }}</td>
 
-                                <td>{{ $vale->nro_informe }}</td>
+                                <td>{{ $vale->nro_vale }}</td>
+                                <td>{{ $vale->tipo_vale == 'E' ? 'Entrega' : 'Salida' }}</td>
+                                @foreach ($entidades as $entidad)
+                                    @if ($entidad->id == $vale->entidad_id)
+                                        <td>{{ $entidad->nombre }}</td>
+                                    @endif
+                                @endforeach
                                 @foreach ($almacenes as $almacen)
                                     @if ($almacen->id == $vale->almacen_id)
                                         <td>{{ $almacen->nombre }}</td>
                                     @endif
                                 @endforeach
-                                @foreach ($usuarios as $usuario)
-                                    @if ($usuario->id == $vale->user_id)
-                                        <td>{{ $usuario->name }}</td>
-                                    @endif
-                                @endforeach
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
-                                        <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"
+                                        <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id="{{ $vale->id }}" title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
@@ -106,7 +108,7 @@
     </div>
 
     {{-- Modal para ver Informe de Recepción  --}}
-    @include('admin.vales.modals.verInformeRecepcion')
+    @include('admin.vales.modals.verDetalles')
 
 @stop
 

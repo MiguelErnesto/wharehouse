@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\OrdenDespacho;
 use App\Models\DespachoProducto;
+use App\Models\Entidad;
+use App\Models\Cliente;
 use App\Models\Almacen;
+use App\Models\Vale;
 use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
@@ -36,12 +39,14 @@ class OrdenDespachoController extends Controller
     public function index()
     {
         $ordenes_despacho = OrdenDespacho::orderBy('updated_at', 'desc')->get();
-        $usuarios = User::all();
+        $entidades = Entidad::orderBy('nombre', 'desc')->get();
+        $clientes = Cliente::orderBy('nombre', 'desc')->get();
         $almacenes = Almacen::orderBy('nombre', 'desc')->get();
+        $usuarios = User::all();
 
         return view(
             'admin.ordenes_despacho.index',
-            compact('ordenes_despacho', 'usuarios', 'almacenes')
+            compact('ordenes_despacho', 'usuarios', 'entidades', 'almacenes')
         );
     }
 
@@ -52,16 +57,28 @@ class OrdenDespachoController extends Controller
      */
     public function create()
     {
+        $entidades = Entidad::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $clientes = Cliente::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
         $almacenes = Almacen::select('id', 'nombre')
             ->get()
             ->pluck('nombre', 'id');
+
+        $vales = Vale::select('id', 'nro_vale')
+            ->get()
+            ->pluck('nro_vale', 'id');
 
         $productos = Producto::select('id', 'nombre')
             ->get()
             ->pluck('nombre', 'id');
         return view(
             'admin.ordenes_despacho.create',
-            compact('almacenes', 'productos')
+            compact('entidades', 'clientes', 'almacenes', 'vales', 'productos')
         );
     }
 

@@ -31,7 +31,7 @@
                         <th>Cuenta bancaria</th>
                         <th>Dirección</th>
                         <th>Descripción</th>
-                        <th colspan="3" class='text-center'>Acciones</th>
+                        <th colspan="3" class='text-center'></th>
                     </tr>
                 </thead>
                 <tbody>

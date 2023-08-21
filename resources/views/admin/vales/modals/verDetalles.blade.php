@@ -4,7 +4,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 id='titleMdVerProdAlm' class="modal-title">Informe de Recepción</h5>
+                <h5 id='titleMdVerProdAlm' class="modal-title">Detalles</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 

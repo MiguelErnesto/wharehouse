@@ -112,10 +112,10 @@ Route::resource('vales', ValeController::class, [
         'vales' => 'vale',
     ],
 ]);
-Route::get('vales/getDetallesVale/{id}', [
+Route::get('vales/getDetalles/{id}', [
     ValeController::class,
-    'getDetallesVale',
-])->name('getDetallesVale');
+    'getDetalles',
+])->name('getDetalles');
 Route::get('vales/imprimir/{id}', [ValeController::class, 'imprimir']);
 
 /* //esto puede ser despacho_productos o eliminarlo por completo

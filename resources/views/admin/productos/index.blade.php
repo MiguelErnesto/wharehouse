@@ -29,7 +29,7 @@
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th colspan="2" class='text-center'>Acciones</th>
+                        <th colspan="2" class='text-center'></th>
                     </tr>
                 </thead>
                 <tbody>

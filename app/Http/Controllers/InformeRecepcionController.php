@@ -178,7 +178,7 @@ class InformeRecepcionController extends Controller
      */
     public function destroy(InformeRecepcion $informe_recepcion)
     {
-        $InformesRecepcion = RecepcionProducto::where(
+        $RecepcionProductos = RecepcionProducto::where(
             'informe_recepcion_id',
             '=',
             $informe_recepcion->id

@@ -72,7 +72,33 @@ class ValeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Guardar nuevo vale
+        $request->validate([
+            'entidad_id' => 'required',
+            'almacen_id' => 'required',
+            'user_id' => 'required',
+            'tipo_vale' => 'required',
+            'nro_vale' => 'required',
+            'importe_total' => 'required',
+            'persona_emisor' => 'required',
+            'persona_receptor' => 'required',
+        ]);
+
+        $vale = Vale::create($request->all());
+        $vale_id = Vale::latest()->first()->id;
+        $cantidad = $request->cantidad;
+        $productos = $request->productos;
+
+        foreach ($productos as $producto) {
+            //Agregar productos y cantidades a Recepcion Productos
+
+            $RPid = ValeProducto::create([
+                'vale_id' => $vale_id,
+                'producto_id' => $producto['id'],
+                'cantidad' => $producto['cantidad'],
+            ]);
+        }
+        return response()->json($vale_id);
     }
 
     /**
@@ -115,8 +141,92 @@ class ValeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vale $vale)
     {
-        //
+        $valeProductos = ValeProducto::where(
+            'vale_id',
+            '=',
+            $vale->id
+        )->delete();
+        $vale->delete();
+        return redirect()
+            ->route('vales.index')
+            ->with(
+                'info',
+                'Vale ' . $vale->nro_vale . ' eliminado correctamente'
+            );
+    }
+
+    public function getDetalles($id)
+    {
+        $detalles = Vale::where('vales.id', '=', $id)
+            ->join('entidades as ent', 'ent.id', '=', 'vales.entidad_id')
+            ->join('almacenes as alm', 'alm.id', '=', 'vales.almacen_id')
+            ->join('users as u', 'u.id', '=', 'vales.user_id')
+            ->select(
+                'vales.id as id',
+                'vales.created_at as created_at',
+                'vales.updated_at as updated_at',
+                'vales.nro_vale as nro_vale',
+                'vales.tipo_vale as tipo_vale',
+                'vales.importe_total as importe_total',
+                'vales.persona_emisor as persona_emisor',
+                'vales.persona_receptor as persona_receptor',
+                'ent.nombre as entidad',
+                'alm.nombre as almacen',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Vale::where('vales.id', '=', $id)
+            ->join('vale_productos as vp', 'vp.vale_id', '=', 'vales.id')
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad as cantidad'
+            )
+            ->get();
+
+        return response()->json([
+            'detalles' => $detalles,
+            'productos' => $productos,
+        ]);
+    }
+
+    public function imprimir($id)
+    {
+        $detalles = Vale::where('vales.id', '=', $id)
+            ->join('entidades as ent', 'ent.id', '=', 'vales.entidad_id')
+            ->join('almacenes as alm', 'alm.id', '=', 'vales.almacen_id')
+            ->join('users as u', 'u.id', '=', 'vales.user_id')
+            ->select(
+                'vales.id as id',
+                'vales.created_at as created_at',
+                'vales.updated_at as updated_at',
+                'vales.nro_vale as nro_vale',
+                'vales.tipo_vale as tipo_vale',
+                'vales.importe_total as importe_total',
+                'vales.persona_emisor as persona_emisor',
+                'vales.persona_receptor as persona_receptor',
+                'ent.nombre as entidad',
+                'alm.nombre as almacen',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Vale::where('vales.id', '=', $id)
+            ->join('vale_productos as vp', 'vp.vale_id', '=', 'vales.id')
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad as cantidad'
+            )
+            ->get();
+
+        return view('admin.vales.print', compact('detalles', 'productos'));
     }
 }

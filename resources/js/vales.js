@@ -4,9 +4,7 @@ export default class ObjectClass {
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
     this.add = document.getElementById('add')
 
-    this.btnVerInformeRecepcion = document.querySelectorAll(
-      '.btnVerInformeRecepcion',
-    )
+    this.btnVerDetalles = document.querySelectorAll('.btnVerDetalles')
 
     this.btnPrint = document.querySelectorAll('.btnPrint')
 
@@ -22,14 +20,8 @@ export default class ObjectClass {
         document.querySelector('table#listaProductos thead').innerHTML = ''
       }
     }
-    if (document.querySelector('input[name="cantidad_ordenada"]')) {
-      document.querySelector('input[name="cantidad_ordenada"]').value = 1
-    }
-    if (document.querySelector('input[name="cantidad_despachada"]')) {
-      document.querySelector('input[name="cantidad_despachada"]').value = 1
-    }
-    if (document.querySelector('input[name="cantidad_entregada"]')) {
-      document.querySelector('input[name="cantidad_entregada"]').value = 1
+    if (document.querySelector('input[name="cantidad"]')) {
+      document.querySelector('input[name="cantidad"]').value = 1
     }
     if (document.querySelector('producto')) {
       document.getElementById('producto').value = ''
@@ -51,10 +43,10 @@ export default class ObjectClass {
       this.add.addEventListener('click', () => this.onAddProducts())
     }
 
-    if (this.btnVerInformeRecepcion) {
-      for (var i = 0; i < this.btnVerInformeRecepcion.length; i += 1) {
-        this.btnVerInformeRecepcion[i].addEventListener('click', (evt) =>
-          this.onVerInformeRecepcion(evt),
+    if (this.btnVerDetalles) {
+      for (var i = 0; i < this.btnVerDetalles.length; i += 1) {
+        this.btnVerDetalles[i].addEventListener('click', (evt) =>
+          this.onVerDetalles(evt),
         )
       }
     }
@@ -74,10 +66,10 @@ export default class ObjectClass {
     evt.preventDefault()
     evt.stopPropagation()
     let id = evt.currentTarget.dataset.id
-    window.open(`informes_recepcion/imprimir/${id}`, '_blank')
+    window.open(`vales/imprimir/${id}`, '_blank')
   }
 
-  onVerInformeRecepcion(evt) {
+  onVerDetalles(evt) {
     evt.preventDefault()
     evt.stopPropagation()
 
@@ -87,14 +79,14 @@ export default class ObjectClass {
 
     // AJAX GET request
     $.ajax({
-      url: `informes_recepcion/getDetallesRecepcion/${id}`,
+      url: `vales/getDetalles/${id}`,
       type: 'get',
       dataType: 'json',
       context: this,
       success: function (response) {
         console.log('Fetching data: SUCCESS')
-        this.showDetallesInforme(response.informeDetalles[0])
-        this.showProductosInforme(response.informeProductos)
+        this.showDetalles(response.detalles[0])
+        this.showProductos(response.productos)
       },
       error: function (error) {
         console.log('Fetching data: ERROR')
@@ -103,7 +95,7 @@ export default class ObjectClass {
     })
   }
 
-  showProductosInforme(productos) {
+  showProductos(productos) {
     const listaProductos = document.querySelector(
       '#listaProductosInforme tbody',
     )
@@ -112,7 +104,7 @@ export default class ObjectClass {
     if (!productos.length > 0) {
       listaProductos.innerHTML = `
       <tr>
-        <td class='text-center' colspan='4'><i>No hay elementos para mostrar...</i></td>        
+        <td class='text-center' colspan='2'><i>No hay elementos para mostrar...</i></td>        
       </tr>`
       return false
     }
@@ -124,25 +116,41 @@ export default class ObjectClass {
     <td style="width: 30%">${producto.nombre}</td>
     <td style="width: 40%">${producto.descripcion}</td>
     <td class='text-right pr-2' style="width: 15%">${
-      producto.cantidad_ordenada ?? '0'
-    }</td>
-    <td class='text-right pr-2' style="width: 15%">${
-      producto.cantidad_despachada ?? '0'
-    }</td>
-    <td class='text-right pr-2' style="width: 15%">${
-      producto.cantidad_entregada ?? '0'
+      producto.cantidad ?? '0'
     }</td>
     </tr>`
     })
   }
 
-  showDetallesInforme(informe) {
-    document.getElementById('Head').innerHTML = `<tr>
-    <td class="font-weight-bold pr-3">
-        No. Informe:
+  showDetalles(informe) {
+    document.getElementById('Head').innerHTML = `
+  <tr>
+    <td class='font-weight-bold pr-3'>
+        No. Vale:
     </td>
     <td>
-        ${informe.nro_informe}
+        ${informe.nro_vale}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  
+  <tr>
+    <td class="font-weight-bold">
+        Tipo de vale:
+    </td>
+    <td>
+        ${informe.tipo_vale == 'E' ? 'Entrega' : 'Devolución'}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold pt-3">
+        Entidad:
+    </td>
+    <td class="pt-3">
+        ${informe.entidad}
     </td>
     <td></td>
     <td></td>
@@ -159,10 +167,34 @@ export default class ObjectClass {
   </tr>
   <tr>
     <td class="font-weight-bold">
-        Fecha:
+        Persona emisor:
     </td>
     <td>
-        ${informe.fecha}
+        ${informe.persona_emisor}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Persona receptor:
+    </td>
+    <td>
+        ${informe.persona_receptor}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold pt-3">
+        Fecha:
+    </td>
+    <td class="pt-3">
+        ${
+          informe.updated_at > informe.created_at
+            ? this.formated_datetime(informe.updated_at)
+            : this.formated_datetime(informe.created_at)
+        }
     </td>
     <td></td>
     <td></td>
@@ -180,6 +212,19 @@ export default class ObjectClass {
   <br/>`
   }
 
+  formated_datetime(fecha) {
+    // Mostrar Fecha del movimiento en formato ('dd/mm/yy')
+    let inputDate = new Date(fecha)
+    let date = inputDate.getDate()
+    let month = inputDate.getMonth() + 1
+    let year = inputDate.getFullYear()
+    date = date.toString().padStart(2, '0')
+    month = month.toString().padStart(2, '0')
+    const fecha_formato = date + '-' + month + '-' + year
+
+    return fecha_formato + ' ' + inputDate.toLocaleTimeString()
+  }
+
   onAddProducts() {
     if (document.getElementById('producto').value.length == 0) {
       alert('Debe seleccionar un producto')
@@ -191,16 +236,8 @@ export default class ObjectClass {
       return false
     }
 
-    const cantidad_ordenada = parseInt(
-      document.querySelector('input[name="cantidad_ordenada"]').value,
-    )
-
-    const cantidad_despachada = parseInt(
-      document.querySelector('input[name="cantidad_despachada"]').value,
-    )
-
-    const cantidad_entregada = parseInt(
-      document.querySelector('input[name="cantidad_entregada"]').value,
+    const cantidad = parseInt(
+      document.querySelector('input[name="cantidad"]').value,
     )
 
     this.producto = document.getElementById('producto')
@@ -212,44 +249,24 @@ export default class ObjectClass {
       ].text
       document.querySelector('table#listaProductos thead').innerHTML = `<tr>
         <th style="width: 55%">Productos agregados</th>
-        <th class='text-right' style="width: 15%">Cantidad ordenada</th>
-        <th class='text-right' style="width: 15%">Cantidad despachada</th>
-        <th class='text-right' style="width: 15%">Cantidad entregada</th>
+        <th class='text-right' style="width: 15%">Cantidad</th>
         <th></th>
      </tr>`
       document
         .querySelector('table#listaProductos tbody')
-        .append(
-          this.addProductoList(
-            idSelected,
-            valueSelected,
-            cantidad_ordenada,
-            cantidad_despachada,
-            cantidad_entregada,
-          ),
-        )
+        .append(this.addProductoList(idSelected, valueSelected, cantidad))
     }
     this.clean()
   }
 
-  addProductoList(
-    id,
-    product,
-    cantidad_ordenada,
-    cantidad_despachada,
-    cantidad_entregada,
-  ) {
+  addProductoList(id, product, cantidad) {
     const tr = document.createElement('tr')
     tr.id = id
     tr.dataset.id = id
-    tr.dataset.cantidad_ordenada = cantidad_ordenada
-    tr.dataset.cantidad_despachada = cantidad_despachada
-    tr.dataset.cantidad_entregada = cantidad_entregada
+    tr.dataset.cantidad = cantidad
     tr.innerHTML = `
                     <td>${product}</td>
-                    <td class="text-right">${cantidad_ordenada}</td>
-                    <td class="text-right">${cantidad_despachada}</td>
-                    <td class="text-right">${cantidad_entregada}</td>
+                    <td class="text-right">${cantidad}</td>
                     <td class="text-center pl-5 pr-3"><a href="#" class="btn btn-sm btn-danger deleteProductoFromList"> <i class="fas fa-solid fa-trash fa-lg"></i></a></td>
                 `
     tr.querySelector('.deleteProductoFromList').addEventListener(
@@ -296,31 +313,83 @@ export default class ObjectClass {
     evt.stopPropagation()
 
     if (document.getElementById('fecha').value.length == 0) {
-      alert('Debe completar todos los datos de la Orden')
+      alert('Debe completar todos los datos del Vale')
       document.getElementById('fecha').className =
         'form-control border border-danger'
       document.getElementById('fecha').placeholder = '--- Valor requerido ---'
       document.getElementById('fecha').focus()
       return false
     }
-    if (document.getElementById('nro_orden').value.length == 0) {
-      alert('Debe completar todos los datos de la Orden')
-      document.getElementById('nro_orden').className =
+    if (document.getElementById('nro_vale').value.length == 0) {
+      alert('Debe completar todos los datos del Vale')
+      document.getElementById('nro_vale').className =
         'form-control border border-danger'
-      document.getElementById('nro_orden').placeholder =
+      document.getElementById('nro_vale').placeholder =
         '--- Valor requerido ---'
-      document.getElementById('nro_orden').focus()
+      document.getElementById('nro_vale').focus()
+      return false
+    }
+    if (document.getElementById('entidad').value.length == 0) {
+      alert('Debe completar todos los datos del Vale')
+      document.getElementById('entidad').className =
+        'form-control border border-danger'
+      document.getElementById('entidad').placeholder = '--- Valor requerido ---'
+      document.getElementById('entidad').focus()
       return false
     }
     if (document.getElementById('almacen').value.length == 0) {
-      alert('Debe completar todos los datos de la Orden')
+      alert('Debe completar todos los datos del Vale')
       document.getElementById('almacen').className =
         'form-control border border-danger'
       document.getElementById('almacen').placeholder = '--- Valor requerido ---'
       document.getElementById('almacen').focus()
       return false
     }
-
+    if (document.getElementById('importe_total').value.length == 0) {
+      alert('Debe completar todos los datos del Vale')
+      document.getElementById('importe_total').className =
+        'form-control border border-danger'
+      document.getElementById('importe_total').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('importe_total').focus()
+      return false
+    }
+    if (isNaN(document.getElementById('importe_total').value)) {
+      alert('El valor debe ser un número')
+      document.getElementById('importe_total').className =
+        'form-control border border-danger'
+      document.getElementById('importe_total').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('importe_total').focus()
+      return false
+    }
+    if (document.getElementById('persona_emisor').value.length == 0) {
+      alert('Debe completar todos los datos del Vale')
+      document.getElementById('persona_emisor').className =
+        'form-control border border-danger'
+      document.getElementById('persona_emisor').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('persona_emisor').focus()
+      return false
+    }
+    if (document.getElementById('persona_receptor').value.length == 0) {
+      alert('Debe completar todos los datos del Vale')
+      document.getElementById('persona_receptor').className =
+        'form-control border border-danger'
+      document.getElementById('persona_receptor').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('persona_receptor').focus()
+      return false
+    }
+    if (document.getElementById('tipo_vale').value.length == 0) {
+      alert('Debe completar todos los datos del Vale')
+      document.getElementById('tipo_vale').className =
+        'form-control border border-danger'
+      document.getElementById('tipo_vale').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('tipo_vale').focus()
+      return false
+    }
     if (
       document.querySelectorAll('table#listaProductos tbody tr').length == 0
     ) {
@@ -333,58 +402,44 @@ export default class ObjectClass {
       return false
     }
 
-    if (document.getElementById('cantidad_ordenada').value.length == 0) {
-      alert('Debe completar todos los datos de la Orden')
-      document.getElementById('cantidad_ordenada').className =
+    if (document.getElementById('cantidad').value.length == 0) {
+      alert('Debe completar todos los datos del Vale')
+      document.getElementById('cantidad').className =
         'form-control border border-danger'
-      document.getElementById('cantidad_ordenada').placeholder =
+      document.getElementById('cantidad').placeholder =
         '--- Valor requerido ---'
-      document.getElementById('cantidad_ordenada').focus()
+      document.getElementById('cantidad').focus()
       return false
     }
-
-    if (document.getElementById('cantidad_despachada').value.length == 0) {
-      alert('Debe completar todos los datos de la Orden')
-      document.getElementById('cantidad_despachada').className =
-        'form-control border border-danger'
-      document.getElementById('cantidad_despachada').placeholder =
-        '--- Valor requerido ---'
-      document.getElementById('cantidad_despachada').focus()
-      return false
-    }
-
-    if (document.getElementById('cantidad_entregada').value.length == 0) {
-      alert('Debe completar todos los datos de la Orden')
-      document.getElementById('cantidad_entregada').className =
-        'form-control border border-danger'
-      document.getElementById('cantidad_entregada').placeholder =
-        '--- Valor requerido ---'
-      document.getElementById('cantidad_entregada').focus()
-      return false
-    }
-
     const data = {
       _token: document.querySelector('input[name="_token"]').value,
       user_id: document.getElementById('user_id').value,
       fecha: document.getElementById('fecha').value,
-      nro_informe: document.getElementById('nro_orden').value,
+      nro_vale: document.getElementById('nro_vale').value,
+      entidad_id: document.getElementById('entidad').value,
       almacen_id: document.getElementById('almacen').value,
+      importe_total: document.getElementById('importe_total').value,
+      persona_emisor: document.getElementById('persona_emisor').value,
+      persona_receptor: document.getElementById('persona_receptor').value,
+      tipo_vale: document.getElementById('tipo_vale').value,
+      cantidad: document.getElementById('cantidad').value,
       productos: this.getProductos(),
     }
 
     $.ajax({
-      url: `/ordenes_despacho`,
+      url: `/vales`,
       type: 'POST',
       dataType: 'json',
       data: data,
       context: this,
       success: function (response) {
-        alert('Orden de despacho exitosa')
-        window.open(`/ordenes_despacho`, '_self')
+        alert('Vale generado correctamente')
+        window.open(`/vales`, '_self')
       },
       error: function (error) {
         console.log('Fetching data: ERROR')
         console.log(JSON.stringify(error))
+        alert(JSON.stringify(error))
       },
     })
   }
@@ -397,9 +452,7 @@ export default class ObjectClass {
     for (const producto of NodelistaProductos) {
       listaProductos.unshift({
         id: producto.dataset.id,
-        cantidad_ordenada: producto.dataset.cantidad_ordenada,
-        cantidad_despachada: producto.dataset.cantidad_despachada,
-        cantidad_entregada: producto.dataset.cantidad_entregada,
+        cantidad: producto.dataset.cantidad,
       })
     }
     return listaProductos

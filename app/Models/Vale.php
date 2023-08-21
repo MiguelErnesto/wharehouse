@@ -13,7 +13,9 @@ class Vale extends Model
     protected $fillable = [
         'entidad_id',
         'almacen_id',
+        'user_id',
         'tipo_vale',
+        'nro_vale',
         'importe_total',
         'persona_emisor',
         'persona_receptor',

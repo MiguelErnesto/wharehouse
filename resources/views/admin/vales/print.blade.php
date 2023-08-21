@@ -6,15 +6,23 @@
                 <table>
                     <tr>
                         <td colspan="4">
-                            <strong>INFORME DE RECEPCIÓN</strong>
+                            <strong>DETALLES DEL VALE</strong>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <strong>No. de Informe:</strong> {{ $informe[0]->nro_informe }}<br />
-                            <strong>Almacén:</strong> {{ $informe[0]->almacen }}<br />
-                            <strong>Fecha:</strong> {{ $informe[0]->fecha }}<br />
-                            <strong>Creado/Actualizado:</strong> {{ $informe[0]->usuario }}<br />
+                            <strong>No. Vale:</strong> {{ $detalles[0]->nro_vale }}<br />
+                            <strong>Tipo de vale:</strong>
+                            {{ $detalles[0]->tipo_vale == 'E' ? 'Entrega' : 'Devolución' }}<br /><br />
+
+                            <strong>Entidad:</strong> {{ $detalles[0]->entidad }}<br />
+                            <strong>Almacén:</strong> {{ $detalles[0]->almacen }}<br />
+                            <strong>Persona emisor:</strong> {{ $detalles[0]->persona_emisor }}<br />
+                            <strong>Persona receptor:</strong> {{ $detalles[0]->persona_receptor }}<br /><br />
+
+                            <strong>Fecha:</strong>
+                            {{ $detalles[0]->updated_at > $detalles[0]->created_at ? $detalles[0]->updated_at : $detalles[0]->created_at }}<br />
+                            <strong>Creado/Actualizado:</strong> {{ $detalles[0]->usuario }}<br />
                         </td>
                     </tr>
                     <tr>

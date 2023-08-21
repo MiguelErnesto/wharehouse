@@ -30,7 +30,7 @@
                         <th>No. Informe</th>
                         <th>Almacén</th>
                         <th>Creado/Actualizado por</th>
-                        <th colspan="3" class='text-center'>Acciones</th>
+                        <th colspan="3" class='text-center'></th>
                     </tr>
                 </thead>
                 <tbody>
