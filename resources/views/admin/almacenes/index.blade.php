@@ -18,7 +18,7 @@
     <div class="card" style='width:95%;'>
         @can('admin.almacenes.create')
             <div class="card-header">
-                <a href="{{ route('almacenes.create') }}" class="btn btn-info" title="Crear Nuevo"><i
+                <a href="{{ route('almacenes.create') }}" class="btn btn-info" title="Guardar Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
             </div>
         @endcan

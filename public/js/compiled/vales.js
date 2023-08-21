@@ -848,12 +848,12 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!***********************************!*\
-  !*** ./resources/js/entidades.js ***!
-  \***********************************/
+/*!*******************************!*\
+  !*** ./resources/js/vales.js ***!
+  \*******************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ objectClass)
+/* harmony export */   "default": () => (/* binding */ ObjectClass)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -863,6 +863,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -871,15 +877,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//import Request from './modules/services/request.js'
-var objectClass = /*#__PURE__*/function () {
-  function objectClass() {
+var ObjectClass = /*#__PURE__*/function () {
+  function ObjectClass() {
     var _this = this,
         _document$getElementB,
-        _document$querySelect,
-        _document$querySelect2;
+        _document$querySelect;
 
-    _classCallCheck(this, objectClass);
+    _classCallCheck(this, ObjectClass);
 
     _defineProperty(this, "addListeners", function () {
       _this.form ? _this.form.addEventListener('submit', function (evt) {
@@ -894,17 +898,27 @@ var objectClass = /*#__PURE__*/function () {
         }
       }
 
-      if (_this.btnVerProdAlm) {
-        for (var i = 0; i < _this.btnVerProdAlm.length; i += 1) {
-          _this.btnVerProdAlm[i].addEventListener('click', function (evt) {
-            return _this.onVerProductosAlmacen(evt);
+      if (_this.add) {
+        _this.add.addEventListener('click', function () {
+          return _this.onAddProducts();
+        });
+      }
+
+      if (_this.btnVerInformeRecepcion) {
+        for (var i = 0; i < _this.btnVerInformeRecepcion.length; i += 1) {
+          _this.btnVerInformeRecepcion[i].addEventListener('click', function (evt) {
+            return _this.onVerInformeRecepcion(evt);
           });
         }
       }
 
-      _this.btnPrint.addEventListener('click', function (evt) {
-        return _this.onPrint(evt);
-      });
+      if (_this.btnPrint) {
+        for (var i = 0; i < _this.btnPrint.length; i += 1) {
+          _this.btnPrint[i].addEventListener('click', function (evt) {
+            return _this.onPrint(evt);
+          });
+        }
+      }
 
       $(document).ready(function () {
         console.log('Ready!');
@@ -913,52 +927,63 @@ var objectClass = /*#__PURE__*/function () {
 
     this.form = (_document$getElementB = document.getElementById('form')) !== null && _document$getElementB !== void 0 ? _document$getElementB : null;
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
-    this.btnPrint = (_document$querySelect2 = document.querySelector('.btnPrint')) !== null && _document$querySelect2 !== void 0 ? _document$querySelect2 : null;
-    this.btnVerProdAlm = document.querySelectorAll('.btnVerProdAlm');
+    this.add = document.getElementById('add');
+    this.btnVerInformeRecepcion = document.querySelectorAll('.btnVerInformeRecepcion');
+    this.btnPrint = document.querySelectorAll('.btnPrint');
     this.addListeners();
+    this.clean();
   }
 
-  _createClass(objectClass, [{
+  _createClass(ObjectClass, [{
+    key: "clean",
+    value: function clean() {
+      if (document.querySelector('table#listaProductos tbody')) {
+        if (document.querySelector('table#listaProductos tbody').innerHTML == '') {
+          document.querySelector('table#listaProductos thead').innerHTML = '';
+        }
+      }
+
+      if (document.querySelector('input[name="cantidad_ordenada"]')) {
+        document.querySelector('input[name="cantidad_ordenada"]').value = 1;
+      }
+
+      if (document.querySelector('input[name="cantidad_despachada"]')) {
+        document.querySelector('input[name="cantidad_despachada"]').value = 1;
+      }
+
+      if (document.querySelector('input[name="cantidad_entregada"]')) {
+        document.querySelector('input[name="cantidad_entregada"]').value = 1;
+      }
+
+      if (document.querySelector('producto')) {
+        document.getElementById('producto').value = '';
+      }
+    }
+  }, {
     key: "onPrint",
     value: function onPrint(evt) {
       evt.preventDefault();
       evt.stopPropagation();
-      var id = document.getElementById('almacen_id').value;
-      window.open("almacenes_productos/imprimir/".concat(id), '_blank'); // AJAX GET request
-
-      /* $.ajax({
-        url: `almacenes_productos/imprimir/${id}`,
-        type: 'get',
-        dataType: 'json',
-        context: this,
-        success: function (response) {
-          alert(JSON.stringify(response))
-        },
-        error: function (error) {
-          console.log('Fetching data: ERROR')
-          console.log(JSON.stringify(error))
-        },
-      }) */
+      var id = evt.currentTarget.dataset.id;
+      window.open("informes_recepcion/imprimir/".concat(id), '_blank');
     }
   }, {
-    key: "onVerProductosAlmacen",
-    value: function onVerProductosAlmacen(evt) {
+    key: "onVerInformeRecepcion",
+    value: function onVerInformeRecepcion(evt) {
       evt.preventDefault();
       evt.stopPropagation();
       var id = evt.currentTarget.dataset.id;
-      var nombre = evt.currentTarget.dataset.nombre;
-      var direccion = evt.currentTarget.dataset.direccion;
-      document.getElementById('almacen_id').value = id; // AJAX GET request
+      document.getElementById('informe_id').value = id; // AJAX GET request
 
       $.ajax({
-        url: "almacenes_productos/getProductosAlmacen/".concat(id),
+        url: "informes_recepcion/getDetallesRecepcion/".concat(id),
         type: 'get',
         dataType: 'json',
         context: this,
         success: function success(response) {
           console.log('Fetching data: SUCCESS');
-          this.showDataAlmacen(nombre, direccion);
-          this.showProductosAlmacen(response);
+          this.showDetallesInforme(response.informeDetalles[0]);
+          this.showProductosInforme(response.informeProductos);
         },
         error: function error(_error) {
           console.log('Fetching data: ERROR');
@@ -967,33 +992,88 @@ var objectClass = /*#__PURE__*/function () {
       });
     }
   }, {
-    key: "showProductosAlmacen",
-    value: function showProductosAlmacen(response) {
-      var listaProductos = document.querySelector('#listaProductosAlmacen tbody');
+    key: "showProductosInforme",
+    value: function showProductosInforme(productos) {
+      var listaProductos = document.querySelector('#listaProductosInforme tbody');
       listaProductos.innerHTML = '';
 
-      if (!response.length > 0) {
+      if (!productos.length > 0) {
         listaProductos.innerHTML = "\n      <tr>\n        <td class='text-center' colspan='4'><i>No hay elementos para mostrar...</i></td>        \n      </tr>";
         return false;
       }
 
-      response.forEach(function (producto) {
-        var _producto$apCantidad;
+      productos.forEach(function (producto) {
+        var _producto$cantidad_or, _producto$cantidad_de, _producto$cantidad_en;
 
-        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.pCodigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.pNombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.pDescripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$apCantidad = producto.apCantidad) !== null && _producto$apCantidad !== void 0 ? _producto$apCantidad : '0', "</td>\n    </tr>");
+        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.codigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.nombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.descripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_or = producto.cantidad_ordenada) !== null && _producto$cantidad_or !== void 0 ? _producto$cantidad_or : '0', "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_de = producto.cantidad_despachada) !== null && _producto$cantidad_de !== void 0 ? _producto$cantidad_de : '0', "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_en = producto.cantidad_entregada) !== null && _producto$cantidad_en !== void 0 ? _producto$cantidad_en : '0', "</td>\n    </tr>");
       });
     }
   }, {
-    key: "showDataAlmacen",
-    value: function showDataAlmacen(nombre, direccion) {
-      document.getElementById('Head').innerHTML = "<tr>\n    <td class=\"font-weight-bold pr-3\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ".concat(nombre, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Direcci\xF3n:\n    </td>\n    <td>\n        ").concat(direccion, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
+    key: "showDetallesInforme",
+    value: function showDetallesInforme(informe) {
+      document.getElementById('Head').innerHTML = "<tr>\n    <td class=\"font-weight-bold pr-3\">\n        No. Informe:\n    </td>\n    <td>\n        ".concat(informe.nro_informe, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ").concat(informe.almacen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha:\n    </td>\n    <td>\n        ").concat(informe.fecha, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Creado/Actualizado:\n    </td>\n    <td>\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
+    }
+  }, {
+    key: "onAddProducts",
+    value: function onAddProducts() {
+      if (document.getElementById('producto').value.length == 0) {
+        alert('Debe seleccionar un producto');
+        document.getElementById('producto').className = 'form-control border border-danger';
+        document.getElementById('producto').placeholder = '--- Valor requerido ---';
+        document.getElementById('producto').focus();
+        return false;
+      }
+
+      var cantidad_ordenada = parseInt(document.querySelector('input[name="cantidad_ordenada"]').value);
+      var cantidad_despachada = parseInt(document.querySelector('input[name="cantidad_despachada"]').value);
+      var cantidad_entregada = parseInt(document.querySelector('input[name="cantidad_entregada"]').value);
+      this.producto = document.getElementById('producto');
+      var idSelected = this.producto.value;
+
+      if (!this.productExists(idSelected)) {
+        var valueSelected = document.getElementById('producto').options[document.getElementById('producto').selectedIndex].text;
+        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 55%\">Productos agregados</th>\n        <th class='text-right' style=\"width: 15%\">Cantidad ordenada</th>\n        <th class='text-right' style=\"width: 15%\">Cantidad despachada</th>\n        <th class='text-right' style=\"width: 15%\">Cantidad entregada</th>\n        <th></th>\n     </tr>";
+        document.querySelector('table#listaProductos tbody').append(this.addProductoList(idSelected, valueSelected, cantidad_ordenada, cantidad_despachada, cantidad_entregada));
+      }
+
+      this.clean();
+    }
+  }, {
+    key: "addProductoList",
+    value: function addProductoList(id, product, cantidad_ordenada, cantidad_despachada, cantidad_entregada) {
+      var tr = document.createElement('tr');
+      tr.id = id;
+      tr.dataset.id = id;
+      tr.dataset.cantidad_ordenada = cantidad_ordenada;
+      tr.dataset.cantidad_despachada = cantidad_despachada;
+      tr.dataset.cantidad_entregada = cantidad_entregada;
+      tr.innerHTML = "\n                    <td>".concat(product, "</td>\n                    <td class=\"text-right\">").concat(cantidad_ordenada, "</td>\n                    <td class=\"text-right\">").concat(cantidad_despachada, "</td>\n                    <td class=\"text-right\">").concat(cantidad_entregada, "</td>\n                    <td class=\"text-center pl-5 pr-3\"><a href=\"#\" class=\"btn btn-sm btn-danger deleteProductoFromList\"> <i class=\"fas fa-solid fa-trash fa-lg\"></i></a></td>\n                ");
+      tr.querySelector('.deleteProductoFromList').addEventListener('click', function (evt) {
+        if (confirm('¿Desea eliminar el producto de la lista?')) {
+          document.querySelector("table#listaProductos tbody tr[id=\"".concat(evt.currentTarget.dataset.id, "\"]")).remove();
+        }
+      });
+      return tr;
+    }
+  }, {
+    key: "productExists",
+    value: function productExists(id) {
+      var productsWithId = document.querySelectorAll("table#listaProductos tbody tr[id=\"".concat(id, "\"]"));
+
+      if (productsWithId.length > 0) {
+        alert('El producto ya fué agregado al listado');
+        return true;
+      }
+
+      return false;
     }
   }, {
     key: "onDelete",
     value: function onDelete(evt) {
       evt.preventDefault();
+      evt.stopPropagation();
 
-      if (confirm('¿Confirma que desea eliminar este elemento?')) {
+      if (confirm("\xBFConfirma que desea eliminar este elemento?")) {
         this.formIndex = document.getElementById('formIndex_' + evt.currentTarget.dataset.id);
         this.formIndex.submit();
       }
@@ -1004,45 +1084,130 @@ var objectClass = /*#__PURE__*/function () {
     key: "onValidate",
     value: function onValidate(evt) {
       evt.preventDefault();
+      evt.stopPropagation();
 
-      if (document.getElementById('codigo').value.length == 0) {
-        document.getElementById('codigo').className = 'form-control border border-danger';
-        document.getElementById('codigo').placeholder = '--- Valor requerido ---';
-        document.getElementById('codigo').focus();
+      if (document.getElementById('fecha').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('fecha').className = 'form-control border border-danger';
+        document.getElementById('fecha').placeholder = '--- Valor requerido ---';
+        document.getElementById('fecha').focus();
         return false;
       }
 
-      if (document.getElementById('nombre').value.length == 0) {
-        document.getElementById('nombre').className = 'form-control border border-danger';
-        document.getElementById('nombre').placeholder = '--- Valor requerido ---';
-        document.getElementById('nombre').focus();
+      if (document.getElementById('nro_orden').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('nro_orden').className = 'form-control border border-danger';
+        document.getElementById('nro_orden').placeholder = '--- Valor requerido ---';
+        document.getElementById('nro_orden').focus();
         return false;
       }
 
-      if (document.getElementById('descripcion').value.length == 0) {
-        document.getElementById('descripcion').className = 'form-control border border-danger';
-        document.getElementById('descripcion').placeholder = '--- Valor requerido ---';
-        document.getElementById('descripcion').focus();
+      if (document.getElementById('almacen').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('almacen').className = 'form-control border border-danger';
+        document.getElementById('almacen').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen').focus();
         return false;
       }
 
-      this.form.submit();
+      if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
+        alert('Debe agregar al menos un producto');
+        document.getElementById('producto').className = 'form-control border border-danger';
+        document.getElementById('producto').placeholder = '--- Valor requerido ---';
+        document.getElementById('producto').focus();
+        return false;
+      }
+
+      if (document.getElementById('cantidad_ordenada').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('cantidad_ordenada').className = 'form-control border border-danger';
+        document.getElementById('cantidad_ordenada').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad_ordenada').focus();
+        return false;
+      }
+
+      if (document.getElementById('cantidad_despachada').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('cantidad_despachada').className = 'form-control border border-danger';
+        document.getElementById('cantidad_despachada').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad_despachada').focus();
+        return false;
+      }
+
+      if (document.getElementById('cantidad_entregada').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('cantidad_entregada').className = 'form-control border border-danger';
+        document.getElementById('cantidad_entregada').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad_entregada').focus();
+        return false;
+      }
+
+      var data = {
+        _token: document.querySelector('input[name="_token"]').value,
+        user_id: document.getElementById('user_id').value,
+        fecha: document.getElementById('fecha').value,
+        nro_informe: document.getElementById('nro_orden').value,
+        almacen_id: document.getElementById('almacen').value,
+        productos: this.getProductos()
+      };
+      $.ajax({
+        url: "/ordenes_despacho",
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+        context: this,
+        success: function success(response) {
+          alert('Orden de despacho exitosa');
+          window.open("/ordenes_despacho", '_self');
+        },
+        error: function error(_error2) {
+          console.log('Fetching data: ERROR');
+          console.log(JSON.stringify(_error2));
+        }
+      });
+    }
+  }, {
+    key: "getProductos",
+    value: function getProductos() {
+      var NodelistaProductos = document.querySelectorAll('table#listaProductos tbody tr');
+      var listaProductos = [];
+
+      var _iterator = _createForOfIteratorHelper(NodelistaProductos),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var producto = _step.value;
+          listaProductos.unshift({
+            id: producto.dataset.id,
+            cantidad_ordenada: producto.dataset.cantidad_ordenada,
+            cantidad_despachada: producto.dataset.cantidad_despachada,
+            cantidad_entregada: producto.dataset.cantidad_entregada
+          });
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return listaProductos;
     }
   }]);
 
-  return objectClass;
+  return ObjectClass;
 }();
 
 
 
-var object = /*#__PURE__*/function () {
+var _Object = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
     var Handler;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            Handler = new objectClass();
+            Handler = new ObjectClass();
 
           case 1:
           case "end":
@@ -1052,12 +1217,12 @@ var object = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function object() {
+  return function _Object() {
     return _ref.apply(this, arguments);
   };
 }();
 
-window.addEventListener('load', object);
+window.addEventListener('load', _Object);
 })();
 
 /******/ })()

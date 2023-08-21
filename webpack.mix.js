@@ -18,10 +18,12 @@ mix
     require('tailwindcss'),
   ])
   .js('resources/js/entidades.js', 'public/js/compiled/')
+  .js('resources/js/clientes.js', 'public/js/compiled/')
   .js('resources/js/almacenes.js', 'public/js/compiled/')
   .js('resources/js/productos.js', 'public/js/compiled/')
   .js('resources/js/informes_recepcion.js', 'public/js/compiled/')
   .js('resources/js/ordenes_despacho.js', 'public/js/compiled/')
+  .js('resources/js/vales.js', 'public/js/compiled/')
 
 if (mix.inProduction()) {
   mix.version()

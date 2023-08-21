@@ -848,9 +848,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!***********************************!*\
-  !*** ./resources/js/entidades.js ***!
-  \***********************************/
+/*!**********************************!*\
+  !*** ./resources/js/clientes.js ***!
+  \**********************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ objectClass)
@@ -1016,6 +1016,20 @@ var objectClass = /*#__PURE__*/function () {
         document.getElementById('nombre').className = 'form-control border border-danger';
         document.getElementById('nombre').placeholder = '--- Valor requerido ---';
         document.getElementById('nombre').focus();
+        return false;
+      }
+
+      if (document.getElementById('cuenta_bancaria').value.length == 0) {
+        document.getElementById('cuenta_bancaria').className = 'form-control border border-danger';
+        document.getElementById('cuenta_bancaria').placeholder = '--- Valor requerido ---';
+        document.getElementById('cuenta_bancaria').focus();
+        return false;
+      }
+
+      if (document.getElementById('direccion').value.length == 0) {
+        document.getElementById('direccion').className = 'form-control border border-danger';
+        document.getElementById('direccion').placeholder = '--- Valor requerido ---';
+        document.getElementById('direccion').focus();
         return false;
       }
 

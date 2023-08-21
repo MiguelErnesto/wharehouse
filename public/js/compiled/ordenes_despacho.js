@@ -1073,7 +1073,7 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.preventDefault();
       evt.stopPropagation();
 
-      if (confirm("\xBFConfirma que desea eliminar este Informe?")) {
+      if (confirm("\xBFConfirma que desea eliminar este elemento?")) {
         this.formIndex = document.getElementById('formIndex_' + evt.currentTarget.dataset.id);
         this.formIndex.submit();
       }

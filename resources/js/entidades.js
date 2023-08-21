@@ -136,7 +136,7 @@ export default class objectClass {
 
   onDelete(evt) {
     evt.preventDefault()
-    if (confirm('¿Confirma que desea eliminar esta entidad?')) {
+    if (confirm('¿Confirma que desea eliminar este elemento?')) {
       this.formIndex = document.getElementById(
         'formIndex_' + evt.currentTarget.dataset.id,
       )

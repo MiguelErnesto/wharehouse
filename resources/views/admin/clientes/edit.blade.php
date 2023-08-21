@@ -3,10 +3,11 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Nuevo Almacén</h1>
+    <span class="text-uppercase page-subtitle">Editar cliente <h1 class='pl-3'>{{ $cliente->nombre }}</h1></span>
 @stop
 
 @section('content')
+
     @if (session('info'))
         <div class="alert alert-success" role="alert">
             <strong>{{ session('info') }}</strong>
@@ -15,16 +16,20 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::open(['id' => 'form', 'route' => 'almacenes.store']) !!}
-            @include('admin.almacenes.partials.form')
+            {!! Form::model($cliente, ['id' => 'form', 'route' => ['clientes.update', $cliente->id], 'method' => 'put']) !!}
+
+            @include('admin.clientes.partials.form')
 
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('almacenes.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('clientes.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
-                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar almacén', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
             {!! Form::close() !!}
         </div>
+
+        {!! Form::close() !!}
+    </div>
     </div>
 @stop
 
@@ -39,5 +44,8 @@
             });
         });
     </script>
-    <script async type="module" src="{{ mix('/js/compiled/almacenes.js') }}"></script>
+
+    <script async type="module" src="{{ mix('/js/compiled/clientes.js') }}"></script>
+
+
 @stop

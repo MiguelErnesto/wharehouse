@@ -1,9 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/compiled/entidades.js": "/js/compiled/entidades.js",
+    "/js/compiled/clientes.js": "/js/compiled/clientes.js",
     "/js/compiled/almacenes.js": "/js/compiled/almacenes.js",
     "/js/compiled/productos.js": "/js/compiled/productos.js",
     "/js/compiled/informes_recepcion.js": "/js/compiled/informes_recepcion.js",
     "/js/compiled/ordenes_despacho.js": "/js/compiled/ordenes_despacho.js",
+    "/js/compiled/vales.js": "/js/compiled/vales.js",
     "/css/app.css": "/css/app.css"
 }

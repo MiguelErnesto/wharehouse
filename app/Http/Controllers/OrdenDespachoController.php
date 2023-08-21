@@ -73,7 +73,7 @@ class OrdenDespachoController extends Controller
      */
     public function store(Request $request)
     {
-        //Crear nueva Orden de Despacho
+        //Guardar nueva Orden de Despacho
         $request->validate([
             'almacen_id' => 'required',
             'entidad_id' => 'required',

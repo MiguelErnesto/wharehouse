@@ -993,7 +993,7 @@ var almacenesClass = /*#__PURE__*/function () {
     value: function onDelete(evt) {
       evt.preventDefault();
 
-      if (confirm('¿Confirma que desea eliminar este Almacén?')) {
+      if (confirm('¿Confirma que desea eliminar este elemento?')) {
         this.formIndex = document.getElementById('formIndex_' + evt.currentTarget.dataset.id);
         this.formIndex.submit();
       }

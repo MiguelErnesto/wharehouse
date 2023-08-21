@@ -77,7 +77,7 @@ class InformeRecepcionController extends Controller
      */
     public function store(Request $request)
     {
-        //Crear nuevo Informe de Recepcion
+        //Guardar nuevo Informe de Recepcion
         $request->validate([
             'user_id' => 'required',
             'fecha' => 'required',

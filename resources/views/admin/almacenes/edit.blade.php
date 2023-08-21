@@ -23,7 +23,7 @@
             <div class='text-right'>
                 <a class="btn btn-danger" href="{{ route('almacenes.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
-                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar cambios', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
+                {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
             {!! Form::close() !!}
         </div>

@@ -53,7 +53,7 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.entidades.create',
-            'description' => 'Crear nuevo entidad',
+            'description' => 'Guardar nuevo entidad',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.entidades.edit',
@@ -64,6 +64,24 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar entidad',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
+        // Permisos para Clientes
+        Permission::create([
+            'name' => 'admin.clientes.index',
+            'description' => 'Listar clientes',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.clientes.create',
+            'description' => 'Guardar nuevo cliente',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.clientes.edit',
+            'description' => 'Editar cliente',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.clientes.destroy',
+            'description' => 'Eliminar cliente',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+
         // Permisos para Almacenes
         Permission::create([
             'name' => 'admin.almacenes.index',
@@ -71,7 +89,7 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.almacenes.create',
-            'description' => 'Crear nuevo almacén',
+            'description' => 'Guardar nuevo almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.almacenes.edit',
@@ -89,7 +107,7 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.productos.create',
-            'description' => 'Crear nuevo producto',
+            'description' => 'Guardar nuevo producto',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.productos.edit',
@@ -118,14 +136,14 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar productos de un almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
-        // Permisos para la Recepción de Productos
+        // Permisos para Informes de Recepcion
         Permission::create([
             'name' => 'admin.informes_recepcion.index',
             'description' => 'Listar informe de recepción',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.informes_recepcion.create',
-            'description' => 'Crear nuevo informe de recepción',
+            'description' => 'Guardar nuevo informe de recepción',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.informes_recepcion.edit',
@@ -143,7 +161,7 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.ordenes_despacho.create',
-            'description' => 'Crear nueva orden de despacho',
+            'description' => 'Guardar nueva orden de despacho',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
             'name' => 'admin.ordenes_despacho.edit',
@@ -152,6 +170,24 @@ class RoleSeeder extends Seeder
         Permission::create([
             'name' => 'admin.ordenes_despacho.destroy',
             'description' => 'Eliminar orden de despacho',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+
+        // Permisos para Vales
+        Permission::create([
+            'name' => 'admin.vales.index',
+            'description' => 'Listar vales',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.vales.create',
+            'description' => 'Crear nuevo vale',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.vales.edit',
+            'description' => 'Editar vale',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.vales.destroy',
+            'description' => 'Eliminar vale',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         //Enable foreign key checks for current db driver

@@ -1,6 +1,6 @@
 //import Request from './modules/services/request.js'
 
-export default class almacenesClass {
+export default class objectClass {
   constructor() {
     this.form = document.getElementById('form') ?? null
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
@@ -148,11 +148,26 @@ export default class almacenesClass {
   onValidate(evt) {
     evt.preventDefault()
 
+    if (document.getElementById('codigo').value.length == 0) {
+      document.getElementById('codigo').className =
+        'form-control border border-danger'
+      document.getElementById('codigo').placeholder = '--- Valor requerido ---'
+      document.getElementById('codigo').focus()
+      return false
+    }
     if (document.getElementById('nombre').value.length == 0) {
       document.getElementById('nombre').className =
         'form-control border border-danger'
       document.getElementById('nombre').placeholder = '--- Valor requerido ---'
       document.getElementById('nombre').focus()
+      return false
+    }
+    if (document.getElementById('cuenta_bancaria').value.length == 0) {
+      document.getElementById('cuenta_bancaria').className =
+        'form-control border border-danger'
+      document.getElementById('cuenta_bancaria').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('cuenta_bancaria').focus()
       return false
     }
     if (document.getElementById('direccion').value.length == 0) {
@@ -163,13 +178,21 @@ export default class almacenesClass {
       document.getElementById('direccion').focus()
       return false
     }
+    if (document.getElementById('descripcion').value.length == 0) {
+      document.getElementById('descripcion').className =
+        'form-control border border-danger'
+      document.getElementById('descripcion').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('descripcion').focus()
+      return false
+    }
 
     this.form.submit()
   }
 }
 
-const almacenes = async () => {
-  var Handler = new almacenesClass()
+const object = async () => {
+  var Handler = new objectClass()
 }
 
-window.addEventListener('load', almacenes)
+window.addEventListener('load', object)

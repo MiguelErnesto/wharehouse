@@ -3,14 +3,15 @@
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\EntidadController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\AlmacenProductoController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\InformeRecepcionController;
-use App\Http\Controllers\SalidaProductoController;
-use App\Http\Controllers\RecepcionProductoController;
 use App\Http\Controllers\OrdenDespachoController;
-use App\Http\Controllers\EntidadController;
+use App\Http\Controllers\ValeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,13 @@ Route::middleware([
 Route::resource('entidades', EntidadController::class, [
     'parameters' => [
         'entidades' => 'entidad',
+    ],
+]);
+
+//Clientes
+Route::resource('clientes', ClienteController::class, [
+    'parameters' => [
+        'clientes' => 'cliente',
     ],
 ]);
 
@@ -97,6 +105,18 @@ Route::get('ordenes_despacho/imprimir/{id}', [
     OrdenDespachoController::class,
     'imprimir',
 ]);
+
+//Vales
+Route::resource('vales', ValeController::class, [
+    'parameters' => [
+        'vales' => 'vale',
+    ],
+]);
+Route::get('vales/getDetallesVale/{id}', [
+    ValeController::class,
+    'getDetallesVale',
+])->name('getDetallesVale');
+Route::get('vales/imprimir/{id}', [ValeController::class, 'imprimir']);
 
 /* //esto puede ser despacho_productos o eliminarlo por completo
 //Recepcion de Productos

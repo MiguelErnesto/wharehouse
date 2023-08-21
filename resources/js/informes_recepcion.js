@@ -242,7 +242,7 @@ export default class ObjectClass {
   onDelete(evt) {
     evt.preventDefault()
     evt.stopPropagation()
-    if (confirm(`¿Confirma que desea eliminar este Informe?`)) {
+    if (confirm(`¿Confirma que desea eliminar este elemento?`)) {
       this.formIndex = document.getElementById(
         'formIndex_' + evt.currentTarget.dataset.id,
       )

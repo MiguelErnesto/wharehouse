@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Entidad;
+use App\Models\Cliente;
 
-class EntidadController extends Controller
+class ClienteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.entidades.index')->only('index');
-        $this->middleware('can:admin.entidades.create')->only(
-            'create',
-            'store'
-        );
-        $this->middleware('can:admin.entidades.edit')->only('edit', 'update');
-        $this->middleware('can:admin.entidades.destroy')->only('destroy');
+        $this->middleware('can:admin.clientes.index')->only('index');
+        $this->middleware('can:admin.clientes.create')->only('create', 'store');
+        $this->middleware('can:admin.clientes.edit')->only('edit', 'update');
+        $this->middleware('can:admin.clientes.destroy')->only('destroy');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +21,8 @@ class EntidadController extends Controller
      */
     public function index()
     {
-        $entidades = Entidad::all();
-        return view('admin.entidades.index', compact('entidades'));
+        $clientes = Cliente::all();
+        return view('admin.clientes.index', compact('clientes'));
     }
 
     /**
@@ -36,7 +32,7 @@ class EntidadController extends Controller
      */
     public function create()
     {
-        return view('admin.entidades.create');
+        return view('admin.clientes.create');
     }
 
     /**
@@ -50,15 +46,17 @@ class EntidadController extends Controller
         $request->validate([
             'codigo' => 'required',
             'nombre' => 'required',
+            'direccion' => 'required',
+            'cuenta_bancaria' => 'required',
             'descripcion' => 'required',
         ]);
 
-        $entidad = Entidad::create($request->all());
+        $cliente = Cliente::create($request->all());
         return redirect()
-            ->route('entidades.index')
+            ->route('clientes.index')
             ->with(
                 'info',
-                'Entidad ' . $entidad->nombre . ' creada correctamente'
+                'Cliente ' . $cliente->nombre . ' creado correctamente'
             );
     }
 
@@ -79,9 +77,9 @@ class EntidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Entidad $entidad)
+    public function edit(Cliente $cliente)
     {
-        return view('admin.entidades.edit', compact('entidad'));
+        return view('admin.clientes.edit', compact('cliente'));
     }
 
     /**
@@ -91,21 +89,23 @@ class EntidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Entidad $entidad)
+    public function update(Request $request, Cliente $cliente)
     {
         $request->validate([
             'codigo' => 'required',
             'nombre' => 'required',
+            'direccion' => 'required',
+            'cuenta_bancaria' => 'required',
             'descripcion' => 'required',
         ]);
 
-        $entidad->update($request->all());
+        $cliente->update($request->all());
 
         return redirect()
-            ->route('entidades.index')
+            ->route('clientes.index')
             ->with(
                 'info',
-                'Entidad ' . $entidad->nombre . ' actualizada correctamente'
+                'Cliente ' . $cliente->nombre . ' actualizado correctamente'
             );
     }
 
@@ -115,15 +115,15 @@ class EntidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Entidad $entidad)
+    public function destroy(Cliente $cliente)
     {
-        $entidad->delete();
+        $cliente->delete();
 
         return redirect()
-            ->route('entidades.index')
+            ->route('clientes.index')
             ->with(
                 'info',
-                'Entidad ' . $entidad->nombre . ' eliminada correctamente'
+                'Cliente ' . $cliente->nombre . ' eliminado correctamente'
             );
     }
 }
