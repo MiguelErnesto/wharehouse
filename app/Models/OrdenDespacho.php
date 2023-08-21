@@ -20,5 +20,6 @@ class OrdenDespacho extends Model
         'fecha_entrega',
         'transferencia_id',
         'vale_id',
+        'nro_orden',
     ];
 }

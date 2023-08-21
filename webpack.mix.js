@@ -21,6 +21,7 @@ mix
   .js('resources/js/almacenes.js', 'public/js/compiled/')
   .js('resources/js/productos.js', 'public/js/compiled/')
   .js('resources/js/informes_recepcion.js', 'public/js/compiled/')
+  .js('resources/js/ordenes_despacho.js', 'public/js/compiled/')
 
 if (mix.inProduction()) {
   mix.version()

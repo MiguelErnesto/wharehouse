@@ -848,9 +848,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!********************************************!*\
-  !*** ./resources/js/informes_recepcion.js ***!
-  \********************************************/
+/*!******************************************!*\
+  !*** ./resources/js/ordenes_despacho.js ***!
+  \******************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ObjectClass)
@@ -943,8 +943,16 @@ var ObjectClass = /*#__PURE__*/function () {
         }
       }
 
-      if (document.querySelector('input[name="cantidad"]')) {
-        document.querySelector('input[name="cantidad"]').value = 1;
+      if (document.querySelector('input[name="cantidad_ordenada"]')) {
+        document.querySelector('input[name="cantidad_ordenada"]').value = 1;
+      }
+
+      if (document.querySelector('input[name="cantidad_despachada"]')) {
+        document.querySelector('input[name="cantidad_despachada"]').value = 1;
+      }
+
+      if (document.querySelector('input[name="cantidad_entregada"]')) {
+        document.querySelector('input[name="cantidad_entregada"]').value = 1;
       }
 
       if (document.querySelector('producto')) {
@@ -995,9 +1003,9 @@ var ObjectClass = /*#__PURE__*/function () {
       }
 
       productos.forEach(function (producto) {
-        var _producto$cantidad;
+        var _producto$cantidad_or, _producto$cantidad_de, _producto$cantidad_en;
 
-        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.codigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.nombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.descripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad = producto.cantidad) !== null && _producto$cantidad !== void 0 ? _producto$cantidad : '0', "</td>\n    </tr>");
+        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.codigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.nombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.descripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_or = producto.cantidad_ordenada) !== null && _producto$cantidad_or !== void 0 ? _producto$cantidad_or : '0', "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_de = producto.cantidad_despachada) !== null && _producto$cantidad_de !== void 0 ? _producto$cantidad_de : '0', "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_en = producto.cantidad_entregada) !== null && _producto$cantidad_en !== void 0 ? _producto$cantidad_en : '0', "</td>\n    </tr>");
       });
     }
   }, {
@@ -1016,26 +1024,30 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      var cantidad = parseInt(document.querySelector('input[name="cantidad"]').value);
+      var cantidad_ordenada = parseInt(document.querySelector('input[name="cantidad_ordenada"]').value);
+      var cantidad_despachada = parseInt(document.querySelector('input[name="cantidad_despachada"]').value);
+      var cantidad_entregada = parseInt(document.querySelector('input[name="cantidad_entregada"]').value);
       this.producto = document.getElementById('producto');
       var idSelected = this.producto.value;
 
       if (!this.productExists(idSelected)) {
         var valueSelected = document.getElementById('producto').options[document.getElementById('producto').selectedIndex].text;
-        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 70%\">Productos agregados</th>\n        <th class='text-center' style=\"width: 10%\">Cantidad</th>\n        <th></th>\n     </tr>";
-        document.querySelector('table#listaProductos tbody').append(this.addProductoList(idSelected, valueSelected, cantidad));
+        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 55%\">Productos agregados</th>\n        <th class='text-right' style=\"width: 15%\">Cantidad ordenada</th>\n        <th class='text-right' style=\"width: 15%\">Cantidad despachada</th>\n        <th class='text-right' style=\"width: 15%\">Cantidad entregada</th>\n        <th></th>\n     </tr>";
+        document.querySelector('table#listaProductos tbody').append(this.addProductoList(idSelected, valueSelected, cantidad_ordenada, cantidad_despachada, cantidad_entregada));
       }
 
       this.clean();
     }
   }, {
     key: "addProductoList",
-    value: function addProductoList(id, product, qty) {
+    value: function addProductoList(id, product, cantidad_ordenada, cantidad_despachada, cantidad_entregada) {
       var tr = document.createElement('tr');
       tr.id = id;
       tr.dataset.id = id;
-      tr.dataset.cantidad = qty;
-      tr.innerHTML = "\n                    <td>".concat(product, "</td>\n                    <td class=\"text-right\">").concat(qty, "</td>\n                    <td class=\"text-center\"><a href=\"#\" class=\"btn btn-sm btn-danger deleteProductoFromList\"> <i class=\"fas fa-solid fa-trash fa-lg\"></i></a></td>\n                ");
+      tr.dataset.cantidad_ordenada = cantidad_ordenada;
+      tr.dataset.cantidad_despachada = cantidad_despachada;
+      tr.dataset.cantidad_entregada = cantidad_entregada;
+      tr.innerHTML = "\n                    <td>".concat(product, "</td>\n                    <td class=\"text-right\">").concat(cantidad_ordenada, "</td>\n                    <td class=\"text-right\">").concat(cantidad_despachada, "</td>\n                    <td class=\"text-right\">").concat(cantidad_entregada, "</td>\n                    <td class=\"text-center pl-5 pr-3\"><a href=\"#\" class=\"btn btn-sm btn-danger deleteProductoFromList\"> <i class=\"fas fa-solid fa-trash fa-lg\"></i></a></td>\n                ");
       tr.querySelector('.deleteProductoFromList').addEventListener('click', function (evt) {
         if (confirm('¿Desea eliminar el producto de la lista?')) {
           document.querySelector("table#listaProductos tbody tr[id=\"".concat(evt.currentTarget.dataset.id, "\"]")).remove();
@@ -1075,23 +1087,23 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.stopPropagation();
 
       if (document.getElementById('fecha').value.length == 0) {
-        alert('Debe completar todos los datos del Informe');
+        alert('Debe completar todos los datos de la Orden');
         document.getElementById('fecha').className = 'form-control border border-danger';
         document.getElementById('fecha').placeholder = '--- Valor requerido ---';
         document.getElementById('fecha').focus();
         return false;
       }
 
-      if (document.getElementById('nro_informe').value.length == 0) {
-        alert('Debe completar todos los datos del Informe');
-        document.getElementById('nro_informe').className = 'form-control border border-danger';
-        document.getElementById('nro_informe').placeholder = '--- Valor requerido ---';
-        document.getElementById('nro_informe').focus();
+      if (document.getElementById('nro_orden').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('nro_orden').className = 'form-control border border-danger';
+        document.getElementById('nro_orden').placeholder = '--- Valor requerido ---';
+        document.getElementById('nro_orden').focus();
         return false;
       }
 
       if (document.getElementById('almacen').value.length == 0) {
-        alert('Debe completar todos los datos del Informe');
+        alert('Debe completar todos los datos de la Orden');
         document.getElementById('almacen').className = 'form-control border border-danger';
         document.getElementById('almacen').placeholder = '--- Valor requerido ---';
         document.getElementById('almacen').focus();
@@ -1106,11 +1118,27 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('cantidad').value.length == 0) {
-        alert('Debe completar todos los datos del Informe');
-        document.getElementById('cantidad').className = 'form-control border border-danger';
-        document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad').focus();
+      if (document.getElementById('cantidad_ordenada').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('cantidad_ordenada').className = 'form-control border border-danger';
+        document.getElementById('cantidad_ordenada').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad_ordenada').focus();
+        return false;
+      }
+
+      if (document.getElementById('cantidad_despachada').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('cantidad_despachada').className = 'form-control border border-danger';
+        document.getElementById('cantidad_despachada').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad_despachada').focus();
+        return false;
+      }
+
+      if (document.getElementById('cantidad_entregada').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden');
+        document.getElementById('cantidad_entregada').className = 'form-control border border-danger';
+        document.getElementById('cantidad_entregada').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad_entregada').focus();
         return false;
       }
 
@@ -1118,19 +1146,19 @@ var ObjectClass = /*#__PURE__*/function () {
         _token: document.querySelector('input[name="_token"]').value,
         user_id: document.getElementById('user_id').value,
         fecha: document.getElementById('fecha').value,
-        nro_informe: document.getElementById('nro_informe').value,
+        nro_informe: document.getElementById('nro_orden').value,
         almacen_id: document.getElementById('almacen').value,
         productos: this.getProductos()
       };
       $.ajax({
-        url: "/informes_recepcion",
+        url: "/ordenes_despacho",
         type: 'POST',
         dataType: 'json',
         data: data,
         context: this,
         success: function success(response) {
-          alert('Recepción de productos exitosa');
-          window.open("/informes_recepcion", '_self');
+          alert('Orden de despacho exitosa');
+          window.open("/ordenes_despacho", '_self');
         },
         error: function error(_error2) {
           console.log('Fetching data: ERROR');
@@ -1152,7 +1180,9 @@ var ObjectClass = /*#__PURE__*/function () {
           var producto = _step.value;
           listaProductos.unshift({
             id: producto.dataset.id,
-            cantidad: producto.dataset.cantidad
+            cantidad_ordenada: producto.dataset.cantidad_ordenada,
+            cantidad_despachada: producto.dataset.cantidad_despachada,
+            cantidad_entregada: producto.dataset.cantidad_entregada
           });
         }
       } catch (err) {

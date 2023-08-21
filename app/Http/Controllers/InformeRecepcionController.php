@@ -43,8 +43,6 @@ class InformeRecepcionController extends Controller
         $usuarios = User::all();
         $almacenes = Almacen::orderBy('nombre', 'desc')->get();
 
-        //$datosInformes = $query->get();
-
         return view(
             'admin.informes_recepcion.index',
             compact('informes_recepcion', 'usuarios', 'almacenes')
@@ -79,7 +77,7 @@ class InformeRecepcionController extends Controller
      */
     public function store(Request $request)
     {
-        //Crear nueva Recepcion Producto
+        //Crear nuevo Informe de Recepcion
         $request->validate([
             'user_id' => 'required',
             'fecha' => 'required',
