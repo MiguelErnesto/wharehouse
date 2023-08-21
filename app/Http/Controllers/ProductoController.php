@@ -51,6 +51,8 @@ class ProductoController extends Controller
             'codigo' => 'required',
             'nombre' => 'required',
             'descripcion' => 'required',
+            'unidad_medida' => 'required',
+            'precio' => 'required',
         ]);
 
         $producto = Producto::create($request->all());
@@ -97,6 +99,8 @@ class ProductoController extends Controller
             'codigo' => 'required',
             'nombre' => 'required',
             'descripcion' => 'required',
+            'unidad_medida' => 'required',
+            'precio' => 'required',
         ]);
 
         $producto->update($request->all());

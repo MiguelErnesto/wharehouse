@@ -21,7 +21,7 @@ return new class extends Migration {
 
             $table->bigInteger('vale_id');
             $table
-                ->foreign('transferencia_id')
+                ->foreign('vale_id')
                 ->references('id')
                 ->on('vales');
         });
@@ -36,6 +36,9 @@ return new class extends Migration {
     {
         Schema::table('ordenes_despacho', function (Blueprint $table) {
             $table->dropColumn('transferencia_id');
+        });
+
+        Schema::table('ordenes_despacho', function (Blueprint $table) {
             $table->dropColumn('vale_id');
         });
     }

@@ -45,6 +45,24 @@ export default class productosClass {
       document.getElementById('nombre').focus()
       return false
     }
+
+    if (document.getElementById('unidad_medida').value.length == 0) {
+      document.getElementById('unidad_medida').className =
+        'form-control border border-danger'
+      document.getElementById('unidad_medida').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('unidad_medida').focus()
+      return false
+    }
+
+    if (document.getElementById('precio').value.length == 0) {
+      document.getElementById('precio').className =
+        'form-control border border-danger'
+      document.getElementById('precio').placeholder = '--- Valor requerido ---'
+      document.getElementById('precio').focus()
+      return false
+    }
+
     if (document.getElementById('descripcion').value.length == 0) {
       document.getElementById('descripcion').className =
         'form-control border border-danger'
