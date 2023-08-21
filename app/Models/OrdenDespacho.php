@@ -15,9 +15,10 @@ class OrdenDespacho extends Model
         'almacen_id',
         'cliente_id',
         'user_id',
-        'tipo_salida_id',
         'fecha',
         'lugar_entrega',
         'fecha_entrega',
+        'transferencia_id',
+        'vale_id',
     ];
 }

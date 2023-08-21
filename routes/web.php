@@ -10,6 +10,7 @@ use App\Http\Controllers\InformeRecepcionController;
 use App\Http\Controllers\SalidaProductoController;
 use App\Http\Controllers\RecepcionProductoController;
 use App\Http\Controllers\OrdenDespachoController;
+use App\Http\Controllers\EntidadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,14 +32,24 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('productos', ProductoController::class, [
+//Entidades
+Route::resource('entidades', EntidadController::class, [
     'parameters' => [
-        'productos' => 'producto',
+        'entidades' => 'entidad',
     ],
 ]);
+
+//Almacenes
 Route::resource('almacenes', AlmacenController::class, [
     'parameters' => [
         'almacenes' => 'almacen',
+    ],
+]);
+
+//Productos
+Route::resource('productos', ProductoController::class, [
+    'parameters' => [
+        'productos' => 'producto',
     ],
 ]);
 
@@ -87,7 +98,7 @@ Route::get('ordenes_despacho/imprimir/{id}', [
     'imprimir',
 ]);
 
-//esto puede ser despacho_productos o eliminarlo por completo
+/* //esto puede ser despacho_productos o eliminarlo por completo
 //Recepcion de Productos
 Route::resource('recepcion_productos', RecepcionProductoController::class, [
     'parameters' => [
@@ -101,7 +112,7 @@ Route::resource('salida_productos', SalidaProductoController::class, [
         'salida_productos' => 'salida_producto',
     ],
 ]);
-
+ */
 //Route::get('/', [PostController::class, 'index'])->name('posts.index');
 //Route::resource('posts', PostController::class);
 /* Route::get('category/{category}', [PostController::class, 'category'])->name(

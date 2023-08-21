@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoSalida extends Model
+class ValeProducto extends Model
 {
     use HasFactory;
 
-    protected $table = 'tipos_salida';
-    protected $fillable = ['descripcion'];
+    protected $table = 'vale_productos';
+    protected $fillable = ['vale_id', 'producto_id', 'cantidad'];
 }

@@ -10,10 +10,5 @@ class AlmacenProducto extends Model
     use HasFactory;
 
     protected $table = 'almacenes_productos';
-    protected $fillable = [
-        'recepcion_producto_id',
-        'almacen_id',
-        'producto_id',
-        'cantidad',
-    ];
+    protected $fillable = ['almacen_id', 'producto_id', 'cantidad'];
 }

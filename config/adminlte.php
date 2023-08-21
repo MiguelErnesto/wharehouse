@@ -248,6 +248,14 @@ return [
             'icon' => 'fas fa-fw fa-clone',
             'submenu' => [
                 [
+                    'text' => 'Entidades',
+                    'classes' => 'ml-1',
+                    'route' => 'entidades.index',
+                    'icon' => 'fas fa-landmark fa-fw pr-2',
+                    'active' => ['admin/entidades*'],
+                    'can' => 'admin.entidades.index',
+                ],
+                [
                     'text' => 'Almacenes',
                     'classes' => 'ml-1',
                     'route' => 'almacenes.index',

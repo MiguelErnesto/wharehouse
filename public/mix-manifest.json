@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/compiled/entidades.js": "/js/compiled/entidades.js",
     "/js/compiled/almacenes.js": "/js/compiled/almacenes.js",
     "/js/compiled/productos.js": "/js/compiled/productos.js",
     "/js/compiled/informes_recepcion.js": "/js/compiled/informes_recepcion.js",

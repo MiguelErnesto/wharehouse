@@ -13,7 +13,6 @@ class DespachoProducto extends Model
     protected $fillable = [
         'producto_id',
         'orden_despacho_id',
-        'unidad_medida',
         'cantidad_ordenada',
         'cantidad_despachada',
         'cantidad_entregada',
