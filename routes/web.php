@@ -12,6 +12,7 @@ use App\Http\Controllers\InformeRecepcionController;
 use App\Http\Controllers\OrdenDespachoController;
 use App\Http\Controllers\ValeController;
 use App\Http\Controllers\TransferenciaController;
+use App\Http\Controllers\ConduceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,6 +131,18 @@ Route::get('transferencias/imprimir/{id}', [
     TransferenciaController::class,
     'imprimir',
 ]);
+
+//Conduces
+Route::resource('conduces', ConduceController::class, [
+    'parameters' => [
+        'conduces' => 'conduce',
+    ],
+]);
+Route::get('conduces/getDetalles/{id}', [
+    ConduceController::class,
+    'getDetalles',
+]);
+Route::get('conduces/imprimir/{id}', [ConduceController::class, 'imprimir']);
 
 /* //esto puede ser despacho_productos o eliminarlo por completo
 //Recepcion de Productos

@@ -208,6 +208,24 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar transferencia',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
+        // Permisos para Conduces
+        Permission::create([
+            'name' => 'admin.conduces.index',
+            'description' => 'Listar conduces',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.conduces.create',
+            'description' => 'Crear nuevo conduce',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.conduces.edit',
+            'description' => 'Editar conduces',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.conduces.destroy',
+            'description' => 'Eliminar conduce',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+
         //Enable foreign key checks for current db driver
         //SET foreign_key_checks = 1 //MYSQL
         DB::statement('PRAGMA foreign_keys = OFF;');

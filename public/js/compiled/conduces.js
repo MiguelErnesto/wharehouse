@@ -848,9 +848,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!****************************************!*\
-  !*** ./resources/js/transferencias.js ***!
-  \****************************************/
+/*!**********************************!*\
+  !*** ./resources/js/conduces.js ***!
+  \**********************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ObjectClass)
@@ -943,12 +943,8 @@ var ObjectClass = /*#__PURE__*/function () {
         }
       }
 
-      if (document.querySelector('input[name="cantidad_remitida"]')) {
-        document.querySelector('input[name="cantidad_remitida"]').value = 1;
-      }
-
-      if (document.querySelector('input[name="cantidad_recibida"]')) {
-        document.querySelector('input[name="cantidad_recibida"]').value = 1;
+      if (document.querySelector('input[name="cantidad"]')) {
+        document.querySelector('input[name="cantidad"]').value = 1;
       }
 
       if (document.querySelector('producto')) {
@@ -961,7 +957,7 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.preventDefault();
       evt.stopPropagation();
       var id = evt.currentTarget.dataset.id;
-      window.open("transferencias/imprimir/".concat(id), '_blank');
+      window.open("vales/imprimir/".concat(id), '_blank');
     }
   }, {
     key: "onVerDetalles",
@@ -972,13 +968,13 @@ var ObjectClass = /*#__PURE__*/function () {
       document.getElementById('informe_id').value = id; // AJAX GET request
 
       $.ajax({
-        url: "transferencias/getDetalles/".concat(id),
+        url: "vales/getDetalles/".concat(id),
         type: 'get',
         dataType: 'json',
         context: this,
         success: function success(response) {
           console.log('Fetching data: SUCCESS');
-          this.showDetalles(response.almacenes, response.detalles[0]);
+          this.showDetalles(response.detalles[0]);
           this.showProductos(response.productos);
         },
         error: function error(_error) {
@@ -994,32 +990,20 @@ var ObjectClass = /*#__PURE__*/function () {
       listaProductos.innerHTML = '';
 
       if (!productos.length > 0) {
-        listaProductos.innerHTML = "\n      <tr>\n        <td class='text-center' colspan='3'><i>No hay elementos para mostrar...</i></td>        \n      </tr>";
+        listaProductos.innerHTML = "\n      <tr>\n        <td class='text-center' colspan='2'><i>No hay elementos para mostrar...</i></td>        \n      </tr>";
         return false;
       }
 
       productos.forEach(function (producto) {
-        var _producto$cantidad_re, _producto$cantidad_re2;
+        var _producto$cantidad;
 
-        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.codigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.nombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.descripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_re = producto.cantidad_remitida) !== null && _producto$cantidad_re !== void 0 ? _producto$cantidad_re : '0', "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad_re2 = producto.cantidad_recibida) !== null && _producto$cantidad_re2 !== void 0 ? _producto$cantidad_re2 : '0', "</td>\n    </tr>");
+        listaProductos.innerHTML += "\n      <tr>\n    <td style=\"width: 15%\">".concat(producto.codigo, "</td>\n    <td style=\"width: 30%\">").concat(producto.nombre, "</td>\n    <td style=\"width: 40%\">").concat(producto.descripcion, "</td>\n    <td class='text-right pr-2' style=\"width: 15%\">").concat((_producto$cantidad = producto.cantidad) !== null && _producto$cantidad !== void 0 ? _producto$cantidad : '0', "</td>\n    </tr>");
       });
     }
   }, {
     key: "showDetalles",
-    value: function showDetalles(almacenes, informe) {
-      var almacen_origen = '';
-      almacenes.forEach(function (item) {
-        if (item.id == informe.almacen_origen_id) {
-          almacen_origen = item.nombre;
-        }
-      });
-      var almacen_destino = '';
-      almacenes.forEach(function (item) {
-        if (item.id == informe.almacen_destino_id) {
-          almacen_destino = item.nombre;
-        }
-      });
-      document.getElementById('Head').innerHTML = "\n  <tr>\n    <td class='font-weight-bold pr-3'>\n        No. Transferencia:\n    </td>\n    <td>\n        ".concat(informe.nro_transferencia, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class='font-weight-bold pr-3'>\n        Entidad:\n    </td>\n    <td>\n        ").concat(informe.entidad, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class='font-weight-bold pr-3'>\n        Fecha del modelo:\n    </td>\n    <td>\n        ").concat(informe.fecha_modelo, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n    \n  <tr>\n  <td class=\"font-weight-bold pt-3\">\n      Almac\xE9n origen:\n  </td>\n  <td class=\"pt-3\">\n      ").concat(almacen_origen, "\n  </td>\n  <td></td>\n  <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Actualiza:\n    </td>\n    <td>\n        ").concat(informe.persona_actualiza_origen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Contabiliza:\n    </td>\n    <td>\n        ").concat(informe.persona_contabiliza_origen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n\n  <tr>\n  <td class=\"font-weight-bold pt-3\">\n      Almac\xE9n destino:\n  </td>\n  <td class=\"pt-3\">\n      ").concat(almacen_destino, "\n  </td>\n  <td></td>\n  <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Actualiza:\n    </td>\n    <td>\n        ").concat(informe.persona_actualiza_destino, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Contabiliza:\n    </td>\n    <td>\n        ").concat(informe.persona_contabiliza_destino, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  \n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Autoriza:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.persona_autoriza, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Entrega:\n    </td>\n    <td>\n        ").concat(informe.persona_entrega, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Recibe:\n    </td>\n    <td>\n        ").concat(informe.persona_recibe, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Fecha de traslado:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.fecha_traslado, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha de recepci\xF3n:\n    </td>\n    <td>\n        ").concat(informe.fecha_recepcion, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Creado/Actualizado:\n    </td>\n    <td>\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Importe total de la entrega:\n    </td>\n    <td class=\"pt-3 pl-3\">\n       $ ").concat(informe.importe_total_entrega, "\n    </td>\n    <td class=\"font-weight-bold pt-3\">\n      Importe total recibido:\n    </td>\n    <td class=\"pt-3 pl-3\">\n      $ ").concat(informe.importe_total_recibido, "\n    </td>\n  </tr>\n  <br/>");
+    value: function showDetalles(informe) {
+      document.getElementById('Head').innerHTML = "\n  <tr>\n    <td class='font-weight-bold pr-3'>\n        No. Vale:\n    </td>\n    <td>\n        ".concat(informe.nro_vale, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  \n  <tr>\n    <td class=\"font-weight-bold\">\n        Tipo de vale:\n    </td>\n    <td>\n        ").concat(informe.tipo_vale == 'E' ? 'Entrega' : 'Devolución', "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Entidad:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.entidad, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ").concat(informe.almacen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Persona emisor:\n    </td>\n    <td>\n        ").concat(informe.persona_emisor, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Persona receptor:\n    </td>\n    <td>\n        ").concat(informe.persona_receptor, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Fecha:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.updated_at > informe.created_at ? this.formated_datetime(informe.updated_at) : this.formated_datetime(informe.created_at), "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Creado/Actualizado:\n    </td>\n    <td>\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
     }
   }, {
     key: "formated_datetime",
@@ -1045,28 +1029,26 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      var cantidad_recibida = parseInt(document.querySelector('input[name="cantidad_recibida"]').value);
-      var cantidad_remitida = parseInt(document.querySelector('input[name="cantidad_remitida"]').value);
+      var cantidad = parseInt(document.querySelector('input[name="cantidad"]').value);
       this.producto = document.getElementById('producto');
       var idSelected = this.producto.value;
 
       if (!this.productExists(idSelected)) {
         var valueSelected = document.getElementById('producto').options[document.getElementById('producto').selectedIndex].text;
-        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 45%\">Productos agregados</th>\n        <th class='text-right' style=\"width: 20%\">Cantidad recibida</th>\n        <th class='text-right' style=\"width: 20%\">Cantidad remitida</th>\n        <th></th>\n     </tr>";
-        document.querySelector('table#listaProductos tbody').append(this.addProductoList(idSelected, valueSelected, cantidad_recibida, cantidad_remitida));
+        document.querySelector('table#listaProductos thead').innerHTML = "<tr>\n        <th style=\"width: 55%\">Productos agregados</th>\n        <th class='text-right' style=\"width: 15%\">Cantidad</th>\n        <th></th>\n     </tr>";
+        document.querySelector('table#listaProductos tbody').append(this.addProductoList(idSelected, valueSelected, cantidad));
       }
 
       this.clean();
     }
   }, {
     key: "addProductoList",
-    value: function addProductoList(id, product, cantidad_recibida, cantidad_remitida) {
+    value: function addProductoList(id, product, cantidad) {
       var tr = document.createElement('tr');
       tr.id = id;
       tr.dataset.id = id;
-      tr.dataset.cantidad_recibida = cantidad_recibida;
-      tr.dataset.cantidad_remitida = cantidad_remitida;
-      tr.innerHTML = "\n                    <td>".concat(product, "</td>\n                    <td class=\"text-right\">").concat(cantidad_recibida, "</td>\n                    <td class=\"text-right\">").concat(cantidad_remitida, "</td>\n                    <td class=\"text-center pl-5 pr-3\"><a href=\"#\" class=\"btn btn-sm btn-danger deleteProductoFromList\"> <i class=\"fas fa-solid fa-trash fa-lg\"></i></a></td>\n                ");
+      tr.dataset.cantidad = cantidad;
+      tr.innerHTML = "\n                    <td>".concat(product, "</td>\n                    <td class=\"text-right\">").concat(cantidad, "</td>\n                    <td class=\"text-center pl-5 pr-3\"><a href=\"#\" class=\"btn btn-sm btn-danger deleteProductoFromList\"> <i class=\"fas fa-solid fa-trash fa-lg\"></i></a></td>\n                ");
       tr.querySelector('.deleteProductoFromList').addEventListener('click', function (evt) {
         if (confirm('¿Desea eliminar el producto de la lista?')) {
           document.querySelector("table#listaProductos tbody tr[id=\"".concat(id, "\"]")).remove();
@@ -1105,155 +1087,75 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.preventDefault();
       evt.stopPropagation();
 
-      if (document.getElementById('nro_transferencia').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('nro_transferencia').className = 'form-control border border-danger';
-        document.getElementById('nro_transferencia').placeholder = '--- Valor requerido ---';
-        document.getElementById('nro_transferencia').focus();
+      if (document.getElementById('fecha').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('fecha').className = 'form-control border border-danger';
+        document.getElementById('fecha').placeholder = '--- Valor requerido ---';
+        document.getElementById('fecha').focus();
         return false;
       }
 
-      if (document.getElementById('fecha_modelo').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('fecha_modelo').className = 'form-control border border-danger';
-        document.getElementById('fecha_modelo').placeholder = '--- Valor requerido ---';
-        document.getElementById('fecha_modelo').focus();
-        return false;
-      }
-
-      if (document.getElementById('fecha_traslado').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('fecha_traslado').className = 'form-control border border-danger';
-        document.getElementById('fecha_traslado').placeholder = '--- Valor requerido ---';
-        document.getElementById('fecha_traslado').focus();
-        return false;
-      }
-
-      if (document.getElementById('fecha_recepcion').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('fecha_recepcion').className = 'form-control border border-danger';
-        document.getElementById('fecha_recepcion').placeholder = '--- Valor requerido ---';
-        document.getElementById('fecha_recepcion').focus();
+      if (document.getElementById('nro_vale').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('nro_vale').className = 'form-control border border-danger';
+        document.getElementById('nro_vale').placeholder = '--- Valor requerido ---';
+        document.getElementById('nro_vale').focus();
         return false;
       }
 
       if (document.getElementById('entidad').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
+        alert('Debe completar todos los datos del Vale');
         document.getElementById('entidad').className = 'form-control border border-danger';
         document.getElementById('entidad').placeholder = '--- Valor requerido ---';
         document.getElementById('entidad').focus();
         return false;
       }
 
-      if (document.getElementById('almacen_origen').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('almacen_origen').className = 'form-control border border-danger';
-        document.getElementById('almacen_origen').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen_origen').focus();
+      if (document.getElementById('almacen').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('almacen').className = 'form-control border border-danger';
+        document.getElementById('almacen').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen').focus();
         return false;
       }
 
-      if (document.getElementById('almacen_destino').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('almacen_destino').className = 'form-control border border-danger';
-        document.getElementById('almacen_destino').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen_destino').focus();
-        return false;
-      } else {
-        if (document.getElementById('almacen_origen').value == document.getElementById('almacen_destino').value) {
-          alert('El almacén origen y destino deben ser diferentes');
-          document.getElementById('almacen_destino').className = 'form-control border border-danger';
-          document.getElementById('almacen_destino').placeholder = '--- Valor requerido ---';
-          document.getElementById('almacen_destino').focus();
-          return false;
-        }
-      }
-
-      if (document.getElementById('persona_actualiza_origen').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('persona_actualiza_origen').className = 'form-control border border-danger';
-        document.getElementById('persona_actualiza_origen').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_actualiza_origen').focus();
+      if (document.getElementById('importe_total').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('importe_total').className = 'form-control border border-danger';
+        document.getElementById('importe_total').placeholder = '--- Valor requerido ---';
+        document.getElementById('importe_total').focus();
         return false;
       }
 
-      if (document.getElementById('persona_contabiliza_origen').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('persona_contabiliza_origen').className = 'form-control border border-danger';
-        document.getElementById('persona_contabiliza_origen').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_contabiliza_origen').focus();
-        return false;
-      }
-
-      if (document.getElementById('persona_actualiza_destino').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('persona_actualiza_destino').className = 'form-control border border-danger';
-        document.getElementById('persona_actualiza_destino').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_actualiza_destino').focus();
-        return false;
-      }
-
-      if (document.getElementById('persona_contabiliza_destino').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('persona_contabiliza_destino').className = 'form-control border border-danger';
-        document.getElementById('persona_contabiliza_destino').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_contabiliza_destino').focus();
-        return false;
-      }
-
-      if (document.getElementById('persona_autoriza').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('persona_autoriza').className = 'form-control border border-danger';
-        document.getElementById('persona_autoriza').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_autoriza').focus();
-        return false;
-      }
-
-      if (document.getElementById('persona_entrega').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('persona_entrega').className = 'form-control border border-danger';
-        document.getElementById('persona_entrega').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_entrega').focus();
-        return false;
-      }
-
-      if (document.getElementById('persona_recibe').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('persona_recibe').className = 'form-control border border-danger';
-        document.getElementById('persona_recibe').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_recibe').focus();
-        return false;
-      }
-
-      if (document.getElementById('importe_total_entrega').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('importe_total_entrega').className = 'form-control border border-danger';
-        document.getElementById('importe_total_entrega').placeholder = '--- Valor requerido ---';
-        document.getElementById('importe_total_entrega').focus();
-        return false;
-      }
-
-      if (isNaN(document.getElementById('importe_total_entrega').value)) {
+      if (isNaN(document.getElementById('importe_total').value)) {
         alert('El valor debe ser un número');
-        document.getElementById('importe_total_entrega').className = 'form-control border border-danger';
-        document.getElementById('importe_total_entrega').placeholder = '--- Valor requerido ---';
-        document.getElementById('importe_total_entrega').focus();
+        document.getElementById('importe_total').className = 'form-control border border-danger';
+        document.getElementById('importe_total').placeholder = '--- Valor requerido ---';
+        document.getElementById('importe_total').focus();
         return false;
       }
 
-      if (document.getElementById('importe_total_recibido').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('importe_total_recibido').className = 'form-control border border-danger';
-        document.getElementById('importe_total_recibido').placeholder = '--- Valor requerido ---';
-        document.getElementById('importe_total_recibido').focus();
+      if (document.getElementById('persona_emisor').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('persona_emisor').className = 'form-control border border-danger';
+        document.getElementById('persona_emisor').placeholder = '--- Valor requerido ---';
+        document.getElementById('persona_emisor').focus();
         return false;
       }
 
-      if (isNaN(document.getElementById('importe_total_recibido').value)) {
-        alert('El valor debe ser un número');
-        document.getElementById('importe_total_recibido').className = 'form-control border border-danger';
-        document.getElementById('importe_total_recibido').placeholder = '--- Valor requerido ---';
-        document.getElementById('importe_total_recibido').focus();
+      if (document.getElementById('persona_receptor').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('persona_receptor').className = 'form-control border border-danger';
+        document.getElementById('persona_receptor').placeholder = '--- Valor requerido ---';
+        document.getElementById('persona_receptor').focus();
+        return false;
+      }
+
+      if (document.getElementById('tipo_vale').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('tipo_vale').className = 'form-control border border-danger';
+        document.getElementById('tipo_vale').placeholder = '--- Valor requerido ---';
+        document.getElementById('tipo_vale').focus();
         return false;
       }
 
@@ -1265,52 +1167,37 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('cantidad_recibida').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('cantidad_recibida').className = 'form-control border border-danger';
-        document.getElementById('cantidad_recibida').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad_recibida').focus();
-        return false;
-      }
-
-      if (document.getElementById('cantidad_remitida').value.length == 0) {
-        alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('cantidad_remitida').className = 'form-control border border-danger';
-        document.getElementById('cantidad_remitida').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad_remitida').focus();
+      if (document.getElementById('cantidad').value.length == 0) {
+        alert('Debe completar todos los datos del Vale');
+        document.getElementById('cantidad').className = 'form-control border border-danger';
+        document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
+        document.getElementById('cantidad').focus();
         return false;
       }
 
       var data = {
         _token: document.querySelector('input[name="_token"]').value,
         user_id: document.getElementById('user_id').value,
+        fecha: document.getElementById('fecha').value,
+        nro_vale: document.getElementById('nro_vale').value,
         entidad_id: document.getElementById('entidad').value,
-        almacen_origen_id: document.getElementById('almacen_origen').value,
-        almacen_destino_id: document.getElementById('almacen_destino').value,
-        nro_transferencia: document.getElementById('nro_transferencia').value,
-        fecha_modelo: document.getElementById('fecha_modelo').value,
-        fecha_traslado: document.getElementById('fecha_traslado').value,
-        fecha_recepcion: document.getElementById('fecha_recepcion').value,
-        persona_autoriza: document.getElementById('persona_autoriza').value,
-        persona_entrega: document.getElementById('persona_entrega').value,
-        persona_recibe: document.getElementById('persona_recibe').value,
-        persona_actualiza_origen: document.getElementById('persona_actualiza_origen').value,
-        persona_actualiza_destino: document.getElementById('persona_actualiza_destino').value,
-        persona_contabiliza_origen: document.getElementById('persona_contabiliza_origen').value,
-        persona_contabiliza_destino: document.getElementById('persona_contabiliza_destino').value,
-        importe_total_entrega: document.getElementById('importe_total_entrega').value,
-        importe_total_recibido: document.getElementById('importe_total_recibido').value,
+        almacen_id: document.getElementById('almacen').value,
+        importe_total: document.getElementById('importe_total').value,
+        persona_emisor: document.getElementById('persona_emisor').value,
+        persona_receptor: document.getElementById('persona_receptor').value,
+        tipo_vale: document.getElementById('tipo_vale').value,
+        cantidad: document.getElementById('cantidad').value,
         productos: this.getProductos()
       };
       $.ajax({
-        url: "/transferencias",
+        url: "/vales",
         type: 'POST',
         dataType: 'json',
         data: data,
         context: this,
         success: function success(response) {
-          alert('Transferencia generada correctamente');
-          window.open("/transferencias", '_self');
+          alert('Vale generado correctamente');
+          window.open("/vales", '_self');
         },
         error: function error(_error2) {
           console.log('Fetching data: ERROR');
@@ -1333,8 +1220,7 @@ var ObjectClass = /*#__PURE__*/function () {
           var producto = _step.value;
           listaProductos.unshift({
             id: producto.dataset.id,
-            cantidad_remitida: producto.dataset.cantidad_remitida,
-            cantidad_recibida: producto.dataset.cantidad_recibida
+            cantidad: producto.dataset.cantidad
           });
         }
       } catch (err) {

@@ -20,8 +20,7 @@
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th class='text-right pr-2'>Cantidad remitida</th>
-                        <th class='text-right pr-2'>Cantidad recibida</th>
+                        <th class='text-right pr-2'>Cantidad</th>
                     </thead>
                     <tbody>
                     </tbody>

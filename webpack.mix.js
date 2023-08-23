@@ -25,6 +25,7 @@ mix
   .js('resources/js/ordenes_despacho.js', 'public/js/compiled/')
   .js('resources/js/vales.js', 'public/js/compiled/')
   .js('resources/js/transferencias.js', 'public/js/compiled/')
+  .js('resources/js/conduces.js', 'public/js/compiled/')
 
 if (mix.inProduction()) {
   mix.version()

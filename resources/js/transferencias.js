@@ -69,7 +69,7 @@ export default class ObjectClass {
     evt.preventDefault()
     evt.stopPropagation()
     let id = evt.currentTarget.dataset.id
-    window.open(`vales/imprimir/${id}`, '_blank')
+    window.open(`transferencias/imprimir/${id}`, '_blank')
   }
 
   onVerDetalles(evt) {
@@ -82,13 +82,13 @@ export default class ObjectClass {
 
     // AJAX GET request
     $.ajax({
-      url: `vales/getDetalles/${id}`,
+      url: `transferencias/getDetalles/${id}`,
       type: 'get',
       dataType: 'json',
       context: this,
       success: function (response) {
         console.log('Fetching data: SUCCESS')
-        this.showDetalles(response.detalles[0])
+        this.showDetalles(response.almacenes, response.detalles[0])
         this.showProductos(response.productos)
       },
       error: function (error) {
@@ -128,79 +128,162 @@ export default class ObjectClass {
     })
   }
 
-  showDetalles(informe) {
+  showDetalles(almacenes, informe) {
+    let almacen_origen = ''
+    almacenes.forEach((item) => {
+      if (item.id == informe.almacen_origen_id) {
+        almacen_origen = item.nombre
+      }
+    })
+
+    let almacen_destino = ''
+    almacenes.forEach((item) => {
+      if (item.id == informe.almacen_destino_id) {
+        almacen_destino = item.nombre
+      }
+    })
+
     document.getElementById('Head').innerHTML = `
   <tr>
     <td class='font-weight-bold pr-3'>
-        No. Vale:
+        No. Transferencia:
     </td>
     <td>
-        ${informe.nro_vale}
-    </td>
-    <td></td>
-    <td></td>
-  </tr>
-  
-  <tr>
-    <td class="font-weight-bold">
-        Tipo de vale:
-    </td>
-    <td>
-        ${informe.tipo_vale == 'E' ? 'Entrega' : 'Devolución'}
+        ${informe.nro_transferencia}
     </td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td class="font-weight-bold pt-3">
+    <td class='font-weight-bold pr-3'>
         Entidad:
     </td>
-    <td class="pt-3">
+    <td>
         ${informe.entidad}
     </td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td class="font-weight-bold">
-        Almacén:
+    <td class='font-weight-bold pr-3'>
+        Fecha del modelo:
     </td>
     <td>
-        ${informe.almacen}
+        ${informe.fecha_modelo}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+    
+  <tr>
+  <td class="font-weight-bold pt-3">
+      Almacén origen:
+  </td>
+  <td class="pt-3">
+      ${almacen_origen}
+  </td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Actualiza:
+    </td>
+    <td>
+        ${informe.persona_actualiza_origen}
     </td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="font-weight-bold">
-        Persona emisor:
+        Contabiliza:
     </td>
     <td>
-        ${informe.persona_emisor}
+        ${informe.persona_contabiliza_origen}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+  <td class="font-weight-bold pt-3">
+      Almacén destino:
+  </td>
+  <td class="pt-3">
+      ${almacen_destino}
+  </td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Actualiza:
+    </td>
+    <td>
+        ${informe.persona_actualiza_destino}
     </td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="font-weight-bold">
-        Persona receptor:
+        Contabiliza:
     </td>
     <td>
-        ${informe.persona_receptor}
+        ${informe.persona_contabiliza_destino}
     </td>
     <td></td>
     <td></td>
   </tr>
+  
   <tr>
     <td class="font-weight-bold pt-3">
-        Fecha:
+        Autoriza:
     </td>
     <td class="pt-3">
-        ${
-          informe.updated_at > informe.created_at
-            ? this.formated_datetime(informe.updated_at)
-            : this.formated_datetime(informe.created_at)
-        }
+        ${informe.persona_autoriza}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Entrega:
+    </td>
+    <td>
+        ${informe.persona_entrega}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Recibe:
+    </td>
+    <td>
+        ${informe.persona_recibe}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td class="font-weight-bold pt-3">
+        Fecha de traslado:
+    </td>
+    <td class="pt-3">
+        ${informe.fecha_traslado}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Fecha de recepción:
+    </td>
+    <td>
+        ${informe.fecha_recepcion}
     </td>
     <td></td>
     <td></td>
@@ -214,6 +297,20 @@ export default class ObjectClass {
     </td>
     <td></td>
     <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold pt-3">
+        Importe total de la entrega:
+    </td>
+    <td class="pt-3 pl-3">
+       $ ${informe.importe_total_entrega}
+    </td>
+    <td class="font-weight-bold pt-3">
+      Importe total recibido:
+    </td>
+    <td class="pt-3 pl-3">
+      $ ${informe.importe_total_recibido}
+    </td>
   </tr>
   <br/>`
   }

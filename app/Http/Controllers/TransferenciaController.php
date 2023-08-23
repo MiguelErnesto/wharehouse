@@ -101,7 +101,7 @@ class TransferenciaController extends Controller
 
         $transferencia = Transferencia::create($request->all());
         $transferencia_id = Transferencia::latest()->first()->id;
-        $almacen_id = $request->almacen_origen_id;
+        $almacen_id = $request->almacen_destino_id;
         //$cantidad_remitida = $request->cantidad_remitida;
         //$cantidad_recibida = $request->cantidad_recibida;
         $productos = $request->productos;
@@ -129,7 +129,6 @@ class TransferenciaController extends Controller
                 ]);
             } else {
                 $almProdId = AlmacenProducto::create([
-                    'recepcion_producto_id' => $informe_recepcion_id,
                     'almacen_id' => $almacen_id,
                     'producto_id' => $producto['id'],
                     'cantidad' => $producto['cantidad_recibida'],
@@ -179,8 +178,138 @@ class TransferenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Transferencia $transferencia)
     {
-        //
+        $transferenciaProductos = TransferenciaProducto::where(
+            'transferencia_id',
+            '=',
+            $transferencia->id
+        )->delete();
+        $transferencia->delete();
+        return redirect()
+            ->route('transferencias.index')
+            ->with(
+                'info',
+                'Vale ' .
+                    $transferencia->nro_transferencia .
+                    ' eliminada correctamente'
+            );
+    }
+
+    public function getDetalles($id)
+    {
+        $detalles = Transferencia::where('transferencias.id', '=', $id)
+            ->join(
+                'entidades as ent',
+                'ent.id',
+                '=',
+                'transferencias.entidad_id'
+            )
+            ->join('users as u', 'u.id', '=', 'transferencias.user_id')
+            ->select(
+                'transferencias.id as id',
+                'transferencias.fecha_modelo as fecha_modelo',
+                'transferencias.nro_transferencia as nro_transferencia',
+                'transferencias.almacen_origen_id as almacen_origen_id',
+                'transferencias.almacen_destino_id as almacen_destino_id',
+                'transferencias.fecha_modelo as fecha_modelo',
+                'transferencias.fecha_traslado as fecha_traslado',
+                'transferencias.fecha_recepcion as fecha_recepcion',
+                'transferencias.persona_autoriza as persona_autoriza',
+                'transferencias.persona_entrega as persona_entrega',
+                'transferencias.persona_recibe as persona_recibe',
+                'transferencias.persona_actualiza_origen as persona_actualiza_origen',
+                'transferencias.persona_contabiliza_origen as persona_contabiliza_origen',
+                'transferencias.persona_actualiza_destino as persona_actualiza_destino',
+                'transferencias.persona_contabiliza_destino as persona_contabiliza_destino',
+                'transferencias.importe_total_entrega as importe_total_entrega',
+                'transferencias.importe_total_recibido as importe_total_recibido',
+                'ent.nombre as entidad',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Transferencia::where('transferencias.id', '=', $id)
+            ->join(
+                'transferencia_productos as tp',
+                'tp.transferencia_id',
+                '=',
+                'transferencias.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'tp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'tp.cantidad_remitida as cantidad_remitida',
+                'tp.cantidad_recibida as cantidad_recibida'
+            )
+            ->get();
+
+        $almacenes = Almacen::orderBy('nombre', 'desc')->get();
+
+        return response()->json([
+            'detalles' => $detalles,
+            'productos' => $productos,
+            'almacenes' => $almacenes,
+        ]);
+    }
+
+    public function imprimir($id)
+    {
+        $detalles = Transferencia::where('transferencias.id', '=', $id)
+            ->join(
+                'entidades as ent',
+                'ent.id',
+                '=',
+                'transferencias.entidad_id'
+            )
+            ->join('users as u', 'u.id', '=', 'transferencias.user_id')
+            ->select(
+                'transferencias.id as id',
+                'transferencias.fecha_modelo as fecha_modelo',
+                'transferencias.nro_transferencia as nro_transferencia',
+                'transferencias.almacen_origen_id as almacen_origen_id',
+                'transferencias.almacen_destino_id as almacen_destino_id',
+                'transferencias.fecha_modelo as fecha_modelo',
+                'transferencias.fecha_traslado as fecha_traslado',
+                'transferencias.fecha_recepcion as fecha_recepcion',
+                'transferencias.persona_autoriza as persona_autoriza',
+                'transferencias.persona_entrega as persona_entrega',
+                'transferencias.persona_recibe as persona_recibe',
+                'transferencias.persona_actualiza_origen as persona_actualiza_origen',
+                'transferencias.persona_contabiliza_origen as persona_contabiliza_origen',
+                'transferencias.persona_actualiza_destino as persona_actualiza_destino',
+                'transferencias.persona_contabiliza_destino as persona_contabiliza_destino',
+                'transferencias.importe_total_entrega as importe_total_entrega',
+                'transferencias.importe_total_recibido as importe_total_recibido',
+                'ent.nombre as entidad',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Transferencia::where('transferencias.id', '=', $id)
+            ->join(
+                'transferencia_productos as tp',
+                'tp.transferencia_id',
+                '=',
+                'transferencias.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'tp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'tp.cantidad_remitida as cantidad_remitida',
+                'tp.cantidad_recibida as cantidad_recibida'
+            )
+            ->get();
+
+        $almacenes = Almacen::orderBy('nombre', 'desc')->get();
+
+        return view(
+            'admin.transferencias.print',
+            compact('detalles', 'almacenes', 'productos')
+        );
     }
 }

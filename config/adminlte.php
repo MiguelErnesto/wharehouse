@@ -314,6 +314,14 @@ return [
                     'active' => ['transferencias*'],
                     'can' => 'admin.transferencias.index',
                 ],
+                [
+                    'text' => 'Conduces',
+                    'classes' => 'ml-1',
+                    'route' => 'conduces.index',
+                    'icon' => 'fas fa-list fa-fw pr-2',
+                    'active' => ['conduces*'],
+                    'can' => 'admin.conduces.index',
+                ],
             ],
         ],
 
