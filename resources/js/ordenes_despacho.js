@@ -257,9 +257,7 @@ export default class ObjectClass {
       (evt) => {
         if (confirm('¿Desea eliminar el producto de la lista?')) {
           document
-            .querySelector(
-              `table#listaProductos tbody tr[id="${evt.currentTarget.dataset.id}"]`,
-            )
+            .querySelector(`table#listaProductos tbody tr[id="${id}"]`)
             .remove()
         }
       },

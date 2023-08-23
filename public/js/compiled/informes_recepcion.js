@@ -1038,7 +1038,7 @@ var ObjectClass = /*#__PURE__*/function () {
       tr.innerHTML = "\n                    <td>".concat(product, "</td>\n                    <td class=\"text-right\">").concat(qty, "</td>\n                    <td class=\"text-center\"><a href=\"#\" class=\"btn btn-sm btn-danger deleteProductoFromList\"> <i class=\"fas fa-solid fa-trash fa-lg\"></i></a></td>\n                ");
       tr.querySelector('.deleteProductoFromList').addEventListener('click', function (evt) {
         if (confirm('¿Desea eliminar el producto de la lista?')) {
-          document.querySelector("table#listaProductos tbody tr[id=\"".concat(evt.currentTarget.dataset.id, "\"]")).remove();
+          document.querySelector("table#listaProductos tbody tr[id=\"".concat(id, "\"]")).remove();
         }
       });
       return tr;

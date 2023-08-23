@@ -190,6 +190,24 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar vale',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
+        // Permisos para Transferencias
+        Permission::create([
+            'name' => 'admin.transferencias.index',
+            'description' => 'Listar transferencias',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.transferencias.create',
+            'description' => 'Crear nueva transferencia',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.transferencias.edit',
+            'description' => 'Editar transferencia',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.transferencias.destroy',
+            'description' => 'Eliminar transferencia',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+
         //Enable foreign key checks for current db driver
         //SET foreign_key_checks = 1 //MYSQL
         DB::statement('PRAGMA foreign_keys = OFF;');

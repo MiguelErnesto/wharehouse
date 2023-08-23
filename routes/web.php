@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\InformeRecepcionController;
 use App\Http\Controllers\OrdenDespachoController;
 use App\Http\Controllers\ValeController;
+use App\Http\Controllers\TransferenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,11 +113,23 @@ Route::resource('vales', ValeController::class, [
         'vales' => 'vale',
     ],
 ]);
-Route::get('vales/getDetalles/{id}', [
-    ValeController::class,
-    'getDetalles',
-])->name('getDetalles');
+Route::get('vales/getDetalles/{id}', [ValeController::class, 'getDetalles']);
 Route::get('vales/imprimir/{id}', [ValeController::class, 'imprimir']);
+
+//TRansferencias
+Route::resource('transferencias', TransferenciaController::class, [
+    'parameters' => [
+        'transferencias' => 'transferencia',
+    ],
+]);
+Route::get('transferencias/getDetalles/{id}', [
+    TransferenciaController::class,
+    'getDetalles',
+]);
+Route::get('transferencias/imprimir/{id}', [
+    TransferenciaController::class,
+    'imprimir',
+]);
 
 /* //esto puede ser despacho_productos o eliminarlo por completo
 //Recepcion de Productos

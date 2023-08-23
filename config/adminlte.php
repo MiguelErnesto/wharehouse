@@ -306,6 +306,14 @@ return [
                     'active' => ['vales*'],
                     'can' => 'admin.vales.index',
                 ],
+                [
+                    'text' => 'Transferencias',
+                    'classes' => 'ml-1',
+                    'route' => 'transferencias.index',
+                    'icon' => 'fas fa-list fa-fw pr-2',
+                    'active' => ['transferencias*'],
+                    'can' => 'admin.transferencias.index',
+                ],
             ],
         ],
 
