@@ -20,7 +20,7 @@ class Conduce extends Model
         'fecha_entrega',
         'fecha_recepcion',
         'persona_entrega',
-        'persona_recpecion',
+        'persona_recepcion',
         'persona_actualiza',
         'persona_contabiliza',
         'transportador',

@@ -58,6 +58,7 @@ class ValeController extends Controller
         $productos = Producto::select('id', 'nombre')
             ->get()
             ->pluck('nombre', 'id');
+
         return view(
             'admin.vales.create',
             compact('entidades', 'almacenes', 'productos')

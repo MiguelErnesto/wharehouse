@@ -226,6 +226,24 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar conduce',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
+        // Permisos para Facturas
+        Permission::create([
+            'name' => 'admin.facturas.index',
+            'description' => 'Listar facturas',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.facturas.create',
+            'description' => 'Crear nueva factura',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.facturas.edit',
+            'description' => 'Editar factura',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create([
+            'name' => 'admin.facturas.destroy',
+            'description' => 'Eliminar factura',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+
         //Enable foreign key checks for current db driver
         //SET foreign_key_checks = 1 //MYSQL
         DB::statement('PRAGMA foreign_keys = OFF;');

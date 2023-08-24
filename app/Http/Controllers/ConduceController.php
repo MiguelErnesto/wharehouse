@@ -58,9 +58,14 @@ class ConduceController extends Controller
         $productos = Producto::select('id', 'nombre')
             ->get()
             ->pluck('nombre', 'id');
+
+        $almacenes = Almacen::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
         return view(
             'admin.conduces.create',
-            compact('entidades', 'facturas', 'productos')
+            compact('entidades', 'almacenes', 'facturas', 'productos')
         );
     }
 

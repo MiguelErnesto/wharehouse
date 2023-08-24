@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>WHAREHOUSE SYSTEM</title>
+    <title>WAREHOUSE SYSTEM</title>
 
     <link rel="stylesheet" href="{{ asset('css') }}/print.css?v={{ env('CSS_VERSION') }}">
     @stack('page-css')

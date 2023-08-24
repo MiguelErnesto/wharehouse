@@ -1,9 +1,9 @@
 <input id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
 
 <div class="row">
-    <div class="col-3">
+    <div class="col-2">
         <div class="form-group">
-            {!! Form::label('fecha_modelo', 'Fecha del modelo:', [
+            {!! Form::label('fecha_modelo', 'Fecha modelo:', [
                 'class' => 'pl-1',
             ]) !!}
             {!! Form::date('fecha_modelo', now(), [
@@ -16,29 +16,14 @@
         </div>
     </div>
 
-    <div class="col-3">
+    <div class="col-2">
         <div class="form-group">
-            {!! Form::label('nro_conduce', 'No. Conduce:', [
+            {!! Form::label('nro_factura', 'No. Factura:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::text('nro_conduce', null, [
+            {!! Form::text('nro_factura', null, [
                 'class' => 'form-control',
-                'placeholder' => 'No. conduce',
-            ]) !!}
-            @error('nro_conduce')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-
-    <div class="col-3">
-        <div class="form-group">
-            {!! Form::label('nro_factura', 'Nro. Factura:', [
-                'class' => 'pl-1',
-            ]) !!}
-            {!! Form::select('nro_factura', $facturas, null, [
-                'class' => 'form-control',
-                'placeholder' => 'Seleccione la entidad...',
+                'placeholder' => 'No. Factura',
             ]) !!}
             @error('nro_factura')
                 <span class="text-danger">{{ $message }}</span>
@@ -46,7 +31,7 @@
         </div>
     </div>
 
-    <div class="col-3">
+    <div class="col-4">
         <div class="form-group">
             {!! Form::label('entidad', 'Entidad:', [
                 'class' => 'pl-1',
@@ -60,170 +45,153 @@
             @enderror
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-6">
+    <div class="col-2">
         <div class="form-group">
-            {!! Form::label('almacen_origen', 'Almacén origen:', [
+            {!! Form::label('moneda_pago', 'Moneda pago:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('almacen_origen', $almacenes, null, [
+            {!! Form::text('moneda_pago', null, [
                 'class' => 'form-control',
-                'placeholder' => 'Seleccione el almacén origen...',
+                'placeholder' => 'Moneda del pago',
             ]) !!}
-            @error('almacen_origen')
+            @error('moneda_pago')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
+    </div>
+
+    <div class="col-2">
+        <div class="form-group">
+            {!! Form::label('porciento', 'Porciento:', [
+                'class' => 'pl-1',
+            ]) !!}
+            {!! Form::text('porciento', null, [
+                'class' => 'form-control',
+                'placeholder' => 'Porciento',
+            ]) !!}
+            @error('porciento')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2 pt-2">
+        <div class="form-group">
+            {!! Form::label('datos_registro', 'Datos registro:', [
+                'class' => 'pl-1',
+            ]) !!}
+        </div>
+    </div>
+
+    <div class="col-10">
+        <div class="form-group">
+            {!! Form::text('datos_registro', null, [
+                'class' => 'form-control',
+                'placeholder' =>
+                    'Nombre, dirección, código REEUP, número de cuenta, sucursal bancaria, NIT, número de inscripción...',
+            ]) !!}
+            @error('datos_registro')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2 pt-2">
+        <div class="form-group">
+            {!! Form::label('operaciones', 'Operaciones:', [
+                'class' => 'pl-1',
+            ]) !!}
+        </div>
+    </div>
+
+    <div class="col-10">
+        <div class="form-group">
+            {!! Form::text('operaciones', null, [
+                'class' => 'form-control',
+                'placeholder' => 'Especificar concepto de las operaciones por la que se remite...',
+            ]) !!}
+            @error('operaciones')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<br />
+
+
+
+<div class="row">
+    <div class="col-2">
+        {!! Form::label('transportista', 'Transportista:', [
+            'class' => 'pl-1 pt-2',
+        ]) !!}
+    </div>
+
+    <div class="col-10">
+        <div class="form-group">
+            {!! Form::text('transportista', null, [
+                'class' => 'form-control',
+                'placeholder' => 'Datos del transportista',
+            ]) !!}
+            @error('transportista')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+        {!! Form::label('persona_transportador', 'Transportador:', [
+            'class' => 'pl-1 pt-2',
+        ]) !!}
     </div>
 
     <div class="col-6">
         <div class="form-group">
-            {!! Form::label('almacen_destino', 'Almacén destino:', [
-                'class' => 'pl-1',
-            ]) !!}
-            {!! Form::select('almacen_destino', $almacenes, null, [
+            {!! Form::text('persona_transportador', null, [
                 'class' => 'form-control',
-                'placeholder' => 'Seleccione el almacén destino...',
+                'placeholder' => 'Datos del transportador',
             ]) !!}
-            @error('almacen_destino')
+            @error('persona_transportador')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
     </div>
 
-</div>
-
-<br />
-
-{!! Form::label('', 'En el origen:', [
-    'class' => 'pl-1',
-]) !!}
-
-<br />
-
-<div class="row">
-    <div class="col-2 pl-5">
-        {!! Form::label('persona_actualiza_origen', 'Actualiza:', [
+    <div class="col-2">
+        {!! Form::label('fecha_recepcion_transportador', 'Fecha recibe:', [
             'class' => 'pl-1 pt-2',
         ]) !!}
     </div>
 
-    <div class="col-9">
+    <div class="col-2">
         <div class="form-group">
-            {!! Form::text('persona_actualiza_origen', null, [
+            {!! Form::date('fecha_recepcion_transportador', now(), [
                 'class' => 'form-control',
-                'placeholder' => 'Persona que actualiza',
+                'placeholder' => 'Fecha',
             ]) !!}
-            @error('persona_actualiza_origen')
+            @error('fecha_recepcion_transportador')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
     </div>
-
 </div>
 
 <div class="row">
-    <div class="col-2 pl-5">
-        {!! Form::label('persona_contabiliza_origen', 'Contabiliza:', [
+    <div class="col-2">
+        {!! Form::label('persona_entrega', 'Entrega:', [
             'class' => 'pl-1 pt-2',
         ]) !!}
     </div>
 
-    <div class="col-9">
-        <div class="form-group">
-            {!! Form::text('persona_contabiliza_origen', null, [
-                'class' => 'form-control',
-                'placeholder' => 'Persona que contabiliza',
-            ]) !!}
-            @error('persona_contabiliza_origen')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-</div>
-
-
-<br />
-
-
-{!! Form::label('', 'En el destino:', [
-    'class' => 'pl-1',
-]) !!}
-
-<br />
-
-<div class="row">
-    <div class="col-2 pl-5">
-        {!! Form::label('persona_actualiza_destino', 'Actualiza:', [
-            'class' => 'pl-1 pt-2',
-        ]) !!}
-    </div>
-
-    <div class="col-9">
-        <div class="form-group">
-            {!! Form::text('persona_actualiza_destino', null, [
-                'class' => 'form-control',
-                'placeholder' => 'Persona que actualiza',
-            ]) !!}
-            @error('persona_actualiza_destino')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-2 pl-5">
-        {!! Form::label('persona_contabiliza_destino', 'Contabiliza:', [
-            'class' => 'pl-1 pt-2',
-        ]) !!}
-    </div>
-
-    <div class="col-9">
-        <div class="form-group">
-            {!! Form::text('persona_contabiliza_destino', null, [
-                'class' => 'form-control',
-                'placeholder' => 'Persona que contabiliza',
-            ]) !!}
-            @error('persona_contabiliza_destino')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-</div>
-
-<br />
-
-<div class="row">
-    <div class="col-3">
-        {!! Form::label('persona_autoriza', 'Persona que autoriza:', [
-            'class' => 'pl-1 pt-3',
-        ]) !!}
-    </div>
-
-    <div class="col-9">
-        <div class="form-group">
-            {!! Form::text('persona_autoriza', null, [
-                'class' => 'form-control',
-                'placeholder' => 'Persona que autoriza',
-            ]) !!}
-            @error('persona_autoriza')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-3">
-        {!! Form::label('persona_entrega', 'Persona que entrega:', [
-            'class' => 'pl-1 pt-3',
-        ]) !!}
-    </div>
-
-    <div class="col-9">
+    <div class="col-6">
         <div class="form-group">
             {!! Form::text('persona_entrega', null, [
                 'class' => 'form-control',
@@ -234,16 +202,34 @@
             @enderror
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-3">
-        {!! Form::label('persona_recibe', 'Persona que recibe:', [
-            'class' => 'pl-1 pt-3',
+    <div class="col-2">
+        {!! Form::label('fecha_entrega', 'Fecha entrega:', [
+            'class' => 'pl-1 pt-2',
         ]) !!}
     </div>
 
-    <div class="col-9">
+    <div class="col-2">
+        <div class="form-group">
+            {!! Form::date('fecha_entrega', now(), [
+                'class' => 'form-control',
+                'placeholder' => 'Fecha',
+            ]) !!}
+            @error('fecha_entrega')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+        {!! Form::label('persona_recibe', 'Recibe:', [
+            'class' => 'pl-1 pt-2',
+        ]) !!}
+    </div>
+
+    <div class="col-6">
         <div class="form-group">
             {!! Form::text('persona_recibe', null, [
                 'class' => 'form-control',
@@ -254,41 +240,66 @@
             @enderror
         </div>
     </div>
+
+    <div class="col-2">
+        {!! Form::label('fecha_recepcion', 'Fecha recibe:', [
+            'class' => 'pl-1 pt-2',
+        ]) !!}
+    </div>
+
+    <div class="col-2">
+        <div class="form-group">
+            {!! Form::date('fecha_recepcion', now(), [
+                'class' => 'form-control',
+                'placeholder' => 'Fecha',
+            ]) !!}
+            @error('fecha_recepcion')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+        {!! Form::label('persona_contabiliza', 'Contabiliza:', [
+            'class' => 'pl-1 pt-2',
+        ]) !!}
+    </div>
+
+    <div class="col-10">
+        <div class="form-group">
+            {!! Form::text('persona_contabiliza', null, [
+                'class' => 'form-control',
+                'placeholder' => 'Persona que contabiliza',
+            ]) !!}
+            @error('persona_contabiliza')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
 </div>
 
 <br />
 
 <div class="row">
-    <div class="col-5">
-        <div class="form-group pl-5 pr-5">
-            {!! Form::label('importe_total_entrega', 'Importe total de la entrega:', [
-                'class' => 'pl-1',
-            ]) !!}
-            {!! Form::text('importe_total_entrega', null, [
+    <div class="col-2">
+        {!! Form::label('importe_total', 'Importe total:', [
+            'class' => 'pl-1 pt-2',
+        ]) !!}
+    </div>
+
+    <div class="col-3">
+        <div class="form-group">
+            {!! Form::text('importe_total', null, [
                 'class' => 'form-control',
-                'placeholder' => 'Importe total de la entrega',
+                'placeholder' => 'Importe total',
             ]) !!}
-            @error('importe_total_entrega')
+            @error('importe_total')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
     </div>
-
-    <div class="col-5">
-        <div class="form-group pl-5">
-            {!! Form::label('importe_total_recibido', 'Importe total recibido:', [
-                'class' => 'pl-1',
-            ]) !!}
-            {!! Form::text('importe_total_recibido', null, [
-                'class' => 'form-control',
-                'placeholder' => 'Importe total recibido',
-            ]) !!}
-            @error('importe_total_recibido')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-
 </div>
 
 <br />
@@ -312,23 +323,11 @@
 
     <div class="col-3">
         <div class="form-group pl-5">
-            {!! Form::label('cantidad_recibida', 'Cantidad recibida:', [
+            {!! Form::label('cantidad', 'Cantidad:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::number('cantidad_recibida', '1', ['min' => '1', 'class' => 'text-right form-control']) !!}
-            @error('cantidad_recibida')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-
-    <div class="col-3">
-        <div class="form-group pl-5">
-            {!! Form::label('cantidad_remitida', 'Cantidad remitida:', [
-                'class' => 'pl-1',
-            ]) !!}
-            {!! Form::number('cantidad_remitida', '1', ['min' => '1', 'class' => 'text-right form-control']) !!}
-            @error('cantidad_remitida')
+            {!! Form::number('cantidad', '1', ['min' => '1', 'class' => 'text-right form-control']) !!}
+            @error('cantidad')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>

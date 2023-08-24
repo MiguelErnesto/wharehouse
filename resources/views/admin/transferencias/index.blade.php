@@ -27,10 +27,10 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>Fecha</th>
-                        <th>No.</th>
-                        <th>Tipo</th>
-                        <th>Entidad</th>
-                        <th>Almacén</th>
+                        <th class='text-center'>No.</th>
+                        <th class='text-center'>Entidad</th>
+                        <th class='text-center'>Origen</th>
+                        <th>Destino</th>
                         <th colspan="3" class='text-center'></th>
                     </tr>
                 </thead>
@@ -42,19 +42,21 @@
                     @else
                         @foreach ($transferencias as $transferencia)
                             <tr>
-                                <td>{{ $transferencia->updated_at > $transferencia->created_at ? $transferencia->updated_at : $transferencia->created_at }}
-                                </td>
-
-                                <td>{{ $transferencia->nro_vale }}</td>
-                                <td>{{ $transferencia->tipo_vale == 'E' ? 'Entrega' : 'Salida' }}</td>
+                                <td>{{ $transferencia->fecha_modelo }}</td>
+                                <td>{{ $transferencia->nro_transferencia }}</td>
                                 @foreach ($entidades as $entidad)
                                     @if ($entidad->id == $transferencia->entidad_id)
                                         <td>{{ $entidad->nombre }}</td>
                                     @endif
                                 @endforeach
                                 @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $transferencia->almacen_id)
-                                        <td>{{ $almacen->nombre }}</td>
+                                    @if ($almacen->id == $transferencia->almacen_origen_id)
+                                        <td class='text-center'>{{ $almacen->nombre }}</td>
+                                    @endif
+                                @endforeach
+                                @foreach ($almacenes as $almacen)
+                                    @if ($almacen->id == $transferencia->almacen_destino_id)
+                                        <td class='text-center'>{{ $almacen->nombre }}</td>
                                     @endif
                                 @endforeach
 
@@ -114,7 +116,7 @@
 @stop
 
 @section('js')
-    {{-- <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
+    {{-- <script type="module" src="{{ asset('warehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
     <script async type="module" src="{{ mix('/js/compiled/transferencias.js') }}"></script>
 
 @stop

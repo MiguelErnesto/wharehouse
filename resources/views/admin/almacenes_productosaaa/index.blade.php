@@ -54,7 +54,7 @@
 @stop
 
 @section('js')
-    {{-- <script type="module" src="{{ asset('wharehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
+    {{-- <script type="module" src="{{ asset('warehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
     <script async type="module" src="{{ mix('/js/compiled/almacenes.js') }}"></script>
 
 @stop

@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'logo' => '<b>Whare</b>House',
+    'logo' => '<b>Ware</b>House',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -321,6 +321,14 @@ return [
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['conduces*'],
                     'can' => 'admin.conduces.index',
+                ],
+                [
+                    'text' => 'Facturas',
+                    'classes' => 'ml-1',
+                    'route' => 'facturas.index',
+                    'icon' => 'fas fa-list fa-fw pr-2',
+                    'active' => ['facturas*'],
+                    'can' => 'admin.facturas.index',
                 ],
             ],
         ],

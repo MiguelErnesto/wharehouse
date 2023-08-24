@@ -13,6 +13,7 @@ use App\Http\Controllers\OrdenDespachoController;
 use App\Http\Controllers\ValeController;
 use App\Http\Controllers\TransferenciaController;
 use App\Http\Controllers\ConduceController;
+use App\Http\Controllers\FacturaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +144,18 @@ Route::get('conduces/getDetalles/{id}', [
     'getDetalles',
 ]);
 Route::get('conduces/imprimir/{id}', [ConduceController::class, 'imprimir']);
+
+//Facturas
+Route::resource('facturas', FacturaController::class, [
+    'parameters' => [
+        'facturas' => 'factura',
+    ],
+]);
+Route::get('facturas/getDetalles/{id}', [
+    FacturaController::class,
+    'getDetalles',
+]);
+Route::get('facturas/imprimir/{id}', [FacturaController::class, 'imprimir']);
 
 /* //esto puede ser despacho_productos o eliminarlo por completo
 //Recepcion de Productos

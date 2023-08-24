@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <span class="text-uppercase page-subtitle">Listado de <h1 class='pl-3'>Informes de Recepción</h1></span>
+    <span class="text-uppercase page-subtitle">Listado de <h1 class='pl-3'>facturas</h1></span>
     <br />
 @stop
 
@@ -16,9 +16,9 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.informes_recepcion.create')
+        @can('admin.facturas.create')
             <div class="card-header">
-                <a href="{{ route('informes_recepcion.create') }}" class="btn btn-info" title="Crear Nuevo"><i
+                <a href="{{ route('facturas.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
             </div>
         @endcan
@@ -27,39 +27,36 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>Fecha</th>
-                        <th>No. Informe</th>
-                        <th>Almacén</th>
-                        <th>Creado/Actualizado por</th>
+                        <th>No.</th>
+                        <th>Entidad</th>
+                        <th class='text-right'>Importe</th>
+                        <th></th>
                         <th colspan="3" class='text-center'></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (count($informes_recepcion) == 0)
+                    @if (count($facturas) == 0)
                         <tr>
-                            <td colspan='5' class='text-center'><i>No hay elementos para mostrar...</i></td>
+                            <td colspan='9' class='text-center'><i>No hay elementos para mostrar...</i></td>
                         </tr>
                     @else
-                        @foreach ($informes_recepcion as $informe_recepcion)
+                        @foreach ($facturas as $factura)
                             <tr>
-                                <td>{{ $informe_recepcion->fecha }}</td>
+                                <td>{{ $factura->fecha_modelo }}</td>
+                                <td>{{ $factura->nro_factura }}</td>
+                                @foreach ($entidades as $entidad)
+                                    @if ($entidad->id == $factura->entidad_id)
+                                        <td>{{ $entidad->nombre }}</td>
+                                    @endif
+                                @endforeach
+                                <td class="text-right">$ {{ $factura->importe_total }}</td>
 
-                                <td>{{ $informe_recepcion->nro_informe }}</td>
-                                @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $informe_recepcion->almacen_id)
-                                        <td>{{ $almacen->nombre }}</td>
-                                    @endif
-                                @endforeach
-                                @foreach ($usuarios as $usuario)
-                                    @if ($usuario->id == $informe_recepcion->user_id)
-                                        <td>{{ $usuario->name }}</td>
-                                    @endif
-                                @endforeach
+                                <td></td>
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
-                                        <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"
-                                            data-bs-target="#myModal" data-id="{{ $informe_recepcion->id }}"
-                                            title="Ver detalles">
+                                        <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"
+                                            data-bs-target="#myModal" data-id="{{ $factura->id }}" title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
                                     @endcan
@@ -67,7 +64,7 @@
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
-                                        <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $informe_recepcion->id }}"
+                                        <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $factura->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
@@ -75,23 +72,21 @@
                                 </td>
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.informes_recepcion.edit')
-                                        <a class="btn btn-success btn-sm"
-                                            href="{{ route('informes_recepcion.edit', $informe_recepcion) }}" title="Editar">
+                                    @can('admin.facturas.edit')
+                                        <a class="btn btn-success btn-sm" href="{{ route('facturas.edit', $factura) }}"
+                                            title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
                                     @endcan
                                 </td>
 
-
                                 <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
                                     class="text-right">
-                                    @can('admin.informes_recepcion.destroy')
-                                        <form id='formIndex_{{ $informe_recepcion->id }}'
-                                            action="{{ route('informes_recepcion.destroy', $informe_recepcion) }}"
-                                            method="POST">
+                                    @can('admin.facturas.destroy')
+                                        <form id='formIndex_{{ $factura->id }}'
+                                            action="{{ route('facturas.destroy', $factura) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" data-id={{ $informe_recepcion->id }}
+                                            <button type="submit" data-id={{ $factura->id }}
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
@@ -108,12 +103,12 @@
     </div>
 
     {{-- Modal para ver Informe de Recepción  --}}
-    @include('admin.informes_recepcion.modals.verInformeRecepcion')
+    @include('admin.facturas.modals.verDetalles')
 
 @stop
 
 @section('js')
     {{-- <script type="module" src="{{ asset('warehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
-    <script async type="module" src="{{ mix('/js/compiled/informes_recepcion.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/facturas.js') }}"></script>
 
 @stop
