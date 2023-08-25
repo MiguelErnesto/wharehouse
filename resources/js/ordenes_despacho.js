@@ -4,11 +4,10 @@ export default class ObjectClass {
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
     this.add = document.getElementById('add')
 
-    this.btnVerInformeRecepcion = document.querySelectorAll(
-      '.btnVerInformeRecepcion',
-    )
+    this.btnVerDetalles = document.querySelectorAll('.btnVerDetalles')
 
     this.btnPrint = document.querySelectorAll('.btnPrint')
+    this.tipoSalida = document.getElementById('tipo_salida')
 
     this.addListeners()
     this.clean()
@@ -51,10 +50,10 @@ export default class ObjectClass {
       this.add.addEventListener('click', () => this.onAddProducts())
     }
 
-    if (this.btnVerInformeRecepcion) {
-      for (var i = 0; i < this.btnVerInformeRecepcion.length; i += 1) {
-        this.btnVerInformeRecepcion[i].addEventListener('click', (evt) =>
-          this.onVerInformeRecepcion(evt),
+    if (this.btnVerDetalles) {
+      for (var i = 0; i < this.btnVerDetalles.length; i += 1) {
+        this.btnVerDetalles[i].addEventListener('click', (evt) =>
+          this.onVerDetalles(evt),
         )
       }
     }
@@ -65,19 +64,36 @@ export default class ObjectClass {
       }
     }
 
+    this.tipoSalida.addEventListener('change', (evt) =>
+      this.onChandeTipoSalida(evt),
+    )
+
     $(document).ready(function () {
       console.log('Ready!')
     })
+  }
+
+  onChandeTipoSalida(evt) {
+    if (this.tipoSalida.value == 'V') {
+      document.getElementById('divVale').classList.remove('d-none')
+      document.getElementById('transferencia').value = ''
+      document.getElementById('divTransferencia').classList.add('d-none')
+    }
+    if (this.tipoSalida.value == 'T') {
+      document.getElementById('divTransferencia').classList.remove('d-none')
+      document.getElementById('vale').value = ''
+      document.getElementById('divVale').classList.add('d-none')
+    }
   }
 
   onPrint(evt) {
     evt.preventDefault()
     evt.stopPropagation()
     let id = evt.currentTarget.dataset.id
-    window.open(`informes_recepcion/imprimir/${id}`, '_blank')
+    window.open(`ordenes_despacho/imprimir/${id}`, '_blank')
   }
 
-  onVerInformeRecepcion(evt) {
+  onVerDetalles(evt) {
     evt.preventDefault()
     evt.stopPropagation()
 
@@ -87,14 +103,18 @@ export default class ObjectClass {
 
     // AJAX GET request
     $.ajax({
-      url: `informes_recepcion/getDetallesRecepcion/${id}`,
+      url: `ordenes_despacho/getDetalles/${id}`,
       type: 'get',
       dataType: 'json',
       context: this,
       success: function (response) {
         console.log('Fetching data: SUCCESS')
-        this.showDetallesInforme(response.informeDetalles[0])
-        this.showProductosInforme(response.informeProductos)
+        this.showDetalles(
+          response.detalles[0],
+          response.vales,
+          response.transferencias,
+        )
+        this.showProductos(response.productos)
       },
       error: function (error) {
         console.log('Fetching data: ERROR')
@@ -103,7 +123,7 @@ export default class ObjectClass {
     })
   }
 
-  showProductosInforme(productos) {
+  showProductos(productos) {
     const listaProductos = document.querySelector(
       '#listaProductosInforme tbody',
     )
@@ -136,23 +156,13 @@ export default class ObjectClass {
     })
   }
 
-  showDetallesInforme(informe) {
-    document.getElementById('Head').innerHTML = `<tr>
+  showDetalles(informe, vales, transferencias) {
+    let salida1 = `<tr>
     <td class="font-weight-bold pr-3">
-        No. Informe:
+        No. Orden:
     </td>
     <td>
-        ${informe.nro_informe}
-    </td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="font-weight-bold">
-        Almacén:
-    </td>
-    <td>
-        ${informe.almacen}
+        ${informe.nro_orden}
     </td>
     <td></td>
     <td></td>
@@ -169,15 +179,93 @@ export default class ObjectClass {
   </tr>
   <tr>
     <td class="font-weight-bold">
-        Creado/Actualizado:
+        Salida por:
+    </td>
+    <td>`
+
+    let salida2 = ''
+    vales.forEach((vale) => {
+      if (vale.id == informe.vale_id) {
+        salida2 = 'VALE  (Nro: ' + vale.nro_vale + ')'
+      }
+    })
+    transferencias.forEach((transferencia) => {
+      if (transferencia.id == informe.transferencia_id) {
+        salida2 =
+          'TRANSFERENCIA  (Nro: ' + transferencia.nro_transferencia + ')'
+      }
+    })
+
+    let salida3 = `</td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td class="font-weight-bold pt-3">
+        Entidad:
+    </td>
+    <td class="pt-3">
+        ${informe.entidad}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Almacén:
     </td>
     <td>
+        ${informe.almacen}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Cliente:
+    </td>
+    <td>
+        ${informe.cliente}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td class="font-weight-bold pt-3">
+        Lugar de entrega:
+    </td>
+    <td class="pt-3">
+        ${informe.lugar_entrega}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="font-weight-bold">
+        Fecha de entrega:
+    </td>
+    <td>
+        ${informe.fecha_entrega}
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td  class="font-weight-bold pt-3">
+        Creado/Actualizado:
+    </td>
+    <td  class="pt-3">
         ${informe.usuario}
     </td>
     <td></td>
     <td></td>
   </tr>
   <br/>`
+
+    document.getElementById('Head').innerHTML = salida1 + salida2 + salida3
   }
 
   onAddProducts() {
@@ -310,6 +398,14 @@ export default class ObjectClass {
       document.getElementById('nro_orden').focus()
       return false
     }
+    if (document.getElementById('entidad').value.length == 0) {
+      alert('Debe completar todos los datos de la Orden')
+      document.getElementById('entidad').className =
+        'form-control border border-danger'
+      document.getElementById('entidad').placeholder = '--- Valor requerido ---'
+      document.getElementById('entidad').focus()
+      return false
+    }
     if (document.getElementById('almacen').value.length == 0) {
       alert('Debe completar todos los datos de la Orden')
       document.getElementById('almacen').className =
@@ -318,7 +414,62 @@ export default class ObjectClass {
       document.getElementById('almacen').focus()
       return false
     }
-
+    if (document.getElementById('cliente').value.length == 0) {
+      alert('Debe completar todos los datos de la Orden')
+      document.getElementById('cliente').className =
+        'form-control border border-danger'
+      document.getElementById('cliente').placeholder = '--- Valor requerido ---'
+      document.getElementById('cliente').focus()
+      return false
+    }
+    if (document.getElementById('lugar_entrega').value.length == 0) {
+      alert('Debe completar todos los datos de la Orden')
+      document.getElementById('lugar_entrega').className =
+        'form-control border border-danger'
+      document.getElementById('lugar_entrega').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('lugar_entrega').focus()
+      return false
+    }
+    if (document.getElementById('fecha_entrega').value.length == 0) {
+      alert('Debe completar todos los datos de la Orden')
+      document.getElementById('fecha_entrega').className =
+        'form-control border border-danger'
+      document.getElementById('fecha_entrega').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('fecha_entrega').focus()
+      return false
+    }
+    if (document.getElementById('tipo_salida').value.length == 0) {
+      alert('Debe completar todos los datos de la Orden')
+      document.getElementById('tipo_salida').className =
+        'form-control border border-danger'
+      document.getElementById('tipo_salida').placeholder =
+        '--- Valor requerido ---'
+      document.getElementById('tipo_salida').focus()
+      return false
+    }
+    if (document.getElementById('tipo_salida').value == 'V') {
+      if (document.getElementById('vale').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden')
+        document.getElementById('vale').className =
+          'form-control border border-danger'
+        document.getElementById('vale').placeholder = '--- Valor requerido ---'
+        document.getElementById('vale').focus()
+        return false
+      }
+    }
+    if (document.getElementById('tipo_salida').value == 'T') {
+      if (document.getElementById('transferencia').value.length == 0) {
+        alert('Debe completar todos los datos de la Orden')
+        document.getElementById('transferencia').className =
+          'form-control border border-danger'
+        document.getElementById('transferencia').placeholder =
+          '--- Valor requerido ---'
+        document.getElementById('transferencia').focus()
+        return false
+      }
+    }
     if (
       document.querySelectorAll('table#listaProductos tbody tr').length == 0
     ) {
@@ -365,8 +516,20 @@ export default class ObjectClass {
       _token: document.querySelector('input[name="_token"]').value,
       user_id: document.getElementById('user_id').value,
       fecha: document.getElementById('fecha').value,
-      nro_informe: document.getElementById('nro_orden').value,
+      nro_orden: document.getElementById('nro_orden').value,
+      entidad_id: document.getElementById('entidad').value,
       almacen_id: document.getElementById('almacen').value,
+      cliente_id: document.getElementById('cliente').value,
+      lugar_entrega: document.getElementById('lugar_entrega').value,
+      fecha_entrega: document.getElementById('fecha_entrega').value,
+      vale_id:
+        document.getElementById('vale').value.length == 0
+          ? null
+          : document.getElementById('vale').value,
+      transferencia_id:
+        document.getElementById('transferencia').value.length == 0
+          ? null
+          : document.getElementById('transferencia').value,
       productos: this.getProductos(),
     }
 

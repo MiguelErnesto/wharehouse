@@ -1,7 +1,7 @@
 <input id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
 
 <div class="row">
-    <div class="col-2">
+    <div class="col-3">
         <div class="form-group">
             {!! Form::label('fecha', 'Fecha:', [
                 'class' => 'pl-1',
@@ -15,9 +15,6 @@
             @enderror
         </div>
     </div>
-</div>
-
-<div class="row">
 
     <div class="col-3">
         <div class="form-group">
@@ -34,7 +31,7 @@
         </div>
     </div>
 
-    <div class="col-3">
+    <div class="col-6">
         <div class="form-group">
             {!! Form::label('entidad', 'Entidad:', [
                 'class' => 'pl-1',
@@ -49,7 +46,10 @@
         </div>
     </div>
 
-    <div class="col-3">
+</div>
+
+<div class="row">
+    <div class="col-6">
         <div class="form-group">
             {!! Form::label('almacen', 'Almacén:', [
                 'class' => 'pl-1',
@@ -64,16 +64,16 @@
         </div>
     </div>
 
-    <div class="col-3">
+    <div class="col-6">
         <div class="form-group">
-            {!! Form::label('clientes', 'Cliente:', [
+            {!! Form::label('cliente', 'Cliente:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('clientes', $clientes, null, [
+            {!! Form::select('cliente', $clientes, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione el cliente...',
             ]) !!}
-            @error('clientes')
+            @error('cliente')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -82,9 +82,8 @@
 
 <br />
 
-
 <div class="row">
-    <div class="col-4">
+    <div class="col-9">
         <div class="form-group">
             {!! Form::label('lugar_entrega', 'Lugar de entrega:', [
                 'class' => 'pl-1',
@@ -99,7 +98,7 @@
         </div>
     </div>
 
-    <div class="col-2">
+    <div class="col-3">
         <div class="form-group">
             {!! Form::label('fecha_entrega', 'Fecha de entrega:', [
                 'class' => 'pl-1',
@@ -113,23 +112,27 @@
             @enderror
         </div>
     </div>
+</div>
 
-    <div class="col-2 ml-5">
+<br />
+
+<div class="row">
+    <div class="col-4">
         <div class="form-group">
-            {!! Form::label('tipo_vale', 'Tipo de Salida:', [
+            {!! Form::label('tipo_salida', 'Tipo de Salida:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('tipo_vale', ['V' => 'Vale', 'T' => 'Transferencia'], null, [
+            {!! Form::select('tipo_salida', ['V' => 'Vale', 'T' => 'Transferencia'], null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccionar...',
             ]) !!}
-            @error('tipo_vale')
+            @error('tipo_salida')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
     </div>
 
-    <div id='divVales' class="col-3">
+    <div id='divVale' class="col-4 d-none">
         <div class="form-group">
             {!! Form::label('vale', 'Nro. Vale:', [
                 'class' => 'pl-1',
@@ -144,12 +147,12 @@
         </div>
     </div>
 
-    <div id='divTrasnferencia' class="col-3">
+    <div id='divTransferencia' class="col-4 d-none">
         <div class="form-group">
             {!! Form::label('transferencia', 'Nro. Transferencia:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('transferencia', $vales, null, [
+            {!! Form::select('transferencia', $transferencias, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccionar...',
             ]) !!}

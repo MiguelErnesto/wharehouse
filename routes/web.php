@@ -100,10 +100,10 @@ Route::resource('ordenes_despacho', OrdenDespachoController::class, [
         'ordenes_despacho' => 'orden_despacho',
     ],
 ]);
-Route::get('ordenes_despacho/getDetallesDespacho/{id}', [
+Route::get('ordenes_despacho/getDetalles/{id}', [
     OrdenDespachoController::class,
-    'getDetallesDespacho',
-])->name('getDetallesRecepcion');
+    'getDetalles',
+])->name('getDetalles');
 Route::get('ordenes_despacho/imprimir/{id}', [
     OrdenDespachoController::class,
     'imprimir',

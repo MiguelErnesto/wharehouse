@@ -27,9 +27,9 @@
                 <thead class="thead-inverse">
                     <tr>
                         <th>Fecha</th>
-                        <th>No. Informe</th>
+                        <th>No. Orden</th>
                         <th>Almacén</th>
-                        <th>Creado/Actualizado por</th>
+                        <th class='text-center'>Tipo de Salida</th>
                         <th colspan="3" class='text-center'></th>
                     </tr>
                 </thead>
@@ -43,21 +43,17 @@
                             <tr>
                                 <td>{{ $orden_despacho->fecha }}</td>
 
-                                <td>{{ $orden_despacho->nro_informe }}</td>
+                                <td>{{ $orden_despacho->nro_orden }}</td>
                                 @foreach ($almacenes as $almacen)
                                     @if ($almacen->id == $orden_despacho->almacen_id)
                                         <td>{{ $almacen->nombre }}</td>
                                     @endif
                                 @endforeach
-                                @foreach ($usuarios as $usuario)
-                                    @if ($usuario->id == $orden_despacho->user_id)
-                                        <td>{{ $usuario->name }}</td>
-                                    @endif
-                                @endforeach
+                                <td class='text-center'>{{ $orden_despacho->vale_id ? 'VALE' : 'TRANSFERENCIA' }}</td>
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
-                                        <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"
+                                    @can('admin.ordenes_despacho.index')
+                                        <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id="{{ $orden_despacho->id }}" title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
@@ -65,7 +61,7 @@
                                 </td>
 
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                    @can('admin.ordenes_despacho.index')
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $orden_despacho->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
@@ -106,7 +102,7 @@
     </div>
 
     {{-- Modal para ver Informe de Recepción  --}}
-    @include('admin.ordenes_despacho.modals.verInformeRecepcion')
+    @include('admin.ordenes_despacho.modals.verDetalles')
 
 @stop
 

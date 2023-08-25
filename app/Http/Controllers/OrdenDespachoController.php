@@ -9,6 +9,7 @@ use App\Models\Entidad;
 use App\Models\Cliente;
 use App\Models\Almacen;
 use App\Models\Vale;
+use App\Models\Transferencia;
 use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
@@ -73,12 +74,24 @@ class OrdenDespachoController extends Controller
             ->get()
             ->pluck('nro_vale', 'id');
 
+        $transferencias = Transferencia::select('id', 'nro_transferencia')
+            ->get()
+            ->pluck('nro_transferencia', 'id');
+
         $productos = Producto::select('id', 'nombre')
             ->get()
             ->pluck('nombre', 'id');
+
         return view(
             'admin.ordenes_despacho.create',
-            compact('entidades', 'clientes', 'almacenes', 'vales', 'productos')
+            compact(
+                'entidades',
+                'clientes',
+                'almacenes',
+                'transferencias',
+                'vales',
+                'productos'
+            )
         );
     }
 
@@ -96,8 +109,8 @@ class OrdenDespachoController extends Controller
             'entidad_id' => 'required',
             'cliente_id' => 'required',
             'user_id' => 'required',
-            'transferencia_id' => 'required',
-            'vale_id' => 'required',
+            'transferencia_id' => 'nullable',
+            'vale_id' => 'nullable',
             'fecha' => 'required',
             'nro_orden' => 'required',
             'lugar_entrega' => 'required',
@@ -107,7 +120,6 @@ class OrdenDespachoController extends Controller
         $ordenes_despacho = OrdenDespacho::create($request->all());
         $ordenes_despacho_id = OrdenDespacho::latest()->first()->id;
         $almacen_id = $request->almacen_id;
-        $cantidad = $request->cantidad;
         $productos = $request->productos;
 
         foreach ($productos as $producto) {
@@ -130,7 +142,7 @@ class OrdenDespachoController extends Controller
                 $almProdId = $found->update([
                     'cantidad' =>
                         intval($found->cantidad) -
-                        intval($producto['cantidad']),
+                        intval($producto['cantidad_despachada']),
                 ]);
             }
         }
@@ -205,8 +217,150 @@ class OrdenDespachoController extends Controller
             ->with(
                 'info',
                 'Despacho ' .
-                    $orden_despacho->nro_informe .
+                    $orden_despacho->nro_orden .
                     ' eliminado correctamente'
             );
+    }
+
+    public function getDetalles($id)
+    {
+        $detalles = OrdenDespacho::where('ordenes_despacho.id', '=', $id)
+            ->join(
+                'entidades as ent',
+                'ent.id',
+                '=',
+                'ordenes_despacho.entidad_id'
+            )
+            ->join(
+                'almacenes as alm',
+                'alm.id',
+                '=',
+                'ordenes_despacho.almacen_id'
+            )
+            ->join(
+                'clientes as cli',
+                'cli.id',
+                '=',
+                'ordenes_despacho.cliente_id'
+            )
+            ->join('users as u', 'u.id', '=', 'ordenes_despacho.user_id')
+            ->select(
+                'ordenes_despacho.id as id',
+                'ordenes_despacho.fecha as fecha',
+                'ordenes_despacho.updated_at as updated_at',
+                'ordenes_despacho.nro_orden as nro_orden',
+                'ordenes_despacho.lugar_entrega as lugar_entrega',
+                'ordenes_despacho.fecha_entrega as fecha_entrega',
+                'ordenes_despacho.vale_id as vale_id',
+                'ordenes_despacho.transferencia_id as transferencia_id',
+                'ent.nombre as entidad',
+                'alm.nombre as almacen',
+                'cli.nombre as cliente',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $vales = Vale::select('id', 'nro_vale')
+            ->orderBy('nro_vale', 'desc')
+            ->get();
+
+        $transferencias = Transferencia::select('id', 'nro_transferencia')
+            ->orderBy('nro_transferencia', 'desc')
+            ->get();
+
+        $productos = OrdenDespacho::where('ordenes_despacho.id', '=', $id)
+            ->join(
+                'despacho_productos as vp',
+                'vp.orden_despacho_id',
+                '=',
+                'ordenes_despacho.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad_ordenada as cantidad_ordenada',
+                'vp.cantidad_despachada as cantidad_despachada',
+                'vp.cantidad_entregada as cantidad_entregada'
+            )
+            ->get();
+
+        return response()->json([
+            'detalles' => $detalles,
+            'vales' => $vales,
+            'transferencias' => $transferencias,
+            'productos' => $productos,
+        ]);
+    }
+
+    public function imprimir($id)
+    {
+        $detalles = OrdenDespacho::where('ordenes_despacho.id', '=', $id)
+            ->join(
+                'entidades as ent',
+                'ent.id',
+                '=',
+                'ordenes_despacho.entidad_id'
+            )
+            ->join(
+                'almacenes as alm',
+                'alm.id',
+                '=',
+                'ordenes_despacho.almacen_id'
+            )
+            ->join(
+                'clientes as cli',
+                'cli.id',
+                '=',
+                'ordenes_despacho.cliente_id'
+            )
+            ->join('users as u', 'u.id', '=', 'ordenes_despacho.user_id')
+            ->select(
+                'ordenes_despacho.id as id',
+                'ordenes_despacho.fecha as fecha',
+                'ordenes_despacho.updated_at as updated_at',
+                'ordenes_despacho.nro_orden as nro_orden',
+                'ordenes_despacho.lugar_entrega as lugar_entrega',
+                'ordenes_despacho.fecha_entrega as fecha_entrega',
+                'ordenes_despacho.vale_id as vale_id',
+                'ordenes_despacho.transferencia_id as transferencia_id',
+                'ent.nombre as entidad',
+                'alm.nombre as almacen',
+                'cli.nombre as cliente',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $vales = Vale::select('id', 'nro_vale')
+            ->orderBy('nro_vale', 'desc')
+            ->get();
+
+        $transferencias = Transferencia::select('id', 'nro_transferencia')
+            ->orderBy('nro_transferencia', 'desc')
+            ->get();
+
+        $productos = OrdenDespacho::where('ordenes_despacho.id', '=', $id)
+            ->join(
+                'despacho_productos as vp',
+                'vp.orden_despacho_id',
+                '=',
+                'ordenes_despacho.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad_ordenada as cantidad_ordenada',
+                'vp.cantidad_despachada as cantidad_despachada',
+                'vp.cantidad_entregada as cantidad_entregada'
+            )
+            ->get();
+
+        return view(
+            'admin.ordenes_despacho.print',
+            compact('detalles', 'productos', 'vales', 'transferencias')
+        );
     }
 }

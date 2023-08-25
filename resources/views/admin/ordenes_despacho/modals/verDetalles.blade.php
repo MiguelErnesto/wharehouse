@@ -4,7 +4,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 id='titleMdVerProdAlm' class="modal-title">Informe de Recepción</h5>
+                <h5 id='titleMdVerProdAlm' class="modal-title">Despacho de Productos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -20,7 +20,9 @@
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th class='text-right pr-2'>Cantidad</th>
+                        <th class='text-right pr-2'>Cantidad Ordenada</th>
+                        <th class='text-right pr-2'>Cantidad Despachada</th>
+                        <th class='text-right pr-2'>Cantidad Entregada</th>
                     </thead>
                     <tbody>
                     </tbody>
