@@ -31,12 +31,12 @@ class ConduceController extends Controller
     {
         $conduces = Conduce::orderBy('fecha_modelo', 'desc')->get();
         $usuarios = User::all();
-        $almacenes = Almacen::orderBy('nombre', 'desc')->get();
+        $facturas = Factura::orderBy('nro_factura', 'desc')->get();
         $entidades = Entidad::orderBy('nombre', 'desc')->get();
 
         return view(
             'admin.conduces.index',
-            compact('conduces', 'usuarios', 'almacenes', 'entidades')
+            compact('conduces', 'usuarios', 'facturas', 'entidades')
         );
     }
 
@@ -51,9 +51,9 @@ class ConduceController extends Controller
             ->get()
             ->pluck('nombre', 'id');
 
-        $facturas = Factura::select('id', 'nombre')
+        $facturas = Factura::select('id', 'nro_factura')
             ->get()
-            ->pluck('nombre', 'id');
+            ->pluck('nro_factura', 'nro_factura');
 
         $productos = Producto::select('id', 'nombre')
             ->get()
@@ -77,7 +77,39 @@ class ConduceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Guardar nuevo conduce
+        $request->validate([
+            'entidad_id',
+            'user_id',
+            'nro_conduce',
+            'nro_factura',
+            'fecha_modelo',
+            'fecha_recepcion_transportador',
+            'fecha_entrega',
+            'fecha_recepcion',
+            'persona_entrega',
+            'persona_recepcion',
+            'persona_actualiza',
+            'persona_contabiliza',
+            'transportador',
+            'lugar_entrega',
+            'comprador',
+        ]);
+
+        $conduce = Conduce::create($request->all());
+        $conduce_id = Conduce::latest()->first()->id;
+        $productos = $request->productos;
+
+        foreach ($productos as $producto) {
+            //Agregar productos y cantidades a Recepcion Productos
+
+            $RPid = ConduceProducto::create([
+                'conduce_id' => $conduce_id,
+                'producto_id' => $producto['id'],
+                'cantidad' => $producto['cantidad'],
+            ]);
+        }
+        return response()->json($conduce_id);
     }
 
     /**
@@ -120,8 +152,111 @@ class ConduceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Conduce $conduce)
     {
-        //
+        $conduceProductos = ConduceProducto::where(
+            'conduce_id',
+            '=',
+            $conduce->id
+        )->delete();
+        $conduce->delete();
+
+        return redirect()
+            ->route('conduces.index')
+            ->with(
+                'info',
+                'Conduce ' . $conduce->nro_conduce . ' eliminado correctamente'
+            );
+    }
+
+    public function getDetalles($id)
+    {
+        $detalles = Conduce::where('conduces.id', '=', $id)
+            ->join('entidades as ent', 'ent.id', '=', 'conduces.entidad_id')
+            ->join('users as u', 'u.id', '=', 'conduces.user_id')
+            ->select(
+                'conduces.id as id',
+                'conduces.fecha_modelo as fecha_modelo',
+                'conduces.nro_conduce as nro_conduce',
+                'conduces.nro_factura as nro_factura',
+                'conduces.comprador as comprador',
+                'conduces.lugar_entrega as lugar_entrega',
+                'conduces.transportador as transportador',
+                'conduces.fecha_recepcion_transportador as fecha_recepcion_transportador',
+                'conduces.persona_entrega as persona_entrega',
+                'conduces.fecha_entrega as fecha_entrega',
+                'conduces.persona_recepcion as persona_recepcion',
+                'conduces.fecha_recepcion as fecha_recepcion',
+                'conduces.persona_actualiza as persona_actualiza',
+                'conduces.persona_contabiliza as persona_contabiliza',
+                'ent.nombre as entidad',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Conduce::where('conduces.id', '=', $id)
+            ->join(
+                'conduce_productos as vp',
+                'vp.conduce_id',
+                '=',
+                'conduces.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad as cantidad'
+            )
+            ->get();
+
+        return response()->json([
+            'detalles' => $detalles,
+            'productos' => $productos,
+        ]);
+    }
+
+    public function imprimir($id)
+    {
+        $detalles = Conduce::where('conduces.id', '=', $id)
+            ->join('entidades as ent', 'ent.id', '=', 'conduces.entidad_id')
+            ->join('users as u', 'u.id', '=', 'conduces.user_id')
+            ->select(
+                'conduces.id as id',
+                'conduces.fecha_modelo as fecha_modelo',
+                'conduces.nro_conduce as nro_conduce',
+                'conduces.nro_factura as nro_factura',
+                'conduces.comprador as comprador',
+                'conduces.lugar_entrega as lugar_entrega',
+                'conduces.transportador as transportador',
+                'conduces.fecha_recepcion_transportador as fecha_recepcion_transportador',
+                'conduces.persona_entrega as persona_entrega',
+                'conduces.fecha_entrega as fecha_entrega',
+                'conduces.persona_recepcion as persona_recepcion',
+                'conduces.fecha_recepcion as fecha_recepcion',
+                'conduces.persona_actualiza as persona_actualiza',
+                'conduces.persona_contabiliza as persona_contabiliza',
+                'ent.nombre as entidad',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Conduce::where('conduces.id', '=', $id)
+            ->join(
+                'conduce_productos as vp',
+                'vp.conduce_id',
+                '=',
+                'conduces.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad as cantidad'
+            )
+            ->get();
+
+        return view('admin.conduces.print', compact('detalles', 'productos'));
     }
 }

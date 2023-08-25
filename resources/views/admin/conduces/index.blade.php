@@ -28,9 +28,9 @@
                     <tr>
                         <th>Fecha</th>
                         <th>No.</th>
-                        <th>Tipo</th>
                         <th>Entidad</th>
-                        <th>Almacén</th>
+                        <th class='text-right'>Factura asociada</th>
+                        <th></th>
                         <th colspan="3" class='text-center'></th>
                     </tr>
                 </thead>
@@ -42,22 +42,17 @@
                     @else
                         @foreach ($conduces as $conduce)
                             <tr>
-                                <td>{{ $conduce->updated_at > $conduce->created_at ? $conduce->updated_at : $conduce->created_at }}
+                                <td>{{ $conduce->fecha_modelo }}
                                 </td>
 
-                                <td>{{ $conduce->nro_vale }}</td>
-                                <td>{{ $conduce->tipo_vale == 'E' ? 'Entrega' : 'Salida' }}</td>
+                                <td>{{ $conduce->nro_conduce }}</td>
                                 @foreach ($entidades as $entidad)
                                     @if ($entidad->id == $conduce->entidad_id)
                                         <td>{{ $entidad->nombre }}</td>
                                     @endif
                                 @endforeach
-                                @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $conduce->almacen_id)
-                                        <td>{{ $almacen->nombre }}</td>
-                                    @endif
-                                @endforeach
-
+                                <td class="text-right">{{ $conduce->nro_factura }}</td>
+                                <td></td>
                                 <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                     @can('admin.almacenes_productos.index')
                                         <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"

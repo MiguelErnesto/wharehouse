@@ -957,7 +957,7 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.preventDefault();
       evt.stopPropagation();
       var id = evt.currentTarget.dataset.id;
-      window.open("vales/imprimir/".concat(id), '_blank');
+      window.open("conduces/imprimir/".concat(id), '_blank');
     }
   }, {
     key: "onVerDetalles",
@@ -968,7 +968,7 @@ var ObjectClass = /*#__PURE__*/function () {
       document.getElementById('informe_id').value = id; // AJAX GET request
 
       $.ajax({
-        url: "vales/getDetalles/".concat(id),
+        url: "conduces/getDetalles/".concat(id),
         type: 'get',
         dataType: 'json',
         context: this,
@@ -1003,7 +1003,7 @@ var ObjectClass = /*#__PURE__*/function () {
   }, {
     key: "showDetalles",
     value: function showDetalles(informe) {
-      document.getElementById('Head').innerHTML = "\n  <tr>\n    <td class='font-weight-bold pr-3'>\n        No. Vale:\n    </td>\n    <td>\n        ".concat(informe.nro_vale, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  \n  <tr>\n    <td class=\"font-weight-bold\">\n        Tipo de vale:\n    </td>\n    <td>\n        ").concat(informe.tipo_vale == 'E' ? 'Entrega' : 'Devolución', "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Entidad:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.entidad, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Almac\xE9n:\n    </td>\n    <td>\n        ").concat(informe.almacen, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Persona emisor:\n    </td>\n    <td>\n        ").concat(informe.persona_emisor, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Persona receptor:\n    </td>\n    <td>\n        ").concat(informe.persona_receptor, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Fecha:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.updated_at > informe.created_at ? this.formated_datetime(informe.updated_at) : this.formated_datetime(informe.created_at), "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Creado/Actualizado:\n    </td>\n    <td>\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
+      document.getElementById('Head').innerHTML = "\n  <tr>\n    <td class='font-weight-bold pr-3'>\n        No. Conduce:\n    </td>\n    <td>\n        ".concat(informe.nro_conduce, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Entidad:\n    </td>\n    <td>\n      ").concat(informe.entidad, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha del modelo:\n    </td>\n    <td class=\"\">\n        ").concat(informe.fecha_modelo, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n  <td class=\"font-weight-bold\">\n      Factura asociada:\n  </td>\n  <td class=\"\">\n      ").concat(informe.nro_factura, "\n  </td>\n  <td></td>\n  <td></td>\n</tr>\n\n<tr>\n    <td class=\"font-weight-bold pt-3\">\n        Comprador:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.comprador, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Lugar de entrega:\n    </td>\n    <td>\n        ").concat(informe.lugar_entrega, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Transportador:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.transportador, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha que recibe:\n    </td>\n    <td>\n        ").concat(informe.fecha_recepcion_transportador, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Entrega:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.persona_entrega, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha que entrega:\n    </td>\n    <td>\n        ").concat(informe.fecha_entrega, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Recibe:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.persona_recepcion, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Fecha que recibe:\n    </td>\n    <td>\n        ").concat(informe.fecha_recepcion, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n        Actualiza:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.persona_actualiza, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <tr>\n    <td class=\"font-weight-bold\">\n        Contabiliza:\n    </td>\n    <td>\n        ").concat(informe.persona_contabiliza, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n\n  <tr>\n    <td class=\"font-weight-bold pt-3\">\n    Creado/Actualizado:\n    </td>\n    <td class=\"pt-3\">\n        ").concat(informe.usuario, "\n    </td>\n    <td></td>\n    <td></td>\n  </tr>\n  <br/>");
     }
   }, {
     key: "formated_datetime",
@@ -1087,75 +1087,115 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.preventDefault();
       evt.stopPropagation();
 
-      if (document.getElementById('fecha').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
-        document.getElementById('fecha').className = 'form-control border border-danger';
-        document.getElementById('fecha').placeholder = '--- Valor requerido ---';
-        document.getElementById('fecha').focus();
+      if (document.getElementById('fecha_modelo').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('fecha_modelo').className = 'form-control border border-danger';
+        document.getElementById('fecha_modelo').placeholder = '--- Valor requerido ---';
+        document.getElementById('fecha_modelo').focus();
         return false;
       }
 
-      if (document.getElementById('nro_vale').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
-        document.getElementById('nro_vale').className = 'form-control border border-danger';
-        document.getElementById('nro_vale').placeholder = '--- Valor requerido ---';
-        document.getElementById('nro_vale').focus();
+      if (document.getElementById('nro_conduce').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('nro_conduce').className = 'form-control border border-danger';
+        document.getElementById('nro_conduce').placeholder = '--- Valor requerido ---';
+        document.getElementById('nro_conduce').focus();
+        return false;
+      }
+
+      if (document.getElementById('nro_factura').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('nro_factura').className = 'form-control border border-danger';
+        document.getElementById('nro_factura').placeholder = '--- Valor requerido ---';
+        document.getElementById('nro_factura').focus();
         return false;
       }
 
       if (document.getElementById('entidad').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
+        alert('Debe completar todos los datos del Conduce');
         document.getElementById('entidad').className = 'form-control border border-danger';
         document.getElementById('entidad').placeholder = '--- Valor requerido ---';
         document.getElementById('entidad').focus();
         return false;
       }
 
-      if (document.getElementById('almacen').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
-        document.getElementById('almacen').className = 'form-control border border-danger';
-        document.getElementById('almacen').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen').focus();
+      if (document.getElementById('comprador').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('comprador').className = 'form-control border border-danger';
+        document.getElementById('comprador').placeholder = '--- Valor requerido ---';
+        document.getElementById('comprador').focus();
         return false;
       }
 
-      if (document.getElementById('importe_total').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
-        document.getElementById('importe_total').className = 'form-control border border-danger';
-        document.getElementById('importe_total').placeholder = '--- Valor requerido ---';
-        document.getElementById('importe_total').focus();
+      if (document.getElementById('lugar_entrega').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('lugar_entrega').className = 'form-control border border-danger';
+        document.getElementById('lugar_entrega').placeholder = '--- Valor requerido ---';
+        document.getElementById('lugar_entrega').focus();
         return false;
       }
 
-      if (isNaN(document.getElementById('importe_total').value)) {
-        alert('El valor debe ser un número');
-        document.getElementById('importe_total').className = 'form-control border border-danger';
-        document.getElementById('importe_total').placeholder = '--- Valor requerido ---';
-        document.getElementById('importe_total').focus();
+      if (document.getElementById('transportador').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('transportador').className = 'form-control border border-danger';
+        document.getElementById('transportador').placeholder = '--- Valor requerido ---';
+        document.getElementById('transportador').focus();
         return false;
       }
 
-      if (document.getElementById('persona_emisor').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
-        document.getElementById('persona_emisor').className = 'form-control border border-danger';
-        document.getElementById('persona_emisor').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_emisor').focus();
+      if (document.getElementById('fecha_recepcion_transportador').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('fecha_recepcion_transportador').className = 'form-control border border-danger';
+        document.getElementById('fecha_recepcion_transportador').placeholder = '--- Valor requerido ---';
+        document.getElementById('fecha_recepcion_transportador').focus();
         return false;
       }
 
-      if (document.getElementById('persona_receptor').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
-        document.getElementById('persona_receptor').className = 'form-control border border-danger';
-        document.getElementById('persona_receptor').placeholder = '--- Valor requerido ---';
-        document.getElementById('persona_receptor').focus();
+      if (document.getElementById('persona_entrega').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('persona_entrega').className = 'form-control border border-danger';
+        document.getElementById('persona_entrega').placeholder = '--- Valor requerido ---';
+        document.getElementById('persona_entrega').focus();
         return false;
       }
 
-      if (document.getElementById('tipo_vale').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
-        document.getElementById('tipo_vale').className = 'form-control border border-danger';
-        document.getElementById('tipo_vale').placeholder = '--- Valor requerido ---';
-        document.getElementById('tipo_vale').focus();
+      if (document.getElementById('fecha_entrega').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('fecha_entrega').className = 'form-control border border-danger';
+        document.getElementById('fecha_entrega').placeholder = '--- Valor requerido ---';
+        document.getElementById('fecha_entrega').focus();
+        return false;
+      }
+
+      if (document.getElementById('persona_recepcion').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('persona_recepcion').className = 'form-control border border-danger';
+        document.getElementById('persona_recepcion').placeholder = '--- Valor requerido ---';
+        document.getElementById('persona_recepcion').focus();
+        return false;
+      }
+
+      if (document.getElementById('fecha_recepcion').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('fecha_recepcion').className = 'form-control border border-danger';
+        document.getElementById('fecha_recepcion').placeholder = '--- Valor requerido ---';
+        document.getElementById('fecha_recepcion').focus();
+        return false;
+      }
+
+      if (document.getElementById('persona_actualiza').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('persona_actualiza').className = 'form-control border border-danger';
+        document.getElementById('persona_actualiza').placeholder = '--- Valor requerido ---';
+        document.getElementById('persona_actualiza').focus();
+        return false;
+      }
+
+      if (document.getElementById('persona_contabiliza').value.length == 0) {
+        alert('Debe completar todos los datos del Conduce');
+        document.getElementById('persona_contabiliza').className = 'form-control border border-danger';
+        document.getElementById('persona_contabiliza').placeholder = '--- Valor requerido ---';
+        document.getElementById('persona_contabiliza').focus();
         return false;
       }
 
@@ -1168,7 +1208,7 @@ var ObjectClass = /*#__PURE__*/function () {
       }
 
       if (document.getElementById('cantidad').value.length == 0) {
-        alert('Debe completar todos los datos del Vale');
+        alert('Debe completar todos los datos del Conduce');
         document.getElementById('cantidad').className = 'form-control border border-danger';
         document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
         document.getElementById('cantidad').focus();
@@ -1178,26 +1218,31 @@ var ObjectClass = /*#__PURE__*/function () {
       var data = {
         _token: document.querySelector('input[name="_token"]').value,
         user_id: document.getElementById('user_id').value,
-        fecha: document.getElementById('fecha').value,
-        nro_vale: document.getElementById('nro_vale').value,
+        fecha_modelo: document.getElementById('fecha_modelo').value,
+        nro_conduce: document.getElementById('nro_conduce').value,
+        nro_factura: document.getElementById('nro_factura').value,
         entidad_id: document.getElementById('entidad').value,
-        almacen_id: document.getElementById('almacen').value,
-        importe_total: document.getElementById('importe_total').value,
-        persona_emisor: document.getElementById('persona_emisor').value,
-        persona_receptor: document.getElementById('persona_receptor').value,
-        tipo_vale: document.getElementById('tipo_vale').value,
-        cantidad: document.getElementById('cantidad').value,
+        comprador: document.getElementById('comprador').value,
+        lugar_entrega: document.getElementById('lugar_entrega').value,
+        transportador: document.getElementById('transportador').value,
+        fecha_recepcion_transportador: document.getElementById('fecha_recepcion_transportador').value,
+        persona_entrega: document.getElementById('persona_entrega').value,
+        fecha_entrega: document.getElementById('fecha_entrega').value,
+        persona_recepcion: document.getElementById('persona_recepcion').value,
+        fecha_recepcion: document.getElementById('fecha_recepcion').value,
+        persona_actualiza: document.getElementById('persona_actualiza').value,
+        persona_contabiliza: document.getElementById('persona_contabiliza').value,
         productos: this.getProductos()
       };
       $.ajax({
-        url: "/vales",
+        url: "/conduces",
         type: 'POST',
         dataType: 'json',
         data: data,
         context: this,
         success: function success(response) {
-          alert('Vale generado correctamente');
-          window.open("/vales", '_self');
+          alert('Conduce generado correctamente');
+          window.open("/conduces", '_self');
         },
         error: function error(_error2) {
           console.log('Fetching data: ERROR');

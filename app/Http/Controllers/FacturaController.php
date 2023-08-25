@@ -158,7 +158,7 @@ class FacturaController extends Controller
         )->delete();
         $factura->delete();
         return redirect()
-            ->route('vales.index')
+            ->route('facturas.index')
             ->with(
                 'info',
                 'Factura ' . $factura->nro_factura . ' eliminada correctamente'
