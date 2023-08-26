@@ -4,7 +4,6 @@ use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Fortify Guard
@@ -62,6 +61,10 @@ return [
     */
 
     'home' => RouteServiceProvider::HOME,
+    'redirects' => [
+        'logout' => 'login',
+        'login' => 'admin',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -142,5 +145,4 @@ return [
             'confirmPassword' => true,
         ]),
     ],
-
 ];

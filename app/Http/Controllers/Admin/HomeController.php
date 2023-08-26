@@ -49,4 +49,11 @@ class HomeController extends Controller
             )
         );
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect('/');
+    }
 }

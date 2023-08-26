@@ -36,6 +36,8 @@ Route::middleware([
     })->name('dashboard');
 });
 
+//Route::post('logout', HomeController::class, 'logout')->name('logout');
+
 //Entidades
 Route::resource('entidades', EntidadController::class, [
     'parameters' => [
@@ -157,24 +159,4 @@ Route::get('facturas/getDetalles/{id}', [
 ]);
 Route::get('facturas/imprimir/{id}', [FacturaController::class, 'imprimir']);
 
-/* //esto puede ser despacho_productos o eliminarlo por completo
-//Recepcion de Productos
-Route::resource('recepcion_productos', RecepcionProductoController::class, [
-    'parameters' => [
-        'recepcion_productos' => 'recepcion_producto',
-    ],
-]);
-
-//Salida de productos
-Route::resource('salida_productos', SalidaProductoController::class, [
-    'parameters' => [
-        'salida_productos' => 'salida_producto',
-    ],
-]);
- */
-//Route::get('/', [PostController::class, 'index'])->name('posts.index');
-//Route::resource('posts', PostController::class);
-/* Route::get('category/{category}', [PostController::class, 'category'])->name(
-    'posts.category'
-); */
-//Route::get('tag/{tag}', [PostController::class, 'tag'])->name('posts.tag');
+//Route::get('/logout', [Auth::logout()]);
