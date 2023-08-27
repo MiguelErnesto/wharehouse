@@ -22,18 +22,18 @@ class DatabaseSeeder extends Seeder
         //SET foreign_key_checks = 0   //MYSQL
         DB::statement('PRAGMA foreign_keys = ON;');
 
-        Storage::deleteDirectory('public/posts');
+        //Storage::deleteDirectory('public/posts');
 
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
-        $this->call(CategorySeeder::class);
+        //$this->call(CategorySeeder::class);
 
-        Tag::factory(8)->create();
+        //Tag::factory(8)->create();
 
-        Storage::makeDirectory('public/posts');
+        //Storage::makeDirectory('public/posts');
 
-        $this->call(PostSeeder::class);
+        //$this->call(PostSeeder::class);
 
         //Enable foreign key checks for current db driver
         //SET foreign_key_checks = 1 //MYSQL
