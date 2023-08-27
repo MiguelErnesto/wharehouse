@@ -245,6 +245,7 @@ return [
         ['header' => ''],
         [
             'text' => 'Módulos del Sistema',
+            'active' => ['admin*'],
             'classes' => '',
             'icon' => 'fas fa-fw fa-clone',
             'submenu' => [

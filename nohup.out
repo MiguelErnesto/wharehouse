@@ -1,0 +1,111 @@
+
+   INFO  Server running on [http://127.0.0.1:8000].  
+
+  Press Ctrl+C to stop the server
+
+  2023-08-27 18:04:34 ................................................... ~ 1s
+  2023-08-27 18:04:35 ................................................... ~ 1s
+  2023-08-27 18:04:36 /css/app.css ...................................... ~ 0s
+  2023-08-27 18:04:36 /js/app.js ........................................ ~ 0s
+  2023-08-27 18:04:36 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:04:36 /favicon.ico ...................................... ~ 0s
+  2023-08-27 18:04:42 ................................................... ~ 1s
+  2023-08-27 18:04:43 ................................................... ~ 1s
+  2023-08-27 18:04:44 /vendor/fontawesome-free/css/all.min.css .......... ~ 0s
+  2023-08-27 18:04:44 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:04:44 ................................................... ~ 0s
+  2023-08-27 18:04:44 /vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js  ~ 0s
+  2023-08-27 18:04:44 /vendor/jquery/jquery.min.js ...................... ~ 0s
+  2023-08-27 18:04:44 /vendor/adminlte/dist/js/adminlte.min.js .......... ~ 0s
+  2023-08-27 18:04:44 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:04:44 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:04:44 /vendor/fontawesome-free/webfonts/fa-solid-900.woff2  ~ 0s
+  2023-08-27 18:04:44 /favicon.ico ...................................... ~ 0s
+  2023-08-27 18:06:25 ................................................... ~ 0s
+  2023-08-27 18:06:25 /vendor/fontawesome-free/css/all.min.css .......... ~ 0s
+  2023-08-27 18:06:25 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:06:25 ................................................... ~ 0s
+  2023-08-27 18:06:25 /vendor/jquery/jquery.min.js ...................... ~ 0s
+  2023-08-27 18:06:25 /vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js  ~ 0s
+  2023-08-27 18:06:25 /vendor/adminlte/dist/js/adminlte.min.js .......... ~ 0s
+  2023-08-27 18:06:25 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:06:25 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:06:38 /vendor/fontawesome-free/webfonts/fa-solid-900.woff2  ~ 0s
+  2023-08-27 18:06:39 /vendor/fontawesome-free/css/all.min.css .......... ~ 0s
+  2023-08-27 18:06:39 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:06:39 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:06:39 ................................................... ~ 0s
+  2023-08-27 18:06:39 /vendor/adminlte/dist/css/adminlte.min.css.map .... ~ 0s
+  2023-08-27 18:06:44 ................................................... ~ 0s
+  2023-08-27 18:06:44 /vendor/fontawesome-free/css/all.min.css .......... ~ 0s
+  2023-08-27 18:06:44 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:06:44 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:06:44 ................................................... ~ 0s
+  2023-08-27 18:06:44 /vendor/jquery/jquery.min.js ...................... ~ 0s
+  2023-08-27 18:06:44 /vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js  ~ 0s
+  2023-08-27 18:06:44 /vendor/adminlte/dist/js/adminlte.min.js .......... ~ 0s
+  2023-08-27 18:06:44 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:06:45 /vendor/fontawesome-free/webfonts/fa-solid-900.woff2  ~ 0s
+  2023-08-27 18:06:55 ................................................... ~ 1s
+  2023-08-27 18:06:55 /vendor/fontawesome-free/css/all.min.css .......... ~ 1s
+  2023-08-27 18:06:56 ................................................... ~ 0s
+  2023-08-27 18:06:56 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:06:56 /vendor/jquery/jquery.min.js ...................... ~ 0s
+  2023-08-27 18:06:56 /vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js  ~ 0s
+  2023-08-27 18:06:56 /vendor/adminlte/dist/js/adminlte.min.js .......... ~ 0s
+  2023-08-27 18:06:56 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:06:56 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:06:59 /vendor/fontawesome-free/webfonts/fa-solid-900.woff2  ~ 0s
+  2023-08-27 18:07:00 ................................................... ~ 1s
+  2023-08-27 18:07:01 /vendor/fontawesome-free/css/all.min.css .......... ~ 0s
+  2023-08-27 18:07:01 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:07:01 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:07:01 /vendor/jquery/jquery.min.js ...................... ~ 0s
+  2023-08-27 18:07:01 /vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js  ~ 0s
+  2023-08-27 18:07:01 /vendor/adminlte/dist/js/adminlte.min.js .......... ~ 0s
+  2023-08-27 18:07:01 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:07:01 /js/compiled/entidades.js ......................... ~ 0s
+  2023-08-27 18:07:04 /vendor/fontawesome-free/webfonts/fa-solid-900.woff2  ~ 0s
+  2023-08-27 18:07:15 ................................................... ~ 1s
+  2023-08-27 18:07:16 /vendor/fontawesome-free/css/all.min.css .......... ~ 0s
+  2023-08-27 18:07:16 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:07:16 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:07:16 /vendor/jquery/jquery.min.js ...................... ~ 0s
+  2023-08-27 18:07:16 /vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js  ~ 0s
+  2023-08-27 18:07:16 /vendor/adminlte/dist/js/adminlte.min.js .......... ~ 0s
+  2023-08-27 18:07:16 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:07:16 /js/compiled/entidades.js ......................... ~ 0s
+  2023-08-27 18:07:17 /vendor/fontawesome-free/webfonts/fa-solid-900.woff2  ~ 0s
+  2023-08-27 18:07:21 ................................................... ~ 0s
+  2023-08-27 18:07:21 ................................................... ~ 0s
+  2023-08-27 18:07:21 /css/app.css ...................................... ~ 0s
+  2023-08-27 18:07:21 /js/app.js ........................................ ~ 0s
+  2023-08-27 18:07:21 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:07:27 ................................................... ~ 1s
+  2023-08-27 18:07:27 /css/app.css ...................................... ~ 1s
+  2023-08-27 18:07:28 /js/app.js ........................................ ~ 0s
+  2023-08-27 18:07:28 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:07:33 ................................................... ~ 0s
+  2023-08-27 18:07:33 /css/app.css ...................................... ~ 0s
+  2023-08-27 18:07:33 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:07:33 /js/app.js ........................................ ~ 0s
+  2023-08-27 18:07:46 ................................................... ~ 0s
+  2023-08-27 18:07:46 /css/app.css ...................................... ~ 0s
+  2023-08-27 18:07:46 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:07:46 /js/app.js ........................................ ~ 0s
+  2023-08-27 18:07:47 ................................................... ~ 1s
+  2023-08-27 18:07:48 /css/app.css ...................................... ~ 0s
+  2023-08-27 18:07:48 /js/app.js ........................................ ~ 0s
+  2023-08-27 18:07:48 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:08:00 ................................................... ~ 0s
+  2023-08-27 18:08:00 ................................................... ~ 1s
+  2023-08-27 18:08:01 /vendor/fontawesome-free/css/all.min.css .......... ~ 0s
+  2023-08-27 18:08:01 /vendor/overlayScrollbars/css/OverlayScrollbars.min.css  ~ 0s
+  2023-08-27 18:08:01 /vendor/adminlte/dist/css/adminlte.min.css ........ ~ 0s
+  2023-08-27 18:08:01 ................................................... ~ 0s
+  2023-08-27 18:08:01 /vendor/jquery/jquery.min.js ...................... ~ 0s
+  2023-08-27 18:08:01 /vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js  ~ 0s
+  2023-08-27 18:08:01 /vendor/adminlte/dist/js/adminlte.min.js .......... ~ 0s
+  2023-08-27 18:08:01 /storage/whlogo03.jpg ............................. ~ 0s
+  2023-08-27 18:08:11 /vendor/fontawesome-free/webfonts/fa-solid-900.woff2  ~ 0s
+  2023-08-27 18:08:17 /favicon.ico ...................................... ~ 0s
