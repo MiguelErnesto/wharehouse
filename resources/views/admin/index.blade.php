@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         {{-- Entidades --}}
-        @can('admin.entidades.index')
+        @can('Listar entidades')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-primary">
                     <div class="inner text-center">
@@ -29,7 +29,7 @@
         @endcan
 
         {{-- Clientes --}}
-        @can('admin.clientes.index')
+        @can('Listar clientes')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-success">
                     <div class="inner text-center">
@@ -48,7 +48,7 @@
         @endcan
 
         {{-- Almacenes --}}
-        @can('admin.almacenes.index')
+        @can('Listar almacenes')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-danger">
                     <div class="inner text-center">
@@ -67,7 +67,7 @@
         @endcan
 
         {{-- Productos --}}
-        @can('admin.productos.index')
+        @can('Listar productos')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-warning">
                     <div class="inner text-center">
@@ -86,7 +86,7 @@
         @endcan
 
         {{-- Informes de Recpeción --}}
-        @can('admin.informes_recepcion.index')
+        @can('Listar informes recepción')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-black">
                     <div class="inner text-center">
@@ -108,7 +108,7 @@
 
     <div class="row">
         {{-- Órdenes de despacho --}}
-        @can('admin.ordenes_despacho.index')
+        @can('Listar órdenes despacho')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-light">
                     <div class="inner text-center">
@@ -127,7 +127,7 @@
         @endcan
 
         {{-- Vales --}}
-        @can('admin.vales.index')
+        @can('Listar vales')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-warning">
                     <div class="inner text-center">
@@ -146,7 +146,7 @@
         @endcan
 
         {{-- Transferencias --}}
-        @can('admin.transferencias.index')
+        @can('Listar transferencias')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-secondary">
                     <div class="inner text-center">
@@ -165,7 +165,7 @@
         @endcan
 
         {{-- Conduces --}}
-        @can('admin.conduces.index')
+        @can('Listar conduces')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-info">
                     <div class="inner text-center">
@@ -184,7 +184,7 @@
         @endcan
 
         {{-- Facturas --}}
-        @can('admin.facturas.index')
+        @can('Listar facturas')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-primary">
                     <div class="inner text-center">

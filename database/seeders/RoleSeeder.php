@@ -32,8 +32,8 @@ class RoleSeeder extends Seeder
 
         //Ver Dashboard
         Permission::create([
-            'name' => 'admin.home',
-            'description' => 'Ver panel de administración',
+            'name' => 'Ver panel',
+            'description' => 'Ver panel',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         //Administración de usuarios
@@ -48,199 +48,199 @@ class RoleSeeder extends Seeder
 
         // Permisos para Entidades
         Permission::create([
-            'name' => 'admin.entidades.index',
+            'name' => 'Listar entidades',
             'description' => 'Listar entidades',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.entidades.create',
-            'description' => 'Guardar nuevo entidad',
+            'name' => 'Crear entidad',
+            'description' => 'Crear entidad',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.entidades.edit',
+            'name' => 'Editar entidad',
             'description' => 'Editar entidad',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.entidades.destroy',
+            'name' => 'Eliminar entidad',
             'description' => 'Eliminar entidad',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Clientes
         Permission::create([
-            'name' => 'admin.clientes.index',
+            'name' => 'Listar clientes',
             'description' => 'Listar clientes',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.clientes.create',
-            'description' => 'Guardar nuevo cliente',
+            'name' => 'Crear cliente',
+            'description' => 'Crear cliente',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.clientes.edit',
+            'name' => 'Editar cliente',
             'description' => 'Editar cliente',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.clientes.destroy',
+            'name' => 'Eliminar cliente',
             'description' => 'Eliminar cliente',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Almacenes
         Permission::create([
-            'name' => 'admin.almacenes.index',
+            'name' => 'Listar almacenes',
             'description' => 'Listar almacenes',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.almacenes.create',
-            'description' => 'Guardar nuevo almacén',
+            'name' => 'Crear almacén',
+            'description' => 'Crear almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.almacenes.edit',
+            'name' => 'Editar almacén',
             'description' => 'Editar almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.almacenes.destroy',
+            'name' => 'Eliminar almacén',
             'description' => 'Eliminar almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Productos
         Permission::create([
-            'name' => 'admin.productos.index',
+            'name' => 'Listar productos',
             'description' => 'Listar productos',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.productos.create',
-            'description' => 'Guardar nuevo producto',
+            'name' => 'Crear producto',
+            'description' => 'Crear producto',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.productos.edit',
+            'name' => 'Editar producto',
             'description' => 'Editar producto',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.productos.destroy',
+            'name' => 'Eliminar producto',
             'description' => 'Eliminar producto',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para los Productos de los almacenes
         Permission::create([
-            'name' => 'admin.almacenes_productos.index',
-            'description' => 'Listar productos de un almacén',
+            'name' => 'Listar producto almacén',
+            'description' => 'Listar productos del almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.almacenes_productos.create',
-            'description' => 'Ingresar nuevo producto a un almacén',
+            'name' => 'Ingresar producto almacén',
+            'description' => 'Ingresar producto a un almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.almacenes_productos.edit',
-            'description' => 'Editar productos de un almacén',
+            'name' => 'Editar productos almacén',
+            'description' => 'Editar productos del almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.almacenes_productos.destroy',
+            'name' => 'Eliminar productos almacén',
             'description' => 'Eliminar productos de un almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Informes de Recepcion
         Permission::create([
-            'name' => 'admin.informes_recepcion.index',
-            'description' => 'Listar informe de recepción',
+            'name' => 'Listar informes recepción',
+            'description' => 'Listar informes de recepción',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.informes_recepcion.create',
-            'description' => 'Guardar nuevo informe de recepción',
+            'name' => 'Crear informe recepción',
+            'description' => 'Crear informe de recepción',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.informes_recepcion.edit',
+            'name' => 'Editar informe recepción',
             'description' => 'Editar informe de recepción',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.informes_recepcion.destroy',
+            'name' => 'Eliminar informe recepción',
             'description' => 'Eliminar informe de recepción',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para el Despacho de Productos
         Permission::create([
-            'name' => 'admin.ordenes_despacho.index',
-            'description' => 'Listar orden de despacho',
+            'name' => 'Listar ordenes despacho',
+            'description' => 'Listar despachos',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.ordenes_despacho.create',
-            'description' => 'Guardar nueva orden de despacho',
+            'name' => 'Crear orden despacho',
+            'description' => 'Crear despacho',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.ordenes_despacho.edit',
-            'description' => 'Editar orden de despacho',
+            'name' => 'Editar orden despacho',
+            'description' => 'Editar despacho',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.ordenes_despacho.destroy',
-            'description' => 'Eliminar orden de despacho',
+            'name' => 'Eliminar despacho',
+            'description' => 'Eliminar orden despacho',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Vales
         Permission::create([
-            'name' => 'admin.vales.index',
+            'name' => 'Listar vales',
             'description' => 'Listar vales',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.vales.create',
+            'name' => 'Crear vale',
             'description' => 'Crear nuevo vale',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.vales.edit',
+            'name' => 'Editar vale',
             'description' => 'Editar vale',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.vales.destroy',
+            'name' => 'Eliminar vale',
             'description' => 'Eliminar vale',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Transferencias
         Permission::create([
-            'name' => 'admin.transferencias.index',
+            'name' => 'Listar transferencias',
             'description' => 'Listar transferencias',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.transferencias.create',
-            'description' => 'Crear nueva transferencia',
+            'name' => 'Crear transferencia',
+            'description' => 'Crear transferencia',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.transferencias.edit',
+            'name' => 'Editar transferencia',
             'description' => 'Editar transferencia',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.transferencias.destroy',
+            'name' => 'Eliminar transferencia',
             'description' => 'Eliminar transferencia',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Conduces
         Permission::create([
-            'name' => 'admin.conduces.index',
+            'name' => 'Listar conduces',
             'description' => 'Listar conduces',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.conduces.create',
+            'name' => 'Crear nuevo conduce',
             'description' => 'Crear nuevo conduce',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.conduces.edit',
-            'description' => 'Editar conduces',
+            'name' => 'Editar conduce',
+            'description' => 'Editar conduce',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.conduces.destroy',
+            'name' => 'Eliminar conduce',
             'description' => 'Eliminar conduce',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
         // Permisos para Facturas
         Permission::create([
-            'name' => 'admin.facturas.index',
+            'name' => 'Listar facturas',
             'description' => 'Listar facturas',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.facturas.create',
-            'description' => 'Crear nueva factura',
+            'name' => 'Crear factura',
+            'description' => 'Crear factura',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.facturas.edit',
+            'name' => 'Editar factura',
             'description' => 'Editar factura',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'admin.facturas.destroy',
+            'name' => 'Eliminar factura',
             'description' => 'Eliminar factura',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 

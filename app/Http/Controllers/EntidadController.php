@@ -9,13 +9,10 @@ class EntidadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.entidades.index')->only('index');
-        $this->middleware('can:admin.entidades.create')->only(
-            'create',
-            'store'
-        );
-        $this->middleware('can:admin.entidades.edit')->only('edit', 'update');
-        $this->middleware('can:admin.entidades.destroy')->only('destroy');
+        $this->middleware('can:Listar entidades')->only('index');
+        $this->middleware('can:Crear entidad')->only('create', 'store');
+        $this->middleware('can:Editar entidad')->only('edit', 'update');
+        $this->middleware('can:Eliminar entidad')->only('destroy');
     }
 
     /**

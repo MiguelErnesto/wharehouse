@@ -9,10 +9,10 @@ class ClienteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.clientes.index')->only('index');
-        $this->middleware('can:admin.clientes.create')->only('create', 'store');
-        $this->middleware('can:admin.clientes.edit')->only('edit', 'update');
-        $this->middleware('can:admin.clientes.destroy')->only('destroy');
+        $this->middleware('can:Listar clientes')->only('index');
+        $this->middleware('can:Crear cliente')->only('create', 'store');
+        $this->middleware('can:Editar cliente')->only('edit', 'update');
+        $this->middleware('can:Eliminar cliente')->only('destroy');
     }
     /**
      * Display a listing of the resource.

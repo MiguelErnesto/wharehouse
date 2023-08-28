@@ -255,7 +255,7 @@ return [
                     'route' => 'entidades.index',
                     'icon' => 'fas fa-landmark fa-fw pr-2',
                     'active' => ['entidades*'],
-                    'can' => 'admin.entidades.index',
+                    'can' => 'Listar entidades',
                 ],
                 [
                     'text' => 'Clientes',
@@ -263,7 +263,7 @@ return [
                     'route' => 'clientes.index',
                     'icon' => 'fas fa-users fa-fw pr-2',
                     'active' => ['clientes*'],
-                    'can' => 'admin.clientes.index',
+                    'can' => 'Listar clientes',
                 ],
                 [
                     'text' => 'Almacenes',
@@ -274,7 +274,7 @@ return [
                         'almacenes*',
                         /* 'almacenes_productos/getProductosAlmacen*', */
                     ],
-                    'can' => 'admin.almacenes.index',
+                    'can' => 'Listar almacenes',
                 ],
                 [
                     'text' => 'Productos',
@@ -282,7 +282,7 @@ return [
                     'route' => 'productos.index',
                     'icon' => 'fas fa-boxes fa-fw pr-2',
                     'active' => ['productos*'],
-                    'can' => 'admin.productos.index',
+                    'can' => 'Listar productos',
                 ],
                 [
                     'text' => 'Informes de Recepción',
@@ -290,7 +290,7 @@ return [
                     'route' => 'informes_recepcion.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['informes_recepcion*'],
-                    'can' => 'admin.informes_recepcion.index',
+                    'can' => 'Listar informes recepción',
                 ],
                 [
                     'text' => 'Órdenes de Despacho',
@@ -298,7 +298,7 @@ return [
                     'route' => 'ordenes_despacho.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['ordenes_despacho*'],
-                    'can' => 'admin.ordenes_despacho.index',
+                    'can' => 'Listar órdenes despacho',
                 ],
                 [
                     'text' => 'Vales',
@@ -306,7 +306,7 @@ return [
                     'route' => 'vales.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['vales*'],
-                    'can' => 'admin.vales.index',
+                    'can' => 'Listar vales',
                 ],
                 [
                     'text' => 'Transferencias',
@@ -314,7 +314,7 @@ return [
                     'route' => 'transferencias.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['transferencias*'],
-                    'can' => 'admin.transferencias.index',
+                    'can' => 'Listar transferencias',
                 ],
                 [
                     'text' => 'Conduces',
@@ -322,7 +322,7 @@ return [
                     'route' => 'conduces.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['conduces*'],
-                    'can' => 'admin.conduces.index',
+                    'can' => 'Listar conduces',
                 ],
                 [
                     'text' => 'Facturas',
@@ -330,7 +330,7 @@ return [
                     'route' => 'facturas.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['facturas*'],
-                    'can' => 'admin.facturas.index',
+                    'can' => 'Listar facturas',
                 ],
             ],
         ],

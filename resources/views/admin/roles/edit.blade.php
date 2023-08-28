@@ -3,7 +3,7 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <h1>Edit Role: </h1>
+    <h1> </h1>
 @stop
 
 @section('content')
@@ -17,9 +17,9 @@
             {!! Form::model($role, ['route' => ['admin.roles.update', $role], 'method' => 'PUT']) !!}
 
             @include('admin.roles.partials.form')
-
-            {!! Form::submit('Edit Role', ['class' => 'btn btn-primary']) !!}
+            <br />
+            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
 
             {!! Form::close() !!}
         </div>
-@stop
+    @stop

@@ -16,10 +16,10 @@ class ValeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.vales.index')->only('index');
-        $this->middleware('can:admin.vales.create')->only('create', 'store');
-        $this->middleware('can:admin.vales.edit')->only('edit', 'update');
-        $this->middleware('can:admin.vales.destroy')->only('destroy');
+        $this->middleware('can:Listar vales')->only('index');
+        $this->middleware('can:Crear vale')->only('create', 'store');
+        $this->middleware('can:Editar vale')->only('edit', 'update');
+        $this->middleware('can:Eliminar vale')->only('destroy');
     }
 
     /**

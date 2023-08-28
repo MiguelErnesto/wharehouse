@@ -14,19 +14,19 @@
     @endif
     <div class="card">
         <div class="card-body">
-            <p class="h5">Name: </p>
+            {{-- <p class="h5">Nombre: </p> --}}
             <p class="form-control">{{ $user->name }}</p>
-            <h2 class="h5">Role List</h2>
+            <h2 class="h5">Roles</h2>
             {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'PUT']) !!}
             @foreach ($roles as $role)
                 <div>
-                    <label>
+                    <label class='pl-5'>
                         {!! Form::checkbox('roles[]', $role->id, null, ['class' => 'mr-1']) !!}
                         {{ $role->name }}
                     </label>
                 </div>
             @endforeach
-            {!! Form::submit('Update', ['class' => 'btn btn-primary mt-2']) !!}
+            {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
             {!! Form::close() !!}
         </div>
     </div>

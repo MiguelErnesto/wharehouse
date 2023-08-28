@@ -16,10 +16,10 @@ class FacturaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.facturas.index')->only('index');
-        $this->middleware('can:admin.facturas.create')->only('create', 'store');
-        $this->middleware('can:admin.facturas.edit')->only('edit', 'update');
-        $this->middleware('can:admin.facturas.destroy')->only('destroy');
+        $this->middleware('can:Listar facturas')->only('index');
+        $this->middleware('can:Crear factura')->only('create', 'store');
+        $this->middleware('can:Editar factura')->only('edit', 'update');
+        $this->middleware('can:Eliminar factura')->only('destroy');
     }
     /**
      * Display a listing of the resource.

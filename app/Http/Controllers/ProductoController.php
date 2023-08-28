@@ -9,13 +9,10 @@ class ProductoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.productos.index')->only('index');
-        $this->middleware('can:admin.productos.create')->only(
-            'create',
-            'store'
-        );
-        $this->middleware('can:admin.productos.edit')->only('edit', 'update');
-        $this->middleware('can:admin.productos.destroy')->only('destroy');
+        $this->middleware('can:Listar productos')->only('index');
+        $this->middleware('can:Crear producto')->only('create', 'store');
+        $this->middleware('can:Editar producto')->only('edit', 'update');
+        $this->middleware('can:Eliminar producto')->only('destroy');
     }
 
     /**

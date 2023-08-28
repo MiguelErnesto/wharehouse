@@ -17,10 +17,10 @@ class ConduceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.conduces.index')->only('index');
-        $this->middleware('can:admin.conduces.create')->only('create', 'store');
-        $this->middleware('can:admin.conduces.edit')->only('edit', 'update');
-        $this->middleware('can:admin.conduces.destroy')->only('destroy');
+        $this->middleware('can:Listar conduces')->only('index');
+        $this->middleware('can:Nuevo conduce')->only('create', 'store');
+        $this->middleware('can:Editar conduce')->only('edit', 'update');
+        $this->middleware('can:Eliminar conduce')->only('destroy');
     }
     /**
      * Display a listing of the resource.

@@ -16,16 +16,10 @@ class TransferenciaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.transferencias.index')->only('index');
-        $this->middleware('can:admin.transferencias.create')->only(
-            'create',
-            'store'
-        );
-        $this->middleware('can:admin.transferencias.edit')->only(
-            'edit',
-            'update'
-        );
-        $this->middleware('can:admin.transferencias.destroy')->only('destroy');
+        $this->middleware('can:Listar transferencias')->only('index');
+        $this->middleware('can:Crear transferencias')->only('create', 'store');
+        $this->middleware('can:Editar transferencia')->only('edit', 'update');
+        $this->middleware('can:Eliminar transferencia')->only('destroy');
     }
 
     /**

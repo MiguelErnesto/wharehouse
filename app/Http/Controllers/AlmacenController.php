@@ -10,13 +10,10 @@ class AlmacenController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.almacenes.index')->only('index');
-        $this->middleware('can:admin.almacenes.create')->only(
-            'create',
-            'store'
-        );
-        $this->middleware('can:admin.almacenes.edit')->only('edit', 'update');
-        $this->middleware('can:admin.almacenes.destroy')->only('destroy');
+        $this->middleware('can:Listar almacenes')->only('index');
+        $this->middleware('can:Crear almacén')->only('create', 'store');
+        $this->middleware('can:Editar almacén')->only('edit', 'update');
+        $this->middleware('can:Eliminar almacén')->only('destroy');
     }
 
     /**
