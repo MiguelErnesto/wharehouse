@@ -973,7 +973,6 @@ var ObjectClass = /*#__PURE__*/function () {
     value: function onExport(evt) {
       evt.preventDefault();
       evt.stopPropagation();
-      alert('aaa');
       var id = evt.currentTarget.dataset.id;
       window.open("informes_recepcion/exportar/".concat(id), '_blank');
     }

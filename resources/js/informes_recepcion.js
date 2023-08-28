@@ -81,7 +81,6 @@ export default class ObjectClass {
   onExport(evt) {
     evt.preventDefault()
     evt.stopPropagation()
-    alert('aaa')
     let id = evt.currentTarget.dataset.id
     window.open(`informes_recepcion/exportar/${id}`, '_blank')
   }

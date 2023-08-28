@@ -122,7 +122,6 @@
 @stop
 
 @section('js')
-    {{-- <script type="module" src="{{ asset('warehouse') }}/almacenes.js?{{ env('JS_VERSION') }}"></script> --}}
     <script async type="module" src="{{ mix('/js/compiled/informes_recepcion.js') }}"></script>
 
 @stop

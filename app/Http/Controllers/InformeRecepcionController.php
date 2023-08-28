@@ -325,8 +325,8 @@ class InformeRecepcionController extends Controller
         ];
 
         $pdf = PDF::loadView('admin.informes_recepcion.print', $data);
-        //return $pdf->download('users_pdf_example.pdf');
-        return $pdf->stream('result.pdf');
+        return $pdf->download('users_pdf_example.pdf');
+        //return $pdf->stream('result.pdf');
 
         return view(
             'admin.informes_recepcion.print',

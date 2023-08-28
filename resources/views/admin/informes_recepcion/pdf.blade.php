@@ -15,10 +15,10 @@
                     {{-- <h2>{{ title }}</h2>
                     <h4>{{ date }}</h4> --}}
                 </div>
-                <div class="pull-right">
+                {{-- <div class="pull-right">
                     <a class="btn btn-primary"
                         href="{{ route('informes_recepcion.index', ['download' => 'pdf']) }}">Download PDF</a>
-                </div>
+                </div> --}}
             </div>
         </div><br>
         <table class="table table-bordered">
