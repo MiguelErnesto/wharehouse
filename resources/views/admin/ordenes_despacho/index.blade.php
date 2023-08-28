@@ -51,36 +51,35 @@
                                 @endforeach
                                 <td class='text-center'>{{ $orden_despacho->vale_id ? 'VALE' : 'TRANSFERENCIA' }}</td>
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.ordenes_despacho.index')
+                                @can('Listar ordenes despacho')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id="{{ $orden_despacho->id }}" title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.ordenes_despacho.index')
+                                @can('Imprimir documento', 'Exportar documento')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $orden_despacho->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.ordenes_despacho.edit')
+                                @can('Editar orden despacho')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm"
                                             href="{{ route('ordenes_despacho.edit', $orden_despacho) }}" title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-
-                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.ordenes_despacho.destroy')
+                                @can('Eliminar orden despacho')
+                                    <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $orden_despacho->id }}'
                                             action="{{ route('ordenes_despacho.destroy', $orden_despacho) }}" method="POST">
                                             @csrf
@@ -89,8 +88,8 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     @endif

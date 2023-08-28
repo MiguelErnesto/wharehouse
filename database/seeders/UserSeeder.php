@@ -27,6 +27,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ])->assignRole('SuperAdmin');
 
+        User::create([
+            'name' => 'Jose Rodriguez',
+            'email' => 'jr@example.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('Almacenero');
+
         //User::factory(9)->create();
 
         //Enable foreign key checks for current db driver

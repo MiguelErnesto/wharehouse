@@ -38,12 +38,22 @@ class RoleSeeder extends Seeder
 
         //Administración de usuarios
         Permission::create([
-            'name' => 'admin.users.index',
+            'name' => 'Listar usuarios',
             'description' => 'Listar usuarios',
         ])->syncRoles([$role1]);
         Permission::create([
-            'name' => 'admin.users.edit',
+            'name' => 'Asignar roles',
             'description' => 'Asignar roles a usuarios',
+        ])->syncRoles([$role1]);
+
+        //Administración de roles
+        Permission::create([
+            'name' => 'Listar roles',
+            'description' => 'Listar roles',
+        ])->syncRoles([$role1]);
+        Permission::create([
+            'name' => 'Editar roles',
+            'description' => 'Editar',
         ])->syncRoles([$role1]);
 
         // Permisos para Entidades
@@ -138,111 +148,121 @@ class RoleSeeder extends Seeder
 
         // Permisos para Informes de Recepcion
         Permission::create([
-            'name' => 'Listar informes recepción',
+            'name' => 'Listar informes recepcion',
             'description' => 'Listar informes de recepción',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
-            'name' => 'Crear informe recepción',
+            'name' => 'Crear informe recepcion',
             'description' => 'Crear informe de recepción',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
-            'name' => 'Editar informe recepción',
+            'name' => 'Editar informe recepcion',
             'description' => 'Editar informe de recepción',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
-            'name' => 'Eliminar informe recepción',
+            'name' => 'Eliminar informe recepcion',
             'description' => 'Eliminar informe de recepción',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
 
         // Permisos para el Despacho de Productos
         Permission::create([
             'name' => 'Listar ordenes despacho',
-            'description' => 'Listar despachos',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+            'description' => 'Listar ordenes de despachos',
+        ])->syncRoles([$role1, $role2, $role5]);
         Permission::create([
             'name' => 'Crear orden despacho',
-            'description' => 'Crear despacho',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+            'description' => 'Crear orden de despacho',
+        ])->syncRoles([$role1, $role2, $role5]);
         Permission::create([
             'name' => 'Editar orden despacho',
-            'description' => 'Editar despacho',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+            'description' => 'Editar orden de despacho',
+        ])->syncRoles([$role1, $role2, $role5]);
         Permission::create([
-            'name' => 'Eliminar despacho',
-            'description' => 'Eliminar orden despacho',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+            'name' => 'Eliminar orden despacho',
+            'description' => 'Eliminar orden de despacho',
+        ])->syncRoles([$role1, $role2, $role5]);
 
         // Permisos para Vales
         Permission::create([
             'name' => 'Listar vales',
             'description' => 'Listar vales',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Crear vale',
             'description' => 'Crear nuevo vale',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Editar vale',
             'description' => 'Editar vale',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Eliminar vale',
             'description' => 'Eliminar vale',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
 
         // Permisos para Transferencias
         Permission::create([
             'name' => 'Listar transferencias',
             'description' => 'Listar transferencias',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
             'name' => 'Crear transferencia',
             'description' => 'Crear transferencia',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
             'name' => 'Editar transferencia',
             'description' => 'Editar transferencia',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
             'name' => 'Eliminar transferencia',
             'description' => 'Eliminar transferencia',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
 
         // Permisos para Conduces
         Permission::create([
             'name' => 'Listar conduces',
             'description' => 'Listar conduces',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
             'name' => 'Crear nuevo conduce',
             'description' => 'Crear nuevo conduce',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
             'name' => 'Editar conduce',
             'description' => 'Editar conduce',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
             'name' => 'Eliminar conduce',
             'description' => 'Eliminar conduce',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3]);
 
         // Permisos para Facturas
         Permission::create([
             'name' => 'Listar facturas',
             'description' => 'Listar facturas',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Crear factura',
             'description' => 'Crear factura',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Editar factura',
             'description' => 'Editar factura',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Eliminar factura',
             'description' => 'Eliminar factura',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role4]);
+
+        Permission::create([
+            'name' => 'Imprimir documento',
+            'description' => 'Imprimir documentos',
+        ])->syncRoles([$role1, $role2, $role4]);
+
+        Permission::create([
+            'name' => 'Exportar documento',
+            'description' => 'Exportar documentos',
+        ])->syncRoles([$role1, $role2, $role3]);
 
         //Enable foreign key checks for current db driver
         //SET foreign_key_checks = 1 //MYSQL

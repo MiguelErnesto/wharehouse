@@ -11,8 +11,8 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.users.index')->only('index');
-        $this->middleware('can:admin.users.edit')->only('edit', 'update');
+        $this->middleware('can:Listar usuarios')->only('index');
+        $this->middleware('can:Asignar roles')->only('edit', 'update');
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +33,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view ('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -46,6 +46,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
-        return redirect()->route('admin.users.edit', $user)->with('info', 'The role was successfully assigned.');
+        return redirect()
+            ->route('admin.users.edit', $user)
+            ->with('info', 'The role was successfully assigned.');
     }
 }

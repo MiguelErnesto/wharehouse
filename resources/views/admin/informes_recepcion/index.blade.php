@@ -16,7 +16,7 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.informes_recepcion.create')
+        @can('Crear informe recepcion')
             <div class="card-header">
                 <a href="{{ route('informes_recepcion.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
@@ -55,37 +55,36 @@
                                     @endif
                                 @endforeach
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                @can('Listar informes recepcion')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id="{{ $informe_recepcion->id }}"
                                             title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                @can('Imprimir documento', 'Exportar documento')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $informe_recepcion->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.informes_recepcion.edit')
+                                @can('Editar informe recepcion')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm"
                                             href="{{ route('informes_recepcion.edit', $informe_recepcion) }}" title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-
-                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.informes_recepcion.destroy')
+                                @can('Eliminar informe recepcion')
+                                    <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $informe_recepcion->id }}'
                                             action="{{ route('informes_recepcion.destroy', $informe_recepcion) }}"
                                             method="POST">
@@ -95,8 +94,9 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
+
                             </tr>
                         @endforeach
                     @endif

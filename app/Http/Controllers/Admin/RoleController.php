@@ -46,7 +46,9 @@ class RoleController extends Controller
         $role = Role::create($request->all());
         $role->permissions()->sync($request->permissions);
 
-        return redirect()->route('admin.roles.edit', $role)->with('info', 'The role has been successfully created.');
+        return redirect()
+            ->route('admin.roles.edit', $role)
+            ->with('info', 'The role has been successfully created.');
     }
 
     /**
@@ -88,7 +90,9 @@ class RoleController extends Controller
         $role->update($request->all());
         $role->permissions()->sync($request->permissions);
 
-        return redirect()->route('admin.roles.edit', $role)->with('info', 'The role has been successfully updated.');
+        return redirect()
+            ->route('admin.roles.edit', $role)
+            ->with('info', 'The role has been successfully updated.');
     }
 
     /**
@@ -101,6 +105,8 @@ class RoleController extends Controller
     {
         $role->delete();
 
-        return redirect()->route('admin.roles.index')->with('info', 'The role has been successfully deleted.');
+        return redirect()
+            ->route('admin.roles.index')
+            ->with('info', 'The role has been successfully deleted.');
     }
 }

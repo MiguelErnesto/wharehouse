@@ -53,36 +53,36 @@
                                 @endforeach
                                 <td class="text-right">{{ $conduce->nro_factura }}</td>
                                 <td></td>
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+
+                                @can('Listar conduces')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id="{{ $conduce->id }}" title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                @can('Imprimir documento', 'Exportar documento')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $conduce->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.conduces.edit')
+                                @can('Editar conduce')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm" href="{{ route('conduces.edit', $conduce) }}"
                                             title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-
-                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.conduces.destroy')
+                                @can('Eliminar conduce')
+                                    <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $conduce->id }}'
                                             action="{{ route('conduces.destroy', $conduce) }}" method="POST">
                                             @csrf
@@ -91,8 +91,8 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     @endif

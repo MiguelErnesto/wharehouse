@@ -19,10 +19,10 @@ class OrdenDespachoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar órdenes despacho')->only('index');
-        $this->middleware('can:Crear órden despacho')->only('create', 'store');
-        $this->middleware('can:Editar órden despacho')->only('edit', 'update');
-        $this->middleware('can:Eliminar órden despacho')->only('destroy');
+        $this->middleware('can:Listar ordenes despacho')->only('index');
+        $this->middleware('can:Crear orden despacho')->only('create', 'store');
+        $this->middleware('can:Editar orden despacho')->only('edit', 'update');
+        $this->middleware('can:Eliminar orden despacho')->only('destroy');
     }
     /**
      * Display a listing of the resource.

@@ -290,7 +290,7 @@ return [
                     'route' => 'informes_recepcion.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['informes_recepcion*'],
-                    'can' => 'Listar informes recepción',
+                    'can' => 'Listar informes recepcion',
                 ],
                 [
                     'text' => 'Órdenes de Despacho',
@@ -298,7 +298,7 @@ return [
                     'route' => 'ordenes_despacho.index',
                     'icon' => 'fas fa-list fa-fw pr-2',
                     'active' => ['ordenes_despacho*'],
-                    'can' => 'Listar órdenes despacho',
+                    'can' => 'Listar ordenes despacho',
                 ],
                 [
                     'text' => 'Vales',
@@ -339,6 +339,12 @@ return [
             'text' => 'Usuarios',
             'classes' => 'text-uppercase',
             'icon' => 'fas fa-fw fa-users mr-1',
+            'can' => [
+                'Listar usuarios',
+                'Editar usuario',
+                'Listar roles',
+                'Editar role',
+            ],
             'submenu' => [
                 [
                     'text' => 'Usuarios',
@@ -346,7 +352,7 @@ return [
                     'route' => 'admin.users.index',
                     'icon' => 'fas fa-users fa-fw pr-4',
                     'active' => ['admin/users*'],
-                    'can' => 'admin.users.index',
+                    'can' => 'Listar usuarios',
                 ],
                 [
                     'text' => 'Roles',
@@ -354,7 +360,7 @@ return [
                     'route' => 'admin.roles.index',
                     'icon' => 'fas fa-users-cog fa-fw pr-4',
                     'active' => ['admin/roles*'],
-                    // 'can' => 'admin.roles.index',
+                    'can' => 'Listar roles',
                 ],
                 [
                     'text' => 'Perfil de Usuario',
@@ -370,11 +376,11 @@ return [
                 ],
             ],
         ],
-        [
+        /* [
             'text' => 'Ajustes',
             'url' => 'admin/pages',
             'icon' => 'fas fa-cogs mr-1',
-        ],
+        ], */
     ],
 
     /*

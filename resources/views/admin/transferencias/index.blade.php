@@ -60,36 +60,36 @@
                                     @endif
                                 @endforeach
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                @can('Listar transferencias')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id="{{ $transferencia->id }}" title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                @can('Imprimir documento', 'Exportar documento')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $transferencia->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.transferencias.edit')
+                                @can('Editar transferencia')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm"
                                             href="{{ route('transferencias.edit', $transferencia) }}" title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
 
-                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.transferencias.destroy')
+                                @can('Eliminar transferencia')
+                                    <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $transferencia->id }}'
                                             action="{{ route('transferencias.destroy', $transferencia) }}" method="POST">
                                             @csrf
@@ -98,8 +98,8 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     @endif

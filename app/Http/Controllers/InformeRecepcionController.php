@@ -15,16 +15,16 @@ class InformeRecepcionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar informes recepción')->only('index');
-        $this->middleware('can:Crear informe recepción')->only(
+        $this->middleware('can:Listar informes recepcion')->only('index');
+        $this->middleware('can:Crear informe recepcion')->only(
             'create',
             'store'
         );
-        $this->middleware('can:Editar informe recepción')->only(
+        $this->middleware('can:Editar informe recepcion')->only(
             'edit',
             'update'
         );
-        $this->middleware('can:Eliminar informe recepción')->only('destroy');
+        $this->middleware('can:Eliminar informe recepcion')->only('destroy');
     }
 
     /**

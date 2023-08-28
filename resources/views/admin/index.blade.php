@@ -85,8 +85,8 @@
             </div>
         @endcan
 
-        {{-- Informes de Recpeción --}}
-        @can('Listar informes recepción')
+        {{-- Informes de Recepción --}}
+        @can('Listar informes recepcion')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-black">
                     <div class="inner text-center">
@@ -108,7 +108,7 @@
 
     <div class="row">
         {{-- Órdenes de despacho --}}
-        @can('Listar órdenes despacho')
+        @can('Listar ordenes despacho')
             <div class="col-lg-2 col-9">
                 <div class="small-box bg-light">
                     <div class="inner text-center">

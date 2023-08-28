@@ -57,8 +57,8 @@
                                     @endif
                                 @endforeach
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                @can('Listar vales')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-info btn-sm btnVerDetalles" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id="{{ $vale->id }}" title="Ver detalles">
                                             <i class="fas fa-info fa-fw"></i>
@@ -66,27 +66,26 @@
                                     @endcan
                                 </td>
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes_productos.index')
+                                @can('Imprimir documento', 'Exportar documento')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $vale->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
                                         </a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-                                <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                    @can('admin.vales.edit')
+                                @can('Editar vale')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm" href="{{ route('vales.edit', $vale) }}"
                                             title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
 
-
-                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.vales.destroy')
+                                @can('Eliminar vale')
+                                    <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $vale->id }}' action="{{ route('vales.destroy', $vale) }}"
                                             method="POST">
                                             @csrf
@@ -95,8 +94,8 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     @endif
