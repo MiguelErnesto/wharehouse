@@ -6,6 +6,7 @@ export default class almacenesClass {
     this.btnDelete = document.querySelectorAll('.btnDelete') ?? null
     this.btnPrint = document.querySelector('.btnPrint') ?? null
     this.btnVerProdAlm = document.querySelectorAll('.btnVerProdAlm')
+    this.btnPDFExport = document.querySelector('.btnPDFExport') ?? null
     this.addListeners()
   }
 
@@ -27,6 +28,15 @@ export default class almacenesClass {
       }
     }
     this.btnPrint.addEventListener('click', (evt) => this.onPrint(evt))
+    this.btnPDFExport.addEventListener('click', (evt) => this.onExportPDF(evt))
+
+    /*  if (this.btnPDFExport) {
+      for (var i = 0; i < this.btnPDFExport.length; i += 1) {
+        this.btnPDFExport[i].addEventListener('click', (evt) =>
+          this.onExportPDF(evt),
+        )
+      }
+    } */
 
     $(document).ready(function () {
       console.log('Ready!')
@@ -38,21 +48,15 @@ export default class almacenesClass {
     evt.stopPropagation()
     let id = document.getElementById('almacen_id').value
     window.open(`almacenes_productos/imprimir/${id}`, '_blank')
+  }
 
-    // AJAX GET request
-    /* $.ajax({
-      url: `almacenes_productos/imprimir/${id}`,
-      type: 'get',
-      dataType: 'json',
-      context: this,
-      success: function (response) {
-        alert(JSON.stringify(response))
-      },
-      error: function (error) {
-        console.log('Fetching data: ERROR')
-        console.log(JSON.stringify(error))
-      },
-    }) */
+  onExportPDF(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    if (confirm(`¿Desea descargar esta información en un PDF?`)) {
+      let id = document.getElementById('almacen_id').value
+      window.open(`almacenes_productos/exportarPDF/${id}`, '_blank')
+    }
   }
 
   onVerProductosAlmacen(evt) {

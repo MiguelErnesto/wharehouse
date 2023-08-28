@@ -920,10 +920,10 @@ var ObjectClass = /*#__PURE__*/function () {
         }
       }
 
-      if (_this.btnExport) {
-        for (var i = 0; i < _this.btnExport.length; i += 1) {
-          _this.btnExport[i].addEventListener('click', function (evt) {
-            return _this.onExport(evt);
+      if (_this.btnPDFExport) {
+        for (var i = 0; i < _this.btnPDFExport.length; i += 1) {
+          _this.btnPDFExport[i].addEventListener('click', function (evt) {
+            return _this.onExportPDF(evt);
           });
         }
       }
@@ -938,7 +938,7 @@ var ObjectClass = /*#__PURE__*/function () {
     this.add = document.getElementById('add');
     this.btnVerInformeRecepcion = document.querySelectorAll('.btnVerInformeRecepcion');
     this.btnPrint = document.querySelectorAll('.btnPrint');
-    this.btnExport = document.querySelectorAll('.btnExport');
+    this.btnPDFExport = document.querySelectorAll('.btnPDFExport');
     this.addListeners();
     this.clean();
   }
@@ -969,8 +969,8 @@ var ObjectClass = /*#__PURE__*/function () {
       window.open("informes_recepcion/imprimir/".concat(id), '_blank');
     }
   }, {
-    key: "onExport",
-    value: function onExport(evt) {
+    key: "onExportPDF",
+    value: function onExportPDF(evt) {
       evt.preventDefault();
       evt.stopPropagation();
 

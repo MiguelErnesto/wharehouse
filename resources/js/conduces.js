@@ -7,7 +7,7 @@ export default class ObjectClass {
     this.btnVerDetalles = document.querySelectorAll('.btnVerDetalles')
 
     this.btnPrint = document.querySelectorAll('.btnPrint')
-
+    this.btnPDFExport = document.querySelectorAll('.btnPDFExport')
     this.addListeners()
     this.clean()
   }
@@ -57,6 +57,14 @@ export default class ObjectClass {
       }
     }
 
+    if (this.btnPDFExport) {
+      for (var i = 0; i < this.btnPDFExport.length; i += 1) {
+        this.btnPDFExport[i].addEventListener('click', (evt) =>
+          this.onExportPDF(evt),
+        )
+      }
+    }
+
     $(document).ready(function () {
       console.log('Ready!')
     })
@@ -67,6 +75,15 @@ export default class ObjectClass {
     evt.stopPropagation()
     let id = evt.currentTarget.dataset.id
     window.open(`conduces/imprimir/${id}`, '_blank')
+  }
+
+  onExportPDF(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    if (confirm(`¿Desea descargar esta información en un PDF?`)) {
+      let id = evt.currentTarget.dataset.id
+      window.open(`conduces/exportarPDF/${id}`, '_blank')
+    }
   }
 
   onVerDetalles(evt) {

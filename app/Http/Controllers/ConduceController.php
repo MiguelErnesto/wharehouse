@@ -12,15 +12,19 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
+use Carbon\Carbon;
+use PDF;
 
 class ConduceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar conduces')->only('index');
+        $this->middleware('can:Listar conduces')->only('index', 'getDetalles');
         $this->middleware('can:Nuevo conduce')->only('create', 'store');
         $this->middleware('can:Editar conduce')->only('edit', 'update');
         $this->middleware('can:Eliminar conduce')->only('destroy');
+        $this->middleware('can:Imprimir')->only('imprimir');
+        $this->middleware('can:Exportar PDF')->only('exportarPDF');
     }
     /**
      * Display a listing of the resource.
@@ -258,5 +262,67 @@ class ConduceController extends Controller
             ->get();
 
         return view('admin.conduces.print', compact('detalles', 'productos'));
+    }
+
+    public function exportarPDF($id)
+    {
+        $DocumentoPDF = Conduce::where('id', '=', $id)
+            ->select('nro_conduce', 'fecha_modelo')
+            ->first();
+
+        $detalles = Conduce::where('conduces.id', '=', $id)
+            ->join('entidades as ent', 'ent.id', '=', 'conduces.entidad_id')
+            ->join('users as u', 'u.id', '=', 'conduces.user_id')
+            ->select(
+                'conduces.id as id',
+                'conduces.fecha_modelo as fecha_modelo',
+                'conduces.nro_conduce as nro_conduce',
+                'conduces.nro_factura as nro_factura',
+                'conduces.comprador as comprador',
+                'conduces.lugar_entrega as lugar_entrega',
+                'conduces.transportador as transportador',
+                'conduces.fecha_recepcion_transportador as fecha_recepcion_transportador',
+                'conduces.persona_entrega as persona_entrega',
+                'conduces.fecha_entrega as fecha_entrega',
+                'conduces.persona_recepcion as persona_recepcion',
+                'conduces.fecha_recepcion as fecha_recepcion',
+                'conduces.persona_actualiza as persona_actualiza',
+                'conduces.persona_contabiliza as persona_contabiliza',
+                'ent.nombre as entidad',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Conduce::where('conduces.id', '=', $id)
+            ->join(
+                'conduce_productos as vp',
+                'vp.conduce_id',
+                '=',
+                'conduces.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad as cantidad'
+            )
+            ->get();
+
+        $pdf = PDF::loadView(
+            'admin.conduces.print',
+            compact('productos', 'detalles')
+        )->setOptions([
+            'defaultFont' => 'sans-serif',
+            'Letter' => 'landscape',
+        ]);
+
+        return $pdf->download(
+            'Conduce_' .
+                Carbon::parse($DocumentoPDF->fecha_modelo)->format('Y-m-d') .
+                '_' .
+                $DocumentoPDF->nro_conduce .
+                '.pdf'
+        );
     }
 }

@@ -11,15 +11,19 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
+use Carbon\Carbon;
+use PDF;
 
 class ValeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar vales')->only('index');
+        $this->middleware('can:Listar vales')->only('index', 'getDetalles');
         $this->middleware('can:Crear vale')->only('create', 'store');
         $this->middleware('can:Editar vale')->only('edit', 'update');
         $this->middleware('can:Eliminar vale')->only('destroy');
+        $this->middleware('can:Imprimir')->only('imprimir');
+        $this->middleware('can:Exportar PDF')->only('exportarPDF');
     }
 
     /**
@@ -229,5 +233,58 @@ class ValeController extends Controller
             ->get();
 
         return view('admin.vales.print', compact('detalles', 'productos'));
+    }
+
+    public function exportarPDF($id)
+    {
+        $DocumentoPDF = Vale::where('id', '=', $id)
+            ->select('nro_vale', 'fecha_modelo')
+            ->first();
+
+        $detalles = Vale::where('vales.id', '=', $id)
+            ->join('entidades as ent', 'ent.id', '=', 'vales.entidad_id')
+            ->join('almacenes as alm', 'alm.id', '=', 'vales.almacen_id')
+            ->join('users as u', 'u.id', '=', 'vales.user_id')
+            ->select(
+                'vales.id as id',
+                'vales.created_at as created_at',
+                'vales.updated_at as updated_at',
+                'vales.nro_vale as nro_vale',
+                'vales.tipo_vale as tipo_vale',
+                'vales.importe_total as importe_total',
+                'vales.persona_emisor as persona_emisor',
+                'vales.persona_receptor as persona_receptor',
+                'ent.nombre as entidad',
+                'alm.nombre as almacen',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Vale::where('vales.id', '=', $id)
+            ->join('vale_productos as vp', 'vp.vale_id', '=', 'vales.id')
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad as cantidad'
+            )
+            ->get();
+
+        $pdf = PDF::loadView(
+            'admin.vales.print',
+            compact('productos', 'detalles')
+        )->setOptions([
+            'defaultFont' => 'sans-serif',
+            'Letter' => 'landscape',
+        ]);
+
+        return $pdf->download(
+            'Vale_' .
+                Carbon::parse($DocumentoPDF->fecha_modelo)->format('Y-m-d') .
+                '_' .
+                $DocumentoPDF->nro_vale .
+                '.pdf'
+        );
     }
 }

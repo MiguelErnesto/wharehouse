@@ -11,15 +11,19 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
+use Carbon\Carbon;
+use PDF;
 
 class FacturaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar facturas')->only('index');
+        $this->middleware('can:Listar facturas')->only('index', 'getDetalles');
         $this->middleware('can:Crear factura')->only('create', 'store');
         $this->middleware('can:Editar factura')->only('edit', 'update');
         $this->middleware('can:Eliminar factura')->only('destroy');
+        $this->middleware('can:Imprimir')->only('imprimir');
+        $this->middleware('can:Exportar PDF')->only('exportarPDF');
     }
     /**
      * Display a listing of the resource.
@@ -258,5 +262,69 @@ class FacturaController extends Controller
             ->get();
 
         return view('admin.facturas.print', compact('detalles', 'productos'));
+    }
+
+    public function exportarPDF($id)
+    {
+        $DocumentoPDF = Factura::where('id', '=', $id)
+            ->select('nro_factura', 'fecha_modelo')
+            ->first();
+
+        $detalles = Factura::where('facturas.id', '=', $id)
+            ->join('entidades as ent', 'ent.id', '=', 'facturas.entidad_id')
+            ->join('users as u', 'u.id', '=', 'facturas.user_id')
+            ->select(
+                'facturas.id as id',
+                'facturas.fecha_modelo as fecha_modelo',
+                'facturas.nro_factura as nro_factura',
+                'facturas.datos_registro as datos_registro',
+                'facturas.operaciones as operaciones',
+                'facturas.moneda_pago as moneda_pago',
+                'facturas.porciento as porciento',
+                'facturas.transportista as transportista',
+                'facturas.persona_transportador as persona_transportador',
+                'facturas.fecha_recepcion_transportador as fecha_recepcion_transportador',
+                'facturas.persona_entrega as persona_entrega',
+                'facturas.fecha_entrega as fecha_entrega',
+                'facturas.persona_recibe as persona_recibe',
+                'facturas.fecha_recepcion as fecha_recepcion',
+                'facturas.persona_contabiliza as persona_contabiliza',
+                'facturas.importe_total as importe_total',
+                'ent.nombre as entidad',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Factura::where('facturas.id', '=', $id)
+            ->join(
+                'factura_productos as fp',
+                'fp.factura_id',
+                '=',
+                'facturas.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'fp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'fp.cantidad as cantidad'
+            )
+            ->get();
+
+        $pdf = PDF::loadView(
+            'admin.facturas.print',
+            compact('productos', 'detalles')
+        )->setOptions([
+            'defaultFont' => 'sans-serif',
+            'Letter' => 'landscape',
+        ]);
+
+        return $pdf->download(
+            'Factura_' .
+                Carbon::parse($DocumentoPDF->fecha_modelo)->format('Y-m-d') .
+                '_' .
+                $DocumentoPDF->nro_factura .
+                '.pdf'
+        );
     }
 }

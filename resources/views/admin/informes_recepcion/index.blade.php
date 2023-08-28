@@ -76,7 +76,7 @@
 
                                 @can('Exportar PDF')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
-                                        <a class="btn btn-warning btn-sm btnExport" data-id="{{ $informe_recepcion->id }}"
+                                        <a class="btn btn-warning btn-sm btnPDFExport" data-id="{{ $informe_recepcion->id }}"
                                             title="Exportar">
                                             <i style="color: #31343b;" class="fas fa-file-pdf fa-fw"></i>
                                         </a>

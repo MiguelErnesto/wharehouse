@@ -36,10 +36,10 @@
         </tr>
 
         <tr class="heading">
-            <td style="text-align: left">{{ __('Código') }}</td>
-            <td style="text-align: left">{{ __('Producto') }}</td>
-            <td style="text-align: left">{{ __('Descripción') }}</td>
-            <td style="text-align: right">{{ __('Cantidad') }}</td>
+            <td style="text-align: left;  width: 12%;">{{ __('Código') }}</td>
+            <td style="text-align: left;  width: 32%;">{{ __('Producto') }}</td>
+            <td style="text-align: left;  width: 49%;">{{ __('Descripción') }}</td>
+            <td style="text-align: right;  width: 12%;">{{ __('Cantidad') }}</td>
         </tr>
         @foreach ($productos as $producto)
             <tr class="item">

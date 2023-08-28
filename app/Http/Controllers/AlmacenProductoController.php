@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\AlmacenProducto;
 use App\Models\Producto;
 use App\Models\Almacen;
+use Carbon\Carbon;
+use PDF;
 
 class AlmacenProductoController extends Controller
 {
@@ -141,5 +143,41 @@ class AlmacenProductoController extends Controller
         $almacen = Almacen::find($id);
 
         return view('admin.almacenes.print', compact('productos', 'almacen'));
+    }
+
+    public function exportarPDF($id)
+    {
+        $productos = AlmacenProducto::where('almacen_id', '=', $id)
+            ->select(
+                'p.codigo as pCodigo',
+                'p.nombre as pNombre',
+                'p.descripcion as pDescripcion',
+                'almacenes_productos.cantidad as apCantidad'
+            )
+            ->join(
+                'productos as p',
+                'p.id',
+                '=',
+                'almacenes_productos.producto_id'
+            )
+            ->get();
+
+        $almacen = Almacen::find($id);
+
+        $pdf = PDF::loadView(
+            'admin.almacenes.print',
+            compact('productos', 'almacen')
+        )->setOptions([
+            'defaultFont' => 'sans-serif',
+            'Letter' => 'landscape',
+        ]);
+
+        return $pdf->download(
+            'ProductosAlmacen_' .
+                Carbon::parse(now())->format('Y-m-d') .
+                '_' .
+                $almacen->nombre .
+                '.pdf'
+        );
     }
 }

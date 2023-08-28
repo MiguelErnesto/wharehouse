@@ -11,15 +11,22 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
+use Carbon\Carbon;
+use PDF;
 
 class TransferenciaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar transferencias')->only('index');
+        $this->middleware('can:Listar transferencias')->only(
+            'index',
+            'getDetalles'
+        );
         $this->middleware('can:Crear transferencias')->only('create', 'store');
         $this->middleware('can:Editar transferencia')->only('edit', 'update');
         $this->middleware('can:Eliminar transferencia')->only('destroy');
+        $this->middleware('can:Imprimir')->only('imprimir');
+        $this->middleware('can:Exportar PDF')->only('exportarPDF');
     }
 
     /**
@@ -304,6 +311,79 @@ class TransferenciaController extends Controller
         return view(
             'admin.transferencias.print',
             compact('detalles', 'almacenes', 'productos')
+        );
+    }
+
+    public function exportarPDF($id)
+    {
+        $DocumentoPDF = Transferencia::where('id', '=', $id)
+            ->select('nro_transferencia', 'fecha_modelo')
+            ->first();
+
+        $detalles = Transferencia::where('transferencias.id', '=', $id)
+            ->join(
+                'entidades as ent',
+                'ent.id',
+                '=',
+                'transferencias.entidad_id'
+            )
+            ->join('users as u', 'u.id', '=', 'transferencias.user_id')
+            ->select(
+                'transferencias.id as id',
+                'transferencias.fecha_modelo as fecha_modelo',
+                'transferencias.nro_transferencia as nro_transferencia',
+                'transferencias.almacen_origen_id as almacen_origen_id',
+                'transferencias.almacen_destino_id as almacen_destino_id',
+                'transferencias.fecha_modelo as fecha_modelo',
+                'transferencias.fecha_traslado as fecha_traslado',
+                'transferencias.fecha_recepcion as fecha_recepcion',
+                'transferencias.persona_autoriza as persona_autoriza',
+                'transferencias.persona_entrega as persona_entrega',
+                'transferencias.persona_recibe as persona_recibe',
+                'transferencias.persona_actualiza_origen as persona_actualiza_origen',
+                'transferencias.persona_contabiliza_origen as persona_contabiliza_origen',
+                'transferencias.persona_actualiza_destino as persona_actualiza_destino',
+                'transferencias.persona_contabiliza_destino as persona_contabiliza_destino',
+                'transferencias.importe_total_entrega as importe_total_entrega',
+                'transferencias.importe_total_recibido as importe_total_recibido',
+                'ent.nombre as entidad',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = Transferencia::where('transferencias.id', '=', $id)
+            ->join(
+                'transferencia_productos as tp',
+                'tp.transferencia_id',
+                '=',
+                'transferencias.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'tp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'tp.cantidad_remitida as cantidad_remitida',
+                'tp.cantidad_recibida as cantidad_recibida'
+            )
+            ->get();
+
+        $almacenes = Almacen::orderBy('nombre', 'desc')->get();
+
+        $pdf = PDF::loadView(
+            'admin.transferencias.print',
+            compact('productos', 'detalles', 'almacenes')
+        )->setOptions([
+            'defaultFont' => 'sans-serif',
+            'Letter' => 'landscape',
+        ]);
+
+        return $pdf->download(
+            'Transferencia_' .
+                Carbon::parse($DocumentoPDF->fecha_modelo)->format('Y-m-d') .
+                '_' .
+                $DocumentoPDF->nro_transferencia .
+                '.pdf'
         );
     }
 }

@@ -63,11 +63,20 @@
                                     </td>
                                 @endcan
 
-                                @can('imprimir')
+                                @can('Imprimir')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $conduce->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
+                                        </a>
+                                    </td>
+                                @endcan
+
+                                @can('Exportar PDF')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
+                                        <a class="btn btn-warning btn-sm btnPDFExport" data-id="{{ $conduce->id }}"
+                                            title="Exportar">
+                                            <i style="color: #31343b;" class="fas fa-file-pdf fa-fw"></i>
                                         </a>
                                     </td>
                                 @endcan

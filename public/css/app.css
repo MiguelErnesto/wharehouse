@@ -1667,14 +1667,14 @@ select {
 .pr-3 {
   padding-right: 0.75rem;
 }
+.pr-2 {
+  padding-right: 0.5rem;
+}
 .pt-8 {
   padding-top: 2rem;
 }
 .pl-4 {
   padding-left: 1rem;
-}
-.pr-2 {
-  padding-right: 0.5rem;
 }
 .pl-2 {
   padding-left: 0.5rem;

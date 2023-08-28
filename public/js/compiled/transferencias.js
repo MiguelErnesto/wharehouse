@@ -920,6 +920,14 @@ var ObjectClass = /*#__PURE__*/function () {
         }
       }
 
+      if (_this.btnPDFExport) {
+        for (var i = 0; i < _this.btnPDFExport.length; i += 1) {
+          _this.btnPDFExport[i].addEventListener('click', function (evt) {
+            return _this.onExportPDF(evt);
+          });
+        }
+      }
+
       $(document).ready(function () {
         console.log('Ready!');
       });
@@ -930,6 +938,7 @@ var ObjectClass = /*#__PURE__*/function () {
     this.add = document.getElementById('add');
     this.btnVerDetalles = document.querySelectorAll('.btnVerDetalles');
     this.btnPrint = document.querySelectorAll('.btnPrint');
+    this.btnPDFExport = document.querySelectorAll('.btnPDFExport');
     this.addListeners();
     this.clean();
   }
@@ -962,6 +971,17 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.stopPropagation();
       var id = evt.currentTarget.dataset.id;
       window.open("transferencias/imprimir/".concat(id), '_blank');
+    }
+  }, {
+    key: "onExportPDF",
+    value: function onExportPDF(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+
+      if (confirm("\xBFDesea descargar esta informaci\xF3n en un PDF?")) {
+        var id = evt.currentTarget.dataset.id;
+        window.open("transferencias/exportarPDF/".concat(id), '_blank');
+      }
     }
   }, {
     key: "onVerDetalles",

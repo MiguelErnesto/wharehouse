@@ -16,7 +16,7 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.ordenes_despacho.create')
+        @can('Crear orden despacho')
             <div class="card-header">
                 <a href="{{ route('ordenes_despacho.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
@@ -60,11 +60,20 @@
                                     </td>
                                 @endcan
 
-                                @can('Imprimir documento', 'Exportar documento')
+                                @can('Imprimir')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $orden_despacho->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
+                                        </a>
+                                    </td>
+                                @endcan
+
+                                @can('Exportar PDF')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
+                                        <a class="btn btn-warning btn-sm btnPDFExport" data-id="{{ $orden_despacho->id }}"
+                                            title="Exportar">
+                                            <i style="color: #31343b;" class="fas fa-file-pdf fa-fw"></i>
                                         </a>
                                     </td>
                                 @endcan

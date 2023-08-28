@@ -877,7 +877,8 @@ var almacenesClass = /*#__PURE__*/function () {
     var _this = this,
         _document$getElementB,
         _document$querySelect,
-        _document$querySelect2;
+        _document$querySelect2,
+        _document$querySelect3;
 
     _classCallCheck(this, almacenesClass);
 
@@ -906,6 +907,18 @@ var almacenesClass = /*#__PURE__*/function () {
         return _this.onPrint(evt);
       });
 
+      _this.btnPDFExport.addEventListener('click', function (evt) {
+        return _this.onExportPDF(evt);
+      });
+      /*  if (this.btnPDFExport) {
+        for (var i = 0; i < this.btnPDFExport.length; i += 1) {
+          this.btnPDFExport[i].addEventListener('click', (evt) =>
+            this.onExportPDF(evt),
+          )
+        }
+      } */
+
+
       $(document).ready(function () {
         console.log('Ready!');
       });
@@ -915,6 +928,7 @@ var almacenesClass = /*#__PURE__*/function () {
     this.btnDelete = (_document$querySelect = document.querySelectorAll('.btnDelete')) !== null && _document$querySelect !== void 0 ? _document$querySelect : null;
     this.btnPrint = (_document$querySelect2 = document.querySelector('.btnPrint')) !== null && _document$querySelect2 !== void 0 ? _document$querySelect2 : null;
     this.btnVerProdAlm = document.querySelectorAll('.btnVerProdAlm');
+    this.btnPDFExport = (_document$querySelect3 = document.querySelector('.btnPDFExport')) !== null && _document$querySelect3 !== void 0 ? _document$querySelect3 : null;
     this.addListeners();
   }
 
@@ -924,21 +938,18 @@ var almacenesClass = /*#__PURE__*/function () {
       evt.preventDefault();
       evt.stopPropagation();
       var id = document.getElementById('almacen_id').value;
-      window.open("almacenes_productos/imprimir/".concat(id), '_blank'); // AJAX GET request
+      window.open("almacenes_productos/imprimir/".concat(id), '_blank');
+    }
+  }, {
+    key: "onExportPDF",
+    value: function onExportPDF(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
 
-      /* $.ajax({
-        url: `almacenes_productos/imprimir/${id}`,
-        type: 'get',
-        dataType: 'json',
-        context: this,
-        success: function (response) {
-          alert(JSON.stringify(response))
-        },
-        error: function (error) {
-          console.log('Fetching data: ERROR')
-          console.log(JSON.stringify(error))
-        },
-      }) */
+      if (confirm("\xBFDesea descargar esta informaci\xF3n en un PDF?")) {
+        var id = document.getElementById('almacen_id').value;
+        window.open("almacenes_productos/exportarPDF/".concat(id), '_blank');
+      }
     }
   }, {
     key: "onVerProductosAlmacen",

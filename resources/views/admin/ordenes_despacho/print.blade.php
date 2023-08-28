@@ -51,12 +51,12 @@
         </tr>
 
         <tr class="heading">
-            <td style="text-align: left;  width: 10%;">{{ __('Código') }}</td>
-            <td style="text-align: left">{{ __('Producto') }}</td>
-            <td style="text-align: left">{{ __('Descripción') }}</td>
-            <td style="text-align: right; width: 15%;">{{ __('Cantidad ordenada') }}</td>
-            <td style="text-align: right; width: 15%;">{{ __('Cantidad despachada') }}</td>
-            <td style="text-align: right; width: 15%;">{{ __('Cantidad entregada') }}</td>
+            <td style="text-align: left;  width: 12%;">{{ __('Código') }}</td>
+            <td style="text-align: left; width: 20%;">{{ __('Producto') }}</td>
+            <td style="text-align: left;  width: 37%;">{{ __('Descripción') }}</td>
+            <td style="text-align: right; width: 12%;">{{ __('Cantidad ordenada') }}</td>
+            <td style="text-align: right; width: 12%;">{{ __('Cantidad despachada') }}</td>
+            <td style="text-align: right; width: 12%;">{{ __('Cantidad entregada') }}</td>
         </tr>
         @foreach ($productos as $producto)
             <tr class="item">

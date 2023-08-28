@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
+use Carbon\Carbon;
 use PDF;
 
 class InformeRecepcionController extends Controller
@@ -288,11 +289,7 @@ class InformeRecepcionController extends Controller
 
     public function exportarPDF($id)
     {
-        $nombreInformePDF = InformeRecepcion::where(
-            'informes_recepcion.id',
-            '=',
-            $id
-        )
+        $DocumentoPDF = InformeRecepcion::where('id', '=', $id)
             ->select('nro_informe', 'fecha')
             ->first();
 
@@ -336,13 +333,12 @@ class InformeRecepcionController extends Controller
             'defaultFont' => 'sans-serif',
             'Letter' => 'landscape',
         ]);
-        //$pdf->setPaper('Letter', 'landscape');
 
         return $pdf->download(
             'InformeRecepción_' .
-                $nombreInformePDF->fecha .
+                Carbon::parse($DocumentoPDF->fecha)->format('Y-m-d') .
                 '_' .
-                $nombreInformePDF->nro_informe .
+                $DocumentoPDF->nro_informe .
                 '.pdf'
         );
     }

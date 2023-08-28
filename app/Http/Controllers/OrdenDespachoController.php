@@ -14,15 +14,22 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
+use Carbon\Carbon;
+use PDF;
 
 class OrdenDespachoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar ordenes despacho')->only('index');
+        $this->middleware('can:Listar ordenes despacho')->only(
+            'index',
+            'getDetalles'
+        );
         $this->middleware('can:Crear orden despacho')->only('create', 'store');
         $this->middleware('can:Editar orden despacho')->only('edit', 'update');
         $this->middleware('can:Eliminar orden despacho')->only('destroy');
+        $this->middleware('can:Imprimir')->only('imprimir');
+        $this->middleware('can:Exportar PDF')->only('exportarPDF');
     }
     /**
      * Display a listing of the resource.
@@ -353,6 +360,91 @@ class OrdenDespachoController extends Controller
         return view(
             'admin.ordenes_despacho.print',
             compact('detalles', 'productos', 'vales', 'transferencias')
+        );
+    }
+
+    public function exportarPDF($id)
+    {
+        $DocumentoPDF = OrdenDespacho::where('id', '=', $id)
+            ->select('nro_orden', 'fecha')
+            ->first();
+
+        $detalles = OrdenDespacho::where('ordenes_despacho.id', '=', $id)
+            ->join(
+                'entidades as ent',
+                'ent.id',
+                '=',
+                'ordenes_despacho.entidad_id'
+            )
+            ->join(
+                'almacenes as alm',
+                'alm.id',
+                '=',
+                'ordenes_despacho.almacen_id'
+            )
+            ->join(
+                'clientes as cli',
+                'cli.id',
+                '=',
+                'ordenes_despacho.cliente_id'
+            )
+            ->join('users as u', 'u.id', '=', 'ordenes_despacho.user_id')
+            ->select(
+                'ordenes_despacho.id as id',
+                'ordenes_despacho.fecha as fecha',
+                'ordenes_despacho.updated_at as updated_at',
+                'ordenes_despacho.nro_orden as nro_orden',
+                'ordenes_despacho.lugar_entrega as lugar_entrega',
+                'ordenes_despacho.fecha_entrega as fecha_entrega',
+                'ordenes_despacho.vale_id as vale_id',
+                'ordenes_despacho.transferencia_id as transferencia_id',
+                'ent.nombre as entidad',
+                'alm.nombre as almacen',
+                'cli.nombre as cliente',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $vales = Vale::select('id', 'nro_vale')
+            ->orderBy('nro_vale', 'desc')
+            ->get();
+
+        $transferencias = Transferencia::select('id', 'nro_transferencia')
+            ->orderBy('nro_transferencia', 'desc')
+            ->get();
+
+        $productos = OrdenDespacho::where('ordenes_despacho.id', '=', $id)
+            ->join(
+                'despacho_productos as vp',
+                'vp.orden_despacho_id',
+                '=',
+                'ordenes_despacho.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'vp.producto_id')
+            ->select(
+                'p.nombre as nombre',
+                'p.codigo as codigo',
+                'p.descripcion as descripcion',
+                'vp.cantidad_ordenada as cantidad_ordenada',
+                'vp.cantidad_despachada as cantidad_despachada',
+                'vp.cantidad_entregada as cantidad_entregada'
+            )
+            ->get();
+
+        $pdf = PDF::loadView(
+            'admin.ordenes_despacho.print',
+            compact('detalles', 'productos', 'vales', 'transferencias')
+        )->setOptions([
+            'defaultFont' => 'sans-serif',
+            'Letter' => 'landscape',
+        ]);
+
+        return $pdf->download(
+            'OrdenDespacho_' .
+                Carbon::parse($DocumentoPDF->fecha)->format('Y-m-d') .
+                '_' .
+                $DocumentoPDF->nro_orden .
+                '.pdf'
         );
     }
 }

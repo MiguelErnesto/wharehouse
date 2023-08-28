@@ -80,6 +80,10 @@ Route::get('almacenes_productos/imprimir/{id}', [
     AlmacenProductoController::class,
     'imprimir',
 ]);
+Route::get('almacenes_productos/exportarPDF/{id}', [
+    AlmacenProductoController::class,
+    'exportarPDF',
+]);
 
 //Informes de Recepcion
 Route::resource('informes_recepcion', InformeRecepcionController::class, [
@@ -114,6 +118,10 @@ Route::get('ordenes_despacho/imprimir/{id}', [
     OrdenDespachoController::class,
     'imprimir',
 ]);
+Route::get('ordenes_despacho/exportarPDF/{id}', [
+    OrdenDespachoController::class,
+    'exportarPDF',
+]);
 
 //Vales
 Route::resource('vales', ValeController::class, [
@@ -123,8 +131,9 @@ Route::resource('vales', ValeController::class, [
 ]);
 Route::get('vales/getDetalles/{id}', [ValeController::class, 'getDetalles']);
 Route::get('vales/imprimir/{id}', [ValeController::class, 'imprimir']);
+Route::get('vales/exportarPDF/{id}', [ValeController::class, 'exportarPDF']);
 
-//TRansferencias
+//Transferencias
 Route::resource('transferencias', TransferenciaController::class, [
     'parameters' => [
         'transferencias' => 'transferencia',
@@ -138,6 +147,10 @@ Route::get('transferencias/imprimir/{id}', [
     TransferenciaController::class,
     'imprimir',
 ]);
+Route::get('transferencias/exportarPDF/{id}', [
+    TransferenciaController::class,
+    'exportarPDF',
+]);
 
 //Conduces
 Route::resource('conduces', ConduceController::class, [
@@ -150,6 +163,10 @@ Route::get('conduces/getDetalles/{id}', [
     'getDetalles',
 ]);
 Route::get('conduces/imprimir/{id}', [ConduceController::class, 'imprimir']);
+Route::get('conduces/exportarPDF/{id}', [
+    ConduceController::class,
+    'exportarPDF',
+]);
 
 //Facturas
 Route::resource('facturas', FacturaController::class, [
@@ -162,5 +179,9 @@ Route::get('facturas/getDetalles/{id}', [
     'getDetalles',
 ]);
 Route::get('facturas/imprimir/{id}', [FacturaController::class, 'imprimir']);
+Route::get('facturas/exportarPDF/{id}', [
+    FacturaController::class,
+    'exportarPDF',
+]);
 
 //Route::get('/logout', [Auth::logout()]);

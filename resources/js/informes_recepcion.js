@@ -9,7 +9,7 @@ export default class ObjectClass {
     )
 
     this.btnPrint = document.querySelectorAll('.btnPrint')
-    this.btnExport = document.querySelectorAll('.btnExport')
+    this.btnPDFExport = document.querySelectorAll('.btnPDFExport')
 
     this.addListeners()
     this.clean()
@@ -60,9 +60,11 @@ export default class ObjectClass {
       }
     }
 
-    if (this.btnExport) {
-      for (var i = 0; i < this.btnExport.length; i += 1) {
-        this.btnExport[i].addEventListener('click', (evt) => this.onExport(evt))
+    if (this.btnPDFExport) {
+      for (var i = 0; i < this.btnPDFExport.length; i += 1) {
+        this.btnPDFExport[i].addEventListener('click', (evt) =>
+          this.onExportPDF(evt),
+        )
       }
     }
 
@@ -78,7 +80,7 @@ export default class ObjectClass {
     window.open(`informes_recepcion/imprimir/${id}`, '_blank')
   }
 
-  onExport(evt) {
+  onExportPDF(evt) {
     evt.preventDefault()
     evt.stopPropagation()
     if (confirm(`¿Desea descargar esta información en un PDF?`)) {

@@ -32,6 +32,10 @@
                 <button type="button" class="btn btn-primary btnPrint"><i class="fas fa-print fa-fw pr-2"></i>
                     Imprimir
                 </button>
+                <button type="button" style="color: #31343b;" class="btn btn-warning btnPDFExport"><i
+                        class="fas fa-file-pdf fa-fw pr-2"></i>
+                    Exportar a PDF
+                </button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
                         class="fas fa-ban fa-fw pr-2"></i>Cerrar</button>
             </div>
