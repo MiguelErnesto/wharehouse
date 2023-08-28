@@ -33,14 +33,14 @@
 
     <div class="col-6">
         <div class="form-group">
-            {!! Form::label('entidad', 'Entidad:', [
+            {!! Form::label('entidad_id', 'Entidad:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('entidad', $entidades, null, [
+            {!! Form::select('entidad_id', $entidades, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione la entidad...',
             ]) !!}
-            @error('entidad')
+            @error('entidad_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -51,14 +51,14 @@
 <div class="row">
     <div class="col-6">
         <div class="form-group">
-            {!! Form::label('almacen', 'Almacén:', [
+            {!! Form::label('almacen_id', 'Almacén:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('almacen', $almacenes, null, [
+            {!! Form::select('almacen_id', $almacenes, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione el almacén...',
             ]) !!}
-            @error('almacen')
+            @error('almacen_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -66,14 +66,14 @@
 
     <div class="col-6">
         <div class="form-group">
-            {!! Form::label('cliente', 'Cliente:', [
+            {!! Form::label('cliente_id', 'Cliente:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('cliente', $clientes, null, [
+            {!! Form::select('cliente_id', $clientes, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione el cliente...',
             ]) !!}
-            @error('cliente')
+            @error('cliente_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -134,14 +134,14 @@
 
     <div id='divVale' class="col-4 d-none">
         <div class="form-group">
-            {!! Form::label('vale', 'Nro. Vale:', [
+            {!! Form::label('vale_id', 'Nro. Vale:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('vale', $vales, null, [
+            {!! Form::select('vale_id', $vales, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccionar...',
             ]) !!}
-            @error('vale')
+            @error('vale_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -149,14 +149,14 @@
 
     <div id='divTransferencia' class="col-4 d-none">
         <div class="form-group">
-            {!! Form::label('transferencia', 'Nro. Transferencia:', [
+            {!! Form::label('transferencia_id', 'Nro. Transferencia:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('transferencia', $transferencias, null, [
+            {!! Form::select('transferencia_id', $transferencias, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccionar...',
             ]) !!}
-            @error('transferencia')
+            @error('transferencia_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -171,10 +171,10 @@
 
 <br />
 
-<div class="row">
+<div id='divProductos' class="row">
     <div class="col-5">
         <div class="form-group">
-            {!! Form::label('producto', 'Producto:', [
+            {!! Form::label('producto', 'Productos del despacho:', [
                 'class' => 'pl-1',
             ]) !!}
             {!! Form::select('producto', $productos, null, [

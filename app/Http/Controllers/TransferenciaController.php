@@ -168,9 +168,38 @@ class TransferenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Transferencia $transferencia)
     {
-        //
+        $request->validate([
+            'entidad_id',
+            'almacen_origen_id',
+            'almacen_destino_id',
+            'user_id',
+            'nro_transferencia',
+            'fecha_modelo',
+            'fecha_traslado',
+            'fecha_recepcion',
+            'persona_autoriza',
+            'persona_entrega',
+            'persona_recibe',
+            'persona_actualiza_origen',
+            'persona_actualiza_destino',
+            'persona_contabiliza_origen',
+            'persona_contabiliza_destino',
+            'importe_total_entrega',
+            'importe_total_recibido',
+        ]);
+
+        $transferencia->update($request->all());
+
+        return redirect()
+            ->route('transferencias.index')
+            ->with(
+                'info',
+                'Transferencia ' .
+                    $transferencia->nro_transferencia .
+                    ' actualizada correctamente'
+            );
     }
 
     /**

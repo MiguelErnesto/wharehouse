@@ -38,7 +38,7 @@
             ]) !!}
             {!! Form::select('nro_factura', $facturas, null, [
                 'class' => 'form-control',
-                'placeholder' => 'Seleccione la entidad...',
+                'placeholder' => 'Seleccione la factura...',
             ]) !!}
             @error('nro_factura')
                 <span class="text-danger">{{ $message }}</span>
@@ -267,7 +267,7 @@
 <br />
 <hr />
 
-<div class="row">
+<div id='divProductos' class="row">
     <div class="col-5">
         <div class="form-group">
             {!! Form::label('producto', 'Productos del vale:', [

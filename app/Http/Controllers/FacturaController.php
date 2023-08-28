@@ -142,9 +142,38 @@ class FacturaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Factura $factura)
     {
-        //
+        $request->validate([
+            'user_id',
+            'entidad_id',
+            'nro_factura',
+            'fecha_modelo',
+            'fecha_entrega',
+            'fecha_recepcion',
+            'fecha_recepcion_transportador',
+            'importe_total',
+            'porciento',
+            'datos_registro',
+            'operaciones',
+            'moneda_pago',
+            'persona_contabiliza',
+            'persona_entrega',
+            'persona_recibe',
+            'transportista',
+            'persona_transportador',
+        ]);
+
+        $factura->update($request->all());
+
+        return redirect()
+            ->route('facturas.index')
+            ->with(
+                'info',
+                'Factura ' .
+                    $factura->nro_factura .
+                    ' actualizada correctamente'
+            );
     }
 
     /**

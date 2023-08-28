@@ -145,9 +145,36 @@ class ConduceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Conduce $conduce)
     {
-        //
+        $request->validate([
+            'entidad_id',
+            'user_id',
+            'nro_conduce',
+            'nro_factura',
+            'fecha_modelo',
+            'fecha_recepcion_transportador',
+            'fecha_entrega',
+            'fecha_recepcion',
+            'persona_entrega',
+            'persona_recepcion',
+            'persona_actualiza',
+            'persona_contabiliza',
+            'transportador',
+            'lugar_entrega',
+            'comprador',
+        ]);
+
+        $conduce->update($request->all());
+
+        return redirect()
+            ->route('conduces.index')
+            ->with(
+                'info',
+                'Conduce ' .
+                    $conduce->nro_conduce .
+                    ' actualizado correctamente'
+            );
     }
 
     /**

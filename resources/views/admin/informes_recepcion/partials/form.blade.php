@@ -33,27 +33,25 @@
 
     <div class="col-6">
         <div class="form-group">
-            {!! Form::label('almacen', 'Almacén:', [
+            {!! Form::label('almacen_id', 'Almacén:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('almacen', $almacenes, null, [
+            {!! Form::select('almacen_id', $almacenes, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione el almacén al cual desesa ingresar los productos...',
             ]) !!}
-            @error('almacen')
+            @error('almacen_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
     </div>
 </div>
 
-<br />
 
-
-<div class="row">
+<div id='divProductos' class="row">
     <div class="col-8">
         <div class="form-group">
-            {!! Form::label('producto', 'Producto:', [
+            {!! Form::label('producto', 'Productos de la recepción:', [
                 'class' => 'pl-1',
             ]) !!}
             {!! Form::select('producto', $productos, null, [

@@ -130,10 +130,10 @@
 <br />
 
 
-<div class="row">
+<div id='divProductos' class="row">
     <div class="col-5">
         <div class="form-group">
-            {!! Form::label('producto', 'Producto:', [
+            {!! Form::label('producto', 'Productos del vale:', [
                 'class' => 'pl-1',
             ]) !!}
             {!! Form::select('producto', $productos, null, [

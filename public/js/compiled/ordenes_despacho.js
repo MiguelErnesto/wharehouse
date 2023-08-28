@@ -972,19 +972,33 @@ var ObjectClass = /*#__PURE__*/function () {
       if (document.querySelector('producto')) {
         document.getElementById('producto').value = '';
       }
+
+      if (window.location.pathname.includes('edit')) {
+        document.getElementById('divProductos').classList.add('d-none');
+
+        if (this.tipoSalida.value == 'V') {
+          document.getElementById('divVale').classList.remove('d-none');
+          document.getElementById('divTransferencia').classList.add('d-none');
+        }
+
+        if (this.tipoSalida.value == 'T') {
+          document.getElementById('divTransferencia').classList.remove('d-none');
+          document.getElementById('divVale').classList.add('d-none');
+        }
+      }
     }
   }, {
     key: "onChandeTipoSalida",
     value: function onChandeTipoSalida(evt) {
       if (this.tipoSalida.value == 'V') {
         document.getElementById('divVale').classList.remove('d-none');
-        document.getElementById('transferencia').value = '';
+        document.getElementById('transferencia_id').value = '';
         document.getElementById('divTransferencia').classList.add('d-none');
       }
 
       if (this.tipoSalida.value == 'T') {
         document.getElementById('divTransferencia').classList.remove('d-none');
-        document.getElementById('vale').value = '';
+        document.getElementById('vale_id').value = '';
         document.getElementById('divVale').classList.add('d-none');
       }
     }
@@ -1155,27 +1169,27 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('entidad').value.length == 0) {
+      if (document.getElementById('entidad_id').value.length == 0) {
         alert('Debe completar todos los datos de la Orden');
-        document.getElementById('entidad').className = 'form-control border border-danger';
-        document.getElementById('entidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('entidad').focus();
+        document.getElementById('entidad_id').className = 'form-control border border-danger';
+        document.getElementById('entidad_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('entidad_id').focus();
         return false;
       }
 
-      if (document.getElementById('almacen').value.length == 0) {
+      if (document.getElementById('almacen_id').value.length == 0) {
         alert('Debe completar todos los datos de la Orden');
-        document.getElementById('almacen').className = 'form-control border border-danger';
-        document.getElementById('almacen').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen').focus();
+        document.getElementById('almacen_id').className = 'form-control border border-danger';
+        document.getElementById('almacen_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen_id').focus();
         return false;
       }
 
-      if (document.getElementById('cliente').value.length == 0) {
+      if (document.getElementById('cliente_id').value.length == 0) {
         alert('Debe completar todos los datos de la Orden');
-        document.getElementById('cliente').className = 'form-control border border-danger';
-        document.getElementById('cliente').placeholder = '--- Valor requerido ---';
-        document.getElementById('cliente').focus();
+        document.getElementById('cliente_id').className = 'form-control border border-danger';
+        document.getElementById('cliente_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('cliente_id').focus();
         return false;
       }
 
@@ -1204,55 +1218,57 @@ var ObjectClass = /*#__PURE__*/function () {
       }
 
       if (document.getElementById('tipo_salida').value == 'V') {
-        if (document.getElementById('vale').value.length == 0) {
+        if (document.getElementById('vale_id').value.length == 0) {
           alert('Debe completar todos los datos de la Orden');
-          document.getElementById('vale').className = 'form-control border border-danger';
-          document.getElementById('vale').placeholder = '--- Valor requerido ---';
-          document.getElementById('vale').focus();
+          document.getElementById('vale_id').className = 'form-control border border-danger';
+          document.getElementById('vale_id').placeholder = '--- Valor requerido ---';
+          document.getElementById('vale_id').focus();
           return false;
         }
       }
 
       if (document.getElementById('tipo_salida').value == 'T') {
-        if (document.getElementById('transferencia').value.length == 0) {
+        if (document.getElementById('transferencia_id').value.length == 0) {
           alert('Debe completar todos los datos de la Orden');
-          document.getElementById('transferencia').className = 'form-control border border-danger';
-          document.getElementById('transferencia').placeholder = '--- Valor requerido ---';
-          document.getElementById('transferencia').focus();
+          document.getElementById('transferencia_id').className = 'form-control border border-danger';
+          document.getElementById('transferencia_id').placeholder = '--- Valor requerido ---';
+          document.getElementById('transferencia_id').focus();
           return false;
         }
       }
 
-      if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
-        alert('Debe agregar al menos un producto');
-        document.getElementById('producto').className = 'form-control border border-danger';
-        document.getElementById('producto').placeholder = '--- Valor requerido ---';
-        document.getElementById('producto').focus();
-        return false;
-      }
+      if (window.location.pathname.includes('create')) {
+        if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
+          alert('Debe agregar al menos un producto');
+          document.getElementById('producto').className = 'form-control border border-danger';
+          document.getElementById('producto').placeholder = '--- Valor requerido ---';
+          document.getElementById('producto').focus();
+          return false;
+        }
 
-      if (document.getElementById('cantidad_ordenada').value.length == 0) {
-        alert('Debe completar todos los datos de la Orden');
-        document.getElementById('cantidad_ordenada').className = 'form-control border border-danger';
-        document.getElementById('cantidad_ordenada').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad_ordenada').focus();
-        return false;
-      }
+        if (document.getElementById('cantidad_ordenada').value.length == 0) {
+          alert('Debe completar todos los datos de la Orden');
+          document.getElementById('cantidad_ordenada').className = 'form-control border border-danger';
+          document.getElementById('cantidad_ordenada').placeholder = '--- Valor requerido ---';
+          document.getElementById('cantidad_ordenada').focus();
+          return false;
+        }
 
-      if (document.getElementById('cantidad_despachada').value.length == 0) {
-        alert('Debe completar todos los datos de la Orden');
-        document.getElementById('cantidad_despachada').className = 'form-control border border-danger';
-        document.getElementById('cantidad_despachada').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad_despachada').focus();
-        return false;
-      }
+        if (document.getElementById('cantidad_despachada').value.length == 0) {
+          alert('Debe completar todos los datos de la Orden');
+          document.getElementById('cantidad_despachada').className = 'form-control border border-danger';
+          document.getElementById('cantidad_despachada').placeholder = '--- Valor requerido ---';
+          document.getElementById('cantidad_despachada').focus();
+          return false;
+        }
 
-      if (document.getElementById('cantidad_entregada').value.length == 0) {
-        alert('Debe completar todos los datos de la Orden');
-        document.getElementById('cantidad_entregada').className = 'form-control border border-danger';
-        document.getElementById('cantidad_entregada').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad_entregada').focus();
-        return false;
+        if (document.getElementById('cantidad_entregada').value.length == 0) {
+          alert('Debe completar todos los datos de la Orden');
+          document.getElementById('cantidad_entregada').className = 'form-control border border-danger';
+          document.getElementById('cantidad_entregada').placeholder = '--- Valor requerido ---';
+          document.getElementById('cantidad_entregada').focus();
+          return false;
+        }
       }
 
       var data = {
@@ -1260,30 +1276,36 @@ var ObjectClass = /*#__PURE__*/function () {
         user_id: document.getElementById('user_id').value,
         fecha: document.getElementById('fecha').value,
         nro_orden: document.getElementById('nro_orden').value,
-        entidad_id: document.getElementById('entidad').value,
-        almacen_id: document.getElementById('almacen').value,
-        cliente_id: document.getElementById('cliente').value,
+        entidad_id: document.getElementById('entidad_id').value,
+        almacen_id: document.getElementById('almacen_id').value,
+        cliente_id: document.getElementById('cliente_id').value,
         lugar_entrega: document.getElementById('lugar_entrega').value,
         fecha_entrega: document.getElementById('fecha_entrega').value,
-        vale_id: document.getElementById('vale').value.length == 0 ? null : document.getElementById('vale').value,
-        transferencia_id: document.getElementById('transferencia').value.length == 0 ? null : document.getElementById('transferencia').value,
+        tipo_salida: document.getElementById('tipo_salida').value,
+        vale_id: document.getElementById('vale_id').value.length == 0 ? null : document.getElementById('vale_id').value,
+        transferencia_id: document.getElementById('transferencia_id').value.length == 0 ? null : document.getElementById('transferencia_id').value,
         productos: this.getProductos()
       };
-      $.ajax({
-        url: "/ordenes_despacho",
-        type: 'POST',
-        dataType: 'json',
-        data: data,
-        context: this,
-        success: function success(response) {
-          alert('Orden de despacho exitosa');
-          window.open("/ordenes_despacho", '_self');
-        },
-        error: function error(_error2) {
-          console.log('Fetching data: ERROR');
-          console.log(JSON.stringify(_error2));
-        }
-      });
+
+      if (window.location.pathname.includes('create')) {
+        $.ajax({
+          url: "/ordenes_despacho",
+          type: 'POST',
+          dataType: 'json',
+          data: data,
+          context: this,
+          success: function success(response) {
+            alert('Orden de despacho exitosa');
+            window.open("/ordenes_despacho", '_self');
+          },
+          error: function error(_error2) {
+            console.log('Fetching data: ERROR');
+            console.log(JSON.stringify(_error2));
+          }
+        });
+      } else {
+        this.form.submit();
+      }
     }
   }, {
     key: "getProductos",

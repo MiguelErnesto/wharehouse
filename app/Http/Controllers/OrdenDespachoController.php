@@ -114,6 +114,7 @@ class OrdenDespachoController extends Controller
             'nro_orden' => 'required',
             'lugar_entrega' => 'required',
             'fecha_entrega' => 'required',
+            'tipo_salida' => 'required',
         ]);
 
         $ordenes_despacho = OrdenDespacho::create($request->all());
@@ -177,9 +178,35 @@ class OrdenDespachoController extends Controller
             ->get()
             ->pluck('nombre', 'id');
 
+        $entidades = Entidad::select('id', 'nombre')
+            ->orderBy('nombre', 'asc')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $clientes = Cliente::select('id', 'nombre')
+            ->orderBy('nombre', 'asc')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $vales = Vale::select('id', 'nro_vale')
+            ->get()
+            ->pluck('nro_vale', 'id');
+
+        $transferencias = Transferencia::select('id', 'nro_transferencia')
+            ->get()
+            ->pluck('nro_transferencia', 'id');
+
         return view(
             'admin.ordenes_despacho.edit',
-            compact('orden_despacho', 'almacenes', 'productos')
+            compact(
+                'orden_despacho',
+                'almacenes',
+                'productos',
+                'entidades',
+                'vales',
+                'transferencias',
+                'clientes'
+            )
         );
     }
 
@@ -190,9 +217,32 @@ class OrdenDespachoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, OrdenDespacho $orden_despacho)
     {
-        //
+        $request->validate([
+            'almacen_id' => 'required',
+            'entidad_id' => 'required',
+            'cliente_id' => 'required',
+            'user_id' => 'required',
+            'transferencia_id' => 'nullable',
+            'vale_id' => 'nullable',
+            'fecha' => 'required',
+            'nro_orden' => 'required',
+            'lugar_entrega' => 'required',
+            'fecha_entrega' => 'required',
+            'tipo_salida' => 'required',
+        ]);
+
+        $orden_despacho->update($request->all());
+
+        return redirect()
+            ->route('ordenes_despacho.index')
+            ->with(
+                'info',
+                'Orden de despacho ' .
+                    $orden_despacho->nro_orden .
+                    ' actualizada correctamente'
+            );
     }
 
     /**

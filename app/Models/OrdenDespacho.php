@@ -21,5 +21,6 @@ class OrdenDespacho extends Model
         'transferencia_id',
         'vale_id',
         'nro_orden',
+        'tipo_salida',
     ];
 }

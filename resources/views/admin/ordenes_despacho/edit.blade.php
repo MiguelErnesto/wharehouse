@@ -3,8 +3,8 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <span class="text-uppercase page-subtitle">Editar informe de recepción <h1 class='pl-3'>
-            {{ $informe_recepcion->nro_informe }}</h1>
+    <span class="text-uppercase page-subtitle">Editar orden de despacho <h1 class='pl-3'>
+            {{ $orden_despacho->nro_orden }}</h1>
     </span>
 @stop
 
@@ -18,16 +18,16 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::model($informe_recepcion, [
+            {!! Form::model($orden_despacho, [
                 'id' => 'form',
-                'route' => ['informes_recepcion.update', $informe_recepcion->id],
+                'route' => ['ordenes_despacho.update', $orden_despacho->id],
                 'method' => 'put',
             ]) !!}
 
-            @include('admin.informes_recepcion.partials.form')
+            @include('admin.ordenes_despacho.partials.form')
 
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('informes_recepcion.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('ordenes_despacho.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
                 {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
@@ -51,7 +51,7 @@
         });
     </script>
 
-    <script async type="module" src="{{ mix('/js/compiled/productos.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/ordenes_despacho.js') }}"></script>
 
 
 @stop

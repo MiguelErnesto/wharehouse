@@ -135,9 +135,27 @@ class ValeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Vale $vale)
     {
-        //
+        $request->validate([
+            'entidad_id' => 'required',
+            'almacen_id' => 'required',
+            'user_id' => 'required',
+            'tipo_vale' => 'required',
+            'nro_vale' => 'required',
+            'importe_total' => 'required',
+            'persona_emisor' => 'required',
+            'persona_receptor' => 'required',
+        ]);
+
+        $vale->update($request->all());
+
+        return redirect()
+            ->route('vales.index')
+            ->with(
+                'info',
+                'Vale ' . $vale->nro_vale . ' actualizado correctamente'
+            );
     }
 
     /**

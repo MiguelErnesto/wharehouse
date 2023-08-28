@@ -170,9 +170,22 @@ class InformeRecepcionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(
+        Request $request,
+        InformeRecepcion $informe_recepcion
+    ) {
+        $request->validate(['nro_informe', 'user_id', 'fecha', 'almacen_id']);
+
+        $informe_recepcion->update($request->all());
+
+        return redirect()
+            ->route('informes_recepcion.index')
+            ->with(
+                'info',
+                'Informe de recepción ' .
+                    $informe_recepcion->nro_informe .
+                    ' actualizado correctamente'
+            );
     }
 
     /**

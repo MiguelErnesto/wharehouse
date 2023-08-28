@@ -26,6 +26,9 @@ export default class ObjectClass {
     if (document.querySelector('producto')) {
       document.getElementById('producto').value = ''
     }
+    if (window.location.pathname.includes('edit')) {
+      document.getElementById('divProductos').classList.add('d-none')
+    }
   }
 
   addListeners = () => {
@@ -581,27 +584,30 @@ export default class ObjectClass {
       return false
     }
 
-    if (
-      document.querySelectorAll('table#listaProductos tbody tr').length == 0
-    ) {
-      alert('Debe agregar al menos un producto')
-      document.getElementById('producto').className =
-        'form-control border border-danger'
-      document.getElementById('producto').placeholder =
-        '--- Valor requerido ---'
-      document.getElementById('producto').focus()
-      return false
+    if (window.location.pathname.includes('create')) {
+      if (
+        document.querySelectorAll('table#listaProductos tbody tr').length == 0
+      ) {
+        alert('Debe agregar al menos un producto')
+        document.getElementById('producto').className =
+          'form-control border border-danger'
+        document.getElementById('producto').placeholder =
+          '--- Valor requerido ---'
+        document.getElementById('producto').focus()
+        return false
+      }
+
+      if (document.getElementById('cantidad').value.length == 0) {
+        alert('Debe completar todos los datos de la Factura')
+        document.getElementById('cantidad').className =
+          'form-control border border-danger'
+        document.getElementById('cantidad').placeholder =
+          '--- Valor requerido ---'
+        document.getElementById('cantidad').focus()
+        return false
+      }
     }
 
-    if (document.getElementById('cantidad').value.length == 0) {
-      alert('Debe completar todos los datos de la Factura')
-      document.getElementById('cantidad').className =
-        'form-control border border-danger'
-      document.getElementById('cantidad').placeholder =
-        '--- Valor requerido ---'
-      document.getElementById('cantidad').focus()
-      return false
-    }
     const data = {
       _token: document.querySelector('input[name="_token"]').value,
       user_id: document.getElementById('user_id').value,
@@ -628,22 +634,26 @@ export default class ObjectClass {
       productos: this.getProductos(),
     }
 
-    $.ajax({
-      url: `/facturas`,
-      type: 'POST',
-      dataType: 'json',
-      data: data,
-      context: this,
-      success: function (response) {
-        alert('Factura generada correctamente')
-        window.open(`/facturas`, '_self')
-      },
-      error: function (error) {
-        console.log('Fetching data: ERROR')
-        console.log(JSON.stringify(error))
-        alert(JSON.stringify(error))
-      },
-    })
+    if (window.location.pathname.includes('create')) {
+      $.ajax({
+        url: `/facturas`,
+        type: 'POST',
+        dataType: 'json',
+        data: data,
+        context: this,
+        success: function (response) {
+          alert('Factura generada correctamente')
+          window.open(`/facturas`, '_self')
+        },
+        error: function (error) {
+          console.log('Fetching data: ERROR')
+          console.log(JSON.stringify(error))
+          alert(JSON.stringify(error))
+        },
+      })
+    } else {
+      this.form.submit()
+    }
   }
 
   getProductos() {

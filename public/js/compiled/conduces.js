@@ -959,6 +959,10 @@ var ObjectClass = /*#__PURE__*/function () {
       if (document.querySelector('producto')) {
         document.getElementById('producto').value = '';
       }
+
+      if (window.location.pathname.includes('edit')) {
+        document.getElementById('divProductos').classList.add('d-none');
+      }
     }
   }, {
     key: "onPrint",
@@ -1219,20 +1223,22 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
-        alert('Debe agregar al menos un producto');
-        document.getElementById('producto').className = 'form-control border border-danger';
-        document.getElementById('producto').placeholder = '--- Valor requerido ---';
-        document.getElementById('producto').focus();
-        return false;
-      }
+      if (window.location.pathname.includes('create')) {
+        if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
+          alert('Debe agregar al menos un producto');
+          document.getElementById('producto').className = 'form-control border border-danger';
+          document.getElementById('producto').placeholder = '--- Valor requerido ---';
+          document.getElementById('producto').focus();
+          return false;
+        }
 
-      if (document.getElementById('cantidad').value.length == 0) {
-        alert('Debe completar todos los datos del Conduce');
-        document.getElementById('cantidad').className = 'form-control border border-danger';
-        document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad').focus();
-        return false;
+        if (document.getElementById('cantidad').value.length == 0) {
+          alert('Debe completar todos los datos del Conduce');
+          document.getElementById('cantidad').className = 'form-control border border-danger';
+          document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
+          document.getElementById('cantidad').focus();
+          return false;
+        }
       }
 
       var data = {
@@ -1254,22 +1260,27 @@ var ObjectClass = /*#__PURE__*/function () {
         persona_contabiliza: document.getElementById('persona_contabiliza').value,
         productos: this.getProductos()
       };
-      $.ajax({
-        url: "/conduces",
-        type: 'POST',
-        dataType: 'json',
-        data: data,
-        context: this,
-        success: function success(response) {
-          alert('Conduce generado correctamente');
-          window.open("/conduces", '_self');
-        },
-        error: function error(_error2) {
-          console.log('Fetching data: ERROR');
-          console.log(JSON.stringify(_error2));
-          alert(JSON.stringify(_error2));
-        }
-      });
+
+      if (window.location.pathname.includes('create')) {
+        $.ajax({
+          url: "/conduces",
+          type: 'POST',
+          dataType: 'json',
+          data: data,
+          context: this,
+          success: function success(response) {
+            alert('Conduce generado correctamente');
+            window.open("/conduces", '_self');
+          },
+          error: function error(_error2) {
+            console.log('Fetching data: ERROR');
+            console.log(JSON.stringify(_error2));
+            alert(JSON.stringify(_error2));
+          }
+        });
+      } else {
+        this.form.submit();
+      }
     }
   }, {
     key: "getProductos",

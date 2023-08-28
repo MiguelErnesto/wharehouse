@@ -51,7 +51,7 @@
         });
     </script>
 
-    <script async type="module" src="{{ mix('/js/compiled/productos.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/informes_recepcion.js') }}"></script>
 
 
 @stop

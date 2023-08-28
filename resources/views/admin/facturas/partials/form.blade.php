@@ -305,7 +305,7 @@
 <br />
 <hr />
 
-<div class="row">
+<div id='divProductos' class="row">
     <div class="col-5">
         <div class="form-group">
             {!! Form::label('producto', 'Productos de la transferencia:', [

@@ -1661,17 +1661,20 @@ select {
 .pb-1 {
   padding-bottom: 0.25rem;
 }
-.pl-5 {
-  padding-left: 1.25rem;
+.pr-2 {
+  padding-right: 0.5rem;
 }
 .pr-3 {
   padding-right: 0.75rem;
 }
-.pr-2 {
-  padding-right: 0.5rem;
+.pl-5 {
+  padding-left: 1.25rem;
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pl-1 {
+  padding-left: 0.25rem;
 }
 .pl-4 {
   padding-left: 1rem;
@@ -1687,9 +1690,6 @@ select {
 }
 .pr-5 {
   padding-right: 1.25rem;
-}
-.pl-1 {
-  padding-left: 0.25rem;
 }
 .text-left {
   text-align: left;

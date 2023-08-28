@@ -959,6 +959,10 @@ var ObjectClass = /*#__PURE__*/function () {
       if (document.querySelector('producto')) {
         document.getElementById('producto').value = '';
       }
+
+      if (window.location.pathname.includes('edit')) {
+        document.getElementById('divProductos').classList.add('d-none');
+      }
     }
   }, {
     key: "onPrint",
@@ -1110,28 +1114,30 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('almacen').value.length == 0) {
+      if (document.getElementById('almacen_id').value.length == 0) {
         alert('Debe completar todos los datos del Informe');
-        document.getElementById('almacen').className = 'form-control border border-danger';
-        document.getElementById('almacen').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen').focus();
+        document.getElementById('almacen_id').className = 'form-control border border-danger';
+        document.getElementById('almacen_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen_id').focus();
         return false;
       }
 
-      if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
-        alert('Debe agregar al menos un producto');
-        document.getElementById('producto').className = 'form-control border border-danger';
-        document.getElementById('producto').placeholder = '--- Valor requerido ---';
-        document.getElementById('producto').focus();
-        return false;
-      }
+      if (window.location.pathname.includes('create')) {
+        if (document.querySelectorAll('table#listaProductos tbody tr').length == 0) {
+          alert('Debe agregar al menos un producto');
+          document.getElementById('producto').className = 'form-control border border-danger';
+          document.getElementById('producto').placeholder = '--- Valor requerido ---';
+          document.getElementById('producto').focus();
+          return false;
+        }
 
-      if (document.getElementById('cantidad').value.length == 0) {
-        alert('Debe completar todos los datos del Informe');
-        document.getElementById('cantidad').className = 'form-control border border-danger';
-        document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('cantidad').focus();
-        return false;
+        if (document.getElementById('cantidad').value.length == 0) {
+          alert('Debe completar todos los datos del Informe');
+          document.getElementById('cantidad').className = 'form-control border border-danger';
+          document.getElementById('cantidad').placeholder = '--- Valor requerido ---';
+          document.getElementById('cantidad').focus();
+          return false;
+        }
       }
 
       var data = {
@@ -1139,24 +1145,29 @@ var ObjectClass = /*#__PURE__*/function () {
         user_id: document.getElementById('user_id').value,
         fecha: document.getElementById('fecha').value,
         nro_informe: document.getElementById('nro_informe').value,
-        almacen_id: document.getElementById('almacen').value,
+        almacen_id: document.getElementById('almacen_id').value,
         productos: this.getProductos()
       };
-      $.ajax({
-        url: "/informes_recepcion",
-        type: 'POST',
-        dataType: 'json',
-        data: data,
-        context: this,
-        success: function success(response) {
-          alert('Recepción de productos exitosa');
-          window.open("/informes_recepcion", '_self');
-        },
-        error: function error(_error2) {
-          console.log('Fetching data: ERROR');
-          console.log(JSON.stringify(_error2));
-        }
-      });
+
+      if (window.location.pathname.includes('create')) {
+        $.ajax({
+          url: "/informes_recepcion",
+          type: 'POST',
+          dataType: 'json',
+          data: data,
+          context: this,
+          success: function success(response) {
+            alert('Nueva recepción de productos realizada correctamente');
+            window.open("/informes_recepcion", '_self');
+          },
+          error: function error(_error2) {
+            console.log('Fetching data: ERROR');
+            console.log(JSON.stringify(_error2));
+          }
+        });
+      } else {
+        this.form.submit();
+      }
     }
   }, {
     key: "getProductos",

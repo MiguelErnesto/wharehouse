@@ -95,6 +95,10 @@ Route::get('informes_recepcion/getDetalles/{id}', [
     InformeRecepcionController::class,
     'getDetalles',
 ])->name('getDetalles');
+Route::get('informes_recepcion/update/{id}', [
+    InformeRecepcionController::class,
+    'update',
+]);
 Route::get('informes_recepcion/imprimir/{id}', [
     InformeRecepcionController::class,
     'imprimir',
