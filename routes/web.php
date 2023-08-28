@@ -67,11 +67,11 @@ Route::resource('productos', ProductoController::class, [
 ]);
 
 //Productos del Almacen
-Route::resource('almacenes_productos', AlmacenProductoController::class, [
+/* Route::resource('almacenes_productos', AlmacenProductoController::class, [
     'parameters' => [
         'almacenes_productos' => 'almacen_productos',
     ],
-]);
+]); */
 Route::get('almacenes_productos/getProductosAlmacen/{id}', [
     AlmacenProductoController::class,
     'getProductosAlmacen',
@@ -94,6 +94,10 @@ Route::get('informes_recepcion/getDetallesRecepcion/{id}', [
 Route::get('informes_recepcion/imprimir/{id}', [
     InformeRecepcionController::class,
     'imprimir',
+]);
+Route::get('informes_recepcion/exportar/{id}', [
+    InformeRecepcionController::class,
+    'exportar',
 ]);
 
 //Órdenes de Despacho

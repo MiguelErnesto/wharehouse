@@ -98,15 +98,15 @@ class RoleSeeder extends Seeder
             'description' => 'Listar almacenes',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'Crear almacén',
+            'name' => 'Crear almacen',
             'description' => 'Crear almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'Editar almacén',
-            'description' => 'Editar almacén',
+            'name' => 'Editar almacen',
+            'description' => 'Editar almacen',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'Eliminar almacén',
+            'name' => 'Eliminar almacen',
             'description' => 'Eliminar almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
@@ -130,19 +130,19 @@ class RoleSeeder extends Seeder
 
         // Permisos para los Productos de los almacenes
         Permission::create([
-            'name' => 'Listar producto almacén',
+            'name' => 'Listar productos almacen',
             'description' => 'Listar productos del almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'Ingresar producto almacén',
+            'name' => 'Ingresar producto almacen',
             'description' => 'Ingresar producto a un almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'Editar productos almacén',
+            'name' => 'Editar productos almacen',
             'description' => 'Editar productos del almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create([
-            'name' => 'Eliminar productos almacén',
+            'name' => 'Eliminar productos almacen',
             'description' => 'Eliminar productos de un almacén',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 

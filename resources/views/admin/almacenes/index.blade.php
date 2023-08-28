@@ -16,7 +16,7 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.almacenes.create')
+        @can('Crear almacen')
             <div class="card-header">
                 <a href="{{ route('almacenes.create') }}" class="btn btn-info" title="Guardar Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
@@ -41,29 +41,31 @@
                             <tr>
                                 <td>{{ $almacen->nombre }}</td>
                                 <td>{{ $almacen->direccion }}</td>
-                                <td style="padding-right: 0.125rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
 
-                                    @can('admin.almacenes_productos.index')
+                                @can('Listar productos almacen')
+                                    <td style="padding-right: 0.125rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
+
                                         <a class="btn btn-primary btn-sm btnVerProdAlm" data-bs-toggle="modal"
                                             data-bs-target="#myModal" data-id={{ $almacen->id }}
                                             data-nombre="{{ $almacen->nombre }}" data-direccion="{{ $almacen->direccion }}"
                                             title="Ver Productos del Almacén">
                                             <i class="fas fa-boxes fa-fw"></i>
                                         </a>
-                                    @endcan
+                                    </td>
+                                @endcan
 
-                                </td>
-                                <td style="padding-right: 0rem;padding-left: 0rem;" width='8px' class="text-right">
-                                    @can('admin.almacenes.edit')
+                                @can('Editar almacen')
+                                    <td style="padding-right: 0rem;padding-left: 0rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm" href="{{ route('almacenes.edit', $almacen) }}"
                                             title="Editar almacén">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
-                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.almacenes.destroy')
+                                    </td>
+                                @endcan
+
+                                @can('Eliminar almacen')
+                                    <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $almacen->id }}'
                                             action="{{ route('almacenes.destroy', $almacen) }}" method="POST">
                                             @csrf
@@ -72,8 +74,9 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
+
                             </tr>
                         @endforeach
                     @endif

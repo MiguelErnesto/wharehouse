@@ -65,11 +65,20 @@
                                     </td>
                                 @endcan
 
-                                @can('Imprimir documento', 'Exportar documento')
+                                @can('Imprimir documento')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $informe_recepcion->id }}"
                                             title="Imprimir">
                                             <i class="fas fa-print fa-fw"></i>
+                                        </a>
+                                    </td>
+                                @endcan
+
+                                @can('Exportar documento')
+                                    <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
+                                        <a class="btn btn-warning btn-sm btnExport" data-id="{{ $informe_recepcion->id }}"
+                                            title="Exportar">
+                                            <i style="color: #31343b;" class="fas fa-file-pdf fa-fw"></i>
                                         </a>
                                     </td>
                                 @endcan

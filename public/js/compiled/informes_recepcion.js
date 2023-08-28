@@ -920,6 +920,14 @@ var ObjectClass = /*#__PURE__*/function () {
         }
       }
 
+      if (_this.btnExport) {
+        for (var i = 0; i < _this.btnExport.length; i += 1) {
+          _this.btnExport[i].addEventListener('click', function (evt) {
+            return _this.onExport(evt);
+          });
+        }
+      }
+
       $(document).ready(function () {
         console.log('Ready!');
       });
@@ -930,6 +938,7 @@ var ObjectClass = /*#__PURE__*/function () {
     this.add = document.getElementById('add');
     this.btnVerInformeRecepcion = document.querySelectorAll('.btnVerInformeRecepcion');
     this.btnPrint = document.querySelectorAll('.btnPrint');
+    this.btnExport = document.querySelectorAll('.btnExport');
     this.addListeners();
     this.clean();
   }
@@ -958,6 +967,15 @@ var ObjectClass = /*#__PURE__*/function () {
       evt.stopPropagation();
       var id = evt.currentTarget.dataset.id;
       window.open("informes_recepcion/imprimir/".concat(id), '_blank');
+    }
+  }, {
+    key: "onExport",
+    value: function onExport(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      alert('aaa');
+      var id = evt.currentTarget.dataset.id;
+      window.open("informes_recepcion/exportar/".concat(id), '_blank');
     }
   }, {
     key: "onVerInformeRecepcion",

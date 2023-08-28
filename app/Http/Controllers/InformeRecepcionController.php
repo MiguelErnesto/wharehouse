@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\AlmacenProducto;
 use App\Http\Controllers\AlmacenProductoController;
+use PDF;
 
 class InformeRecepcionController extends Controller
 {
@@ -273,6 +274,59 @@ class InformeRecepcionController extends Controller
             ->join('productos as p', 'p.id', '=', 'rp.producto_id')
             ->where('informes_recepcion.id', '=', $id)
             ->get();
+
+        return view(
+            'admin.informes_recepcion.print',
+            compact('productos', 'informe')
+        );
+    }
+
+    public function exportar($id)
+    {
+        $informe = InformeRecepcion::where('informes_recepcion.id', '=', $id)
+            ->join(
+                'almacenes as alm',
+                'alm.id',
+                '=',
+                'informes_recepcion.almacen_id'
+            )
+            ->join('users as u', 'u.id', '=', 'informes_recepcion.user_id')
+            ->select(
+                'informes_recepcion.id as id',
+                'informes_recepcion.fecha as fecha',
+                'informes_recepcion.nro_informe as nro_informe',
+                'alm.nombre as almacen',
+                'u.name as usuario'
+            )
+            ->get();
+
+        $productos = InformeRecepcion::select(
+            'p.nombre as nombre',
+            'p.codigo as codigo',
+            'p.descripcion as descripcion',
+            'rp.cantidad as cantidad'
+        )
+            ->join(
+                'recepcion_productos as rp',
+                'rp.informe_recepcion_id',
+                '=',
+                'informes_recepcion.id'
+            )
+            ->join('productos as p', 'p.id', '=', 'rp.producto_id')
+            ->where('informes_recepcion.id', '=', $id)
+            ->get();
+
+        $data = [
+            'title' =>
+                'How To Create PDF File Using DomPDF In Laravel 9 - Techsolutionstuff',
+            'date' => date('d/m/Y'),
+            'informe' => $informe,
+            'productos' => $productos,
+        ];
+
+        $pdf = PDF::loadView('admin.informes_recepcion.print', $data);
+        //return $pdf->download('users_pdf_example.pdf');
+        return $pdf->stream('result.pdf');
 
         return view(
             'admin.informes_recepcion.print',

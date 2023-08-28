@@ -9,6 +9,7 @@ export default class ObjectClass {
     )
 
     this.btnPrint = document.querySelectorAll('.btnPrint')
+    this.btnExport = document.querySelectorAll('.btnExport')
 
     this.addListeners()
     this.clean()
@@ -59,6 +60,12 @@ export default class ObjectClass {
       }
     }
 
+    if (this.btnExport) {
+      for (var i = 0; i < this.btnExport.length; i += 1) {
+        this.btnExport[i].addEventListener('click', (evt) => this.onExport(evt))
+      }
+    }
+
     $(document).ready(function () {
       console.log('Ready!')
     })
@@ -69,6 +76,14 @@ export default class ObjectClass {
     evt.stopPropagation()
     let id = evt.currentTarget.dataset.id
     window.open(`informes_recepcion/imprimir/${id}`, '_blank')
+  }
+
+  onExport(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    alert('aaa')
+    let id = evt.currentTarget.dataset.id
+    window.open(`informes_recepcion/exportar/${id}`, '_blank')
   }
 
   onVerInformeRecepcion(evt) {
