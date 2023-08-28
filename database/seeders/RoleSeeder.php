@@ -255,13 +255,13 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1, $role2, $role4]);
 
         Permission::create([
-            'name' => 'Imprimir documento',
+            'name' => 'Imprimir',
             'description' => 'Imprimir documentos',
         ])->syncRoles([$role1, $role2, $role4]);
 
         Permission::create([
-            'name' => 'Exportar documento',
-            'description' => 'Exportar documentos',
+            'name' => 'Exportar PDF',
+            'description' => 'Exportar documentos en PDF',
         ])->syncRoles([$role1, $role2, $role3]);
 
         //Enable foreign key checks for current db driver

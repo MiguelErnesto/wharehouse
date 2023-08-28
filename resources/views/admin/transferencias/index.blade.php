@@ -69,7 +69,7 @@
                                     </td>
                                 @endcan
 
-                                @can('Imprimir documento', 'Exportar documento')
+                                @can('imprimir')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $transferencia->id }}"
                                             title="Imprimir">

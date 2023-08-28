@@ -65,7 +65,7 @@
                                     </td>
                                 @endcan
 
-                                @can('Imprimir documento')
+                                @can('Imprimir')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-primary btn-sm btnPrint" data-id="{{ $informe_recepcion->id }}"
                                             title="Imprimir">
@@ -74,7 +74,7 @@
                                     </td>
                                 @endcan
 
-                                @can('Exportar documento')
+                                @can('Exportar PDF')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-warning btn-sm btnExport" data-id="{{ $informe_recepcion->id }}"
                                             title="Exportar">

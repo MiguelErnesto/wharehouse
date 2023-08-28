@@ -973,8 +973,11 @@ var ObjectClass = /*#__PURE__*/function () {
     value: function onExport(evt) {
       evt.preventDefault();
       evt.stopPropagation();
-      var id = evt.currentTarget.dataset.id;
-      window.open("informes_recepcion/exportar/".concat(id), '_blank');
+
+      if (confirm("\xBFDesea descargar esta informaci\xF3n en un PDF?")) {
+        var id = evt.currentTarget.dataset.id;
+        window.open("informes_recepcion/exportarPDF/".concat(id), '_blank');
+      }
     }
   }, {
     key: "onVerInformeRecepcion",
@@ -985,7 +988,7 @@ var ObjectClass = /*#__PURE__*/function () {
       document.getElementById('informe_id').value = id; // AJAX GET request
 
       $.ajax({
-        url: "informes_recepcion/getDetallesRecepcion/".concat(id),
+        url: "informes_recepcion/getDetalles/".concat(id),
         type: 'get',
         dataType: 'json',
         context: this,

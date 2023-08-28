@@ -10,7 +10,7 @@
 </div>
 <h2 class="h4">Listado de permisos</h2>
 @foreach ($permissions as $permission)
-    @if (strpos($permission->description, 'Listar') !== false)
+    @if (strpos($permission->description, 'Listar') !== false || strpos($permission->description, 'Imprimir') !== false)
         <br />
     @endif
     <div>

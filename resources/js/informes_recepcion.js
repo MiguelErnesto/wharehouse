@@ -81,8 +81,10 @@ export default class ObjectClass {
   onExport(evt) {
     evt.preventDefault()
     evt.stopPropagation()
-    let id = evt.currentTarget.dataset.id
-    window.open(`informes_recepcion/exportar/${id}`, '_blank')
+    if (confirm(`¿Desea descargar esta información en un PDF?`)) {
+      let id = evt.currentTarget.dataset.id
+      window.open(`informes_recepcion/exportarPDF/${id}`, '_blank')
+    }
   }
 
   onVerInformeRecepcion(evt) {
@@ -95,7 +97,7 @@ export default class ObjectClass {
 
     // AJAX GET request
     $.ajax({
-      url: `informes_recepcion/getDetallesRecepcion/${id}`,
+      url: `informes_recepcion/getDetalles/${id}`,
       type: 'get',
       dataType: 'json',
       context: this,

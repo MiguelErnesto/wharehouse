@@ -87,17 +87,17 @@ Route::resource('informes_recepcion', InformeRecepcionController::class, [
         'informes_recepcion' => 'informe_recepcion',
     ],
 ]);
-Route::get('informes_recepcion/getDetallesRecepcion/{id}', [
+Route::get('informes_recepcion/getDetalles/{id}', [
     InformeRecepcionController::class,
-    'getDetallesRecepcion',
-])->name('getDetallesRecepcion');
+    'getDetalles',
+])->name('getDetalles');
 Route::get('informes_recepcion/imprimir/{id}', [
     InformeRecepcionController::class,
     'imprimir',
 ]);
-Route::get('informes_recepcion/exportar/{id}', [
+Route::get('informes_recepcion/exportarPDF/{id}', [
     InformeRecepcionController::class,
-    'exportar',
+    'exportarPDF',
 ]);
 
 //Órdenes de Despacho

@@ -16,7 +16,10 @@ class InformeRecepcionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Listar informes recepcion')->only('index');
+        $this->middleware('can:Listar informes recepcion')->only(
+            'index',
+            'getDetalles'
+        );
         $this->middleware('can:Crear informe recepcion')->only(
             'create',
             'store'
@@ -26,6 +29,8 @@ class InformeRecepcionController extends Controller
             'update'
         );
         $this->middleware('can:Eliminar informe recepcion')->only('destroy');
+        $this->middleware('can:Imprimir')->only('imprimir');
+        $this->middleware('can:Exportar PDF')->only('exportarPDF');
     }
 
     /**
@@ -195,7 +200,7 @@ class InformeRecepcionController extends Controller
             );
     }
 
-    public function getDetallesRecepcion($id)
+    public function getDetalles($id)
     {
         $InformeRecepcion = InformeRecepcion::where(
             'informes_recepcion.id',
@@ -281,8 +286,16 @@ class InformeRecepcionController extends Controller
         );
     }
 
-    public function exportar($id)
+    public function exportarPDF($id)
     {
+        $nombreInformePDF = InformeRecepcion::where(
+            'informes_recepcion.id',
+            '=',
+            $id
+        )
+            ->select('nro_informe', 'fecha')
+            ->first();
+
         $informe = InformeRecepcion::where('informes_recepcion.id', '=', $id)
             ->join(
                 'almacenes as alm',
@@ -316,21 +329,21 @@ class InformeRecepcionController extends Controller
             ->where('informes_recepcion.id', '=', $id)
             ->get();
 
-        $data = [
-            'title' =>
-                'How To Create PDF File Using DomPDF In Laravel 9 - Techsolutionstuff',
-            'date' => date('d/m/Y'),
-            'informe' => $informe,
-            'productos' => $productos,
-        ];
-
-        $pdf = PDF::loadView('admin.informes_recepcion.print', $data);
-        return $pdf->download('users_pdf_example.pdf');
-        //return $pdf->stream('result.pdf');
-
-        return view(
+        $pdf = PDF::loadView(
             'admin.informes_recepcion.print',
             compact('productos', 'informe')
+        )->setOptions([
+            'defaultFont' => 'sans-serif',
+            'Letter' => 'landscape',
+        ]);
+        //$pdf->setPaper('Letter', 'landscape');
+
+        return $pdf->download(
+            'InformeRecepción_' .
+                $nombreInformePDF->fecha .
+                '_' .
+                $nombreInformePDF->nro_informe .
+                '.pdf'
         );
     }
 }
