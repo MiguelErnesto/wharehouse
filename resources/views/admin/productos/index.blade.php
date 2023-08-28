@@ -16,7 +16,7 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.productos.create')
+        @can('Crear producto')
             <div class="card-header">
                 <a href="{{ route('productos.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
@@ -43,16 +43,18 @@
                                 <td>{{ $producto->codigo }}</td>
                                 <td>{{ $producto->nombre }}</td>
                                 <td>{{ $producto->descripcion }}</td>
-                                <td style="padding-left: 0rem;padding-right: 0rem;" width='8px' class="text-right">
-                                    @can('admin.productos.edit')
+
+                                @can('Editar producto')
+                                    <td style="padding-left: 0rem;padding-right: 0rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm" href="{{ route('productos.edit', $producto) }}"
                                             title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
-                                <td style="padding-left: 0.125rem;padding-right: 0.75rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.productos.destroy')
+                                    </td>
+                                @endcan
+
+                                @can('Eliminar producto')
+                                    <td style="padding-left: 0.125rem;padding-right: 0.75rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $producto->id }}'
                                             action="{{ route('productos.destroy', $producto) }}" method="POST">
                                             @csrf
@@ -61,8 +63,9 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash fa-lg"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
+
                             </tr>
                         @endforeach
                     @endif

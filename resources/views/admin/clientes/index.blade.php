@@ -16,7 +16,7 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.clientes.create')
+        @can('Crear cliente')
             <div class="card-header">
                 <a href="{{ route('clientes.create') }}" class="btn btn-info" title="Guardar Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>
@@ -48,16 +48,17 @@
                                 <td>{{ $cliente->direccion }}</td>
                                 <td>{{ $cliente->descripcion }}</td>
 
-                                <td style="padding-right: 0rem;padding-left: 0rem;" width='8px' class="text-right">
-                                    @can('admin.clientes.edit')
+                                @can('Editar cliente')
+                                    <td style="padding-right: 0rem;padding-left: 0rem;" width='8px' class="text-right">
                                         <a class="btn btn-success btn-sm" href="{{ route('clientes.edit', $cliente) }}"
                                             title="Editar">
                                             <i class="fas fa-solid fa-pen"></i></a>
-                                    @endcan
-                                </td>
-                                <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
-                                    class="text-right">
-                                    @can('admin.clientes.destroy')
+                                    </td>
+                                @endcan
+
+                                @can('Eliminar cliente')
+                                    <td style="padding-right: 0.75rem;padding-left: 0.125rem;" width='8px'
+                                        class="text-right">
                                         <form id='formIndex_{{ $cliente->id }}'
                                             action="{{ route('clientes.destroy', $cliente) }}" method="POST">
                                             @csrf
@@ -66,8 +67,9 @@
                                                 class="btn btn-danger btn-sm btnDelete" title='Eliminar'>
                                                 <i class="fas fa-solid fa-trash"></i></button>
                                         </form>
-                                    @endcan
-                                </td>
+                                    </td>
+                                @endcan
+
                             </tr>
                         @endforeach
                     @endif
