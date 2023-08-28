@@ -28,6 +28,8 @@
                     <tr>
                         <th>Código</th>
                         <th>Nombre</th>
+                        <th class='text-center'>U/M</th>
+                        <th class='text-right'>Precio</th>
                         <th>Descripción</th>
                         <th colspan="2" class='text-center'></th>
                     </tr>
@@ -35,13 +37,15 @@
                 <tbody>
                     @if (count($productos) == 0)
                         <tr>
-                            <td colspan='4' class='text-center'><i>No hay elementos para mostrar...</i></td>
+                            <td colspan='6' class='text-center'><i>No hay elementos para mostrar...</i></td>
                         </tr>
                     @else
                         @foreach ($productos as $producto)
                             <tr>
                                 <td>{{ $producto->codigo }}</td>
                                 <td>{{ $producto->nombre }}</td>
+                                <td class='text-center'>{{ $producto->unidad_medida }}</td>
+                                <td class='text-right'>$ {{ $producto->precio }}</td>
                                 <td>{{ $producto->descripcion }}</td>
 
                                 @can('Editar producto')
