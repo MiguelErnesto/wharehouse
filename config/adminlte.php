@@ -46,7 +46,7 @@ return [
 
     'logo' => '<b>Ware</b>House',
     #'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img' => 'storage/whlogo03.jpg',
+    'logo_img' => 'whlogo03.jpg',
     'logo_img_class' => 'brand-image mr-4',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs logo-xl',

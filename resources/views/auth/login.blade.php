@@ -17,7 +17,7 @@
                 <img style='display: block;
                 margin-left: auto;
                 margin-right: auto;'
-                    src="{{ asset('storage/whlogo03.jpg') }}" height="65" width="65" alt="WareHouse System">
+                    src="{{ asset('whlogo03.jpg') }}" height="65" width="65" alt="WareHouse System">
             </div>
 
             <div class="col-3">
