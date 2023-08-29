@@ -130,9 +130,24 @@ class FacturaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Factura $factura)
     {
-        //
+        $entidades = Entidad::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $almacenes = Almacen::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $productos = Producto::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        return view(
+            'admin.facturas.edit',
+            compact('factura', 'entidades', 'almacenes', 'productos')
+        );
     }
 
     /**

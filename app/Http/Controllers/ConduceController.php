@@ -133,9 +133,34 @@ class ConduceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Conduce $conduce)
     {
-        //
+        $entidades = Entidad::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $facturas = Factura::select('id', 'nro_factura')
+            ->get()
+            ->pluck('nro_factura', 'nro_factura');
+
+        $productos = Producto::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $almacenes = Almacen::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        return view(
+            'admin.conduces.edit',
+            compact(
+                'entidades',
+                'almacenes',
+                'facturas',
+                'productos',
+                'conduce'
+            )
+        );
     }
 
     /**

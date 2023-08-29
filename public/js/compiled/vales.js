@@ -1127,19 +1127,19 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('entidad').value.length == 0) {
+      if (document.getElementById('entidad_id').value.length == 0) {
         alert('Debe completar todos los datos del Vale');
-        document.getElementById('entidad').className = 'form-control border border-danger';
-        document.getElementById('entidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('entidad').focus();
+        document.getElementById('entidad_id').className = 'form-control border border-danger';
+        document.getElementById('entidad_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('entidad_id').focus();
         return false;
       }
 
-      if (document.getElementById('almacen').value.length == 0) {
+      if (document.getElementById('almacen_id').value.length == 0) {
         alert('Debe completar todos los datos del Vale');
-        document.getElementById('almacen').className = 'form-control border border-danger';
-        document.getElementById('almacen').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen').focus();
+        document.getElementById('almacen_id').className = 'form-control border border-danger';
+        document.getElementById('almacen_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen_id').focus();
         return false;
       }
 
@@ -1206,8 +1206,8 @@ var ObjectClass = /*#__PURE__*/function () {
         user_id: document.getElementById('user_id').value,
         fecha: document.getElementById('fecha').value,
         nro_vale: document.getElementById('nro_vale').value,
-        entidad_id: document.getElementById('entidad').value,
-        almacen_id: document.getElementById('almacen').value,
+        entidad_id: document.getElementById('entidad_id').value,
+        almacen_id: document.getElementById('almacen_id').value,
         importe_total: document.getElementById('importe_total').value,
         persona_emisor: document.getElementById('persona_emisor').value,
         persona_receptor: document.getElementById('persona_receptor').value,

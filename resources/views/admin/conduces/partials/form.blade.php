@@ -1,4 +1,4 @@
-<input id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
+<input name="user_id" id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
 
 <div class="row">
     <div class="col-3">
@@ -48,14 +48,14 @@
 
     <div class="col-3">
         <div class="form-group">
-            {!! Form::label('entidad', 'Entidad:', [
+            {!! Form::label('entidad_id', 'Entidad:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('entidad', $entidades, null, [
+            {!! Form::select('entidad_id', $entidades, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione la entidad...',
             ]) !!}
-            @error('entidad')
+            @error('entidad_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>

@@ -156,9 +156,23 @@ class TransferenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Transferencia $transferencia)
     {
-        //
+        $entidades = Entidad::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $almacenes = Almacen::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+
+        $productos = Producto::select('id', 'nombre')
+            ->get()
+            ->pluck('nombre', 'id');
+        return view(
+            'admin.transferencias.edit',
+            compact('transferencia', 'entidades', 'almacenes', 'productos')
+        );
     }
 
     /**

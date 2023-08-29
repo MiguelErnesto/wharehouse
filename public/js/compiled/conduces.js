@@ -1135,11 +1135,11 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('entidad').value.length == 0) {
+      if (document.getElementById('entidad_id').value.length == 0) {
         alert('Debe completar todos los datos del Conduce');
-        document.getElementById('entidad').className = 'form-control border border-danger';
-        document.getElementById('entidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('entidad').focus();
+        document.getElementById('entidad_id').className = 'form-control border border-danger';
+        document.getElementById('entidad_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('entidad_id').focus();
         return false;
       }
 
@@ -1247,7 +1247,7 @@ var ObjectClass = /*#__PURE__*/function () {
         fecha_modelo: document.getElementById('fecha_modelo').value,
         nro_conduce: document.getElementById('nro_conduce').value,
         nro_factura: document.getElementById('nro_factura').value,
-        entidad_id: document.getElementById('entidad').value,
+        entidad_id: document.getElementById('entidad_id').value,
         comprador: document.getElementById('comprador').value,
         lugar_entrega: document.getElementById('lugar_entrega').value,
         transportador: document.getElementById('transportador').value,

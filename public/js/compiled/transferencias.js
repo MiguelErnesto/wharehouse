@@ -1161,34 +1161,34 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('entidad').value.length == 0) {
+      if (document.getElementById('entidad_id').value.length == 0) {
         alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('entidad').className = 'form-control border border-danger';
-        document.getElementById('entidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('entidad').focus();
+        document.getElementById('entidad_id').className = 'form-control border border-danger';
+        document.getElementById('entidad_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('entidad_id').focus();
         return false;
       }
 
-      if (document.getElementById('almacen_origen').value.length == 0) {
+      if (document.getElementById('almacen_origen_id').value.length == 0) {
         alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('almacen_origen').className = 'form-control border border-danger';
-        document.getElementById('almacen_origen').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen_origen').focus();
+        document.getElementById('almacen_origen_id').className = 'form-control border border-danger';
+        document.getElementById('almacen_origen_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen_origen_id').focus();
         return false;
       }
 
-      if (document.getElementById('almacen_destino').value.length == 0) {
+      if (document.getElementById('almacen_destino_id').value.length == 0) {
         alert('Debe completar todos los datos de la transferencia');
-        document.getElementById('almacen_destino').className = 'form-control border border-danger';
-        document.getElementById('almacen_destino').placeholder = '--- Valor requerido ---';
-        document.getElementById('almacen_destino').focus();
+        document.getElementById('almacen_destino_id').className = 'form-control border border-danger';
+        document.getElementById('almacen_destino_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('almacen_destino_id').focus();
         return false;
       } else {
-        if (document.getElementById('almacen_origen').value == document.getElementById('almacen_destino').value) {
+        if (document.getElementById('almacen_origen_id').value == document.getElementById('almacen_destino_id').value) {
           alert('El almacén origen y destino deben ser diferentes');
-          document.getElementById('almacen_destino').className = 'form-control border border-danger';
-          document.getElementById('almacen_destino').placeholder = '--- Valor requerido ---';
-          document.getElementById('almacen_destino').focus();
+          document.getElementById('almacen_destino_id').className = 'form-control border border-danger';
+          document.getElementById('almacen_destino_id').placeholder = '--- Valor requerido ---';
+          document.getElementById('almacen_destino_id').focus();
           return false;
         }
       }
@@ -1310,9 +1310,9 @@ var ObjectClass = /*#__PURE__*/function () {
       var data = {
         _token: document.querySelector('input[name="_token"]').value,
         user_id: document.getElementById('user_id').value,
-        entidad_id: document.getElementById('entidad').value,
-        almacen_origen_id: document.getElementById('almacen_origen').value,
-        almacen_destino_id: document.getElementById('almacen_destino').value,
+        entidad_id: document.getElementById('entidad_id').value,
+        almacen_origen_id: document.getElementById('almacen_origen_id').value,
+        almacen_destino_id: document.getElementById('almacen_destino_id').value,
         nro_transferencia: document.getElementById('nro_transferencia').value,
         fecha_modelo: document.getElementById('fecha_modelo').value,
         fecha_traslado: document.getElementById('fecha_traslado').value,

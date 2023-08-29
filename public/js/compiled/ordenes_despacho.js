@@ -929,7 +929,7 @@ var ObjectClass = /*#__PURE__*/function () {
       }
 
       _this.tipoSalida.addEventListener('change', function (evt) {
-        return _this.onChandeTipoSalida(evt);
+        return _this.onChangeTipoSalida(evt);
       });
 
       $(document).ready(function () {
@@ -988,8 +988,8 @@ var ObjectClass = /*#__PURE__*/function () {
       }
     }
   }, {
-    key: "onChandeTipoSalida",
-    value: function onChandeTipoSalida(evt) {
+    key: "onChangeTipoSalida",
+    value: function onChangeTipoSalida(evt) {
       if (this.tipoSalida.value == 'V') {
         document.getElementById('divVale').classList.remove('d-none');
         document.getElementById('transferencia_id').value = '';
@@ -1271,23 +1271,22 @@ var ObjectClass = /*#__PURE__*/function () {
         }
       }
 
-      var data = {
-        _token: document.querySelector('input[name="_token"]').value,
-        user_id: document.getElementById('user_id').value,
-        fecha: document.getElementById('fecha').value,
-        nro_orden: document.getElementById('nro_orden').value,
-        entidad_id: document.getElementById('entidad_id').value,
-        almacen_id: document.getElementById('almacen_id').value,
-        cliente_id: document.getElementById('cliente_id').value,
-        lugar_entrega: document.getElementById('lugar_entrega').value,
-        fecha_entrega: document.getElementById('fecha_entrega').value,
-        tipo_salida: document.getElementById('tipo_salida').value,
-        vale_id: document.getElementById('vale_id').value.length == 0 ? null : document.getElementById('vale_id').value,
-        transferencia_id: document.getElementById('transferencia_id').value.length == 0 ? null : document.getElementById('transferencia_id').value,
-        productos: this.getProductos()
-      };
-
       if (window.location.pathname.includes('create')) {
+        var data = {
+          _token: document.querySelector('input[name="_token"]').value,
+          user_id: document.getElementById('user_id').value,
+          fecha: document.getElementById('fecha').value,
+          nro_orden: document.getElementById('nro_orden').value,
+          entidad_id: document.getElementById('entidad_id').value,
+          almacen_id: document.getElementById('almacen_id').value,
+          cliente_id: document.getElementById('cliente_id').value,
+          lugar_entrega: document.getElementById('lugar_entrega').value,
+          fecha_entrega: document.getElementById('fecha_entrega').value,
+          tipo_salida: document.getElementById('tipo_salida').value,
+          vale_id: document.getElementById('vale_id').value.length == 0 ? null : document.getElementById('vale_id').value,
+          transferencia_id: document.getElementById('transferencia_id').value.length == 0 ? null : document.getElementById('transferencia_id').value,
+          productos: this.getProductos()
+        };
         $.ajax({
           url: "/ordenes_despacho",
           type: 'POST',

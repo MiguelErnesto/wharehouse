@@ -1127,11 +1127,11 @@ var ObjectClass = /*#__PURE__*/function () {
         return false;
       }
 
-      if (document.getElementById('entidad').value.length == 0) {
+      if (document.getElementById('entidad_id').value.length == 0) {
         alert('Debe completar todos los datos de la Factura');
-        document.getElementById('entidad').className = 'form-control border border-danger';
-        document.getElementById('entidad').placeholder = '--- Valor requerido ---';
-        document.getElementById('entidad').focus();
+        document.getElementById('entidad_id').className = 'form-control border border-danger';
+        document.getElementById('entidad_id').placeholder = '--- Valor requerido ---';
+        document.getElementById('entidad_id').focus();
         return false;
       }
 
@@ -1278,7 +1278,7 @@ var ObjectClass = /*#__PURE__*/function () {
         user_id: document.getElementById('user_id').value,
         fecha_modelo: document.getElementById('fecha_modelo').value,
         nro_factura: document.getElementById('nro_factura').value,
-        entidad_id: document.getElementById('entidad').value,
+        entidad_id: document.getElementById('entidad_id').value,
         moneda_pago: document.getElementById('moneda_pago').value,
         porciento: document.getElementById('porciento').value,
         datos_registro: document.getElementById('datos_registro').value,

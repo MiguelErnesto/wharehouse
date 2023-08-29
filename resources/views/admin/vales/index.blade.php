@@ -16,7 +16,7 @@
     @endif
 
     <div class="card" style='width:95%;'>
-        @can('admin.vales.create')
+        @can('Crear vale')
             <div class="card-header">
                 <a href="{{ route('vales.create') }}" class="btn btn-info" title="Crear Nuevo"><i
                         class="fas fa-solid fa-file pr-3"></i>Nuevo</a>

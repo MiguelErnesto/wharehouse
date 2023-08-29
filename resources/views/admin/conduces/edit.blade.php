@@ -3,8 +3,8 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <span class="text-uppercase page-subtitle">Editar informe de recepción <h1 class='pl-3'>
-            {{ $informe_recepcion->nro_informe }}</h1>
+    <span class="text-uppercase page-subtitle">Editar conduce <h1 class='pl-3'>
+            {{ $conduce->nro_conduce }}</h1>
     </span>
 @stop
 
@@ -18,16 +18,16 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::model($informe_recepcion, [
+            {!! Form::model($conduce, [
                 'id' => 'form',
-                'route' => ['informes_recepcion.update', $informe_recepcion->id],
+                'route' => ['conduces.update', $conduce->id],
                 'method' => 'put',
             ]) !!}
 
-            @include('admin.informes_recepcion.partials.form')
+            @include('admin.conduces.partials.form')
 
             <div class='text-right'>
-                <a class="btn btn-danger" href="{{ route('informes_recepcion.index') }}"><i
+                <a class="btn btn-danger" href="{{ route('conduces.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
                 {{ Form::button('<i class="fa fa-btn fa-save pr-2"></i> Guardar', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
             </div>
@@ -51,7 +51,7 @@
         });
     </script>
 
-    <script async type="module" src="{{ mix('/js/compiled/productos.js') }}"></script>
+    <script async type="module" src="{{ mix('/js/compiled/conduces.js') }}"></script>
 
 
 @stop

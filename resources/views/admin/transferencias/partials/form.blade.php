@@ -1,4 +1,4 @@
-<input id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
+<input name="user_id" id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
 
 <div class="row">
     <div class="col-3">
@@ -66,14 +66,14 @@
 <div class="row">
     <div class="col-4">
         <div class="form-group">
-            {!! Form::label('entidad', 'Entidad:', [
+            {!! Form::label('entidad_id', 'Entidad:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('entidad', $entidades, null, [
+            {!! Form::select('entidad_id', $entidades, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione la entidad...',
             ]) !!}
-            @error('entidad')
+            @error('entidad_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -81,14 +81,14 @@
 
     <div class="col-4">
         <div class="form-group">
-            {!! Form::label('almacen_origen', 'Almacén origen:', [
+            {!! Form::label('almacen_origen_id', 'Almacén origen:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('almacen_origen', $almacenes, null, [
+            {!! Form::select('almacen_origen_id', $almacenes, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione el almacén origen...',
             ]) !!}
-            @error('almacen_origen')
+            @error('almacen_origen_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -96,14 +96,14 @@
 
     <div class="col-4">
         <div class="form-group">
-            {!! Form::label('almacen_destino', 'Almacén destino:', [
+            {!! Form::label('almacen_destino_id', 'Almacén destino:', [
                 'class' => 'pl-1',
             ]) !!}
-            {!! Form::select('almacen_destino', $almacenes, null, [
+            {!! Form::select('almacen_destino_id', $almacenes, null, [
                 'class' => 'form-control',
                 'placeholder' => 'Seleccione el almacén destino...',
             ]) !!}
-            @error('almacen_destino')
+            @error('almacen_destino_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>

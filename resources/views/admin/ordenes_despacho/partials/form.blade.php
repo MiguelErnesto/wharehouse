@@ -1,4 +1,4 @@
-<input id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
+<input name="user_id" id="user_id" type="hidden" value="{{ Auth::user()->id }}" />
 
 <div class="row">
     <div class="col-3">
