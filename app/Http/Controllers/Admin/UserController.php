@@ -12,7 +12,13 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('can:Listar usuarios')->only('index');
-        $this->middleware('can:Asignar roles')->only('edit', 'update');
+        $this->middleware('can:Crear usuario')->only('create');
+        $this->middleware('can:Editar usuario')->only('edit', 'update');
+        $this->middleware('can:Eliminar usuario')->only('destroy');
+        $this->middleware('can:Asignar roles')->only(
+            'asignarRoles',
+            'updateRoles'
+        );
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +27,27 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
+        $roles = Role::all();
+        return view('admin.users.index', compact('roles'));
+    }
+
+    public function create()
+    {
+        return view('admin.users.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::create($request->all());
+        return redirect()
+            ->route('admin.users.index')
+            ->with('info', 'Usuario ' . $user->name . ' creado correctamente');
     }
 
     /**
@@ -30,10 +56,16 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+
+    public function asignarRoles(User $user)
     {
         $roles = Role::all();
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.asignarRoles', compact('user', 'roles'));
+    }
+
+    public function edit(User $user)
+    {
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -43,11 +75,51 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function updateRoles(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
         return redirect()
-            ->route('admin.users.edit', $user)
-            ->with('info', 'The role was successfully assigned.');
+            ->route('admin.users.index', $user)
+            ->with(
+                'info',
+                'Roles del usuario ' .
+                    $user->name .
+                    ' actualizados correctamente'
+            );
+    }
+
+    public function update(Request $request, User $user)
+    {
+        if (!$request->password) {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with(
+                'info',
+                'Usuario ' . $user->name . ' actualizado correctamente'
+            );
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with(
+                'info',
+                'Usuario ' . $user->name . ' eliminado correctamente'
+            );
     }
 }

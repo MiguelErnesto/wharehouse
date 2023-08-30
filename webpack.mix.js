@@ -27,6 +27,7 @@ mix
   .js('resources/js/transferencias.js', 'public/js/compiled/')
   .js('resources/js/conduces.js', 'public/js/compiled/')
   .js('resources/js/facturas.js', 'public/js/compiled/')
+  .js('resources/js/usuarios.js', 'public/js/compiled/')
 
 if (mix.inProduction()) {
   mix.version()

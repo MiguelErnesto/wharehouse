@@ -36,6 +36,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/register', function () {
+    return redirect('/admin');
+});
+
 //Route::post('logout', HomeController::class, 'logout')->name('logout');
 
 //Entidades

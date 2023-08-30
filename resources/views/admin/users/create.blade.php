@@ -3,11 +3,10 @@
 @section('title', config('app.name'))
 
 @section('content_header')
-    <span class="text-uppercase page-subtitle">Editar usuario <h1 class='pl-3'>{{ $user->name }}</h1></span>
+    <h1>Nuevo usuario</h1>
 @stop
 
 @section('content')
-
     @if (session('info'))
         <div class="alert alert-success" role="alert">
             <strong>{{ session('info') }}</strong>
@@ -16,10 +15,9 @@
 
     <div class="card" style='width:95%;'>
         <div class="card-body">
-            {!! Form::model($user, ['id' => 'form', 'route' => ['admin.users.update', $user->id], 'method' => 'put']) !!}
-
+            {!! Form::open(['id' => 'form', 'route' => 'admin.users.store']) !!}
             @include('admin.users.partials.form')
-
+            <br />
             <div class='text-right'>
                 <a class="btn btn-danger" href="{{ route('admin.users.index') }}"><i
                         class="fa fa-btn fa-ban pr-2"></i>Cancelar</a>
@@ -27,9 +25,6 @@
             </div>
             {!! Form::close() !!}
         </div>
-
-        {!! Form::close() !!}
-    </div>
     </div>
 @stop
 
@@ -44,8 +39,5 @@
             });
         });
     </script>
-
     <script async type="module" src="{{ mix('/js/compiled/usuarios.js') }}"></script>
-
-
 @stop

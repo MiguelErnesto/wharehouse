@@ -14,8 +14,17 @@ Route::get('', [HomeController::class, 'index'])
     ->name('admin.home');
 
 Route::resource('users', UserController::class)
-    ->only(['index', 'edit', 'update'])
+    //->only(['index', 'edit', 'update'])
     ->names('admin.users');
+Route::get('users/asignarRoles/{user}', [
+    UserController::class,
+    'asignarRoles',
+])->name('admin.users.asignarRoles');
+Route::put('users/updateRoles/{user}', [
+    UserController::class,
+    'updateRoles',
+])->name('admin.users.updateRoles');
+
 Route::resource('roles', RoleController::class)->names('admin.roles');
 
 Route::resource('categories', CategoryController::class)

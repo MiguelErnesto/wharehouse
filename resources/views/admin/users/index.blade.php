@@ -7,6 +7,12 @@
 @stop
 
 @section('content')
+    @if (session('info'))
+        <div class="alert alert-success" role="alert" style='width:95%;'>
+            <strong>{{ session('info') }}</strong>
+        </div>
+        <br />
+    @endif
     @livewire('admin.users-index')
 @stop
 
@@ -18,4 +24,6 @@
     <script>
         console.log('Hi!');
     </script>
+    <script async type="module" src="{{ mix('/js/compiled/usuarios.js') }}"></script>
+
 @stop
