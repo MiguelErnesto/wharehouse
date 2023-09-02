@@ -943,6 +943,14 @@ var productosClass = /*#__PURE__*/function () {
         return false;
       }
 
+      if (isNaN(document.getElementById('precio').value)) {
+        alert('El valor debe ser un número');
+        document.getElementById('precio').className = 'form-control border border-danger';
+        document.getElementById('precio').placeholder = '--- Valor requerido ---';
+        document.getElementById('precio').focus();
+        return false;
+      }
+
       if (document.getElementById('descripcion').value.length == 0) {
         document.getElementById('descripcion').className = 'form-control border border-danger';
         document.getElementById('descripcion').placeholder = '--- Valor requerido ---';
