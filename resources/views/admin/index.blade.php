@@ -53,7 +53,7 @@
                 <div class="small-box bg-danger">
                     <div class="inner text-center">
                         <i class="fas fa-warehouse fa-2x">
-                            <strong class='pl-4'>{{ $clientes }}</strong>
+                            <strong class='pl-4'>{{ $almacenes }}</strong>
                         </i>
                     </div>
                     <a href="{{ route('almacenes.index') }}" class="small-box-footer">
@@ -132,7 +132,7 @@
                 <div class="small-box bg-warning">
                     <div class="inner text-center">
                         <i class="fas fa-list fa-2x">
-                            <strong class='pl-4'>{{ $productos }}</strong>
+                            <strong class='pl-4'>{{ $vales }}</strong>
                         </i>
                     </div>
                     <a href="{{ route('vales.index') }}" class="small-box-footer">
