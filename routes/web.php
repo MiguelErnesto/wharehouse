@@ -98,7 +98,7 @@ Route::resource('informes_recepcion', InformeRecepcionController::class, [
 Route::get('informes_recepcion/getDetalles/{id}', [
     InformeRecepcionController::class,
     'getDetalles',
-])->name('getDetalles');
+]);
 Route::get('informes_recepcion/update/{id}', [
     InformeRecepcionController::class,
     'update',
@@ -121,7 +121,7 @@ Route::resource('ordenes_despacho', OrdenDespachoController::class, [
 Route::get('ordenes_despacho/getDetalles/{id}', [
     OrdenDespachoController::class,
     'getDetalles',
-])->name('getDetalles');
+]);
 Route::get('ordenes_despacho/imprimir/{id}', [
     OrdenDespachoController::class,
     'imprimir',
