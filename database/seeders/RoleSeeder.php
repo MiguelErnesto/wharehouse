@@ -36,6 +36,12 @@ class RoleSeeder extends Seeder
             'description' => 'Ver panel',
         ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
+        //Perfil de usuario
+        Permission::create([
+            'name' => 'Editar perfil',
+            'description' => 'Editar perfil',
+        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+
         //Administración de usuarios
         Permission::create([
             'name' => 'Listar usuarios',

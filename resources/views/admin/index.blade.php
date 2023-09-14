@@ -7,6 +7,14 @@
 @stop
 
 @section('content')
+
+    @if (session('info'))
+        <div class="alert alert-success" role="alert" style='width:95%;'>
+            <strong>{{ session('info') }}</strong>
+        </div>
+        <br />
+    @endif
+
     <div class="row">
         {{-- Entidades --}}
         @can('Listar entidades')

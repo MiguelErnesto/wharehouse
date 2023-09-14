@@ -344,6 +344,7 @@ return [
                 'Editar usuario',
                 'Listar roles',
                 'Editar role',
+                'Editar perfil',
             ],
             'submenu' => [
                 [
@@ -365,15 +366,20 @@ return [
                 [
                     'text' => 'Perfil de Usuario',
                     'classes' => 'ml-3',
-                    'url' => 'admin/settings',
+                    //'url' => 'admin/settings',
+                    'route' => 'admin.users.changePassword',
                     'icon' => 'fas fa-fw fa-user mr-1',
+                    'active' => ['admin/users*'],
+                    'can' => 'Editar perfil',
                 ],
-                [
+                /* [
                     'text' => 'Cambiar contraseña',
                     'classes' => 'ml-3',
-                    'url' => 'admin/settings',
+                    //'route' => 'admin.users.edit',
+                    'route' => 'admin.users.changePassword',
+                    //'url' => 'admin/settings',
                     'icon' => 'fas fa-fw fa-lock mr-1',
-                ],
+                ], */
             ],
         ],
         /* [

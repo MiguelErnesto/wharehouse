@@ -20,6 +20,16 @@ Route::get('users/asignarRoles/{user}', [
     UserController::class,
     'asignarRoles',
 ])->name('admin.users.asignarRoles');
+
+Route::get('users/change_password', [
+    UserController::class,
+    'changePassword',
+])->name('admin.users.changePassword');
+Route::put('users/updatepwd/{user}', [
+    UserController::class,
+    'updatepwd',
+])->name('admin.users.updatepwd');
+
 Route::put('users/updateRoles/{user}', [
     UserController::class,
     'updateRoles',

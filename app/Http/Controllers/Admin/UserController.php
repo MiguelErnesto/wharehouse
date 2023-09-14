@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,6 +15,7 @@ class UserController extends Controller
         $this->middleware('can:Listar usuarios')->only('index');
         $this->middleware('can:Crear usuario')->only('create');
         $this->middleware('can:Editar usuario')->only('edit', 'update');
+        $this->middleware('can:Editar perfil')->only('edit', 'update');
         $this->middleware('can:Eliminar usuario')->only('destroy');
         $this->middleware('can:Asignar roles')->only(
             'asignarRoles',
@@ -49,6 +51,10 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+
+        $user->givePermissionTo('Ver panel');
+        $user->givePermissionTo('Editar perfil');
+
         return redirect()
             ->route('admin.users.index')
             ->with('info', 'Usuario ' . $user->name . ' creado correctamente');
@@ -70,6 +76,12 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('admin.users.edit', compact('user'));
+    }
+
+    public function show()
+    {
+        $user = Auth::user();
+        return view('admin.users.change_password', compact('user'));
     }
 
     /**
@@ -109,6 +121,29 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.index')
+            ->with(
+                'info',
+                'Usuario ' . $user->name . ' actualizado correctamente'
+            );
+    }
+
+    public function updatepwd(Request $request, User $user)
+    {
+        if (!$request->password) {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
+        return redirect()
+            ->route('admin.home')
             ->with(
                 'info',
                 'Usuario ' . $user->name . ' actualizado correctamente'
