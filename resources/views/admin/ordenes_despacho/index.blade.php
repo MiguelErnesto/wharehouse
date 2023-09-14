@@ -44,11 +44,13 @@
                                 <td>{{ $orden_despacho->fecha }}</td>
 
                                 <td>{{ $orden_despacho->nro_orden }}</td>
-                                @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $orden_despacho->almacen_id)
-                                        <td>{{ $almacen->nombre }}</td>
-                                    @endif
-                                @endforeach
+                                <td>
+                                    @foreach ($almacenes as $almacen)
+                                        @if ($almacen->id == $orden_despacho->almacen_id)
+                                            {{ $almacen->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td class='text-center'>{{ $orden_despacho->vale_id ? 'VALE' : 'TRANSFERENCIA' }}</td>
 
                                 @can('Listar ordenes despacho')

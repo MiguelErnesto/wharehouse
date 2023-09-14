@@ -44,21 +44,27 @@
                             <tr>
                                 <td>{{ $transferencia->fecha_modelo }}</td>
                                 <td>{{ $transferencia->nro_transferencia }}</td>
-                                @foreach ($entidades as $entidad)
-                                    @if ($entidad->id == $transferencia->entidad_id)
-                                        <td>{{ $entidad->nombre }}</td>
-                                    @endif
-                                @endforeach
-                                @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $transferencia->almacen_origen_id)
-                                        <td class='text-center'>{{ $almacen->nombre }}</td>
-                                    @endif
-                                @endforeach
-                                @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $transferencia->almacen_destino_id)
-                                        <td class='text-center'>{{ $almacen->nombre }}</td>
-                                    @endif
-                                @endforeach
+                                <td>
+                                    @foreach ($entidades as $entidad)
+                                        @if ($entidad->id == $transferencia->entidad_id)
+                                            {{ $entidad->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td class='text-center'>
+                                    @foreach ($almacenes as $almacen)
+                                        @if ($almacen->id == $transferencia->almacen_origen_id)
+                                            {{ $almacen->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td class='text-center'>
+                                    @foreach ($almacenes as $almacen)
+                                        @if ($almacen->id == $transferencia->almacen_destino_id)
+                                            {{ $almacen->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
 
                                 @can('Listar transferencias')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">

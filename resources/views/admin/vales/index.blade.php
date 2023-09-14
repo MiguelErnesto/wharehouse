@@ -46,16 +46,20 @@
 
                                 <td>{{ $vale->nro_vale }}</td>
                                 <td>{{ $vale->tipo_vale == 'E' ? 'Entrega' : 'Salida' }}</td>
+                                <td>
                                 @foreach ($entidades as $entidad)
                                     @if ($entidad->id == $vale->entidad_id)
-                                        <td>{{ $entidad->nombre }}</td>
+                                        {{ $entidad->nombre }}
                                     @endif
                                 @endforeach
-                                @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $vale->almacen_id)
-                                        <td>{{ $almacen->nombre }}</td>
-                                    @endif
-                                @endforeach
+                            </td>
+                                <td>
+                                    @foreach ($almacenes as $almacen)
+                                        @if ($almacen->id == $vale->almacen_id)
+                                            {{ $almacen->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
 
                                 @can('Listar vales')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">

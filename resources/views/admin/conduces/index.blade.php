@@ -46,11 +46,13 @@
                                 </td>
 
                                 <td>{{ $conduce->nro_conduce }}</td>
-                                @foreach ($entidades as $entidad)
-                                    @if ($entidad->id == $conduce->entidad_id)
-                                        <td>{{ $entidad->nombre }}</td>
-                                    @endif
-                                @endforeach
+                                <td>
+                                    @foreach ($entidades as $entidad)
+                                        @if ($entidad->id == $conduce->entidad_id)
+                                            {{ $entidad->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td class="text-right">{{ $conduce->nro_factura }}</td>
                                 <td></td>
 

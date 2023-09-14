@@ -44,17 +44,20 @@
                                 <td>{{ $informe_recepcion->fecha }}</td>
 
                                 <td>{{ $informe_recepcion->nro_informe }}</td>
-                                @foreach ($almacenes as $almacen)
-                                    @if ($almacen->id == $informe_recepcion->almacen_id)
-                                        <td>{{ $almacen->nombre }}</td>
-                                    @endif
-                                @endforeach
-                                @foreach ($usuarios as $usuario)
-                                    @if ($usuario->id == $informe_recepcion->user_id)
-                                        <td>{{ $usuario->name }}</td>
-                                    @endif
-                                @endforeach
-
+                                <td>
+                                    @foreach ($almacenes as $almacen)
+                                        @if ($almacen->id == $informe_recepcion->almacen_id)
+                                            {{ $almacen->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach ($usuarios as $usuario)
+                                        @if ($usuario->id == $informe_recepcion->user_id)
+                                            {{ $usuario->name }}
+                                        @endif
+                                    @endforeach
+                                </td>
                                 @can('Listar informes recepcion')
                                     <td style="padding-right: 0rem;padding-left: 0.125rem;" width='8px' class="text-right">
                                         <a class="btn btn-info btn-sm btnVerInformeRecepcion" data-bs-toggle="modal"

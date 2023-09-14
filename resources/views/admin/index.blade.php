@@ -16,7 +16,6 @@
                         <i class="fas fa-landmark fa-2x">
                             <strong class='pl-4'>{{ $entidades }}</strong>
                         </i>
-
                     </div>
                     <a href="{{ route('entidades.index') }}" class="small-box-footer">
                         <div class='input-group'>

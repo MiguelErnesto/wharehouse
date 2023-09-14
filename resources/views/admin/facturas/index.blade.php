@@ -44,11 +44,13 @@
                             <tr>
                                 <td>{{ $factura->fecha_modelo }}</td>
                                 <td>{{ $factura->nro_factura }}</td>
-                                @foreach ($entidades as $entidad)
-                                    @if ($entidad->id == $factura->entidad_id)
-                                        <td>{{ $entidad->nombre }}</td>
-                                    @endif
-                                @endforeach
+                                <td>
+                                    @foreach ($entidades as $entidad)
+                                        @if ($entidad->id == $factura->entidad_id)
+                                            {{ $entidad->nombre }}
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td class="text-right">$ {{ $factura->importe_total }}</td>
 
                                 <td></td>
