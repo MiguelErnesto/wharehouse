@@ -17,13 +17,15 @@ return new class extends Migration {
             $table
                 ->foreign('transferencia_id')
                 ->references('id')
-                ->on('transferencias');
+                ->on('transferencias')
+                ->onDelete('cascade');
 
             $table->bigInteger('vale_id');
             $table
                 ->foreign('vale_id')
                 ->references('id')
-                ->on('vales');
+                ->on('vales')
+                ->onDelete('cascade');
         });
     }
 

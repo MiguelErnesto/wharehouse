@@ -27,27 +27,32 @@ return new class extends Migration {
             $table
                 ->foreign('entidad_id')
                 ->references('id')
-                ->on('entidades');
+                ->on('entidades')
+                ->onDelete('cascade');
 
             $table
                 ->foreign('almacen_id')
                 ->references('id')
-                ->on('almacenes');
+                ->on('almacenes')
+                ->onDelete('cascade');
 
             $table
                 ->foreign('cliente_id')
                 ->references('id')
-                ->on('clientes');
+                ->on('clientes')
+                ->onDelete('cascade');
 
             $table
                 ->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
 
             $table
                 ->foreign('tipo_salida_id')
                 ->references('id')
-                ->on('tipos_salida');
+                ->on('tipos_salida')
+                ->onDelete('cascade');
         });
     }
 

@@ -25,12 +25,14 @@ return new class extends Migration {
             $table
                 ->foreign('entidad_id')
                 ->references('id')
-                ->on('entidades');
+                ->on('entidades')
+                ->onDelete('cascade');
 
             $table
                 ->foreign('almacen_id')
                 ->references('id')
-                ->on('almacenes');
+                ->on('almacenes')
+                ->onDelete('cascade');
         });
     }
 

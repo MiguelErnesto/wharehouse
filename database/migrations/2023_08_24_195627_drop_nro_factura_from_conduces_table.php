@@ -26,10 +26,6 @@ return new class extends Migration {
     {
         Schema::table('conduces', function (Blueprint $table) {
             $table->string('nro_factura');
-            $table
-                ->foreign('nro_factura')
-                ->references('nro_factura')
-                ->on('facturas');
         });
     }
 };

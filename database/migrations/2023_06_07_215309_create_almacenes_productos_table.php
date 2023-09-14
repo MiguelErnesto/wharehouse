@@ -22,13 +22,13 @@ return new class extends Migration {
                 ->foreign('almacen_id')
                 ->references('id')
                 ->on('almacenes')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onDelete('cascade');
 
             $table
                 ->foreign('producto_id')
                 ->references('id')
-                ->on('productos');
+                ->on('productos')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

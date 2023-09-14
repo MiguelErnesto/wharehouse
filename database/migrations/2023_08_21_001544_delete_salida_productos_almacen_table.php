@@ -34,7 +34,8 @@ return new class extends Migration {
             $table
                 ->foreign('producto_almacen_id')
                 ->references('id')
-                ->on('almacenes_productos');
+                ->on('almacenes_productos')
+                ->onDelete('cascade');
         });
     }
 };

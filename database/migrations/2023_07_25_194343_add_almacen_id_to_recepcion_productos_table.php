@@ -17,7 +17,8 @@ return new class extends Migration {
             $table
                 ->foreign('almacen_id')
                 ->references('id')
-                ->on('almacenes');
+                ->on('almacenes')
+                ->onDelete('cascade');
         });
     }
 

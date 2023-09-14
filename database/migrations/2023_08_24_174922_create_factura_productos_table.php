@@ -22,12 +22,14 @@ return new class extends Migration {
             $table
                 ->foreign('factura_id')
                 ->references('id')
-                ->on('facturas');
+                ->on('facturas')
+                ->onDelete('cascade');
 
             $table
                 ->foreign('producto_id')
                 ->references('id')
-                ->on('productos');
+                ->on('productos')
+                ->onDelete('cascade');
         });
     }
 
