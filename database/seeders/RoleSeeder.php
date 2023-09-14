@@ -76,7 +76,7 @@ class RoleSeeder extends Seeder
         Permission::create([
             'name' => 'Crear entidad',
             'description' => 'Crear entidad',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role5]);
         Permission::create([
             'name' => 'Editar entidad',
             'description' => 'Editar entidad',
@@ -94,7 +94,7 @@ class RoleSeeder extends Seeder
         Permission::create([
             'name' => 'Crear cliente',
             'description' => 'Crear cliente',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role5]);
         Permission::create([
             'name' => 'Editar cliente',
             'description' => 'Editar cliente',
@@ -112,7 +112,7 @@ class RoleSeeder extends Seeder
         Permission::create([
             'name' => 'Crear almacen',
             'description' => 'Crear almacén',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role3, $role5]);
         Permission::create([
             'name' => 'Editar almacen',
             'description' => 'Editar almacen',

@@ -22,7 +22,7 @@ class TransferenciaController extends Controller
             'index',
             'getDetalles'
         );
-        $this->middleware('can:Crear transferencias')->only('create', 'store');
+        $this->middleware('can:Crear transferencia')->only('create', 'store');
         $this->middleware('can:Editar transferencia')->only('edit', 'update');
         $this->middleware('can:Eliminar transferencia')->only('destroy');
         $this->middleware('can:Imprimir')->only('imprimir');
