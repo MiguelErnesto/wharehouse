@@ -26,11 +26,11 @@
             <table class="table table-striped">
                 <thead class="thead-inverse">
                     <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th class='text-center'>U/M</th>
-                        <th class='text-right'>Precio</th>
-                        <th>Descripción</th>
+                        <th style="text-align: left;  width: 10%;">Código</th>
+                        <th style="text-align: left;  width: 25%;">Nombre</th>
+                        <th style="width: 8%;" class='text-center'>U/M</th>
+                        <th class='text-right' style="width: 12%;">Precio</th>
+                        <th style="text-align: center;  width: 45%;">Descripción</th>
                         <th colspan="2" class='text-center'></th>
                     </tr>
                 </thead>
@@ -46,7 +46,7 @@
                                 <td>{{ $producto->nombre }}</td>
                                 <td class='text-center'>{{ $producto->unidad_medida }}</td>
                                 <td class='text-right'>$ {{ $producto->precio }}</td>
-                                <td>{{ $producto->descripcion }}</td>
+                                <td class='text-center'>{{ $producto->descripcion }}</td>
 
                                 @can('Editar producto')
                                     <td style="padding-left: 0rem;padding-right: 0rem;" width='8px' class="text-right">
