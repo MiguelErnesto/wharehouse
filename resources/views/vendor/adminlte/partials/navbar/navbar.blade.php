@@ -15,13 +15,7 @@
         @yield('content_top_nav_left')
 
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fas fa-cogs mr-1"></i>
-                <span class="d-none d-sm-inline-block">{{ __('Ajustes') }}</span></a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.home') }}" class="nav-link">
                 <i class="fas fa-clone mr-1"></i>
                 <span class="d-none d-sm-inline-block">{{ __('Módulos del Sistema') }}</span></a>
         </li>

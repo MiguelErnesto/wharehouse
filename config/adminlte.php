@@ -339,6 +339,7 @@ return [
             'text' => 'Usuarios',
             'classes' => 'text-uppercase',
             'icon' => 'fas fa-fw fa-users mr-1',
+            'active' => ['admin/users*', 'admin/roles*'],
             'can' => [
                 'Listar usuarios',
                 'Editar usuario',
@@ -352,7 +353,7 @@ return [
                     'classes' => 'ml-3',
                     'route' => 'admin.users.index',
                     'icon' => 'fas fa-users fa-fw pr-4',
-                    'active' => ['admin/users*'],
+                    //'active' => ['admin/users*'],
                     'can' => 'Listar usuarios',
                 ],
                 [
@@ -360,7 +361,7 @@ return [
                     'classes' => 'ml-3',
                     'route' => 'admin.roles.index',
                     'icon' => 'fas fa-users-cog fa-fw pr-4',
-                    'active' => ['admin/roles*'],
+                    //'active' => ['admin/roles*'],
                     'can' => 'Listar roles',
                 ],
                 [
@@ -369,7 +370,7 @@ return [
                     //'url' => 'admin/settings',
                     'route' => 'admin.users.changePassword',
                     'icon' => 'fas fa-fw fa-user mr-1',
-                    'active' => ['admin/users*'],
+                    //'active' => ['admin/users*'],
                     'can' => 'Editar perfil',
                 ],
                 /* [

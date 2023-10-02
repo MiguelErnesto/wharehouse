@@ -136,15 +136,15 @@ class RoleSeeder extends Seeder
         Permission::create([
             'name' => 'Crear producto',
             'description' => 'Crear producto',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3, $role5]);
         Permission::create([
             'name' => 'Editar producto',
             'description' => 'Editar producto',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3, $role5]);
         Permission::create([
             'name' => 'Eliminar producto',
             'description' => 'Eliminar producto',
-        ])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        ])->syncRoles([$role1, $role2, $role3, $role5]);
 
         // Permisos para los Productos de los almacenes
         Permission::create([
@@ -207,7 +207,7 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Crear vale',
-            'description' => 'Crear nuevo vale',
+            'description' => 'Crear vale',
         ])->syncRoles([$role1, $role2, $role4]);
         Permission::create([
             'name' => 'Editar vale',
@@ -242,8 +242,8 @@ class RoleSeeder extends Seeder
             'description' => 'Listar conduces',
         ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
-            'name' => 'Crear nuevo conduce',
-            'description' => 'Crear nuevo conduce',
+            'name' => 'Crear conduce',
+            'description' => 'Crear conduce',
         ])->syncRoles([$role1, $role2, $role3]);
         Permission::create([
             'name' => 'Editar conduce',
